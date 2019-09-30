@@ -1,0 +1,153 @@
+.directorio{
+
+    .container-new{
+        .p-l-r-0{
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+    }
+    .text-p{
+        text-align: right;
+    }
+    .absolute-button{
+        position: absolute;
+    }      
+}
+    
+.md-button.disabled {
+    cursor: default;
+    pointer-events: none;
+    text-decoration: none;
+} 
+.md-button.disabled i {
+    color: #9E9E9E !important;
+}
+/*Modal*/ 
+.modal-directorio {
+    .list-select{
+        height: 200px;
+        overflow-y: auto;
+        border: 1px solid #e5e5e5;
+    }    
+    .list-group-item.active{
+        color: #000000;
+        background-color: lavender ;
+        border-color: lavender;        
+    }
+
+    .groupMenu{
+        color: #578ebe;
+        background-color: #F5F5F5;
+        border-color: #F5F5F5;        
+    }    
+    .marginBottom {
+        min-height: 200px;
+        display: flex;
+        justify-content: center;
+        flex-flow: column wrap;
+    }
+    .table-colum-width{
+        width: 15%;
+    }    
+    .estado-check {
+        .checkbox {
+            margin-left: 20px;
+        }
+    }    
+
+    .modal-marginBottom-label {
+        margin-bottom: 0px;
+        padding-left: 0px;
+    }       
+    .modal-mbottom {
+        margin-bottom: 0px;
+    }   
+    .modal-mbottomList {
+        margin-bottom: 10%; 
+    }           
+    .modal-pad-l {
+        padding-left: 0px;
+    }  
+    .modal-pad-r {
+        padding-right: 0px;
+    }    
+    .modal-fl-r {
+        float: right;
+    }               
+    .pad-top{
+        padding-top: 2%;
+    }
+    .pad-left{
+        padding-left: 6%;
+    }    
+    .fa-trash{
+        color: red;
+    }    
+    .fa-times{
+       color: red;
+       padding-left: 10%;
+    }    
+    .has-error {
+        .input-group-btn {
+            button {
+                border-color: #a94442;
+            }
+        }
+    }    
+    .form-group {
+        display: inline-block;
+        width: 100%;
+    }
+    /***/
+    .panel {
+        -webkit-box-shadow: none !important;
+        -moz-box-shadow: none !important;
+        box-shadow: none !important;
+    }
+    .panel-group .panel {
+        overflow: visible;
+    }
+    .panel .panel-body {
+        font-size: 13px;
+    }
+    .panel .panel-title > a:hover {
+        text-decoration: none;
+    }
+    .accordion .panel .panel-heading {
+        padding: 0;
+    }
+    .accordion .panel .panel-title {
+        padding: 0;
+    }
+    .accordion .panel .panel-title .accordion-toggle {
+        display: block;
+        padding: 10px 15px;
+    }
+    .accordion .panel .panel-title .accordion-toggle.accordion-toggle-styled {
+        background: url("../img/accordion-plusminus.png") no-repeat;
+        background-position: right -19px;
+        margin-right: 15px;
+    }
+    .accordion .panel .panel-title .accordion-toggle.accordion-toggle-styled.collapsed {
+        background-position: right 12px;
+    }
+    /***/
+}
+@media(max-width: 349px) {
+    .directorio {
+        .b-permis {
+            width: 100%;
+            margin-bottom: 15px;
+            .btn-group {
+                float: left !important;
+                width: 100%;
+                .btn {
+                    width: 100%;
+                }
+            }
+            .pull-right>.dropdown-menu {
+                left: 0 !important;
+            }
+        }
+    }
+}

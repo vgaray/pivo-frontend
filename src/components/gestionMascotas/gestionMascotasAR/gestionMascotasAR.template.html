@@ -1,0 +1,179 @@
+<div class="md-card">
+    <form name="formMascota">
+        <div class="md-card__title">
+            <h2 class="md-card__title-text">{{Ctrl.frmData.name_page_title}}</h4>
+        </div>
+
+        <div class="md-card__supporting-text">
+            <div class="row">
+                <div class="col-sm-12 md-card__row-title">{{Ctrl.frmData.name_content}}</div>
+                <div class="col-sm-6" ng-hide="Ctrl.ilActivo">
+                    <div class="md-textfield"
+                        ng-class="{ 'is-dirty': Ctrl.frmData.Mascota.listarHC.request.pNoPass.length > 0,'is-invalid': formMascota.noPass.$touched && formMascota.noPass.$invalid}">
+                        <input type="password" name="noPass" class="md-textfield__input"
+                            ng-model="Ctrl.frmData.Mascota.listarHC.request.pNoPass">
+                        <label class="md-textfield__label" for="noPass">Contraseña de Mascota</label>
+                    </div>
+
+                </div>
+                <div class="col-sm-6" ng-hide="Ctrl.ilActivo">
+                    <div class="md-card__actions text-right">
+                        <button type="button" class="md-button" ng-click="Ctrl.cargaAcceso()">Ingresar</button>
+                    </div>
+                </div>
+                <div class="col-sm-6"  ng-show="Ctrl.ilActivo">
+                    <div class="md-textfield"
+                        ng-class="{ 'is-dirty': Ctrl.frmData.Mascota.registrarActualizar.request.mascota.noNombre.length > 0,'is-invalid': formMascota.noMascota.$touched && formMascota.noMascota.$invalid}">
+                        <input type="text" ng-pattern="/^[a-zA-Z ]+$/"
+                            onkeypress='return event.charCode < 48 || event.charCode > 57' name="noMascota"
+                            class="md-textfield__input" maxlength="15"
+                            ng-model="Ctrl.frmData.Mascota.registrarActualizar.request.mascota.noNombre" required>
+                        <label class="md-textfield__label" for="noMascota">Nombre*</label>
+                        <span class="md-textfield__error"
+                            ng-show="formMascota.noMascota.$touched && formMascota.noMascota.$invalid">*campo alfabético
+                            de requerido.</span>
+                    </div>
+                </div>
+                <div class="col-sm-6"  ng-show="Ctrl.ilActivo">
+                    <div class="md-textfield"
+                        ng-class="{ 'is-dirty': Ctrl.frmData.Mascota.registrarActualizar.request.mascota.nuEdad.length > 0,'is-invalid': formMascota.nuEdad.$touched && formMascota.nuEdad.$invalid}">
+                        <input type="text" ng-pattern="/^[0-9]/"
+                            onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="md-textfield__input"
+                            name="nuEdad" ng-model="Ctrl.frmData.Mascota.registrarActualizar.request.mascota.nuEdad"
+                            maxlength="2" required>
+                        <label class="md-textfield__label" for="nuEdad">Edad</label>
+                        <span class="md-textfield__error"
+                            ng-show="formMascota.nuEdad.$touched && formMascota.nuEdad.$invalid">*nro de edad
+                            requerida.</span>
+                    </div>
+                </div>
+                <div class="col-md-6"  ng-show="Ctrl.ilActivo">
+                    <datepicker date-format="dd-MM-yyyy" selector="calendar-inicio-textfield"
+                        button-prev="<i class='mdi mdi-arrow-left'></i>"
+                        button-next="<i class='mdi mdi-arrow-right'></i>">
+                        <div class="md-textfield has-placeholder"
+                            ng-class="{ 'is-dirty': Ctrl.dt ,'is-invalid': form.feIni.$invalid }">
+                            <input input-date-validator type="text" maxlength="10" uib-datepicker-popup="dd-MM-yyyy"
+                                class="calendar-inicio-textfield md-textfield__input" id="feIni" name="feIni"
+                                ng-model="Ctrl.dt" ng-required="true" ng-change="Ctrl.validateDateini()" />
+                            <button class="md-button-input" id="calendarT">
+                                <i class="mdi mdi-calendar"></i>
+                            </button>
+                            <label class="md-textfield__label">Fecha Nacimiento</label>
+                            <span class="md-textfield__error"
+                                ng-show="form.feIni.$dirty && form.feIni.$error.required">*Campo Requerido</span>
+                        </div>
+                    </datepicker>
+                </div>
+                <div class="col-sm-6"  ng-show="Ctrl.ilActivo">
+                    <div class="md-textfield"
+                        ng-class="{ 'is-dirty': Ctrl.frmData.Mascota.registrarActualizar.request.mascota.noColor.length > 0,'is-invalid': formMascota.noColor.$touched && formMascota.noColor.$invalid}">
+                        <input type="text" ng-pattern="/^[a-zA-Z ]+$/" maxlength="15" name="noColor"
+                            class="md-textfield__input"
+                            ng-model="Ctrl.frmData.Mascota.registrarActualizar.request.mascota.noColor" required>
+                        <label class="md-textfield__label" for="noColor">Color*</label>
+                        <span class="md-textfield__error"
+                            ng-show="formMascota.noColor.$touched && formMascota.noColor.$invalid">*campo alfabético
+                            requerido.</span>
+                    </div>
+                </div>
+                <div class="col-sm-6"  ng-show="Ctrl.ilActivo">
+                    <div class="md-textfield"
+                        ng-class="{ 'is-dirty': Ctrl.frmData.Mascota.registrarActualizar.request.mascota.noSeniasParticulares.length > 0,'is-invalid': formMascota.noSenias.$touched && formMascota.noSenias.$invalid}">
+                        <input type="text" ng-pattern="/^[a-zA-Z ]+$/" maxlength="25" name="noSenias"
+                            class="md-textfield__input"
+                            ng-model="Ctrl.frmData.Mascota.registrarActualizar.request.mascota.noSeniasParticulares"
+                            required>
+                        <label class="md-textfield__label" for="noSenias">Señas Particulares*</label>
+                        <span class="md-textfield__error"
+                            ng-show="formMascota.noSenias.$touched && formMascota.noSenias.$invalid">*campo alfabético
+                            requerido.</span>
+                    </div>
+                </div>
+
+                <div class="col-md-6" ng-show="Ctrl.ilActivo">
+                    <div class="md-select"
+                        ng-class="{ 'is-dirty':Ctrl.frmData.Mascota.registrarActualizar.request.mascota.noSexo.length > 0,'is-invalid': formMascota.tipoSexo.$touched && formMascota.tipoSexo.$invalid}">
+                        <select class="md-select__input" name="tipoSexo"
+                            ng-change="Ctrl.combochangeSexo(Ctrl.frmData.Mascota.registrarActualizar.request.mascota.noSexo)"
+                            ng-model="Ctrl.frmData.Mascota.registrarActualizar.request.mascota.noSexo"
+                            ng-options="tiposSexo as tiposSexo.noSexo for tiposSexo in Ctrl.comboTipoSexo" required>
+                            <option ng-show="false" value="" selected="true">
+                                {{Ctrl.frmData.Mascota.registrarActualizar.request.mascota.noSexo}}</option>
+                        </select>
+                        <label class="md-select__label" for="tipoSexo">Sexo*</label>
+                        <span class="md-textfield__error"
+                            ng-show="formMascota.tipoSexo.$touched && formMascota.tipoSexo.$invalid">*Sexo
+                            requerido.</span>
+                    </div>
+
+                </div>
+                <div class="col-md-6"  ng-show="Ctrl.ilActivo">
+                    <div class="md-select"
+                        ng-class="{ 'is-dirty':Ctrl.frmData.Mascota.registrarActualizar.request.mascota.noEspecie.length > 0,'is-invalid': formMascota.tipoEspecie.$touched && formMascota.tipoEspecie.$invalid}">
+                        <select class="md-select__input" name="tipoEspecie"
+                            ng-change="Ctrl.combochangeEspecie(Ctrl.frmData.Mascota.registrarActualizar.request.mascota.idEspecie)" "Canino"
+                            ng-model="Ctrl.frmData.Mascota.registrarActualizar.request.mascota.idEspecie"
+                            ng-options="tiposEspecie as tiposEspecie.noEspecie for tiposEspecie in Ctrl.comboEspecie"
+                            required>
+                            <option ng-show="false" value="" selected="true">
+                                {{Ctrl.frmData.Mascota.registrarActualizar.request.mascota.noEspecie}}</option>
+                        </select>
+                        <label class="md-select__label" for="tipoEspecie">Especie*</label>
+                        <span class="md-textfield__error"
+                            ng-show="formMascota.tipoEspecie.$touched && formMascota.tipoEspecie.$invalid">*Especie
+                            requerida.</span>
+                    </div>
+                </div>
+                <div class="col-md-6"  ng-show="Ctrl.ilActivo">
+                    <div class="md-select"
+                        ng-class="{ 'is-dirty':Ctrl.frmData.Mascota.registrarActualizar.request.mascota.noRaza.length > 0,'is-invalid': formMascota.tipoRaza.$touched && formMascota.tipoRaza.$invalid}">
+                        <select class="md-select__input" name="tipoRaza"
+                            ng-change="Ctrl.combochangeRaza(Ctrl.frmData.Mascota.registrarActualizar.request.mascota.idRaza)"
+                            ng-model="Ctrl.frmData.Mascota.registrarActualizar.request.mascota.idRaza"
+                            ng-options="tiposRaza as tiposRaza.noRaza for tiposRaza in Ctrl.comboRaza" required>
+                            <option ng-show="false" value="" selected="true">
+                                {{Ctrl.frmData.Mascota.registrarActualizar.request.mascota.noRaza}}</option>
+                        </select>
+                        <label class="md-select__label" for="tipoRaza">Raza*</label>
+                        <span class="md-textfield__error"
+                            ng-show="formMascota.tipoRaza.$touched && formMascota.tipoRaza.$invalid">*Raza
+                            requerida.</span>
+                    </div>
+                </div>
+                <div class="col-sm-6"  ng-show="Ctrl.ilActivo">
+                    <div class="md-textfield"
+                        ng-class="{ 'is-dirty': Ctrl.frmData.Mascota.registrarActualizar.request.mascota.nuChip.length > 0,'is-invalid': formMascota.nuChip.$touched && formMascota.nuChip.$invalid}">
+                        <input type="text" ng-pattern="/^[0-9]/"
+                            onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="md-textfield__input"
+                            name="nuChip" ng-model="Ctrl.frmData.Mascota.registrarActualizar.request.mascota.nuChip"
+                            maxlength="11" minlength="11" required>
+                        <label class="md-textfield__label" for="nuChip">N°Chip</label>
+                        <span class="md-textfield__error"
+                            ng-show="formMascota.nuChip.$touched && formMascota.nuChip.$invalid">*nro de chip válido
+                            requerido.</span>
+                    </div>
+                </div>
+
+                <!-- <div class="col-sm-6">
+                    <input type="file" file-input="files" ng-model="Ctrl.files">
+                </div>
+                <button type="button" class="md-button" ng-click="Ctrl.uploadFile()">subir</button>
+
+                <div class="col-sm-3" ng-repeat="image in Ctrl.imagenes">
+                    <img ng-src="{{image.ruta}}" height="100" width="100" id="imagen"></img>
+                </div> -->
+            </div>
+        </div>
+
+        <div class="md-card__menu">
+            <button class="md-button md-button--icon" data-dismiss="modal" ng-click="Ctrl.cancel()">
+                <i class="mdi mdi-close"></i>
+            </button>
+        </div>
+        <div class="md-card__actions text-right"  ng-show="Ctrl.ilActivo">
+            <button type="button" class="md-button" ng-disabled='!formMascota.$valid'
+                ng-click="Ctrl.raMascota()">Guardar</button>
+        </div>
+    </form>
+</div>

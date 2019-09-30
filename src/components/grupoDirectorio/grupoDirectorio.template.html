@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="md-card animated fadeInUp">
+            <div class="md-card__title">
+                <h2 class="md-card__title-text">Grupo de Directorio</h2>
+            </div>
+            <div class="md-card__supporting-text">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="button" class="md-button" ng-click="ctrl.onSaveGrupo( ctrl.frmData.add )"> Agregar Grupo
+                            <i class="mdi mdi-account-plus"></i>
+                        </button>                                     
+                        <button type="button" class="md-button"  ng-click="ctrl.onEliminarGrupo()"> Eliminar Grupo 
+                            <i class="mdi mdi-delete"></i>
+                        </button>                      
+                    </div>
+                </div>
+                <div class="col-md-3" >
+                    <div js-tree="ctrl.treeConfig" aria-expanded="false" ng-model="ctrl.lsGrupo" tree="ctrl.treeInstance" ng-click="ctrl.MostrarEntradas()"
+                            should-apply="ctrl.applyModelChanges()">
+                    </div>
+                </div>
+                    <div class="col-md-9" ng-hide="ctrl.varEstadoEntrada">                                              
+                        <div class="">
+                            <div class="row">   
+                                <div class="col-md-6" >
+                                    <label >Grupo: {{ctrl.grupo}}</label>                   
+                                </div>                                                                       
+                                <div class="col-md-6" >
+                                    <div class="md-card__menu">
+                                        <button type="button" class="md-button" ng-click="ctrl.onSaveEntrada( ctrl.frmData.add )"> Agregar Entrada <i class="mdi mdi-plus"></i>
+                                        </button>   
+                                    </div>                                   
+                                </div>
+                            </div>                            
+                        </div>
+                    <div class="">
+                            <table class="md-table table">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center" ng-repeat="header in ctrl.table_headers">{{header.description}}</th>
+                                        <th class="text-center">Editar</th>
+                                        <th class="text-center">Eliminar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>                               
+                                    <tr ng-repeat="entrada in ctrl.lsEntrada | filter:ctrl.paginate ">
+                                        <td class="text-center">{{entrada.noNombre}}</td>
+                                        <td class="text-center">{{entrada.nuAnexo}}</td>
+                                        <td class="text-center">{{entrada.noPrefijo}}</td>
+                                        <td class="text-center"><button class="md-button md-button--icon" ng-class="entrada.noDescripcion == 1 ? 'disabled' : ''" href="" ng-click="ctrl.onSaveEntrada( ctrl.frmData.update, entrada.idEntrada )"  uib-tooltip="Editar"><i class="mdi mdi-pencil"></i></button></td>
+                                        <td class="text-center"><button class="md-button md-button--icon" ng-class="entrada.noDescripcion == 1 ? 'disabled' : ''" href="" ng-click="ctrl.onEliminarEntrada( entrada.idEntrada,entrada.idGrupo )"><i class="mdi mdi-delete" uib-tooltip="Eliminar"></i></button></td>    
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="10" class="text-center">
+                                            <ul uib-pagination total-items="ctrl.totalItems" ng-model="ctrl.currentPage" max-size="10" boundary-links="true" items-per-page="ctrl.numPerPage"
+                                                class="pagination-sm" first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"
+                                                last-text="&raquo;">
+                                            </ul>
+                                        </td>  
+                                    </tr>
+                                </tfoot>                            
+                            </table>
+                        </div>
+                    </div>
+            </div>      
+        </div>
+    </div>
+</div>
+

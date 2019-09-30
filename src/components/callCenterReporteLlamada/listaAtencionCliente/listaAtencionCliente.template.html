@@ -1,0 +1,275 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="md-card animated fadeInUp">
+            <div class="md-card__title">
+                <h2 class="md-card__title-text">Reporte_ Atención Cliente</h2>
+            </div>
+            <div class="md-card__supporting-text">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="md-select" ng-class="{ 'is-dirty' : Ctrl.scope.frmData.list.reporteRespuestaOperador.request.length>0 }">
+                            <select type="text" class="md-select__input" ng-model="Ctrl.scope.frmData.list.reporteRespuestaOperador.request" ng-change="Ctrl.funcionQueunameRel(Ctrl.scope.frmData.list.reporteRespuestaOperador.request)"
+                                ng-options="Quename as Quename.name for Quename in Ctrl.lsCola">
+                                <option ng-show="false" value="" selected="true"></option>
+                            </select>
+                            <label class="md-select__label">Cola</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="table-responsive">
+                            <table class="md-table table">
+                                <thead >
+                                    <tr >
+                                        <th class="text-center">
+                                            Leyenda
+                                        </th>
+                                        <th class="text-center">TAB
+                                        </th>
+                                        <th class="text-center">NSV
+                                        </th>
+                                        <th class="text-center">RO
+                                        </th>
+                                        <th class="text-center">EMA
+                                        </th>
+                                        <th class="text-center">EPA
+                                        </th>
+                                        <th class="text-center">TPC
+                                        </th>
+                                    </tr>
+                                    <tr >
+                                        <td class="text-center">
+                                            <i class="mdi mdi-information-outline" aria-hidden="true"></i>
+                                        </td>
+                                        <td class="text-center">Tiempo de abandono
+                                        </td>
+                                        <td class="text-center">
+                                            Nivel de servicio
+                                        </td>
+                                        <td class="text-center">
+                                            Respuesta operador
+                                        </td>
+                                        <td class="text-center">Tiempo de abandono
+                                        </td>
+                                        <td class="text-center">
+                                            Espera promedio de atención
+                                        </td>
+                                        <td class="text-center">
+                                            Tiempo promedio de conversación
+                                        </td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="md-textfield is-dirty" ng-class="{ 'is-dirty' : Ctrl.frmData.list.reporteRespuestaOperador.request.vaNsv.length > 0 }">
+                            <input min="0" type="number" class="md-textfield__input" ng-model="Ctrl.frmData.list.reporteRespuestaOperador.request.vaNsv"
+                                required onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                            <label class="md-textfield__label">NVS(seg)</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="md-textfield is-dirty" ng-class="{ 'is-dirty' : Ctrl.frmData.list.reporteRespuestaOperador.request.vaTab.length > 0 }">
+                            <input  min="0" type="number" required onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="md-textfield__input"
+                                ng-model="Ctrl.frmData.list.reporteRespuestaOperador.request.vaTab" required onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                            <label class="md-textfield__label">TAB(seg)</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="col-sm-6" style="text-align: left !important">
+                            <button ng-disabled="Ctrl.habbot" class="md-button" ng-click="Ctrl.verificador(1)">
+                                <label class="">Buscar</label>
+                                <i class="mdi mdi-magnify"></i>
+                            </button>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <div class="btn-group pull-right" ng-show="Ctrl.varShow">
+                                            <button  ng-disabled="Ctrl.enades" class="md-button" data-toggle="dropdown">
+                                                <label class="">Exportar</label>
+                                                <i class="mdi mdi-chevron-double-down"></i>
+                                            </button>
+                                            <ul class="dropdown-menu ">
+                                                <li>
+                                                    <a  ng-click="Ctrl.descargarArchivo(Ctrl.valExcel)">
+                                                        <i class="mdi mdi-file-excel" style="color:forestgreen"></i> Excel
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a  ng-click="Ctrl.descargarArchivo(Ctrl.vaPdf)">
+                                                        <i class="mdi mdi-file-pdf" style="color:firebrick"></i> Pdf
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <div ng-hide="Ctrl.ui.isFilesLoaded || Ctrl.ui.isListSoundEmpty" class="result-message">
+                        <span class="img-result">
+                            <fading-circle-spinner></fading-circle-spinner>
+                        </span>
+                        <br/>
+                        <span class="msg-result">Cargando consulta y gráficos...</span>
+                    </div>
+                    <div ng-hide="!Ctrl.ui.isListSoundEmpty" class="result-message">
+                        <span class="img-result">
+
+                        </span>
+                        <br/>
+                        <span class="msg-result">No existen datos por el momento...</span>
+                    </div>
+                    <div ng-hide="!Ctrl.ui.isErrorService" class="result-message">
+                        <span class="img-result">
+                            <span class="fa  fa-ban"></span>
+                        </span>
+                        <br/>
+                        <span class="msg-result">Hubo una falla en la conexión con el servidor.</span>
+                        <br/>
+                        <br/>
+
+                    </div>
+                </div>
+                <div ng-show="Ctrl.varShow" class="table-responsive">
+                    <table class="md-table table">
+                        <thead>
+                            <tr>
+                                <th class="text-center">
+                                    {{Ctrl.frmData.fechaCabecera}}
+                                </th>
+                                <th class="text-center">Llamadas</th>
+                                <th class="text-center" colspan="2">
+                                    Atendidas
+                                </th>
+                                <th class="text-center" colspan="2">
+                                    Abandonos
+                                </th>
+                                <th class="text-center" colspan="2">
+                                    %Abandonos
+                                </th>
+                                <th class="text-center" colspan="2">
+                                    %Eficacia
+                                </th>
+                                <th class="text-center" rowspan="2">
+                                    <span class="cc-cursor-help text-center" uib-tooltip="Espera máxima de atención">
+                                        EMA
+                                    </span>
+                                </th class="text-center">
+                                <th class="text-center" rowspan="2">
+                                    <span class="cc-cursor-help text-center" uib-tooltip="Espera promedio de atención	">
+                                        EPA
+                                    </span>
+                                </th>
+                                <th class="text-center" rowspan="2">
+                                    <span class="cc-cursor-help text-center" uib-tooltip="Tiempo promedio de conversación">
+                                        TPC
+                                    </span>
+                                </th rowspan="2">
+                            </tr>
+                            <tr>
+                                <th class="text-center">
+                                    <button ng-click="Ctrl.tipoAnt(Ctrl.frmData.list.reporteRespuestaOperador.request.tiReport)" ng-show="Ctrl.varShowBut" class="md-button md-button--icon" href="" uib-tooltip="retroceder">
+                                        <span class="mdi mdi-keyboard-return icon-white"
+                                            aria-hidden="false"></span>
+                                    </button>
+                                </th>
+                                <th class="text-center">
+                                    Entrantes
+                                </th>
+                                <th class="text-center">
+                                    Total
+                                </th>
+                                <th class="text-center">
+                                    <span class="cc-cursor-help text-center" uib-tooltip="Tiempo Abandono">
+                                        Tab
+                                    </span>
+                                </th>
+                                <th class="text-center">
+                                    Total
+                                </th>
+                                <th class="text-center">
+                                    <span class="cc-cursor-help text-center" uib-tooltip="Tiempo Abandono">
+                                        Tab
+                                    </span>
+                                </th>
+                                <th class="text-center">
+                                    Total
+                                </th>
+                                <th class="text-center">
+                                    <span class="cc-cursor-help text-center" uib-tooltip="Tiempo Abandono">
+                                        Tab
+                                    </span>
+                                </th>
+                                <th class="text-center">
+                                    <span class="cc-cursor-help text-center" uib-tooltip="Respuesta Operador">
+                                        RO
+                                    </span>
+                                </th>
+                                <th class="text-center">
+                                    <span class="cc-cursor-help text-center" uib-tooltip="Tiempo Abandono">
+                                        NSV
+                                    </span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="reporte in Ctrl.listaAtencionCli">
+                                <td class="text-center">
+                                    <span class="cc-cursor-pointer">
+                                        <a href="" ng-model="Ctrl.frmData.list.reporteRespuestaOperador.request.feReport" ng-click="Ctrl.tipoSig(reporte.feLlamad,Ctrl.frmData.list.reporteRespuestaOperador.request.tiReport)">
+                                            {{reporte.feLlamad}}</a>
+                                    </span>
+                                </td>
+                                <td class="text-center">{{reporte.llaEntra}}</td>
+                                <td class="text-center">{{reporte.llaAtendi}}</td>
+                                <td class="text-center">{{reporte.llaAtetab}}</td>
+                                <td class="text-center">{{reporte.llaAbando}}</td>
+                                <td class="text-center">{{reporte.llaAbatab}}</td>
+                                <td class="text-center">{{reporte.porcentajeTotalAbandonos}}%</td>
+                                <td class="text-center">{{reporte.porcentajeTabAbandonos}}%</td>
+                                <td class="text-center">{{reporte.porcentajeRoEficacia}}%</td>
+                                <td class="text-center">{{reporte.porcentajeNsvEficacia}}%</td>
+                                <td class="text-center">{{reporte.tiEma}}</td>
+                                <td class="text-center">{{reporte.tiProesp}}</td>
+                                <td class="text-center">{{reporte.tiProcon}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="md-card__supporting-text">
+                    <div class="row" ng-show="Ctrl.varShow">
+                        <div class="col-md-6">
+                            <div class="panel with-scroll animated zoomIn">
+                                <div class="panel-heading clearfix">Gráfico Llamadas</div>
+                                <div class="panel-body">
+                                    <canvas id="bar" class="chart chart-bar" chart-data="Ctrl.DataArray" chart-labels="Ctrl.labelList" chart-series="Ctrl.serialList"
+                                        chart-options="Ctrl.options1">
+                                    </canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="panel with-scroll animated zoomIn">
+                                <div class="panel-heading clearfix">Gráfico % Llamadas</div>
+                                <div class="panel-body">
+                                    <canvas id="bar" class="chart chart-bar" chart-data="Ctrl.DataArrayporc" chart-labels="Ctrl.labelListporc" chart-series="Ctrl.serialListporc"
+                                        chart-options="Ctrl.options2"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 
+chevron-double-down -->

@@ -1,0 +1,192 @@
+<div class="md-card">
+    <div class="md-card__title">        
+        <h2 class="md-card__title-text" ng-if="ctrl.pkBolsaEmpresa==null">{{ctrl.modal.nombreNuevo}}</h2>
+        <h2 class="md-card__title-text" ng-if="ctrl.pkBolsaEmpresa!=null">{{ctrl.modal.nombreEditar}}</h2>
+    </div>
+    <div class="md-card__supporting-text">
+        <form name="formBolsaEmp" class="row">
+            <div class="col-sm-4">
+                <div class="md-select" ng-class=" { 'is-dirty': ctrl.destinoOption !=null,  'is-invalid': formBolsaEmp.destino.$invalid && formBolsaEmp.destino.$touched || formBolsaEmp.destino.$error.required}">                    
+                    <select name="destino" id="destino" class="md-select__input" ng-model="ctrl.destinoOption" ng-change="ctrl.cambiaTipo();ctrl.tiempoBolsaDisponible();ctrl.ValidaOpciones();ctrl.habilitaMensaje()"
+                        ng-required="true" ng-disabled="ctrl.pkBolsaEmpresa!=null">
+                        <option ng-repeat="opt in ctrl.destino" value="{{opt.valueDestino}}">{{opt.nomDestino}}</option>
+                    </select>
+                    <label class="md-select__label">Destino *</label>
+                    <span class="md-select__error" ng-show="formBolsaEmp.destino.$invalid && formBolsaEmp.destino.$touched || formBolsaEmp.destino.$error.required ">*Campo requerido</span>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <datepicker date-format="dd-MM-yyyy" selector="calendar-inicio-textfield" button-prev="<i class='mdi mdi-arrow-left'></i>"
+                    button-next="<i class='mdi mdi-arrow-right'></i>">                
+                    <div class="md-textfield has-placeholder" ng-class="{'is-dirty' : ctrl.bolsaEmpresa.feIniBol, 'is-invalid' : formBolsaEmp.feIniBol.$invalid && formBolsaEmp.feIniBol.$touched || formBolsaEmp.feIniBol.$error.required }">
+                        <input input-date-validator type="text" id="feIniBol" maxlength="10" name="feIniBol" class="calendar-inicio-textfield md-textfield__input" ng-model="ctrl.bolsaEmpresa.feIniBol" uib-datepicker-popup="dd-MM-yyyy"
+                            is-open="ctrl.opened" datepicker-options="ctrl.dateOptions" close-text="Cerrar" ng-required="true"
+                            ng-disabled="ctrl.pkBolsaEmpresa!=null" current-text="Hoy" clear-text="Limpiar" ng-change=" ctrl.fechaInicioHoy();ctrl.tiempoBolsaDisponible();ctrl.ValidaOpciones();ctrl.mostrarFechaAutomensual();ctrl.habilitaMensaje()"
+                        />
+                        <!--ng-click="ctrl.open()" ng-disabled="ctrl.pkBolsaEmpresa!=null"-->
+                        <button class="md-button-input" >
+                            <i class="mdi mdi-calendar"></i>
+                        </button>
+                        <label class="md-textfield__label">Fecha Inicio</label>
+                        <span class="md-textfield__error" ng-show="formBolsaEmp.$submitted &&  formBolsaEmp.feIniBol.$error.required">*Campo Requerido.</span>
+                    </div>                    
+                </datepicker>
+            </div>
+            <div class=" col-sm-4">
+                <datepicker date-format="dd-MM-yyyy" selector="calendar-inicio-textfield" button-prev="<i class='mdi mdi-arrow-left'></i>"
+                    button-next="<i class='mdi mdi-arrow-right'></i>">                
+                    <div class="md-textfield has-placeholder" ng-class=" {'is-dirty' :ctrl.bolsaEmpresa.feFinBol, 'is-invalid' : formBolsaEmp.feFinBol.$invalid && formBolsaEmp.feFinBol.$touched || formBolsaEmp.feFinBol.$error.required }">
+                        <input input-date-validator type="text" id="feFinBol" name="feFinBol" class="calendar-inicio-textfield md-textfield__input" ng-model="ctrl.bolsaEmpresa.feFinBol" uib-datepicker-popup="dd-MM-yyyy"
+                            is-open="ctrl.opened1" datepicker-options="ctrl.dateOptions1" close-text="Cerrar" current-text="Hoy"
+                            clear-text="Limpiar" ng-change="ctrl.fechaFin();ctrl.tiempoBolsaDisponible();ctrl.ValidaOpciones();ctrl.habilitaMensaje()"
+                            ng-disabled="ctrl.habFecFin" />
+                            <!--ng-click="ctrl.open1()" ng-disabled="ctrl.habFecFin"-->
+                        <button class="md-button-input" >
+                            <i class="mdi mdi-calendar"></i>
+                        </button>
+                        <label class="md-textfield__label">Fecha Fin</label>
+                    </div>
+                </datepicker>
+            </div>
+            <div >
+                <div class="col-sm-4">
+                    <div class="md-textfield" ng-class="{ 'is-dirty' :ctrl.bolsaEmpresa.caMinBol != null ,'is-invalid': formBolsaEmp.caMinBol.$invalid && formBolsaEmp.caMinBol.$touched || formBolsaEmp.caMinBol.$error.required || ctrl.minDisponible < 0}">
+                        <input id="caMinBol" name="caMinBol" type="number" min="0" maxlength="6" class="md-textfield__input" ng-model="ctrl.bolsaEmpresa.caMinBol"
+                            required="required" ng-change="ctrl.restaMinutos(); ctrl.ValidaOpciones();ctrl.habilitaMensaje();"
+                            onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                        <label for="caMinBol" class="md-textfield__label">Cuota de minutos *</label>                        
+                        <span class="md-textfield__error" ng-show="formBolsaEmp.caMinBol.$invalid && formBolsaEmp.caMinBol.$touched || formBolsaEmp.caMinBol.$error.required">*Campo requerido</span>
+                        <span class="md-textfield__error" ng-show="formBolsaEmp.caMinBol.$valid && formBolsaEmp.caMinBol.$error.min">*Minimo</span>
+                        <span class="md-textfield__error" ng-show="formBolsaEmp.caMinBol.$valid && formBolsaEmp.caMinBol.$error.min">*Minimo</span>
+                        <span class="md-textfield__error" ng-show="formBolsaEmp.caMinBol.$valid && formBolsaEmp.caMinBol.$error.maxlength">*Exece los digitos.</span>
+                        <span class="md-textfield__error" ng-show="ctrl.minDisponible < 0">*Excede los minutos disponibles</span>                                        
+                    </div>                                                
+                    <div style="padding-top:20px">
+                    <span class="text-primary min-dispo">min disponibles: {{ctrl.minDisponible}}</span>
+                    </div>                
+                </div>
+                <div class="col-xs-4">
+                    <div class="md-checkbox">
+                        <input id="ilActMes" name="ilActMes" type="checkbox" ng-model="ctrl.bolsaEmpresa.ilActMes" ng-change="ctrl.ValidaOpciones();ctrl.habilitaFecFin();ctrl.mostrarFechaAutomensual()"
+                            ng-click="ctrl.habilitaFecFin();ctrl.mostrarFechaAutomensual();ctrl.habilitaMensaje()">
+                        <label for="ilActMes">
+                            Renovar cada mes
+                        </label>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="md-checkbox">
+                        <input id="ilActivo" name="ilActivo" type="checkbox" ng-true-value="1" ng-false-value="0" ng-model="ctrl.bolsaEmpresa.ilActivo"
+                            ng-change="ctrl.ValidaOpciones()">
+                        <label for="ilActivo">
+                            Activo
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-12 row" >
+                    <strong class="md-textfield__error" ng-hide="ctrl.msjMinCuota">{{ctrl.mensajeRegistrar}}</strong>
+                </div>
+            </div>
+            <div class="col-sm-12 md-card__row-title">Filtrar Bolsa</div>
+            <div class="col-sm-3">
+                <div class="md-textfield" ng-class="{ 'is-dirty' : ctrl.FiltroOption.destinoFiltro.length > 0}">                     
+                    <select name="destinoFiltro" id="destinoFiltro" class="md-textfield__input" ng-model="ctrl.FiltroOption" ng-options="filtro as filtro.nomFiltro for filtro
+                                    in ctrl.destinoFiltro track by filtro.idFiltro">                        
+                    </select>
+                    <label for="destinoFiltro" class="md-textfield__label">Filtrar por</label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="md-textfield">                                        
+                    <input type="text" id="noFiltro" name="noFiltro" maxlength="20" class="md-textfield__input" ng-model="ctrl.filtroNombre" ng-change="scope.changeFiltroNombre()">
+                    <label for="calendarFecha" class="md-textfield__label">Ingrese Dato</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="md-button" ng-click="ctrl.filtroBolsaEmpresa()">Filtrar</button>                
+            </div>
+            <div class="col-md-3">
+                <div class="md-checkbox">
+                    <input id="ilActivoShow" name="ilActivoShow" type="checkbox" ng-true-value="1" ng-false-value="0" ng-model="ctrl.ilFiltroActivoShow"
+                        ng-change="ctrl.changeIlActivoFiltro()">
+                    <label for="ilActivoShow">
+                        Mostrar todos
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="table-responsive">
+                    <table class="md-table table" id="table-det-bolsa">
+                        <thead>
+                            <tr>
+                                <th class="text-center" ng-repeat="headers in ctrl.bolsaEmpresaHeader">{{headers.nameHeader}}</th>
+                                <th>
+                                    <i class="mdi mdi-pencil" uib-tooltip="Editar"></i>
+                                </th>
+                                <th>
+                                    <i class="mdi mdi-delete" uib-tooltip="Eliminar"></i>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- | orderBy: '-G' -->
+                            <tr ng-repeat="itemBolsa in ctrl.listBolsaEmpresa | filter: ctrl.paginate" class="tr-table-bolsa" id="tr-table-bolsa">
+                                <td class="text-center">{{itemBolsa.nomTipTel +' '+ itemBolsa.nomClave}}</td>
+                                <td class="text-center">{{itemBolsa.caMinBol}}</td>
+                                <td class="text-center">{{itemBolsa.caResMin}}</td>
+                                <td class="text-center">{{itemBolsa.caConMin}}</td>
+                                <td class="text-center">{{itemBolsa.feIniBol}}</td>
+                                <td class="text-center">{{itemBolsa.feFinBol}}</td>
+                                <td class="text-center">
+                                    <span ng-if="itemBolsa.ilActivo==true">SI</span>
+                                    <span ng-if="itemBolsa.ilActivo==false">NO</span>
+                                </td>
+                                <td class="text-center">
+                                    <span ng-if="itemBolsa.ilActMes == true">SI</span>
+                                    <span ng-if="itemBolsa.ilActMes == false">NO</span>
+                                </td>
+                                <td class="text-center">
+                                    <button class="md-button md-button--icon" uib-tooltip="Editar" id="editBolsa_{{$index+1}}" ng-click="ctrl.obtenDataEditar(itemBolsa.idTipTel,itemBolsa.idClave,itemBolsa.caMinBol,itemBolsa.feIniBol,itemBolsa.feFinBol,itemBolsa.ilActivo,itemBolsa.ilActMes)"
+                                        uib-tooltip="Editar">
+                                        <i class="mdi mdi-pencil"></i>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class="md-button md-button--icon" uib-tooltip="Eliminar" ng-click="ctrl.modalDeleteBolsaEmpresa(itemBolsa.idEmpare,itemBolsa.idTipTel,itemBolsa.idClave,itemBolsa.feIniBol, itemBolsa.nomTipTel + ' ' + itemBolsa.nomClave)">
+                                        <i class="mdi mdi-delete"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="10" class="text-center">
+                                    <ul uib-pagination total-items="ctrl.totalItems" ng-model="ctrl.currentPage" max-size="5" boundary-links="true" items-per-page="ctrl.numPerPage"
+                                        class="pagination-sm"
+                                        first-text="&laquo;"
+                                        previous-text="&lsaquo;"
+                                        next-text="&rsaquo;"
+                                        last-text="&raquo;"                                        >
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="md-card__actions text-right">
+            <button type="submit" id="insertaBolsa" ng-if="ctrl.pkBolsaEmpresa==null" ng-click="ctrl.insertaBolsaEmpresa()" class="md-button"
+            ng-disabled='!formBolsaEmp.$valid || ctrl.minDisponible < 0; ctrl.btnHabilitar'>Agregar</button>
+        <button type="submit" ng-if="ctrl.pkBolsaEmpresa!=null" id="editaBolsa" ng-click="ctrl.editaBolsaEmpresa()" class="md-button"
+            data-ng-disabled='!formBolsaEmp.$valid || ctrl.minDisponible < 0;ctrl.btnHabilitar'>Guardar</button>
+    </div>
+    <div class="md-card__menu">
+        <button class="md-button md-button--icon" data-dismiss="modal" ng-click="ctrl.cancel()"><i class="mdi mdi-close"></i></button>
+    </div>
+</div>
+    <!-- /.modal-content -->
+    <script>    
+
+    </script>

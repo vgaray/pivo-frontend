@@ -1,0 +1,23 @@
+.vAccordion--default{
+    & v-pane-header{
+        &:focus, &:hover{
+            color: $color-default !important;
+        }
+    }
+}
+.vAccordion--default{
+    & v-pane-header{
+        &::after, &::before{
+            background-color: $color-default !important;
+        }
+    }
+}
+.vAccordion--default{
+    & v-pane{
+        &.is-expanded{
+            &>v-pane-header{
+                border-bottom-color: $color-default !important;
+            }
+        }
+    }
+}

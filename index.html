@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="pivo">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>P.I.V.O</title>
+    <!-- favicon icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="src/assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="src/assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="src/assets/img/favicons/favicon-16x16.png">
+    <link rel="manifest" href="src/assets/img/favicons/manifest.json">
+    <meta name="theme-color" content="#ffffff">
+    <!--  stylesheet-->
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./bower_components/angular-ui-select/dist/select.min.css">
+    <link rel="stylesheet" href="./src/assets/css/timepicker.css" />
+    <!--<link rel="stylesheet" href="./src/assets/css/bootstrap-timepicker.css">
+    <link rel="stylesheet" href="./src/assets/css/bootstrap-timepicker.min.css">-->
+    <!--<link rel="stylesheet" href="./src/assets/plugins/timepicker/timepicker.css">-->
+
+    <link rel="stylesheet"
+        href="./bower_components/angular-bootstrap-toggle-switch/style/bootstrap3/angular-toggle-switch-bootstrap-3.css">
+
+    <!-- <link rel="stylesheet" href="./bower_components/bootstrap-fileinput/css/fileinput.min.css">
+    <link rel="stylesheet" href="./bower_components/ng-tags-input/ng-tags-input.min.css"> -->
+
+    <!-- style -->
+    <link rel="stylesheet" href="./src/assets/css/style.min.css">
+    <!-- animate -->
+    <link rel="stylesheet" href="./bower_components/animate.css/animate.min.css">
+    <!-- <link rel="stylesheet" href="./src/assets/css/components.min.css"> -->
+    <link rel="stylesheet" href="./bower_components/normalize-css/normalize.css">
+    <!-- font icons -->
+    <!-- <link rel="stylesheet" href="./bower_components/components-font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="./bower_components/entypo/font/entypo.css">
+    <link rel="stylesheet" href="./bower_components/socicon/css/socicon.css">
+    <link rel="stylesheet" href="./bower_components/Ionicons/css/ionicons.min.css"> -->
+    <link rel="stylesheet" href="./bower_components/toastr/toastr.min.css">
+    <link rel="stylesheet" href="./bower_components/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="./bower_components/v-accordion/dist/v-accordion.min.css">
+    <link rel="stylesheet" href="./bower_components/ngprogress/ngProgress.css">
+    <link rel="stylesheet" href="./bower_components/ng-tags-input/ng-tags-input.min.css">
+    <!-- <base href="/"> -->
+    <!-- theme for tree javascript="/"> -->
+    <link rel="stylesheet" type="text/css" href="./bower_components/jstree/src/themes/default/style.css" />
+    <link rel="stylesheet" href="./bower_components/angular-spinkit/build/angular-spinkit.min.css">
+    <link rel="stylesheet" href="./node_modules/angularjs-datepicker/src/css/angular-datepicker.css">
+    <!-- fonts-->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet"> -->
+    <!--link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet"-->
+</head>
+
+<body>
+    <ui-view></ui-view>
+    <!--jquery  -->
+    <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="./bower_components/jquery-ui/jquery-ui.min.js"></script>
+
+    <!-- Esta ruta pertenece al media server -->
+    <!--<script src="http://192.168.3.153:3666/js/main.js"></script>-->
+    <!-- <script src="./src/assets/plugins/timepicker/timepicker.js"></script>-->
+
+    <!-- bootstrap -->
+    <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./bower_components/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+    <!-- file input -->
+    <!--<script src="./bower_components/bootstrap-fileinput/js/plugins/canvas-to-blob.min.js"></script>-->
+    <script src="./bower_components/bootstrap-fileinput/js/plugins/sortable.min.js"></script>
+    <script src="./bower_components/bootstrap-fileinput/js/plugins/purify.min.js"></script>
+    <script scr="./bower_components/bootstrap-fileinput/js/fileinput.min.js"></script>
+    <!-- angular -->
+    <script src="./bower_components/angular/angular.min.js"></script>
+    <script src="./bower_components/angular-messages/angular-messages.min.js"></script>
+    <script src="./bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="./bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="./bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="./bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="./bower_components/angular-smart-table/dist/smart-table.min.js"></script>
+    <script src="./bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="./bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="./bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="./bower_components/angular-slimscroll/angular-slimscroll.js"></script>
+    <script src="./bower_components/angular-ui-sortable/sortable.min.js"></script>
+    <script src="./bower_components/angular-translate/angular-translate.min.js"></script>
+    <script src="./bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
+    <script src="./bower_components/jstree/dist/jstree.min.js" charset="utf-8"></script>
+    <script src="./bower_components/ng-js-tree/dist/ngJsTree.min.js" charset="utf-8"></script>
+    <script src="./bower_components/angular-base64-upload/dist/angular-base64-upload.min.js"></script>
+    <script src="./bower_components/angular-bootstrap-fileinput/angular-bootstrap-fileinput.js"></script>
+    <script src="./bower_components/angular-ui-select/dist/select.min.js"></script>
+    <script src="./bower_components/ng-ip-address/ngIpAddress.min.js"></script>
+    <script src="./bower_components/checklist-model/checklist-model.js"></script>
+    <script src="./bower_components/angular-media-player/dist/angular-media-player.min.js"></script>
+    <script src="./bower_components/angular-spinkit/build/angular-spinkit.min.js"></script>
+    <script src="./bower_components/angular-audio/app/angular.audio.js"></script>
+    <script src="./bower_components/angular-clipboard/angular-clipboard.js"></script>
+    <script src="./bower_components/angular-bootstrap-toggle-switch/angular-toggle-switch.min.js"></script>
+    <script src="./node_modules/angularjs-datepicker/src/js/angular-datepicker.js"></script>
+
+
+    <!-- gráficos -->
+    <script src="./bower_components/chart.js/dist/Chart.min.js"></script>
+    <script src="./bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
+
+    <script src="./bower_components/ng-password-generator/ng-password-generator.js"></script>
+    <script src="./bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min.js"></script>
+    <script src="./bower_components/ng-tags-input/ng-tags-input.min.js"></script>
+    <script src="./bower_components/clipboard/dist/clipboard.min.js"></script>
+    <script src="./bower_components/ngclipboard/dist/ngclipboard.min.js"></script>
+    <!-- data table -->
+    <script src="./bower_components/toastr/toastr.min.js"></script>
+    <script src="./bower_components/angular-i18n/angular-locale_es-es.js"></script>
+    <script src="./bower_components/v-accordion/dist/v-accordion.min.js"></script>
+    <script src="./bower_components/ngprogress/build/ngprogress.min.js"></script>
+
+    <!-- Página por defecto -->
+    <script src="./src/components/inicio/inicio.module.js"></script>
+    <script src="./src/components/inicio/inicio.controller.js"></script>
+    <script src="./src/components/inicio/inicio.component.js"></script>
+
+    <!--login-->
+    <script src="./src/components/login/login.module.js"></script>
+    <script src="./src/components/login/login.controller.js"></script>
+    <script src="./src/components/login/login.component.js"></script>
+    <script src="./src/components/login/mensaje/mensaje.controller.js"></script>
+    <!-- principal -->
+    <script src="./src/components/principal/principal.module.js"></script>
+    <script src="./src/components/principal/principal.controller.js"></script>
+    <script src="./src/components/principal/principal.component.js"></script>
+    <!-- menu -->
+    <script src="./src/components/principal/sicSidebar/sicSidebar.directive.js"></script>
+    <script src="./src/components/principal/sicSidebar/sicSidebarHelpers.directive.js"></script>
+    <script src="./src/components/principal/sicSidebar/sicSidebar.controller.js"></script>
+    <script src="./src/components/principal/sicSidebar/sicSidebar.component.js"></script>
+    <!-- servicios -->
+    <script src="./src/components/gestionInstancia/gestionInstancia.module.js"></script>
+    <script src="./src/components/gestionInstancia/gestionInstancia.controller.js"></script>
+    <script src="./src/components/gestionInstancia/gestionInstancia.component.js"></script>
+
+
+    <!-- lista de instancias de cliente -->
+    <script src="./src/components/administrarInstancias/administrarInstancias.module.js"></script>
+    <script src="./src/components/administrarInstancias/administrarInstancias.controller.js"></script>
+    <script src="./src/components/administrarInstancias/administrarInstancias.component.js"></script>
+    <script src="./src/components/administrarInstancias/configurarInstancia/configurarInstancia.controller.js"></script>
+    <script
+        src="./src/components/administrarInstancias/administrarInstanciasCrud/administrarInstanciasCrud.controller.js"></script>
+    <script src="./src/components/administrarInstancias/registrarInstancia/registrarInstancia.controller.js"></script>
+
+    <!-- Usuario -->
+    <script src="./src/components/usuario/usuario.module.js"></script>
+    <script src="./src/components/usuario/usuarioGestionInstancia/usuarioGestionInstancia.controller.js"></script>
+    <script src="./src/components/usuario/usuarioGestionInstancia/usuarioGestionInstancia.component.js"></script>
+    <script src="./src/components/usuario/usuarioGestionPedido/usuarioGestionPedido.controller.js"></script>
+    <script src="./src/components/usuario/usuarioGestionPedido/usuarioGestionPedido.component.js"></script>
+    <script
+        src="./src/components/usuario/usuarioGestionInstancia/usuarioGestionInstanciaCrud/usuarioGestionInstanciaDelete/usuarioGestionInstanciaDelete.controller.js"></script>
+    <script
+        src="./src/components/usuario/usuarioGestionInstancia/usuarioGestionInstanciaCrud/usuarioGestionInstanciaSave/usuarioGestionInstanciaSave.controller.js"></script>
+    <script
+        src="./src/components/usuario/usuarioGestionPedido/usuarioGestionPedidoCrud/usuarioGestionPedidoDelete/usuarioGestionPedidoDelete.controller.js"></script>
+    <script
+        src="./src/components/usuario/usuarioGestionPedido/usuarioGestionPedidoCrud/usuarioGestionPedidoSave/usuarioGestionPedidoSave.controller.js"></script>
+
+    <!-- Personal -->
+    <script src="./src/components/personal/personal.module.js"></script>
+    <script src="./src/components/personal/personal.component.js"></script>
+    <script src="./src/components/personal/personal.controller.js"></script>
+    <script src="./src/components/personal/personalDatosPersonales/personalDatosPersonales.controller.js"></script>
+    <script src="./src/components/personal/personalEliminar/personalEliminar.controller.js"></script>
+    <script src="./src/components/personal/personalAR/personalAR.controller.js"></script>
+    <!-- citasVeterinaria -->
+    <script src="./src/components/citasVeterinaria/citasVeterinaria.module.js"></script>
+    <script src="./src/components/citasVeterinaria/citasVeterinaria.component.js"></script>
+    <script src="./src/components/citasVeterinaria/citasVeterinaria.controller.js"></script>
+    <script src="./src/components/citasVeterinaria/citasVeterinariaAR/citasVeterinariaAR.controller.js"></script>
+    <!-- Veterinarias -->
+    <script src="./src/components/veterinarias/veterinarias.module.js"></script>
+    <script src="./src/components/veterinarias/veterinarias.component.js"></script>
+    <script src="./src/components/veterinarias/veterinarias.controller.js"></script>
+    <!-- Mascotas -->
+    <script src="./src/components/mascotas/mascotas.module.js"></script>
+    <script src="./src/components/mascotas/mascotas.component.js"></script>
+    <script src="./src/components/mascotas/mascotas.controller.js"></script>
+    <script src="./src/components/mascotas/mascotasEliminar/mascotasEliminar.controller.js"></script>
+    <script src="./src/components/mascotas/mascotasAR/mascotasAR.controller.js"></script>
+    <script src="./src/components/mascotas/verHistoriaClinica/verHistoriaClinica.controller.js"></script>
+    <!--Gestion Mascotas -->
+    <script src="./src/components/gestionMascotas/gestionMascotas.module.js"></script>
+    <script src="./src/components/gestionMascotas/gestionMascotas.component.js"></script>
+    <script src="./src/components/gestionMascotas/gestionMascotas.controller.js"></script>
+    <script
+        src="./src/components/gestionMascotas/gestionMascotasEliminar/gestionMascotasEliminar.controller.js"></script>
+    <script src="./src/components/gestionMascotas/gestionMascotasAR/gestionMascotasAR.controller.js"></script>
+    <script src="./src/components/gestionMascotas/historiaClinicaAR/historiaClinicaAR.controller.js"></script>
+
+    <!--Gestion Historia clinica Veterinario Interno -->
+    <script src="./src/components/gestionHistoriaClinica/gestionHistoriaClinica.module.js"></script>
+    <script src="./src/components/gestionHistoriaClinica/gestionHistoriaClinica.component.js"></script>
+    <script src="./src/components/gestionHistoriaClinica/gestionHistoriaClinica.controller.js"></script>
+    <script
+        src="./src/components/historiaClinicaService/historiaClinicaServiceAR/historiaClinicaServiceAR.controller.js"></script>
+    <!--Gestion Historia clinica Veterinario externo -->
+    <script src="./src/components/historiaClinicaService/historiaClinicaService.module.js"></script>
+    <script src="./src/components/historiaClinicaService/historiaClinicaService.component.js"></script>
+    <script src="./src/components/historiaClinicaService/historiaClinicaService.controller.js"></script>
+    <script
+        src="./src/components/historiaClinicaService/historiaClinicaServiceAR/historiaClinicaServiceAR.controller.js"></script>
+    <!-- Citas -->
+    <script src="./src/components/citas/citas.module.js"></script>
+    <script src="./src/components/citas/citas.component.js"></script>
+    <script src="./src/components/citas/citas.controller.js"></script>
+    <!-- Seguridad -->
+    <script src="./src/components/seguridad/seguridad.module.js"></script>
+    <script src="./src/components/seguridad/seguridad.component.js"></script>
+    <script src="./src/components/seguridad/seguridad.controller.js"></script>
+    <script src="./src/components/seguridad/seguridadDelete/seguridad.delete.controller.js"></script>
+    <script src="./src/components/seguridad/seguridadConfirmacion/seguridad.confirmacion.controller.js"></script>
+    <script src="./src/components/seguridad/seguridadCrud/seguridadCrud.compoment.js"></script>
+    <script src="./src/components/seguridad/seguridadCrud/seguridadCrud.controller.js"></script>
+    <script src="./src/components/seguridad/seguridadGestPedido/seguridadGestPedido.component.js"></script>
+    <script src="./src/components/seguridad/seguridadGestPedido/seguridadGestPedido.controller.js"></script>
+    <script
+        src="./src/components/seguridad/seguridadGestPedido/seguridadGestCrud/seguridadGestCrud.component.js"></script>
+    <script
+        src="./src/components/seguridad/seguridadGestPedido/seguridadGestCrud/seguridadGestCrud.controller.js"></script>
+
+    <!-- 404 -->
+    <script src="./src/components/page-404/404.js"></script>
+
+    <!-- Gestionar Cliente -->
+    <script src="./src/components/cliente/cliente.module.js"></script>
+    <script src="./src/components/cliente/cliente.component.js"></script>
+    <script src="./src/components/cliente/cliente.controller.js"></script>
+    <script src="./src/components/cliente/clienteDetalle/clienteDetalle.controller.js"></script>
+    <script src="./src/components/cliente/clienteEliminar/clienteEliminar.controller.js"></script>
+    <script src="./src/components/cliente/clienteDetallePedido/clienteDetallePedido.controller.js"></script>
+
+    <script src="./src/components/cliente/clienteAgregarPedido/clienteAgregarPedido.controller.js"></script>
+    <script
+        src="./src/components/cliente/clienteAgregarPedido/clienteAgregarPedidoDelete/clienteAgregarPedidoDelete.controller.js"></script>
+
+    <script src="./src/components/cliente/clienteRA/clienteRA.controller.js"></script>
+    <!-- Gestionar pedido -->
+    <script src="./src/components/pedido/pedido.module.js"></script>
+    <script src="./src/components/pedido/pedido.component.js"></script>
+    <script src="./src/components/pedido/pedido.controller.js"></script>
+
+
+    <script src="./src/app.module.js"></script>
+    <script src="./src/app.module.js"></script>
+    <script src="./src/constants.js"></script>
+    <script src="./src/app.config.js"></script>
+    <script src="./src/app.run.js"></script>
+    <script src="./src/assets/js/download.js"></script>
+    <script src="./src/shared/config/ngResource.config.js"></script>
+    <script src="./src/shared/config/view.config.js"></script>
+    <script src="./src/shared/services/sicUtil.js"></script>
+    <script src="./src/shared/services/sicSidebar.service.js"></script>
+    <script src="./src/shared/services/util.service.js"></script>
+    <script src="./src/shared/services/login.service.js"></script>
+    <script src="./src/shared/services/gestionInstancia.service.js"></script>
+    <script src="./src/shared/services/controlRolEstado.service.js"></script>
+    <script src="./src/shared/services/usuario.service.js"></script>
+    <script src="./src/components/principal/sicSidebar/sic-menu-sidebar.service.js"></script>
+    <script src="./src/shared/services/seguridad.service.js"></script>
+    <script src="./src/shared/services/territorio.service.js"></script>
+    <script src="./src/shared/services/variableGeneral.service.js"></script>
+    <script src="./src/shared/services/cliente.service.js"></script>
+    <script src="./src/shared/services/pedido.service.js"></script>
+    <script src="./src/shared/services/personal.service.js"></script>
+    <script src="./src/shared/services/mascota.service.js"></script>
+    <script src="./src/shared/services/historiaClinica.service.js"></script>
+    <script src="./src/shared/services/citaVeterinaria.service.js"></script>
+    <!-- Utilitarios -->
+    <script src="./src/shared/utils/validator.util.js"></script>
+    <!-- directivas -->
+    <script src="./src/shared/directives/animatedChange.js"></script>
+    <script src="./src/shared/directives/autoExpand.js"></script>
+    <script src="./src/shared/directives/autoFocus.js"></script>
+    <script src="./src/shared/directives/includeWithScope.js"></script>
+    <script src="./src/shared/directives/ionSlider.js"></script>
+    <script src="./src/shared/directives/cargaArchivo.directive.js"></script>
+    <script src="./src/shared/directives/modalDelete.directive.js"></script>
+    <script src="./src/shared/directives/progressBarCustom.directive.js"></script>
+    <script src="./src/shared/directives/ngFileSelect.js"></script>
+    <script src="./src/shared/directives/scrollPosition.js"></script>
+    <script src="./src/shared/directives/trackWidth.js"></script>
+    <script src="./src/shared/directives/zoomIn.js"></script>
+    <script src="./src/shared/directives/validators/phoneSIPValidator.directive.js"></script>
+    <script src="./src/shared/directives/validators/textNumericValidator.directive.js"></script>
+    <script src="./src/shared/directives/validators/macValidator.directive.js"></script>
+    <script src="./src/shared/directives/validators/inputDateValidator.directive.js"></script>
+    <script src="./src/shared/directives/myUiSelect.directive.js" charset="utf-8"></script>
+
+    <!-- <script src="./src/components/principal/sicSidebar/sicSidebar.provider.js"></script> -->
+    <!-- page top -->
+    <script src="./src/components/principal/pageTop/page-top.directive.js"></script>
+    <!-- content top -->
+    <script src="./src/components/principal/contentTop/contentTop.directive.js"></script>
+    <!-- back Top -->
+    <script src="./src/components/principal/backTop/lib/jquery.backTop.min.js"></script>
+    <script src="./src/components/principal/backTop/backTop.directive.js"></script>
+    <script src="./node_modules/angularjs-datepicker/src/js/angular-datepicker.js"></script>
+    <!--Libreria de diseño -->
+    <script src="./src/assets/scripts/md-t-contacta.js"></script>
+
+
+</body>
+
+</html>

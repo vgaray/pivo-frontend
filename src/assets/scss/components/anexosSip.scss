@@ -1,0 +1,16 @@
+.md-card__actions{
+    .img-result{
+        .ng-hide:not(.ng-hide-animate) {
+            display: inline-block !important;
+        }
+    }
+    #loading .fading-circle-spinner
+    {
+        margin: 0px !important;
+        width: 26px !important;
+        height: 26px !important;
+        position: absolute !important;
+        right: 145px !important;
+        bottom: 31px !important;
+    }
+}

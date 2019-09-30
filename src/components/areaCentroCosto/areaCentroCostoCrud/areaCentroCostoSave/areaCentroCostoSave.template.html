@@ -1,0 +1,83 @@
+<form name="formAreaCentroCostoSave" novalidate class="form-horizontal">
+    <div class="md-card">
+        <div ng-if="ctrl.validarModal==true ">
+            <div class="md-card__title">
+                <h4 class="modal-title">{{ctrl.frmData.nameModal}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" ng-class="{ 'has-error': formAreaCentroCostoSave.nomAreaLab.$invalid && formAreaCentroCostoSave.nomAreaLab.$touched || formAreaCentroCostoSave.nomAreaLab.$error.required}">
+                    <div class="col-md-9">
+                        <div class="md-textfield" ng-show='ctrl.menuState.showAI' ng-class="{ 'is-dirty': ctrl.frmData.areaCentroCosto.entity.pNombreArea.length > 0}">
+                            <input type="text" ng-change="ctrl.frmData.areaCentroCosto.entity.pNombreArea ; ctrl.changeAreaReg()" name="nomAreaLab" class="md-textfield__input"
+                                placeholder="Ingrese nombre del Area" ng-model="ctrl.frmData.areaCentroCosto.entity.pNombreArea"
+                                ng-required="true">
+                            <label class="md-textfield__label" for="razonSocial">Area:</label>
+                        </div>
+                        <div ng-show='ctrl.menuState.showAE' class="md-textfield" ng-class="{ 'is-dirty': ctrl.frmData.areaCentroCosto.entity.noArea.length > 0}">
+                            <input type="text" ng-change="ctrl.frmData.areaCentroCosto.entity.noArea ; ctrl.changeAreaAct()" name="nomAreaLabEditar"
+                                class="md-textfield__input" placeholder="Ingrese nombre del Area" ng-model="ctrl.frmData.areaCentroCosto.entity.noArea"
+                                ng-required="true">
+                            <label class="md-textfield__label" for="razonSocial">Area:</label>
+                        </div>
+                        <small style="color:red" ng-show="ctrl.act">*área existente</small>
+                    </div>
+                </div>
+            </div>
+            <div class="md-card__actions text-right">
+                <button type="button" class="md-button" ng-disabled="ctrl.dis" ng-click="ctrl.onSaveArea()">Guardar</button>
+            </div>
+            <div class="md-card__menu">
+                <button class="md-button md-button--icon" data-dismiss="modal" ng-click="ctrl.cancel()">
+                    <i class="mdi mdi-close"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="md-card">
+        <div ng-if="ctrl.validarModal==false ">
+            <div class="md-card__title">
+                <h4 class="modal-title">{{ctrl.frmData.nameModal2}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" ng-class="{ 'has-error': formAreaCentroCostoSave.comboArea.$invalid && formAreaCentroCostoSave.comboArea.$touched || formAreaCentroCostoSave.comboArea.$error.required}">
+                    <div class="col-md-9">
+                        <div class="md-select md-textfield is-dirty" ng-class="{ 'is-dirty' : ctrl.frmData.comboArea.length >0 }">
+                            <select type="text" class="md-select__input" ng-change="ctrl.chageCentroReg()" name="comboArea" class="form-control" ng-model="ctrl.frmData.comboArea"
+                                ng-options="area as area.noArea
+                                    for area in ctrl.nombreAreaLista
+                                    track by area.noArea" ng-selected="$first" ng-required="true">
+                                <option ng-show="false" value="" selected="true"></option>
+                            </select>
+                            <label class="md-select__label">Area</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': formAreaCentroCostoSave.nomCentroCosto.$touched && formAreaCentroCostoSave.nomCentroCosto.$invalid }">
+                    <div class="col-md-9">
+                        <div class="md-textfield"  ng-show='ctrl.menuState.showCI' ng-class="{ 'is-dirty': ctrl.frmData.areaCentroCosto.entity.pNombreCentroCosto.length > 0}">
+                            <input type="text" ng-change="ctrl.chageCentroReg()" name="nomCentroCosto" class="md-textfield__input " ng-show='ctrl.menuState.showCI'
+                                placeholder="Ingrese nombre del Centro de Costo" ng-model="ctrl.frmData.areaCentroCosto.entity.pNombreCentroCosto"
+                                ng-required="true">
+                            <label class="md-textfield__label">Centro de Costo: </label>
+                        </div>
+                        <div class="md-textfield"ng-show='ctrl.menuState.showCE' ng-class="{ 'is-dirty': ctrl.frmData.areaCentroCosto.entity.noCentroCosto.length > 0}">
+                            <input type="text" ng-change="ctrl.chageCentroAct()" name="nomCentroCostoEditar" class="md-textfield__input " ng-show='ctrl.menuState.showCE'
+                                placeholder="Ingrese nombre del Centro de Costo" ng-model="ctrl.frmData.areaCentroCosto.entity.noCentroCosto"
+                                required="true">
+                            <label class="md-textfield__label">Centro de Costo: </label>
+                        </div>
+                        <small style="color:red" ng-show="ctrl.act">*área y centro de costo existente</small>
+                    </div>
+                </div>
+            </div>
+            <div class="md-card__actions text-right">
+                <button type="button" class="md-button" ng-disabled="ctrl.dis" ng-click="ctrl.onSaveCentroCosto()">Guardar</button>
+            </div>
+            <div class="md-card__menu">
+                <button class="md-button md-button--icon" data-dismiss="modal" ng-click="ctrl.cancel()">
+                    <i class="mdi mdi-close"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

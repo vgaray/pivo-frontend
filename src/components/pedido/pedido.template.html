@@ -1,0 +1,119 @@
+<div class="widgets cc-reporte-llamada">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="panel with-scroll animated zoomIn">
+                <div class="portlet-title">
+                    <div class="panel-heading clearfix">
+                        <h3 class="panel-title">Lista Clientes</h3>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="add-row-editable-table">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="row">
+                                    <div class="form-group" ng-class="">
+                                        <div class="col-md-5">
+                                            <label>Cliente</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <input ng-change="Ctrl.listarClientes()" maxlength="20" class="form-control" ng-model="Ctrl.frmData.listaClientes.request.BuscaEli.pNoRazon"
+                                            placeholder="Ingrese razón Social a filtrar ">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label>Nº Documento</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input type="number" ng-change="Ctrl.listarClientes()" maxlength="11" required onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                                min="0" max="100" class="form-control" ng-model="Ctrl.frmData.listaClientes.request.BuscaEli.pNudocide"
+                                                placeholder="Ingrese numero de documento a filtrar ">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Estado</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <select class="form-control" ng-change="Ctrl.combochange(Ctrl.scope.frmData.listaClientes.request.pEstado)" ng-model="Ctrl.scope.frmData.listaClientes.request.pEstado"
+                                                ng-options="estados as estados.value for estados in Ctrl.itemComboConstantsEstado" >
+                                                <option ng-show="false" value="" selected="true">ACTIVO</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-7 col-md-8 b-permis">
+                                <button type="button" class="btn btn-primary" ng-click="Ctrl.raCliente()"> Agregar Cliente
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover table-checkable order-column" id="tbCliente">
+                            <thead>
+                                <tr>
+                                    <th class="cc-center">No Razón Social</th>
+                                    <th class="cc-center">Tipo Doc</th>
+                                    <th class="cc-center">NºDocumento</th>
+                                    <th class="cc-center">Dirección</th>
+                                    <th class="cc-center">Teléfono</th>
+                                    <th class="cc-center">Correo</th>
+                                    <th class="cc-center">N°Centrales</th>
+                                    <th class="cc-center">Estado</th>
+                                    <th class="cc-center">Datos de Contacto</th>
+                                    <th class="cc-center">Editar</th>
+                                    <th ng-show=Ctrl.mostrar class="cc-center">Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="cli in Ctrl.lsCliente | filter:Ctrl.paginate">
+                                    <td class="cc-center">{{cli.noRazonSocial}}</td>
+                                     <td class="cc-center">{{cli.noTipo}}</td>
+                                    <td class="cc-center">{{cli.ruc}}</td>
+                                    <td class="cc-center">{{cli.direcc}}</td>
+                                    <td class="cc-center">{{cli.telef}}</td>
+                                    <td class="cc-center">{{cli.correoEle}}</td>
+                                    <td class="cc-center">{{cli.nuCentrales}}</td>
+                                    <td class="cc-center cc-null-pointer">
+                                        <toggle-switch name="toogle" disabled="true" ng-model="Ctrl.enable" class=" switch-small switch-success" on-label="Activo"
+                                            off-label="Inactivo">
+                                        </toggle-switch>
+                                    </td>
+                                    <td class="cc-center"> <span class="cc-cursor-pointer" uib-tooltip="Más" ng-click="Ctrl.consultarCliente(cli.idCliente,cli.estado)"><i class="fa fa-plus-square" aria-hidden="true"></i> </span></td>
+                                    <td class="cc-center"> <span class="cc-cursor-pointer" ng-click="Ctrl.raCliente(cli.idCliente,cli.estado)"><i class="fa fa-edit" aria-hidden="true"></i> </span></td>
+                                    <td ng-show=Ctrl.mostrar class="cc-center"> <span class="cc-cursor-pointer" ng-click="Ctrl.eliminarCliente(cli.idCliente)"><i class="fa fa-trash" aria-hidden="true"></i> </span></td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="10" class="text-center">
+                                        <div uib-pagination total-items="Ctrl.totalItems" ng-model="Ctrl.currentPage" max-size="5" boundary-links="true" items-per-page="Ctrl.numPerPage"
+                                            class="pagination-sm">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</div>

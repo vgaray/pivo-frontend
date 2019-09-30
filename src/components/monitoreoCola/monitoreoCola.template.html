@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="md-card animated zoomIn">
+            <div class="md-card__title">
+                <h2 class="md-card__title-text">Monitoreo de Colas</h2>
+            </div>
+            <div class="md-card__supporting-text">
+                <div class="table-responsive">
+                    <table class="md-table table" id="tbMonitoreoCola">
+                        <thead>
+                            <tr>
+                                <th ng-repeat="header in ctrl.table_headers">{{header.description}}</th>
+                                <th class="text-center">Editar</th>
+                                <th class="text-center">Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>                               
+                            <tr ng-repeat="monitoreo in ctrl.lsMonitoreo | filter:ctrl.paginate ">
+                                <td>{{monitoreo.name}}</td>
+                                <td>{{monitoreo.nuAnexo}}</td>
+                                <td>{{monitoreo.noCorreo}}</td>
+                                <td>{{monitoreo.hoMinimo}}</td>
+                                <td>{{monitoreo.hoMedio}}</td>
+                                <td>{{monitoreo.hoMaximo}}</td>
+                                <td class="text-center"><button class="md-button md-button--icon" ng-click="ctrl.onSaveMonitoreoCola( ctrl.frmData.update, monitoreo.idQueues )" uib-tooltip="Editar"><i class="mdi mdi-pencil"></i></a></td>
+                                <td class="text-center"><button class="md-button md-button--icon" ng-click="ctrl.onEliminarMonitoreoCola( monitoreo.idQueues )"><i class="mdi mdi-delete" uib-tooltip="Eliminar"></i></a></td>    
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="10" class="text-center">
+                                    <div uib-pagination total-items="ctrl.totalItems" ng-model="ctrl.currentPage" max-size="5" boundary-links="true" items-per-page="ctrl.numPerPage" class="pagination-sm" first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;" last-text="&raquo;"></div>
+                                </td>
+                            </tr>
+                        </tfoot>                            
+                    </table>
+                </div>
+            </div>  
+            <div class="md-card__menu">
+                    <button type="button" class="md-button" ng-click="ctrl.onSaveMonitoreoCola( ctrl.frmData.add )">Agregar Datos de Monitoreo<i class="mdi mdi-plus"></i></button>
+            </div>              
+        </div>
+    </div>
+</div>

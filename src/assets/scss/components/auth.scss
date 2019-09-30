@@ -1,0 +1,102 @@
+.md-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $bg-light_grey;
+    background-image: url(../img/logos/logo-pivo2.png);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-repeat: no-repeat;
+    flex-direction: row;
+    background-position: calc(50% + 150px) calc(50% - 20px);
+    background-size: auto calc(100% - 150px);
+  }
+  
+  .md-t-integro {
+    margin: auto;
+    margin-right: 25px;
+    text-align: center;
+    padding-right: 150px;
+  
+    & .img-login__card {
+      margin-top: 16px;
+      width: 50%;
+    }
+  }
+  
+  .md-card__login {
+    max-width: 300px;
+    margin: auto;
+    margin-left: 20px;
+  }
+  
+  .img-login__left {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+  }
+  
+  .login-text {
+    font-weight: 600;
+    color: $color-black;
+    margin: 8px 0 0 0;
+  
+    &.login-text__head {
+      font-size: 20.5px;
+    }
+  
+    &.login-text__subhead {
+      font-size: 32px;
+      margin-top: 0;
+    }
+  }
+  
+  .img-login__card {
+    width: 100%;
+    max-width: 125px;
+    height: auto;
+  }
+  
+  .md-button__login {
+    width: 100%;
+  }
+  
+  .md-button__forget {
+    color: $color-black;
+    background: transparent;
+    border: none;
+    padding: 11px 38px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    text-transform: initial;
+    float: left;
+  }
+  
+  @media (max-width: 768px){
+    .md-content{
+      background-position: calc(25% + 10px) calc(50% - 20px);
+    }
+    .md-t-integro{
+      display: none;
+    }
+    .md-card__login{
+      margin-left: auto;
+    }
+  }
+
+  @media (max-width: 420px){
+    .md-card__login{
+    max-width: 100%;
+    margin: 0;
+    box-shadow: none; 
+    }
+    .md-content{
+    display: block;
+    background-image: none;
+    background-color: #FFFFFF;
+    padding: 25px 15px; 
+    }
+    }

@@ -1,0 +1,135 @@
+.md-select {
+  position: relative;
+  font-size: 16px;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: 17px 0 0 0;
+  margin: 16px 0;
+
+  &>option {
+    background: red !important;
+  }
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
+  &.is-dirty .md-select__label,
+  &.is-focused .md-select__label {
+    color: #616161;
+    font-size: 12px;
+    top: 4px;
+    visibility: visible;
+  }
+
+  &.is-focused .md-select__label {
+    color: $color-default;
+
+    &:after {
+      left: 0;
+      visibility: visible;
+      width: 100%;
+    }
+  }
+
+  &.is-invalid .md-select__error {
+    visibility: visible;
+  }
+
+  &.is-invalid .md-select__label,
+  &.is-dirty.is-invalid .md-select__label,
+  &.is-focused.is-invalid .md-select__label,
+  &.is-focused.is-dirty.is-invalid .md-select__label {
+    color: $color-error;
+
+    &:after {
+      background-color: $color-error;
+    }
+  }
+
+  &.is-invalid .md-select__input {
+    border-bottom-color: $color-error;
+  }
+}
+
+.md-select__label {
+  bottom: 0;
+  margin-bottom: 0;
+  color:$color-black;
+  font-size: 16px;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  position: absolute;
+  display: block;
+  top: 24px;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: left;
+  transition-duration: .2s;
+  transition-timing-function: cubic-bezier(.4,0,.2,1);
+  font-weight: 500;
+
+  &:after {
+    background-color: $color-default;
+    bottom: 0;
+    content: '';
+    height: 2px;
+    left: 45%;
+    position: absolute;
+    transition-duration: .2s;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    visibility: hidden;
+    width: 10px;
+  }
+}
+
+.md-select__input {
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,.12);
+  display: block;
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 4px 0;
+  width: 100%;
+  background: 0 0;
+  text-align: left;
+  color: inherit;
+  outline: none;
+  color: $color-black;
+
+  &::placeholder {
+    color: transparent;
+  }
+}
+
+.md-select__error {
+  color: $color-error;
+  position: absolute;
+  font-size: 10px;
+  font-weight: 600;
+  margin-top: 2px;
+  visibility: hidden;
+  display: block;
+}
+
+.md-select{
+  &.ui-select-container{
+    & .ui-select-toggle, & .ui-select-search, & .ui-select-match{
+      background-color: transparent;
+      border: none;
+      box-shadow: none;
+      border-bottom: 1px solid #E0E0E0;
+      border-radius: 0;
+      padding-left: 0;
+    }
+  }
+}

@@ -1,0 +1,146 @@
+<div class="widgets cc-reporte-llamada cc-llamada-at-ab">
+    <form name="formConLla">
+        <div class="row">
+        <div class="col-md-12">
+            <div class="md-card animated fadeInUp">
+                <div class="portlet-title">
+                    <div class="md-card__title">
+                        <h2 class="md-card__title-text">{{Ctrl.frmData.name_page_title}}</h2>
+                    </div>
+                    <div class="md-card__supporting-text md-overflow">
+                        <div class="row">
+                            <!-- Cola -->
+                            <div class="col-md-4">
+                                <div class="md-select " ng-class="{ 'is-dirty': Ctrl.lsCola.length > 0}">
+                                    <select class="md-select__input" ng-model="Ctrl.itemComboConstants.itemQueueSelected" ng-options="Quename as Quename.name for Quename in Ctrl.lsCola "
+                                        ng-change="Ctrl.funcionQueunameRel(Ctrl.itemComboConstants.itemQueueSelected)">
+                                            <option ng-show="false" value="" selected="true">Seleccione Cola</option>
+                                        </select>
+                                        <label class="md-select__label">Cola</label>
+                                    </div>
+                                </div>
+
+                                <!-- Fecha Inicio-->
+                                <div class="col-md-4">
+                                    <datepicker date-format="dd-MM-yyyy" selector="calendar-inicio-textfield" button-prev="<i class='mdi mdi-arrow-left'></i>"
+                                        button-next="<i class='mdi mdi-arrow-right'></i>">
+                                        <div class="md-textfield has-placeholder" ng-class="{ 'is-invalid': formConLla.feIni.$dirty && formConLla.feIni.$error.required }">
+                                            <input input-date-validator type="text" maxlength="10" uib-datepicker-popup="dd-MM-yyyy" class="calendar-inicio-textfield md-textfield__input"
+                                                close-text="Cerrar" current-text="Hoy" clear-text="Limpiar" is-open="Ctrl.opened"
+                                                datepicker-options="Ctrl.dateOptions" id="feIni" name="feIni" ng-disabled="Ctrl.habFeini"
+                                                ng-model="Ctrl.dt" ng-change="Ctrl.dt ; Ctrl.validateDateini()" ng-required="Ctrl.frmData.list.reporteConsolidadoLlamada.request.feIni!=null"
+                                            />
+                                            <button class="md-button-input">
+
+                                                <i class="mdi mdi-calendar"></i>
+                                            </button>
+                                            <label class="md-textfield__label">Fecha Inicio</label>
+                                            <span class="md-textfield__error" ng-show="formConLla.feIni.$dirty && formConLla.feIni.$error.required">*Campo Requerido</span>
+                                        </div>
+                                    </datepicker>
+                                </div>
+
+                                <!-- Fecha Fin-->
+                                <div class="col-md-4">
+                                    <datepicker date-format="dd-MM-yyyy" selector="calendar-inicio-textfield" button-prev="<i class='mdi mdi-arrow-left'></i>"
+                                        button-next="<i class='mdi mdi-arrow-right'></i>">
+                                        <div class="md-textfield has-placeholder" ng-class="{ 'is-invalid': formConLla.feFin.$dirty && formConLla.feFin.$error.required }">
+                                            <input input-date-validator type="text" maxlength="10" uib-datepicker-popup="dd-MM-yyyy" class="calendar-inicio-textfield md-textfield__input"
+                                                close-text="Cerrar" current-text="Hoy" clear-text="Limpiar" id="feFin" name="feFin"
+                                                ng-disabled="Ctrl.habFefin" ng-model="Ctrl.dt2" ng-change="Ctrl.dt2;Ctrl.validateDateFin()"
+                                                is-open="Ctrl.openedf" datepicker-options="Ctrl.dateOptions" ng-required="true"
+                                            />
+                                            <button class="md-button-input">
+                                                <i class="mdi mdi-calendar"></i>
+                                            </button>
+                                            <label class="md-textfield__label">Fecha Fin</label>
+                                            <span class="md-textfield__error" ng-show="formConLla.feFin.$dirty && formConLla.feFin.$error.required">*Campo Requerido</span>
+                                        </div>
+                                    </datepicker>
+                                </div>
+
+                                <!--Botones-->
+                                <div class="col-md-12">
+                                    <button ng-disabled="Ctrl.habbot" type="button" class="md-button" ng-click="Ctrl.listaLlamadasContestadas()">Buscar
+                                        <i class="mdi mdi-magnify"></i>
+                                    </button>
+                                    <div class="btn-group pull-right" ng-if="Ctrl.listaConsolidadoLlamada.length != 0">
+                                        <button class="md-button" ng-show="Ctrl.varShow" ng-disabled="Ctrl.enades" s="md-button  dropdown-toggle " data-toggle="dropdown">Exportar
+                                            <i class="mdi mdi-chevron-double-down"></i>
+                                        </button>
+
+                                        <ul class="dropdown-menu pull-right">
+                                            <li>
+                                                <a href="" ng-click="Ctrl.descargarArchivo(Ctrl.valExcel)">
+                                                    <i class="mdi mdi-file-excel" style="color:forestgreen"></i> Excel
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="" ng-click="Ctrl.descargarArchivo(Ctrl.vaPdf)">
+                                                    <i class="mdi mdi-file-pdf" style="color:firebrick"></i> Pdf
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Cargando -->
+                            <div class="cc-msje-body">
+                                <div ng-hide="Ctrl.ui.isFilesLoaded || Ctrl.ui.isListSoundEmpty" class="result-message">
+                                    <span class="img-result">
+                                        <fading-circle-spinner></fading-circle-spinner>
+                                    </span>
+                                    <br/>
+                                    <span class="msg-result">Cargando Reporte...</span>
+                                </div>
+                                <div ng-hide="!Ctrl.ui.isListSoundEmpty" class="result-message">
+                                    <span class="img-result">
+
+                                    </span>
+                                    <br/>
+                                    <span class="msg-result">No existen datos por el momento...</span>
+                                </div>
+                                <div ng-hide="!Ctrl.ui.isErrorService" class="result-message">
+                                    <span class="img-result">
+                                        <span class="fa  fa-ban"></span>
+                                    </span>
+                                    <br/>
+                                    <span class="msg-result">Hubo una falla en la conexión con el servidor.</span>
+                                    <br/>
+                                    <br/>
+
+                                </div>
+                            </div>
+                            <!-- Tabla-->
+                            <div class="table-responsive">
+                                <table ng-show="Ctrl.varShow" class="md-table table">
+                                    <thead>
+                                        <tr>
+                                            <th class="cc-center">Cola</th>
+                                            <th class="cc-center">Año</th>
+                                            <th class="cc-center">Mes</th>
+                                            <th class="cc-center">Dia</th>
+                                            <th class="cc-center">Semana</th>
+                                            <th class="cc-center">Cantidad</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="reporte in Ctrl.listaConsolidadoLlamada">
+                                            <td class="cc-center">{{reporte.noQueuename}}</td>
+                                            <td class="cc-center">{{reporte.nuAnio}}</td>
+                                            <td class="cc-center">{{reporte.noMes}}</td>
+                                            <td class="cc-center">{{reporte.noDia}}</td>
+                                            <td class="cc-center">{{reporte.noDiaSemana}}</td>
+                                            <td class="cc-center">{{reporte.nuCantidad}}</td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

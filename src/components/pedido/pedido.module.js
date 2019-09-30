@@ -1,0 +1,1 @@
+angular.module('pedido',['ngAnimate', 'ngSanitize', 'ui.bootstrap']); 

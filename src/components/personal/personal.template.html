@@ -1,0 +1,152 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="md-card animated fadeInUp">
+            <div class="md-card__title">
+                <h2 class="md-card__title-text">Lista del Personal de la empresa</h2>
+            </div>
+            <div class="md-card__supporting-text">
+                <div class="row">
+                        <div class="col-md-2">
+                                <div class="md-textfield" ng-class="{ 'is-dirty' : Ctrl.frmData.personal.listar.request.pIdPersonal.length > 0 }">
+                                    <input type="text" class="md-textfield__input" name="username" ng-model="Ctrl.frmData.personal.listar.request.pIdPersonal"
+                                        ng-change="Ctrl.listarPersonal()">
+                                    <label class="md-textfield__label">Id Personal</label>
+                                </div>
+                            </div>
+                    <div class="col-md-2">
+                        <div class="md-textfield" ng-class="{ 'is-dirty' : Ctrl.frmData.personal.listar.request.pNoNombreApellido.length > 0 }">
+                            <input type="text" class="md-textfield__input" name="username" ng-model="Ctrl.frmData.personal.listar.request.pNoNombreApellido"
+                                ng-change="Ctrl.listarPersonal()">
+                            <label class="md-textfield__label">Nombres y Apellidos</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="md-textfield" ng-class="{ 'is-dirty' : Ctrl.frmData.personal.listar.request.pNuDocumento.length > 0 }">
+                            <input type="text" class="md-textfield__input" type="number" ng-model="Ctrl.frmData.personal.listar.request.pNuDocumento"
+                                ng-change="Ctrl.listarPersonal()">
+                            <label class="md-textfield__label">N°Documento</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="md-select is-dirty" ng-class="{ 'is-dirty' : Ctrl.frmData.personal.listar.request.pIdTipoDocumento.length >0 }">
+                            <select class="md-select__input" ng-model="Ctrl.frmData.personal.listar.request.pIdTipoDocumento" ng-options="tipoDoc as tipoDoc.noAbreviatura for tipoDoc in Ctrl.comboTipoDocumento"
+                                ng-change="Ctrl.combochangeTipoDocumento(Ctrl.frmData.personal.listar.request.pIdTipoDocumento)">
+                                <option ng-show="false" value="" selected="true">{{Ctrl.noAbreviatura}}</option>
+                            </select>
+                            <label class="md-select__label">Tipo Documento</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="md-select is-dirty" ng-class="{ 'is-dirty' : Ctrl.frmData.personal.listar.request.pIlActivo.length >0 }">
+                            <select class="md-select__input" ng-model="Ctrl.frmData.personal.listar.request.pIlActivo" ng-options="estado as estado.noEstado for estado in Ctrl.comboEstado"
+                                ng-change="Ctrl.combochangeEstado(Ctrl.frmData.personal.listar.request.pIlActivo)">
+                                <option ng-show="false" value="" selected="true">{{Ctrl.noEstado}}</option>
+                            </select>
+                            <label class="md-select__label">Estado</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <div class="btn-group pull-right" >
+                                            <button  ng-disabled="Ctrl.enades" class="md-button" data-toggle="dropdown">
+                                                <label class="">Exportar</label>
+                                                <i class="mdi mdi-chevron-double-down"></i>
+                                            </button>
+                                            <ul class="dropdown-menu ">
+                                                <li>
+                                                    <a  ng-click="Ctrl.descargarArchivo(Ctrl.valExcel)">
+                                                        <i class="mdi mdi-file-excel" style="color:forestgreen"></i> Excel
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a  ng-click="Ctrl.descargarArchivo(Ctrl.vaPdf)">
+                                                        <i class="mdi mdi-file-pdf" style="color:firebrick"></i> Pdf
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="md-table table" id="tbPersonal">
+                        <thead>
+                            <tr>
+                                <th class="text-center">N°ID Personal</th>
+                                <th class="text-center">Nombre Personal</th>
+                                <th class="text-center">Apellido Paterno</th>
+                                <th class="text-center">Apellido Materno</th>
+                                <th class="text-center">T.Documento</th>
+                                <th class="text-center">N°Documento</th>
+                                <th class="text-center">N°CMVP</th>
+                                <th class="text-center">Grupo Ocupacional</th>
+                                <th class="text-center">Datos Personales</th>
+                                <th class="text-center">Editar</th>
+                                <th class="text-center">Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="per in Ctrl.listaPersonal | filter:Ctrl.paginate">
+                                <td class="text-center">{{per.idPersonal}}</td>
+                                <td class="text-center">{{per.noPersonal}}</td>
+                                <td class="text-center">{{per.noApePat}}</td>
+                                <td class="text-center">{{per.noApeMat}}</td>
+                                <td class="text-center">{{per.noAbreviatura}}</td>
+                                <td class="text-center">{{per.nuDocumento}}</td>
+                                <td class="text-center">{{per.nuCmvp}}</td>
+                                <td class="text-center">{{per.noGrupoOcupacional}}</td>
+                                <td class="text-center">
+                                    <button  class="md-button md-button--icon" ng-click="Ctrl.verDatosPersonales(per.noDireccion,per.nuTelefono,per.nuCelular,per.noCorreo)" uib-tooltip="Ver">
+                                        <i class="mdi mdi-eye" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                                <td class="text-center">
+                                    <button class="md-button md-button--icon" uib-tooltip="Editar" ng-click="Ctrl.RAPersonal(per.idPersonal)">
+                                        <i class="mdi mdi-pencil" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                                <td class="text-center">
+                                    <button class="md-button md-button--icon" uib-tooltip="Eliminar" ng-click="Ctrl.eliminarPersonal(per.idPersonal,per.noPersonal)">
+                                        <i class="mdi mdi-delete" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="panel with-scroll animated zoomIn" zoom-in>
+                    <div class="panel-heading clearfix">
+                        <h3 class="panel-title">Reporte:Personal</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-md-12">
+                            <div class="col-md-4 form-group">
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <canvas id="pie" class="chart chart-pie " chart-data="Ctrl.DataArray" chart-labels="Ctrl.labelList" chart-options="Ctrl.options">
+                                </canvas>
+                            </div>
+                            <div class="col-md-4 form-group">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="md-card__menu">
+                <button class="md-button" ng-click="Ctrl.RAPersonal(per.nuDocumento)">
+                    <label class="">Agregar nuevo personal</label>
+                    <i class="mdi mdi-account-plus"></i>
+
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

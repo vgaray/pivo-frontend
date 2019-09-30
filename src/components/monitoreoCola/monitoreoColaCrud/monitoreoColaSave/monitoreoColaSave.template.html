@@ -1,0 +1,111 @@
+<div class="md-card">
+    <div class="md-card__title">
+        <h2 class="md-card__title-text">{{ctrl.frmData.nameModal}}</h2>
+    </div>
+    <div class="md-card__supporting-text timepicker">
+            <form name="modalGuardarMonitoreo" class="row" novalidate>
+
+                <div class=" col-sm-7">
+                    <div class="md-textfield" ng-class="{'is-dirty': ctrl.frmData.monitoreoCola.cola > 0,'is-invalid': modalGuardarMonitoreo.cola.$touched && modalGuardarMonitoreo.cola.$error.required}">
+                        <label class="md-select__label">Cola *</label>
+                        <select name="cola" id="cola" class="md-select__input" ng-model="ctrl.frmData.monitoreoCola.cola " required="true"
+                            ng-options="item as item.name for item in ctrl.nombreCola track by item.name" ng-selected="$first"
+                            ng-change="ctrl.validaCombo()" ng-disabled="ctrl.frmData.btnHabilitar">
+                                <option value="" selected="true"></option>
+                        </select>
+                        <span class="md-select__error" data-ng-show="modalGuardarMonitoreo.cola.$touched && modalGuardarMonitoreo.cola.$error.required">*Cola es obligatoria.</span>
+                    </div>
+                </div>
+
+                <div class=" col-sm-5">
+                    <div class="md-textfield" ng-class="{'is-dirty': ctrl.frmData.monitoreoCola.entity.nuAnexo > 0,'is-invalid': modalGuardarMonitoreo.anexo.$touched && modalGuardarMonitoreo.anexo.$error.required}">
+                        <label class="md-textfield__label">Número Anexo *</label>
+                        <input type="text" name="anexo" class="md-textfield__input" placeholder="Ingrese Anexo" ng-model="ctrl.frmData.monitoreoCola.entity.nuAnexo"
+                            required onkeypress='return event.charCode >= 48 && event.charCode <= 57' ng-change="ctrl.validaCombo()">
+                        <span class="md-textfield__error" data-ng-show="modalGuardarMonitoreo.anexo.$touched && modalGuardarMonitoreo.anexo.$error.required">*Anexo es obligatorio.</span>
+                    </div>                                
+                </div>              
+
+                <div class=" col-sm-7">
+                    <div class="md-textfield" ng-class="{'is-dirty': ctrl.frmData.monitoreoCola.entity.noCorreo > 0,'is-invalid': modalGuardarMonitoreo.correo.$touched && modalGuardarMonitoreo.correo.$error.required || ctrl.flagDevEmail==1}">
+                        <label class="md-textfield__label">Correo *</label>
+                        <input type="text" name="correo" class="md-textfield__input" placeholder="Ingrese Correo" ng-model="ctrl.frmData.monitoreoCola.entity.noCorreo"
+                            required ng-change="ctrl.validaCombo();ctrl.verificarEmail()">
+                        <span class="md-textfield__error" >{{ctrl.menEmailVal}}</span>
+                        <span class="md-textfield__error" data-ng-show="modalGuardarMonitoreo.correo.$touched && modalGuardarMonitoreo.correo.$error.required">*Correo es obligatorio.</span>
+                    </div>
+                </div>
+                <div class=" col-sm-5">
+                </div>
+
+                <div class=" col-sm-4">
+                    <div class="md-textfield has-placeholder" ng-class="{ 'is-invalid': modalGuardarMonitoreo.minTiempo.$invalid && modalGuardarMonitoreo.minTiempo.$touched || modalGuardarMonitoreo.minTiempo.$error.required}">
+                        <input id="minTiempo" name="minTiempo" type="text"  ng-model="ctrl.frmData.monitoreoCola.entity.hoMinima" class="md-textfield__input" ng-required="ctrl.frmData.monitoreoCola.save.request.minTiempo!=''"
+                            ng-change="ctrl.validaCombo()" required="required"> 
+
+                        <button class="md-button-input">
+                            <i class="mdi mdi-clock"></i>
+                        </button>    
+                        <label class="md-textfield__label" for="minTiempo">Min. Tiempo *</label>
+                        <span class="md-textfield__error" data-ng-show="modalGuardarMonitoreo.minTiempo.$error.required">*Min. Tiempo es obligatorio.</span>                            
+                    </div>                            
+                    <script type="text/javascript">
+                        $('#minTiempo').timepicker({
+                            defaultTime: 'default',
+                            showMeridian: false,
+                            timeFormat: 'HH:MM'
+                        });
+                    </script>
+                </div>
+                <div class=" col-sm-4">
+
+                        
+                        <div class="md-textfield has-placeholder" ng-class="{ 'has-error' : modalGuardarMonitoreo.medTiempo.$invalid && modalGuardarMonitoreo.medTiempo.$touched || modalGuardarMonitoreo.medTiempo.$error.required}">
+                            <label class="md-textfield__label">Med. Tiempo *</label>
+                            <button class="md-button-input">
+                                <i class="mdi mdi-clock"></i>
+                            </button>                             
+                            <input id="medTiempo" name="medTiempo" type="text" maxlength="5" onkeypress='return event.charCode >= 48 && event.charCode <= 57' ng-model="ctrl.frmData.monitoreoCola.entity.hoMedia" class="md-textfield__input" ng-required="ctrl.frmData.monitoreoCola.save.request.medTiempo!=''"
+                                ng-change="ctrl.validaCombo()">
+                            <span class="md-textfield__error" data-ng-show="modalGuardarMonitoreo.medTiempo.$error.required">*Med. Tiempo es obligatorio.</span>
+                        </div>
+                        
+                        <script type="text/javascript">
+                            $('#medTiempo').timepicker({
+                                defaultTime: '00:00',
+                                showMeridian: false,
+                                timeFormat: 'HH:MM'
+                            });
+                        </script>
+                </div>
+                <div class=" col-sm-4">
+
+                        
+                        <div class="md-textfield has-placeholder"ng-class="{ 'has-error' : modalGuardarMonitoreo.maxTiempo.$invalid && modalGuardarMonitoreo.maxTiempo.$touched || modalGuardarMonitoreo.maxTiempo.$error.required}">
+                            <button class="md-button-input">
+                                <i class="mdi mdi-clock"></i>
+                            </button>                               
+                            <label class="md-textfield__label">Max. Tiempo *</label>
+                            <input id="maxTiempo" name="maxTiempo" type="text" maxlength="5" onkeypress='return event.charCode >= 48 && event.charCode <= 58' ng-model="ctrl.frmData.monitoreoCola.entity.hoMaxima" class="md-textfield__input" ng-required="ctrl.frmData.monitoreoCola.save.request.hoMaxima!=''"
+                               ng-change="ctrl.validaCombo()">
+                            <span class="md-textfield__error" ng-show="modalGuardarMonitoreo.maxTiempo.$error.required">*Max. Tiempo es obligatorio.</span>
+                        </div>                        
+                        <script type="text/javascript">
+                            $('#maxTiempo').timepicker({
+                                defaultTime: '00:00',
+                                showMeridian: false,
+                                timeFormat: 'HH:MM'
+                            });
+                        </script>
+  
+            </div>          
+                      
+            </form>
+    </div>
+    <div class="md-card__actions">
+        <button type="button" class="md-button" ng-disabled="ctrl.varValidacion" ng-click="ctrl.onSaveMonitoreoCola()">Guardar</button>
+    </div>
+    <div class="md-card__menu">
+        <button type="button" class="md-button md-button--icon" data-dismiss="modal" ng-click="ctrl.cancel()"><i class="mdi mdi-close"></i></button>
+    </div>
+</div>

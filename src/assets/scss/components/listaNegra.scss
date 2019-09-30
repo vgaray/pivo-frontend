@@ -1,0 +1,24 @@
+.lista-negra {
+    .table-lista-negra {
+    	.fa-trash{
+            color:#d9534f;
+        }
+        .th-center{
+            text-align: center;
+        }
+        .th-right {
+            text-align: right;
+        }
+    }
+    thead tr th{
+        text-align: center;
+    }
+}
+
+.modal-lista-Negra {
+    .estado-check {
+        .checkbox {
+            margin-left: 20px;
+        }
+    }
+}

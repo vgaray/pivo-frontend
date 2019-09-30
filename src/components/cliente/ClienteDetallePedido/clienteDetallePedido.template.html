@@ -1,0 +1,37 @@
+<div class="md-card">
+    <div class="md-card__title">
+        <h2 class="md-card__title-text">{{Ctrl.frmData.name_page_title}}</h2>
+    </div>
+    <div class="md-card__supporting-text">
+        <div class="row">
+            <div class="col-sm-12 md-card__row-title">{{Ctrl.frmData.content}}</div>
+        </div>
+        <div class="table-responsive">
+            <table class="md-table table" id="tbCliente">
+                <thead>
+                    <tr>
+                        <th class="cc-center">Codigo pedido</th>
+                        <th class="cc-center">Tipo pedido</th>
+                        <th class="cc-center">Plan</th>
+                        <th class="cc-center">Descripcion pedido</th>
+                        <th class="cc-center">Fecha</th>
+                        <th class="cc-center">Estado pedido</th>                                
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="pe in Ctrl.lspedidosCliente">
+                        <td class="cc-center">{{pe.coPedido}}</td>
+                        <td class="cc-center">{{pe.tiPedido}}</td>
+                        <td class="cc-center">{{pe.plan}}</td>
+                        <td class="cc-center">{{pe.dePedido}}</td>
+                        <td class="cc-center">{{pe.fePedido}}</td>
+                        <td class="cc-center">{{pe.estadoPedido}}</td>                               
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="md-card__menu">
+        <button class="md-button md-button--icon" data-dismiss="modal" ng-click="Ctrl.cancel()"><i class="mdi mdi-close"></i></button>
+    </div>
+</div>

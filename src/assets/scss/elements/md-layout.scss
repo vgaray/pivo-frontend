@@ -1,0 +1,278 @@
+.md-layout {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  width: 240px;
+  height: 100%;
+  max-height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  background: $bg-white;
+  -webkit-transform: translateX(0px);
+  transform: translateX(0px);
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition-duration: .2s;
+  transition-timing-function: cubic-bezier(.4,0,.2,1);
+  transition-property: transform;
+  transition-property: transform,-webkit-transform;
+  color:$color-black;
+  overflow: hidden;
+  z-index: 4;
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+
+  &>ul{
+    overflow-y: auto;
+    padding: 0;
+    margin: 0;
+    margin-top: 64px;
+
+    &>li{
+      color: #757575;
+      display: block;
+      font-weight: 500;
+      font-size: 13px;
+      outline: 0;
+      overflow: hidden;
+      padding: 0 24px;
+      text-overflow: ellipsis;
+      vertical-align: middle;
+      white-space: nowrap;
+      cursor: pointer;
+      margin: 8px 0;
+      background-color: transparent;
+      -webkit-transition-property: background-color;
+      transition-property: background-color;
+      -webkit-transition-duration: 0.5s;
+      transition-duration: 0.5s;
+       -webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+       transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+
+       &::before {
+          content: "";
+          position: absolute;
+          z-index: -1;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: transparent;
+          -webkit-transform: scaleX(0);
+          transform: scaleX(0);
+          -webkit-transform-origin: 0 50%;
+          transform-origin: 0 50%;
+          -webkit-transition-property: transform;
+          transition-property: transform;
+          -webkit-transition-duration: 0.5s;
+          transition-duration: 0.5s;
+          -webkit-transition-timing-function: ease-out;
+          transition-timing-function: ease-out;
+      }
+
+      &::after {
+          content: " ";
+          float: left;
+          height: 38.89px;
+          margin: -38.89px 0 0 -24px;
+          width: 0;
+          background-color: $color-default;
+          -webkit-transition-property: width;
+          transition-property: width;
+          -webkit-transition-duration: 0.5s;
+          transition-duration: 0.5s;
+           -webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+           transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+           z-index: -1;
+      }
+
+      &.is-active,
+      &:hover {
+        background-color: rgba(0,0,0,.05);
+        color: $color-white;
+
+        &>a,
+        &>button {
+          color: $color-white;
+        }
+
+        &::before {
+          background-color: $color-default;
+        }
+
+        &::after {
+          background-color: $color-default;
+          width: calc(100% + 48px);
+        }
+      }
+      &>a{
+        display: inline-block !important;
+      }
+      &>a,
+      &>button {
+        line-height: 39px;
+        font-size: 13px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        color: $color-black;
+        background: transparent;
+        border: none;
+        width: 100%;
+        padding: 0;
+        outline: none;
+        text-decoration: none;
+
+        &:hover {
+          color: $color-white;
+        }
+      }
+
+      &.is-active>a,
+      &.is-active>button {
+        color: $color-white;
+      }
+    }
+  }
+}
+
+.md-layout__hidden .md-layout {
+  -webkit-transform: translateX(-250px);
+  transform: translateX(-250px);
+}
+
+.md-layout-separator {
+  border-top: 1px solid rgba(0,0,0,0.12)
+}
+
+.md-layout-title {
+  position: fixed;
+  min-height: $size-height-nav;
+  top: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+.md-main__container {
+  width: calc(100% - 240px);
+  margin-left: 240px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding: 15px;
+  transition: width .5s ease-in-out, margin-left .5s ease-in-out;
+}
+
+.md-main__opacity {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,.5);
+  visibility: visible;
+  z-index: 3;
+  opacity: 1;
+  transition-property: background-color;
+  transition-duration: .2s;
+  transition-timing-function: cubic-bezier(.4,0,.2,1);
+}
+
+.md-layout__hidden {
+  .md-main__container {
+    overflow-y: auto;
+    height: 100%; 
+    width: 100%;
+    margin-left: auto;
+  }
+  
+  .md-main__opacity {
+    pointer-events: auto;
+    opacity: 0;
+    z-index: -7;
+    background-color: transparent;
+    visibility: hidden;
+  }
+}
+
+.md-overflow{
+  overflow: initial !important;
+}
+
+.md-dropdown-menu{
+  top: 40px;
+  right: 16px;
+  border-radius: 0px;
+}
+
+.md-textfield-addon{
+  position: relative;
+  font-size: 16px;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: 20px 0 0 0;
+  margin: 16px 0;
+  display: inline-table;
+}
+
+.md-button-input{
+  border-radius: 50%;
+  border: none;
+  background-color: transparent;
+  color: #757575;
+  font-size: 24px;
+  width:30px;
+  height: 30px;
+  position: absolute;
+  right: 6px;
+  top: 15px;
+}
+
+.md-button-input i{
+  position: relative;
+  right: 2.5px;
+  /* top: 1px; */
+  vertical-align: middle;
+}
+
+.md-button-input:hover{
+  color: $color-default;
+}
+
+.md-textfield.is-dirty, 
+.md-select.is-dirty { 
+  .md-button-input{
+      color: $color-default;
+  }
+  .md-textfield__label,
+  .md-select__label
+  {
+      color:$color-default !important;
+  }
+  .md-textfield__label:after,
+  .md-select__label:after{
+      background-color: $color-default;
+      bottom: 0;
+      content: '';
+      height: 1.5px;
+      left: 0;
+      position: absolute;
+      visibility: visible;
+      width: 100%;
+  }
+  
+
+}

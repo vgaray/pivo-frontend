@@ -1,0 +1,30 @@
+<aside class="md-layout">
+  <div class="md-layout-title">
+    <button class="md-menu md-button" onclick="toggleMenu()">
+      <i class="mdi mdi-close"></i>
+    </button>
+    <div class="md-nav__brand">
+        <a ui-sref="principal" >
+          <img src="src/assets/img/logos/logo-pivo.png" alt="pivo">
+        </a>
+    </div>
+  </div>
+  <ul class="ul-menu" id="ul-menu">
+    <li ng-repeat="item in ctrl.menuItemsNew" ng-class="{'is-active' : item.isActive}" class="isActive" >
+      <a id="{{$index+1}}"  ng-click="ctrl.goto( item.nomComponente, item.idInstancia, item.hasItems, item.idPagPadre, item.idPagina, item.nomPagina );ctrl.detectActiveElement(this)" 
+      ui-sref="{{item.nomComponente}}({idInstancia:'{{item.idInstancia}}'})" >
+          {{ ::item.nomPagina }}
+      </a>
+    </li>
+  </ul>
+</aside>
+
+<nav class="md-tabs__tab-bar" ng-if="ctrl.stateBar">
+  <!--div class="md-tabs__view">{{ ctrl.view + ":" }}</div-->
+  <a ng-repeat="item in ctrl.menuSubItems" class="mdl-tabs__tab" ng-click="ctrl.goto(item.nomComponente, item.idInstancia, ctrl.stateBar, item.idPagPadre, item.idPagina, null)"  ng-class="{'is-active' : item.isActive}"
+  ui-sref="{{item.nomComponente}}({idInstancia:'{{ctrl.idInstanceSubMenu}}'})">
+      {{ ::item.nomPagina }}
+  </a>
+</nav>
+
+<div class="md-main__opacity"></div>

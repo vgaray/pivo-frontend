@@ -1,0 +1,442 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="md-card animated fadeInUp">
+            <div class="md-card__title">
+                <h2 class="md-card__title-text">{{Ctrl.frmData.name_page_title}}</h2>
+            </div>
+            <div class="md-card__supporting-text md-overflow">
+                <form name="formLla">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <datepicker date-format="dd-MM-yyyy" selector="calendar-inicio-textfield" button-prev="<i class='mdi mdi-arrow-left'></i>"
+                                button-next="<i class='mdi mdi-arrow-right'></i>">
+                                <div class="md-textfield has-placeholder" ng-class="{ 'is-invalid': formLla.feIni.$touched && formLla.feIni.$error.required }">
+                                    <!-- <input input-date-validator id="feIni" name="feIni" type="text" maxlength="10" ng-model="Ctrl.dt" uib-datepicker-popup="dd-MM-yyyy"
+                                is-open="Ctrl.opened" datepicker-options="Ctrl.dateOptions" class="md-textfield__input"
+                                close-text="Cerrar" current-text="Hoy" clear-text="Limpiar" ng-required="Ctrl.frmData.reporte.listar.request.feIni==null"
+                                ng-change="Ctrl.dt ; Ctrl.validateDateini()" />-->
+                                    <input type="text" class="calendar-inicio-textfield md-textfield__input" id="feIni" name="feIni" uib-datepicker-popup="dd-MM-yyyy"
+                                        ng-model="Ctrl.dt" current-text="Hoy" clear-text="Limpiar" close-text="Cerrar" is-open="Ctrl.opened"
+                                        datepicker-options="Ctrl.dateOptions" ng-required="true" close-text="Close" ng-change="Ctrl.dt ; Ctrl.validateDateini()"
+                                        input-date-validator>
+                                    <button class="md-button-input">
+                                        <i class="mdi mdi-calendar"></i>
+                                    </button>
+                                    <label class="md-textfield__label">Desde fecha:</label>
+                                    <small class="md-textfield__error" ng-show="formLla.feIni.$touched && formLla.feIni.$error.required">*campo requerido</small>
+                                </div>
+                            </datepicker>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="md-textfield has-placeholder" ng-class="{ 'is-invalid': formLla.hoIni.$error.required }">
+                                <input id="hoIni" name="hoIni" type="text" ng-model="Ctrl.horaInicio" class="md-textfield__input" ng-required="true" ng-change="Ctrl.validaHoraInicio()">
+                               
+                                <button class="md-button-input">
+                                    <i class="mdi mdi-clock"></i>
+                                </button>
+                                
+                                <label class="md-textfield__label">Desde hora:</label>
+                                <small class="md-textfield__error" ng-show="formLla.hoIni.$error.required && formLla.hoIni.$touched">*seleccione hora</small>
+                            </div>
+                            <script type="text/javascript">
+                                $('#hoIni').timepicker({
+                                    defaultTime: 'default',
+                                    minuteStep: 1,
+                                    showMeridian: false,
+                                    timeFormat: 'HH:MM'
+                                })
+                            </script>
+                        </div>
+                        <div class="col-md-6">
+                            <datepicker date-format="dd-MM-yyyy" selector="calendar-fin-textfield" button-prev="<i class='mdi mdi-arrow-left'></i>" button-next="<i class='mdi mdi-arrow-right'></i>">
+                                <div class="md-textfield has-placeholder" ng-class="{ 'is-invalid' : formLla.feFin.$dirty && formLla.feFin.$error.required }">
+                                    <!--<input input-date-validator id="feFin" name="feFin"  type="text" maxlength="10"  uib-datepicker-popup="dd-MM-yyyy" class="md-textfield__input"
+                            close-text="Cerrar" current-text="Hoy" clear-text="Limpiar" ng-model="Ctrl.dt2" is-open="Ctrl.opened2" datepicker-options="Ctrl.dateOptions2" ng-required="true" close-text="Close"
+                            ng-change="Ctrl.dt2;Ctrl.validateDateFin()"/>-->
+                                    <input type="text" class="calendar-fin-textfield md-textfield__input" id="feFin" name="feFin" uib-datepicker-popup="dd-MM-yyyy"
+                                        ng-model="Ctrl.dt2" current-text="Hoy" clear-text="Limpiar" close-text="Cerrar" is-open="Ctrl.opened2"
+                                        datepicker-options="Ctrl.dateOptions2" ng-required="true" close-text="Close" ng-change="Ctrl.dt2;Ctrl.validateDateFin()"
+                                        input-date-validator>
+
+                                    <button class="md-button-input">
+                                        <i class="mdi mdi-calendar"></i>
+                                    </button>
+                                    <label class="md-textfield__label">Hasta fecha:</label>
+                                    <small class="md-textfield__error" ng-show="formLla.feFin.$dirty">*formato incorrecto</small>
+                                </div>
+                            </datepicker>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="md-textfield has-placeholder" ng-class="{ 'is-invalid': formLla.hoFin.$error.required && formLla.hoFin.$touched}">
+                                <input id="hoFin" name="hoFin" type="text" ng-model="Ctrl.horaFin" class="md-textfield__input" ng-required="Ctrl.frmData.reporte.listar.request.pHoraf!=null"
+                                    ng-change="Ctrl.validaHoraFinal()">
+                                <button class="md-button-input">
+                                    <i class="mdi mdi-clock"></i>
+                                </button>
+                                <label class="md-textfield__label" for="hoFin">Hasta hora:</label>
+                                <small class="md-textfield__error" ng-show="formLla.hoFin.$error.required && formLla.hoFin.$touched">*seleccione hora</small>
+                            </div>
+                            <script type="text/javascript">
+                                $('#hoFin').timepicker({
+                                    defaultTime: 'default',
+                                    minuteStep: 1,
+                                    showMeridian: false,
+                                    timeFormat: 'HH:MM'
+                                })
+                            </script>
+                        </div>
+
+                        <div class="col-md-6">
+                            <button ng-disabled="Ctrl.habbot" type="button" class="md-button" ng-click="Ctrl.listarLlamadaConsolidadaAgente()">
+                                <label>Buscar</label>
+                                <i class="mdi mdi-magnify"></i>
+                            </button>
+                        </div>
+                        <div class="col-md-6 ">
+                            <div class="btn-group pull-right">
+                                <button ng-show="Ctrl.varShow" ng-disabled="Ctrl.enades" class="md-button dropdown-toggle" data-toggle="dropdown">Exportar
+                                    <i class="mdi mdi-chevron-double-down"></i>
+                                </button>
+                                <ul class="dropdown-menu pull-right">
+                                    <li>
+                                        <a href="" ng-click="Ctrl.descargarArchivo(Ctrl.valExcel)">
+                                            <i class="mdi mdi-file-excel" style="color:forestgreen"></i> Excel
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" ng-click="Ctrl.descargarArchivo(Ctrl.vaPdf)">
+                                            <i class="mdi mdi-file-pdf" style="color:firebrick"></i> Pdf
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- <div class="btn-group pull-right">
+                    <button ng-show="Ctrl.varShow" ng-disabled="Ctrl.enades" class="btn btn-info dropdown-toggle" data-toggle="dropdown">Exportar
+                            <i class="fa fa-angle-down"></i>
+                        </button>
+                    <ul class="dropdown-menu ">
+                        <li>
+                            <a href="" ng-click="Ctrl.descargarArchivo(Ctrl.valExcel)">
+                                    <i class="text-danger fa fa-file-excel-o"></i> Excel
+                                </a>
+                        </li>
+                        <li>
+                            <a href="" ng-click="Ctrl.descargarArchivo(Ctrl.vaPdf)">
+                                    <i class="text-danger fa fa-file-pdf-o"></i> Pdf
+                                </a>
+                        </li>
+                    </ul>
+                </div>-->
+                <div class="cc-msje-body">
+                    <div ng-hide="Ctrl.ui.isFilesLoaded || Ctrl.ui.isListSoundEmpty" class="result-message">
+                        <span class="img-result">
+                            <fading-circle-spinner></fading-circle-spinner>
+                        </span>
+                        <br/>
+                        <span class="msg-result">Cargando consulta...</span>
+                    </div>
+                    <div ng-hide="!Ctrl.ui.isListSoundEmpty" class="result-message">
+                        <span class="img-result">
+
+                        </span>
+                        <br/>
+                        <span class="msg-result">No existen datos por el momento...</span>
+                    </div>
+                    <div ng-hide="!Ctrl.ui.isErrorService" class="result-message">
+                        <span class="img-result">
+                            <span class="fa  fa-ban"></span>
+                        </span>
+                        <br/>
+                        <span class="msg-result">Hubo una falla en la conexión con el servidor.</span>
+                        <br/>
+                        <br/>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+
+
+                    <table ng-show="Ctrl.varShow" st-table="Ctrl.listadeLlamadasUsuario" class="md-table table">
+                        <thead>
+                            <tr>
+                                <th class="text-center" rowspan="2">Anexo</th>
+                                <th class="text-center" colspan="5">
+                                    Entrantes
+                                </th>
+                                <th class="text-center" colspan="5">
+                                    Salientes
+                                </th>
+                            </tr>
+                            <tr>
+
+                                <th class="text-center colum-width">Contestadas</th>
+                                <th class="text-center colum-width">No contestadas</th>
+                                <th class="text-center colum-width">Fallidas</th>
+                                <th class="text-center colum-width">Entrantes</th>
+                                <th class="text-center colum-width">Tiempo</th>
+                                <th class="text-center colum-width">Contestadas</th>
+                                <th class="text-center colum-width">No Contestadas</th>
+                                <th class="text-center colum-width">Fallidas</th>
+                                <th class="text-center colum-width">Salientes</th>
+                                <th class="text-center colum-width">Tiempo</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="row in Ctrl.listaLamadaConsolidada | filter:Ctrl.pageChanged">
+
+                                <td class="text-right">{{row.anexo}}</td>
+                                <td class="text-right">{{row.eContestada}}</td>
+                                <td class="text-right">{{row.eNoContestada}}</td>
+                                <td class="text-right">{{row.eFallida}}</td>
+                                <td class="text-right">{{row.totalEntrante}}</td>
+                                <td class="text-center">{{row.totalInhablando2}}</td>
+                                <td class="text-right">{{row.sContestada}}</td>
+                                <td class="text-right">{{row.sNocontestada}}</td>
+                                <td class="text-right">{{row.sFallida}}</td>
+                                <td class="text-right">{{row.totalSaliente}}</td>
+                                <td class="text-center">{{row.totalOuthablando2}}</td>
+
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="10" class="text-center">
+                                    <ul uib-pagination total-items="Ctrl.totalItems" ng-model="Ctrl.currentPage" max-size="5" boundary-links="true" items-per-page="Ctrl.numPerPage"
+                                        class="pagination-sm" first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"
+                                        last-text="&raquo;">
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tfoot>
+                        <!--<tfoot>
+                          <td colspan="10" class="text-center">
+                                    <ul uib-pagination total-items="Ctrl.totalItems" ng-model="Ctrl.currentPage" max-size="5" boundary-links="true" items-per-page="Ctrl.numPerPage" class="pagination-sm">
+                                    </ul>
+                                </td>
+                        </tfoot>-->
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--<div class="widgets cc-reporte-llamada">
+    <form name="formLla" class="row">
+        <div class="col-md-12">
+            <div class="panel with-scroll animated zoomIn" zoom-in>
+                <div class="panel-heading clearfix">
+                    <h3 class="panel-title">{{Ctrl.frmData.name_page_title}}</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="add-row-editable-table">
+                        <div class="col-md-12">
+                            Dia Inicio
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label for="feIni">Desde fecha:</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="input-group" ng-class="{ 'has-error' : formLla.feIni.$invalid || formLla.feIni.$touched && formLla.feIni.$error.required }">
+                                                <input input-date-validator id="feIni" name="feIni" type="text" maxlength="10" ng-model="Ctrl.dt" uib-datepicker-popup="dd-MM-yyyy" is-open="Ctrl.opened"
+                                                    datepicker-options="Ctrl.dateOptions" class="form-control" close-text="Cerrar"
+                                                    current-text="Hoy" clear-text="Limpiar" ng-required="Ctrl.frmData.reporte.listar.request.feIni==null"
+                                                    ng-change="Ctrl.dt ; Ctrl.validateDateini()" />
+                                                <span class="input-group-addon" ng-click="Ctrl.open()">
+                                                 <i class="glyphicon glyphicon-calendar"  ></i>
+                                                 </span>
+                                            </div>
+                                            <small class="text-danger" ng-show="formLla.feIni.$invalid">*formato incorrecto</small>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            Hora Inicial
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label for="hoIni">Desde hora:</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="input-group bootstrap-timepicker timepicker" ng-class="{ 'has-error' : formLla.hoIni.$invalid && formLla.hoIni.$touched || formLla.hoIni.$error.required}">
+                                                <input id="hoIni" name="hoIni" type="text" ng-model="Ctrl.horaInicio" class="form-control input-small" ng-required="true"
+                                                    ng-change="Ctrl.validaHoraInicio()">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                            </div>
+                                            <small class="text-danger" ng-show="formLla.hoIni.$error.required">*seleccione hora</small>
+                                            <script type="text/javascript">
+                                                $('#hoIni').timepicker({
+                                                    defaultTime: 'default',
+                                                    showMeridian: false,
+                                                    timeFormat: 'HH:MM'
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        Dia Final
+                        <div class="col-md-12">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label>Hasta fecha:</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="input-group" ng-class="{ 'has-error' : formLla.feFin.$invalid || formLla.feFin.$touched && formLla.feFin.$error.required }">
+                                                <input input-date-validator id="feFin" name="feFin" current-text="Hoy" clear-text="Limpiar" close-text="Cerrar" type="text" maxlength="10" class="form-control"
+                                                    uib-datepicker-popup="dd-MM-yyyy" ng-model="Ctrl.dt2" is-open="Ctrl.opened2"
+                                                    datepicker-options="Ctrl.dateOptions2" ng-required="true" close-text="Close"
+                                                    ng-change="Ctrl.dt2;Ctrl.validateDateFin()" />
+                                                <span class="input-group-addon" ng-click="Ctrl.open2()">
+                                             <i class="glyphicon glyphicon-calendar" ></i>
+                                            </span>
+                                            </div>
+                                            <small class="text-danger" ng-show="formLla.feFin.$invalid">*formato incorrecto</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            Hora Final
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label for="">Hasta hora:</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="input-group bootstrap-timepicker timepicker" ng-class="{ 'has-error' : formLla.hoFin.$invalid }">
+                                                <input id="hoFin" name="hoFin" type="text" ng-model="Ctrl.horaFin" class="form-control input-small" ng-required="Ctrl.frmData.reporte.listar.request.pHoraf!=null"
+                                                    ng-change="Ctrl.validaHoraFinal()">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                            </div>
+                                            <small class="text-danger" ng-show="formLla.hoFin.$error.required">*seleccione hora</small>
+                                            <script type="text/javascript">
+                                                $('#hoFin').timepicker({
+                                                    defaultTime: '23:45',
+                                                    showMeridian: false,
+                                                    timeFormat: 'HH:MM'
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button  ng-disabled="Ctrl.habbot" type="button" class="btn btn-primary" ng-click="Ctrl.listarLlamadaConsolidadaAgente()"><i class="fa fa-search"></i> Buscar </button>
+
+                        <div class="btn-group pull-right">
+                            <button ng-show="Ctrl.varShow" ng-disabled="Ctrl.enades" class="btn btn-info dropdown-toggle" data-toggle="dropdown">Exportar
+	                                <i class="fa fa-angle-down"></i>
+	                            </button>
+                            <ul class="dropdown-menu ">
+                                <li>
+                                    <a href="" ng-click="Ctrl.descargarArchivo(Ctrl.valExcel)">
+	                                        <i class="text-danger fa fa-file-excel-o"></i> Excel
+	                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" ng-click="Ctrl.descargarArchivo(Ctrl.vaPdf)">
+	                                        <i class="text-danger fa fa-file-pdf-o"></i> Pdf
+	                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="cc-msje-body">
+                        <div ng-hide="Ctrl.ui.isFilesLoaded || Ctrl.ui.isListSoundEmpty" class="result-message">
+                            <span class="img-result">
+                             <fading-circle-spinner></fading-circle-spinner>
+                            </span>
+                            <br/>
+                            <span class="msg-result">Cargando consulta...</span>
+                        </div>
+                        <div ng-hide="!Ctrl.ui.isListSoundEmpty" class="result-message">
+                            <span class="img-result">
+                    
+                             </span>
+                            <br/>
+                            <span class="msg-result">No existen datos por el momento...</span>
+                        </div>
+                        <div ng-hide="!Ctrl.ui.isErrorService" class="result-message">
+                            <span class="img-result">
+                                <span class="fa  fa-ban"></span>
+                            </span>
+                            <br/>
+                            <span class="msg-result">Hubo una falla en la conexión con el servidor.</span>
+                            <br/><br/>
+
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+
+                        <table ng-show="Ctrl.varShow" st-table="Ctrl.listadeLlamadasUsuario" class="table table-striped table-bordered table-hover table-checkable order-column">
+                            <thead>
+                                <tr>
+                                    <th>Anexo</th>
+                                    <th class="cc-center" colspan="5">
+                                        Entrantes
+                                    </th>
+                                    <th class="cc-center" colspan="5">
+                                        Salientes
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th class="cc-center">Contestadas</th>
+                                    <th class="cc-center">No contestadas</th>
+                                    <th class="cc-center">Fallidas</th>
+                                    <th class="cc-center">Entrantes</th>
+                                    <th class="cc-center">Tiempo</th>
+                                    <th class="cc-center">Contestadas</th>
+                                    <th class="cc-center">No Contestadas</th>
+                                    <th class="cc-center">Fallidas</th>
+                                    <th class="cc-center">Salientes</th>
+                                    <th class="cc-center">Tiempo</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="row in Ctrl.listaLamadaConsolidada | filter:Ctrl.pageChanged">
+
+                                    <td class="cc-center">{{row.anexo}}</td>
+                                    <td class="cc-center">{{row.eContestada}}</td>
+                                    <td class="cc-center">{{row.eNoContestada}}</td>
+                                    <td class="cc-center">{{row.eFallida}}</td>
+                                    <td class="cc-center">{{row.totalEntrante}}</td>
+                                    <td class="cc-center">{{row.totalInhablando2}}</td>
+                                    <td class="cc-center">{{row.sContestada}}</td>
+                                    <td class="cc-center">{{row.sNocontestada}}</td>
+                                    <td class="cc-center">{{row.sFallida}}</td>
+                                    <td class="cc-center">{{row.totalSaliente}}</td>
+                                    <td class="cc-center">{{row.totalOuthablando2}}</td>
+
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                              <td colspan="10" class="text-center">
+                                        <div uib-pagination total-items="Ctrl.totalItems" ng-model="Ctrl.currentPage" max-size="5" boundary-links="true" items-per-page="Ctrl.numPerPage" class="pagination-sm">
+                                        </div>
+                                    </td>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>-->

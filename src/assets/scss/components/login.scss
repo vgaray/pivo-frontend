@@ -1,0 +1,328 @@
+#logincontent{
+    display: block !important;
+    padding-top: 56px !important;
+    background-color:white;
+    .md-login{
+        width: 78px;
+        height: 78px;
+        font-size: 60px;
+        cursor: default;
+    }
+    .white-logo{
+        background-color: #FFFFFF;
+    }
+    .white-text{
+        color: #FFFFFF;
+    }
+    .black-text{
+        color: #080808;
+    }
+    .subheading{
+        text-transform: none;
+        margin-top: 0;
+        color: inherit;
+    }
+    .social-buttons{
+        .white-logo{
+            width: 30px;
+            height: 30px;
+            font-size: 26px;
+            cursor: pointer;
+        }
+    }
+    .ml-auto, .mx-auto {
+        margin-left: auto!important;
+    }
+    .mr-auto, .mx-auto {
+        margin-right: auto!important;
+    }
+    .rounded-circle {
+        border-radius: 50%!important;
+    }
+    img {
+        vertical-align: middle;
+        border-style: none;
+    }
+    .team-member img {
+        width: 225px;
+        height: 225px;
+        border: 7px solid #fff;
+    }
+    .card-feedback{
+        .md-textfield{
+            display: inline-block;
+        }
+    }
+    .log{
+        display: none;
+    }
+    .md-card.md-card__login{
+        right: 25px;
+        top: 74px;
+        position: fixed;
+    }
+    .md-t-integro.center{
+        text-align: center !important;
+        margin-right: 0 !important;
+        padding-right: 0 !important;
+    }
+    #contacto{
+        .text-uppercase,
+        .md-card__title-text{
+            color: green !important;
+        }
+    }   
+}
+.background1{
+    display: block;
+    margin: auto;
+}
+@media (min-width: 1200px){
+    .timeline>li .timeline-image h4 {
+        margin-top: 40px !important;
+    }
+}
+@media (min-width: 992px){
+    .timeline>li .timeline-image h4 {
+        font-size: 18px;
+        line-height: 26px;
+        margin-top: 30px;
+    }
+}
+@media (min-width: 768px){
+    .timeline>li .timeline-image h4 {
+        font-size: 13px;
+        line-height: 18px;
+    }
+}
+.card-login{
+    display:initial;
+    position:relative;
+    bottom:0px;
+    transition: .1s;
+}
+
+.card-replace-login{
+    top: 100%;
+    width: 100%;
+    transition: top .6s;
+    position: absolute;
+    visibility:hidden;
+    background-color: #FFFFFF;
+    height: 290px;
+    padding: 20px 0;
+    * {
+        height: 0;
+        display: none
+    }
+}
+.md-va__headers{
+    display: inherit;
+}
+.card-login.md-selected {
+    visibility: hidden !important;
+}
+.card-replace-login.selected {
+    top: 83px !important;
+    transition: top .5s;
+    position: absolute;
+    visibility:visible !important;
+}
+
+.selected * {
+    height: auto;
+    display: block
+}
+
+.md-button__send{
+    margin: auto;
+}
+
+.button-backlogin{
+    font-size: 20px !important;
+    margin: 16px !important;
+    top: 0;
+    position: absolute;
+    color: $color-default !important;
+}
+
+.button-backlogin:hover{
+    background-color: transparent !important;
+}
+
+@media (min-width: 1200px){
+   .timeline>li {
+    min-height: 170px !important;
+    } 
+}
+
+@media (min-width: 992px){
+    .timeline>li {
+        min-height: 150px;
+    }
+}
+
+@media (min-width: 768px){
+    .timeline>li {
+        min-height: 100px;
+        margin-bottom: 100px;
+    }
+}
+
+.timeline>li {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 50px;
+}
+.timeline {
+    position: relative;
+    padding: 0;
+    list-style: none;
+}
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+@media (min-width: 1200px){
+    .timeline>li.timeline-inverted>.timeline-panel {
+        padding: 0 100px 20px 20px !important;
+        float: right !important;
+    }
+}
+
+@media (min-width: 1200px){
+    .timeline>li {
+        min-height: 170px !important;
+    }
+}
+@media (min-width: 992px){
+    .timeline>li {
+        min-height: 150px;
+    }
+}
+@media (min-width: 768px){
+    .timeline>li {
+        min-height: 100px;
+        margin-bottom: 100px;
+    }
+}
+
+@media (min-width: 1200px){
+    .timeline>li .timeline-image {
+        width: 170px !important;
+        height: 170px !important;
+        margin-left: 480px !important;
+    }
+}
+@media (min-width: 992px){
+    .timeline>li .timeline-image {
+        width: 150px;
+        height: 150px;
+        margin-left: -75px;
+    }
+}
+@media (min-width: 768px){
+    .timeline>li .timeline-image {
+        left: 40%;
+        width: 100px;
+        height: 100px;
+        margin-left: -50px;
+    }
+}
+.timeline {
+    position: relative;
+    padding: 0;
+    list-style: none;
+}
+.rounded-circle {
+    border-radius: 50%!important;
+    
+}
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+img {
+    vertical-align: middle;    
+}
+.timeline>li .timeline-image {
+    z-index: 100;
+    left: 0;
+    width: 80px;
+    height: 80px;
+    margin-left: 0;
+    text-align: center;
+    color: #fff;
+    border: 7px solid green;
+    border-radius: 100%;
+}
+@media (min-width: 1200px){
+    .timeline>li .timeline-panel {
+        padding: 0 20px 20px 100px !important;
+    }
+}
+@media (min-width: 992px){
+    .timeline>li .timeline-panel {
+        padding: 0 20px 20px;
+    }
+}
+@media (min-width: 768px){
+    .timeline>li .timeline-panel {
+        float: left;
+        width: 41%;
+        padding: 0 20px 20px 30px;
+        text-align: right;
+    }
+}
+.timeline>li .timeline-panel {
+    position: relative;
+    float: right;
+    width: 100%;
+    padding: 0 20px 0 100px;
+    text-align: left;
+}
+@media (min-width: 768px){
+    .timeline>li .timeline-panel {
+        float: left;
+        width: 41%;
+        padding: 0 20px 20px 30px;
+        text-align: right;
+    }
+}
+.timeline>li .timeline-panel {
+    position: relative;
+    float: right;
+    width: 100%;
+    padding: 0 20px 0 100px;
+    text-align: left;
+}
+.timeline {
+    position: relative;
+    padding: 0;
+    list-style: none;
+}
+@media (min-width: 768px){
+    .timeline>li .timeline-panel {
+        float: left;
+        width: 41%;
+        padding: 0 20px 20px 30px;
+        text-align: right;
+    }
+}
+.timeline .timeline-body>p, .timeline .timeline-body>ul {
+    margin-bottom: 0;
+}
+.text-muted {
+    color: #6c757d!important;
+}
+p {
+    line-height: 1.75;
+}
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+

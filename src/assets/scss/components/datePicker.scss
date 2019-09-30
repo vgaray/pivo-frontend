@@ -1,0 +1,20 @@
+._720kb-datepicker-calendar-header:nth-child(odd)
+{
+    background: $color-default !important;
+}
+
+._720kb-datepicker-calendar-header:nth-child(even){
+    background-color: #9cd2f7  !important;
+}
+
+._720kb-datepicker-calendar-day._720kb-datepicker-active,
+._720kb-datepicker-calendar-day._720kb-datepicker-today{
+    background: $color-default !important;
+    color: #FFFFFF;
+}
+
+._720kb-datepicker-calendar-day:hover{
+    background: #606060 !important;
+    color: #FFFFFF;
+    
+}

@@ -1,0 +1,67 @@
+<div class="col-md-12">
+    <div class="md-card animated fadeInUp">
+        <div class="md-card__title">
+            <h2 class="md-card__title-text"> {{ctrl.frmData.name_page_title}}</h3>
+        </div>
+        <div class="md-card__supporting-text">
+
+            <div class="table-responsive">
+
+                <table class="md-table table" id="tbCliente">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Nombre de Instancia</th>
+                            <th class="text-center">Direccion IP</th>
+                            <th class="text-center">RUC</th>
+                            <th class="text-center">Fecha Pedido</th>
+                            <th class="text-center">Plan</th>
+                            <th class="text-center">Estado Instancia</th>
+                            <th class="text-center">Editar</th>
+                            <th class="text-center">Opciones</th>
+                        </tr>
+                    </thead>
+                
+                <tbody>
+                    <tr ng-repeat="row in ctrl.listaInstancias">
+                        <td class="text-center">{{row.noInstancia}}</td>
+                        <td class="text-center">{{row.ipAsterisk}}</td>
+                        <td class="text-center">{{row.nuDocide}}</td>
+                        <td class="text-center">{{row.fePedido}}</td>
+                        <td class="text-center">{{row.noPlan}}</td>
+                        <td class="text-center">{{row.noEstadoInstancia}}</td>
+                        <td class="text-center">
+                            <button class="md-button md-button--icon" ng-click="ctrl.modalAdmInstanciaCrud(row.idInstanciaEncryp)" ng-if="ctrl.mostrarBoton(row.idMostrar, 10) == 1"
+                                uib-tooltip="Editar">
+                                <i class="mdi mdi-pencil"></i>
+                            </button>
+                        </td>
+                        <td class="text-center">
+                            <button class="md-button md-button--icon" ng-if=" ctrl.mostrarBoton(row.idMostrar , 1) == 1" ng-click="ctrl.openWindowInstancia( row.idInstanciaEncryp )" uib-tooltip="Ver Detalle" ><i class="mdi mdi-eye"></i></button>
+                            <!--<a class="md-button" ng-if=" ctrl.mostrarBoton(row.idMostrar , 1) == 1" ng-click="ctrl.openWindowInstancia( row.idInstanciaEncryp )">
+                                <i class="glyphicon glyphicon-eye-open"></i> Ver Detalle </a>-->
+                            <button class="md-button md-button--icon" uib-tooltip="Ver" ng-if=" ctrl.mostrarBoton(row.idMostrar, 2) == 1" ng-click="ctrl.modalAdmInstanciaCrud( row.idInstanciaEncryp )"><i class="mdi mdi-youtube-creator-studio"></i></button>
+                            <!--<a uib-tooltip="Ver" ng-if=" ctrl.mostrarBoton(row.idMostrar, 2) == 1" ng-click="ctrl.modalAdmInstanciaCrud( row.idInstanciaEncryp )">
+                                <i class="fa  fa-eye"></i>
+                            </a>-->
+                            <button class="md-button md-button--icon" uib-tooltip="Configurar" ng-if=" ctrl.mostrarBoton(row.idMostrar, 3) == 1" ng-click="ctrl.onConfigInstance(row)"><i class="mdi mdi-youtube-creator-studio"></i></button>
+                            <!--<a class="md-button" ng-if=" ctrl.mostrarBoton(row.idMostrar, 3) == 1" ng-click="ctrl.onConfigInstance(row)">
+                                <i class="glyphicon glyphicon-eye-open"></i> Configurar </a>-->
+                            <a class="md-button" ng-if=" ctrl.mostrarBoton(row.idMostrar, 4) == 1" ng-click="ctrl.openWindowInstancia( row.idInstanciaEncryp )">
+                                <i class="glyphicon glyphicon-eye-open"></i> Conforme </a>
+                            <a class="md-button" ng-if=" ctrl.mostrarBoton(row.idMostrar, 5) == 1" ng-click="ctrl.configurarBoton(row)">
+                                <i class="glyphicon glyphicon-eye-open"></i> Instalado </a>
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+            </table>
+            </div>
+        </div>
+        <div class="md-card__menu">
+
+            <button class="md-button" ng-click="ctrl.modalCrearInstancia()"> Agregar instancia
+                <i class="mdi mdi-plus"></i>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,125 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="md-card animated fadeInUp">
+            <div class="md-card__title">
+                <h2 class="md-card__title-text">Lista de mis mascotas</h2>
+            </div>
+
+            <div class="col-md-12" ng-show="Ctrl.habAdmin">
+
+                <div class="btn-group pull-right">
+                    <button ng-disabled="Ctrl.enades" class="md-button" data-toggle="dropdown">
+                        <label class="">Exportar</label>
+                        <i class="mdi mdi-chevron-double-down"></i>
+                    </button>
+                    <ul class="dropdown-menu ">
+                        <li>
+                            <a ng-click="Ctrl.descargarArchivo(Ctrl.valExcel)">
+                                <i class="mdi mdi-file-excel" style="color:forestgreen"></i> Excel
+                            </a>
+                        </li>
+                        <li>
+                            <a ng-click="Ctrl.descargarArchivo(Ctrl.vaPdf)">
+                                <i class="mdi mdi-file-pdf" style="color:firebrick"></i> Pdf
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="md-card__supporting-text">
+
+                <div class="table-responsive">
+                    <table class="md-table table" id="tbMascota">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Nombre</th>
+                                <th class="text-center">Especie</th>
+                                <th class="text-center">Raza</th>
+                                <th class="text-center">Color</th>
+                                <th class="text-center">Señas Particulares</th>
+                                <th class="text-center">Sexo</th>
+                                <th class="text-center">Edad</th>
+                                <th class="text-center">N°Chip</th>
+                                <th class="text-center">F.Nacimiento</th>
+                                <th ng-hide="Ctrl.habAdmin" class="text-center">Ver Info Basica</th>
+                                <!-- <th ng-hide="Ctrl.habAdmin" class="text-center">Editar</th> -->
+                                <th ng-hide="Ctrl.habAdmin" class="text-center">Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="mas in Ctrl.listaMascota | filter:Ctrl.paginate">
+
+                                <td class="text-center">{{mas.noNombre}}</td>
+                                <td class="text-center">{{mas.noEspecie}}</td>
+                                <td class="text-center">{{mas.noRaza}}</td>
+                                <td class="text-center">{{mas.noColor}}</td>
+                                <td class="text-center">{{mas.noSeniasParticulares}}</td>
+                                <td class="text-center">{{mas.noSexo}}</td>
+                                <td class="text-center">{{mas.nuEdad}}</td>
+                                <td class="text-center">{{mas.nuChip}}</td>
+                                <td class="text-center">{{mas.feNacimiento}}</td>
+                                <td ng-hide="Ctrl.habAdmin" class="text-center">
+                                    <button class="md-button md-button--icon"
+                                        ng-click="Ctrl.verHistoria(mas.idMascota,mas.noNombre)" uib-tooltip="Ver">
+                                        <i class="mdi mdi-eye" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                                <!-- <td ng-hide="Ctrl.habAdmin" class="text-center">
+                                    <button class="md-button md-button--icon" uib-tooltip="Editar"
+                                        ng-click="Ctrl.RAMascota(mas.idMascota)">
+                                        <i class="mdi mdi-pencil" aria-hidden="true"></i>
+                                    </button>
+                                </td> -->
+                                <td ng-hide="Ctrl.habAdmin" class="text-center">
+                                    <button class="md-button md-button--icon" uib-tooltip="Eliminar"
+                                        ng-click="Ctrl.eliminarMascota(mas.idMascota,mas.noNombre)">
+                                        <i class="mdi mdi-delete" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="13" class="text-center">
+                                    <div uib-pagination total-items="Ctrl.totalItems" ng-model="Ctrl.currentPage"
+                                        max-size="5" boundary-links="true" items-per-page="Ctrl.numPerPage"
+                                        class="pagination-sm" first-text="&laquo;" previous-text="&lsaquo;"
+                                        next-text="&rsaquo;" last-text="&raquo;">
+                                    </div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            <div class="col-sm-12" ng-show="Ctrl.habAdmin">
+                <div class="panel with-scroll animated zoomIn" zoom-in>
+                    <div class="panel-heading clearfix">
+                        <h3 class="panel-title">Reporte:Mascotas</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-md-12">
+                            <div class="col-md-4 form-group">
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <canvas id="pie" class="chart chart-pie " chart-data="Ctrl.DataArray"
+                                    chart-labels="Ctrl.labelList" chart-options="Ctrl.options">
+                                </canvas>
+                            </div>
+                            <div class="col-md-4 form-group">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="md-card__menu">
+                <button ng-hide="Ctrl.habAdmin" class="md-button" ng-click="Ctrl.RAMascota()">
+                    <label class="">Agregar nueva mascota</label>
+                    <i class="mdi mdi-paw"></i>
+
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="md-card">
+    <div class="md-card__title">
+        <h2 class="md-card__title-text">{{ctrl.frmData.nameModal}}</h2>
+    </div>
+    <div class="md-card__supporting-text">
+        <form name="frmlSaveCustom">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="md-textfield" ng-class="{ 'is-dirty': ctrl.frmData.temporalTiCustomTrunk !=null, 'is-invalid' : frmlSaveCustom.nombre.$dirty &&  frmlSaveCustom.nombre.$error.required || ctrl.estado==1 }">
+                        <input type="text" class="md-textfield__input" name="nombre" ng-model="ctrl.frmData.customTrunk.entity.noCustomTrunk" ng-change="ctrl.cambiarNombreGuion();ctrl.onValidaBoton()" required>
+                        <label class="md-textfield__label" for="nombre">Nombre</label>
+                        <span class="md-textfield__error" ng-show="ctrl.estado==1">{{ctrl.mensajeDup}}</span>
+                        <span class="md-textfield__error" ng-show="frmlSaveCustom.nombre.$dirty && frmlSaveCustom.nombre.$error.required">*Campo requerido</span>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="md-select" ng-class="{ 'is-dirty': ctrl.frmData.temporalTiCustomTrunk > 0,'is-invalid' : ctrl.flaTipo==1}">
+                        <!--  'is-invalid' : ctrl.frmData.temporalTiCustomTrunk == null -->
+                        <select name="tipo" class="md-select__input" ng-change="ctrl.cambiarNombreGuion();ctrl.validarTipo();ctrl.onValidaBoton()" ng-model="ctrl.frmData.customTrunk.entity.tiCustomTrunk" ng-options="item.id as item.nombre for item in ctrl.tipoCustomTrunk">
+                            <option ng-show="false" value="" selected="true">{{ctrl.frmData.temporalTiCustomTrunk}}</option>
+                        </select>
+                        <label class="md-select__label">Tipo</label>
+                        <span class="md-select__error" ng-show="ctrl.flaTipo==1">{{ctrl.menvalTipo}}</span>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="md-textfield" ng-class="{ 'is-dirty': ctrl.frmData.temporalNoDetalle !=null, 'is-invalid' : frmlSaveCustom.detalle.$dirty && frmlSaveCustom.detalle.$error.required || ctrl.estadoDe==1}">
+                        <textarea type="text" class="md-textfield__input" rows="10" name="detalle" id="descripCustomtrunk" placeholder="Ingrese Detalle" ng-model="ctrl.frmData.customTrunk.entity.noDetalle" ng-change="ctrl.cambiarNombreGuion();ctrl.onValidaBoton()"  ng-required="true"  ></textarea>
+                        <label class="md-textfield__label" for="nombre">Detalle</label>
+                        <span class="md-textfield__error" ng-show="frmlSaveCustom.detalle.$dirty && frmlSaveCustom.detalle.$error.required">*Campo requerido</span>
+                        <span class="md-textfield__error" ng-show="ctrl.estadoDe==1">{{ctrl.mensajeDupDe}}</span>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="md-card__actions">
+        <button type="button" class="md-button"  ng-disabled="ctrl.nuEstadoBoton==1" ng-click="ctrl.onSaveCustomTrunk()">Guardar</button>
+    </div>
+    <div class="md-card__menu">
+        <button class="md-button md-button--icon" data-dismiss="modal" ng-click="ctrl.cancel()"><i class="mdi mdi-close"></i></button>
+    </div>
+</div>

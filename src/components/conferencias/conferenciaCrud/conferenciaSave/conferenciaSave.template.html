@@ -1,0 +1,206 @@
+<div class="md-card">
+    <div class="md-card__title">
+        <h2 class="md-card__title-text">{{confeCtrl.frmData.nameModal}}</h2>
+    </div>
+    <div class="md-card__supporting-text md-overflow">
+        <form name="formConferenciaGuardar">
+            <div class=" row ">
+          <!--  <form name="formConferenciaGuardar" novalidate>-->
+                <div class="col-sm-12">
+                    <div class="md-textfield" ng-class="{'is-invalid' : formConferenciaGuardar.noConferencia.$touched && formConferenciaGuardar.noConferencia.$error.required, 'is-dirty': confeCtrl.frmData.conferencia.entity.noConferencia.length > 0}">
+                        <input type="text" name="noConferencia" class="md-textfield__input" ng-model="confeCtrl.frmData.conferencia.entity.noConferencia" required="true" ng-change="confeCtrl.validaCampos()">
+                        <label class="md-textfield__label" for="noConferencia">Nombre:</label>
+                        <small class="md-textfield__error" ng-show="formConferenciaGuardar.noConferencia.$touched && formConferenciaGuardar.noConferencia.$error.required">*Nombre es Obligatorio</small>
+                    </div>
+                        
+                </div>
+                <div class="col-sm-12">
+                    <div class="md-textfield" ng-class="{ 'is-invalid': formConferenciaGuardar.nuConferencia.$touched && formConferenciaGuardar.nuConferencia.$error.required,  'is-dirty': confeCtrl.frmData.conferencia.entity.nuConferencia.length > 0}">
+                        <input type="text" name="nuConferencia" class="md-textfield__input" ng-model="confeCtrl.frmData.conferencia.entity.nuConferencia" required="true" maxlength="4" onkeypress='return event.charCode >= 48 && event.charCode <= 57' ng-change="confeCtrl.validaNumero()">
+                        <label class="md-textfield__label" for="nuConferencia">Numero:</label>
+                        <small class="md-textfield__error" ng-show="formConferenciaGuardar.nuConferencia.$touched && formConferenciaGuardar.nuConferencia.$error.required">*Numero de conferencia es obligatorio</small>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="md-textfield" ng-class="{ 'is-invalid': formConferenciaGuardar.pwdAdmin.$touched && formConferenciaGuardar.pwdAdmin.$error.required, 'is-dirty': confeCtrl.frmData.conferencia.entity.pwdAdmin.length > 0 }">
+                        <input type="text" name="pwdAdmin" class="md-textfield__input" ng-model="confeCtrl.frmData.conferencia.entity.pwdAdmin" required="true" maxlength="4" onkeypress='return event.charCode >= 48 && event.charCode <= 57' ng-change="confeCtrl.validapwdAdmin()">
+                        <label class="md-textfield__label" for="pwdAdmin">Contraseña de Administrador:</label>
+                        <small class="md-textfield__error" ng-show="formConferenciaGuardar.pwdAdmin.$touched && formConferenciaGuardar.pwdAdmin.$error.required">*Debe ingresar password de administrador</small>
+                    </div>
+                
+                </div>
+                <div class="col-sm-12">
+                    <div class="md-textfield" ng-class="{ 'is-invalid': formConferenciaGuardar.pwdUsu.$touched && formConferenciaGuardar.pwdUsu.$error.required, 'is-dirty': confeCtrl.frmData.conferencia.entity.pwdUsuario.length > 0 }">
+                        <input type="text" name="pwdUsu" class="md-textfield__input" ng-model="confeCtrl.frmData.conferencia.entity.pwdUsuario" required="true" maxlength="4" onkeypress='return event.charCode >= 48 && event.charCode <= 57' ng-change="confeCtrl.validapwdUsu()">
+                        <label class="md-textfield__label" for="pwdUsu">Contraseña de Usuario:</label>
+                        <small class="md-textfield__error" ng-show="formConferenciaGuardar.pwdUsu.$touched && formConferenciaGuardar.pwdUsu.$error.required">*Debe ingresar password de usuario</small>
+                        <!--<small class="md-textfield__error" ng-if="confeCtrl.validaAdminUserdobles">{{confeCtrl.mensajeValidaPwdAdminUser}}</small>-->
+                       <!-- <small class="md-textfield__error" ng-show="confeCtrl.validaAdminUserdobles">{{confeCtrl.mensajeValidaPwdAdminUser}}</small>-->
+
+                    </div>
+                    
+          <!--  <small class="text-danger" data-ng-show="(confeCtrl.frmData.conferencia.entity.pwdAdmin!=null && confeCtrl.frmData.conferencia.entity.pwdUsuario!=null) && (confeCtrl.frmData.conferencia.entity.pwdAdmin == confeCtrl.frmData.conferencia.entity.pwdUsuario)">*Las contraseñas de administrador y usuario no deben ser iguales</small>-->   
+                </div>
+                <div class="col-sm-12" ng-if="confeCtrl.validaAdminUserdobles">
+                        <label >{{confeCtrl.mensajeValidaPwdAdminUser}}</label>
+                </div>
+                <div class="col-sm-12">
+                    <datepicker date-format="dd-MM-yyyy" selector="calendar-inicio-textfield" button-prev="<i class='mdi mdi-arrow-left'></i>" button-next="<i class='mdi mdi-arrow-right'></i>">
+                        <div class="md-textfield has-placeholder" ng-class="{'is-invalid' : formConferenciaGuardar.fecha.$touched && formConferenciaGuardar.fecha.$error.required}">
+                            <input type="text" name="fecha" id="fecha" class="calendar-inicio-textfield md-textfield__input" uib-datepicker-popup="dd-MM-yyyy" ng-model="confeCtrl.dt" current-text="Hoy" clear-text="Limpiar" close-text="Cerrar" is-open="confeCtrl.opened" datepicker-options="confeCtrl.dateOptions" close-text="Close" ng-change="confeCtrl.validaFecha();confeCtrl.fechaInicioConferencia();" required="true" input-date-validator>
+                            <button class="md-button-input" >
+                                <i class="mdi mdi-calendar"></i>
+                            </button> 
+                            <label for="fecha" class="md-textfield__label">Fecha de reunión:</label>
+                            <small class="md-textfield__error" ng-show="formConferenciaGuardar.fecha.$error.required && formConferenciaGuardar.fecha.$touched">*Debe ingresar fecha de reunión</small>
+                        </div>  
+                    </datepicker>                  <!--<br/>
+                    <br/>
+                    <div class="col-md-4">
+                        <label for="calendarFecha">Fecha de reunión:</label>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="input-group" ng-class="{'has-error' : formConferenciaGuardar.fecha.$touched && formConferenciaGuardar.fecha.$invalid}">
+                            <input type="text" name="fecha" id="fecha" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="confeCtrl.dt" current-text="Hoy" clear-text="Limpiar" close-text="Cerrar" is-open="confeCtrl.opened" datepicker-options="confeCtrl.dateOptions" close-text="Close" ng-change="confeCtrl.validaFecha();confeCtrl.fechaInicioConferencia();" required="true" input-date-validator>
+                            <span class="input-group-addon" ng-click="confeCtrl.open()">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </span>
+                        </div>
+                        <small class="text-danger text-select" ng-show="formConferenciaGuardar.fecha.$invalid">*Debe ingresar fecha de reunión</small>
+                    </div>-->
+                </div>
+                <div class="col-sm-12 md-card__row-title">Opciones de Conferencia</div>
+                    <div class="col-sm-8">
+                        <div class="md-select" ng-class="{ 'is-dirty': confeCtrl.frmData.conferencia.entity.nuMaxUsuario.length > 0}">
+                            <select id="nroPart" class="md-select__input" ng-model="confeCtrl.frmData.conferencia.entity.nuMaxUsuario" ng-change="confeCtrl.changeComboMaxPart()" ng-options="item.valor as item.dato for item in confeCtrl.comboMaxPart">
+                                <option ng-show="false" value="" selected="true">{{confeCtrl.frmData.conferencia.entity.nuMaxUsuario}}</option>
+                            </select>
+                            <label class="md-select__label">Cant.max. participantes:</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="md-textfield">
+                            <!--<input type="text" name="name" maxlength="2" class="md-textfield__input" placeholder="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' ng-model="confeCtrl.cantMaxUsuario" ng-hide="confeCtrl.inputUsuario" ng-change="confeCtrl.cantUsuarioChange()" ng-keypress="confeCtrl.cantUsuarioChange()">
+                            -->
+                            <input type="text" name="name" maxlength="2" class="md-textfield__input" placeholder="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' ng-model="confeCtrl.cantMaxUsuario" ng-show="confeCtrl.frmData.conferencia.entity.nuMaxUsuario == 'Elegir'" ng-change="confeCtrl.cantUsuarioChange()" ng-keypress="confeCtrl.cantUsuarioChange()">
+                              
+                        </div>                
+                    </div>
+                <div class="col-sm-6">
+                    <div class="md-select" ng-class="{ 'is-dirty': confeCtrl.frmData.conferencia.entity.noRutBie.length > 0}">
+                        <select id="tMusica" class="md-select__input" ng-model="confeCtrl.frmData.conferencia.entity.noRutBie" ng-options="item.valor as item.dato for item in confeCtrl.comboRutaBienvenida">
+                            <option ng-show="false" value="" selected="true">{{confeCtrl.frmData.conferencia.entity.noRutBie}}</option>
+                        </select>
+                        <label class="md-select__label">Tipo de Musica de Bienvenida:</label>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-select" ng-class="{ 'is-dirty': confeCtrl.frmData.conferencia.entity.idClase !=null}">
+                        
+                        <select id="tEspera" class="md-select__input" ng-model="confeCtrl.frmData.conferencia.entity.idClase" ng-options="musicOnHold.idClase as musicOnHold.noClase for musicOnHold in confeCtrl.lscomboMusicOnHold ">
+                            <option ng-show="false" value="" selected="true">{{confeCtrl.frmData.conferencia.entity.idClase}}</option>
+                        </select>
+                        <label class="md-select__label">Tipo de Musica en Espera:</label>
+                    </div>
+                </div>
+
+                <ul class="nav nav-tabs pad-top">
+                    <li class="active"><a data-target="#adm" data-toggle="tab">Administrador</a></li>
+                    <li><a data-target="#usu" data-toggle="tab">Usuario</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="adm" class="tab-pane fade in active">
+                        <div class="col-xs-12">
+                            <div class="md-checkbox">
+                                <input id="chkA1" type="checkbox" ng-model="confeCtrl.chkA1" ng-change="confeCtrl.changeOptionsAdmin1();confeCtrl.changeChkAdmin()" ng-true-value="'true'" ng-false-value="'false'">
+                                <label for="chkA1"> Anunciar la cantidad de usuarios </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="md-checkbox">
+                                <input id="chkA2" type="checkbox" ng-model="confeCtrl.chkA2" ng-change="confeCtrl.changeOptionsAdmin2();confeCtrl.changeChkAdmin()" ng-true-value="'true'" ng-false-value="'false'">
+                                <label for="chkA2"> Musica en espera </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="md-checkbox">
+                                <input id="chkA3" type="checkbox" ng-model="confeCtrl.chkA3" ng-change="confeCtrl.changeOptionsAdmin3();confeCtrl.changeChkAdmin()" ng-true-value="'true'" ng-false-value="'false'">
+                                <label for="chkA3"> Permitir al usuario salir de la conferencia </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="md-checkbox">
+                                <input id="chkA4" type="checkbox" ng-model="confeCtrl.chkA4" ng-change="confeCtrl.changeOptionsAdmin4();confeCtrl.changeChkAdmin()" ng-true-value="'true'" ng-false-value="'false'">
+                                <label for="chkA4"> Escuchar menu </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="md-checkbox">
+                                <input id="chkA5" type="checkbox" ng-model="confeCtrl.chkA5" ng-change="confeCtrl.changeOptionsAdmin5();confeCtrl.changeChkAdmin()" ng-true-value="'true'" ng-false-value="'false'">
+                                <label for="chkA5"> Grabar Conferencia </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="usu" class="tab-pane fade">
+                        <div class="col-xs-12">
+                            <div class="md-checkbox">
+                                <input id="chkU1" type="checkbox" ng-model="confeCtrl.chkU1" ng-change="confeCtrl.changeOptionsUsu1();confeCtrl.changeChkUsuario()" ng-true-value="'true'" ng-false-value="'false'">
+                                <label for="chkU1"> Modo Silencio </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="md-checkbox">
+                                <input id="chkU2" type="checkbox" ng-model="confeCtrl.chkU2" ng-change="confeCtrl.changeOptionsUsu2();confeCtrl.changeChkUsuario()" ng-true-value="'true'" ng-false-value="'false'">
+                                <label for="chkU2"> Anunciar la cantidad de usuarios </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="md-checkbox">
+                                <input id="chkU3" type="checkbox" ng-model="confeCtrl.chkU3" ng-change="confeCtrl.changeOptionsUsu3();confeCtrl.changeChkUsuario()" ng-true-value="'true'" ng-false-value="'false'">
+                                <label for="chkU3"> Musica en espera </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="md-checkbox">
+                                <input id="chkU4" type="checkbox" ng-model="confeCtrl.chkU4" ng-change="confeCtrl.changeOptionsUsu4();confeCtrl.changeChkUsuario()" ng-true-value="'true'" ng-false-value="'false'">
+                                <label for="chkU4"> Permitir al usuario salir de la conferencia </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="md-checkbox">
+                                <input id="chkU5" type="checkbox" ng-model="confeCtrl.chkU5" ng-change="confeCtrl.changeOptionsUsu5();confeCtrl.changeChkUsuario()" ng-true-value="'true'" ng-false-value="'false'">
+                                <label for="chkU5"> Escuchar menu </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="md-checkbox">
+                                <input id="chkU6" type="checkbox" ng-model="confeCtrl.chkU6" ng-change="confeCtrl.changeOptionsUsu6();confeCtrl.changeChkUsuario()" ng-true-value="'true'" ng-false-value="'false'">
+                                <label for="chkU6"> Grabar conferencia </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="md-checkbox">
+                                <input id="chkU7" type="checkbox" ng-model="confeCtrl.chkU7" ng-change="confeCtrl.changeOptionsUsu7();confeCtrl.changeChkUsuario()" ng-true-value="'true'" ng-false-value="'false'">
+                                <label for="chkU7"> Solo escuchar administrador </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="md-checkbox">
+                                <input id="chkU8" type="checkbox" ng-model="confeCtrl.chkU8" ng-change="confeCtrl.changeOptionsUsu8();confeCtrl.changeChkUsuario()" ng-true-value="'true'" ng-false-value="'false'">
+                                <label for="chkU8"> Esperar administrador </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           <!-- </form>-->
+            </div>
+        </form>
+    </div>
+    <div class="md-card__actions">
+        <button type="button" class="md-button" ng-disabled="confeCtrl.validacion" ng-click="confeCtrl.onSaveConferencia()" ng-if="confeCtrl.frmData.conferencia.entity.idConferencia==null">Agregar</button>
+        <button type="button" class="md-button" ng-disabled="confeCtrl.validacion" ng-click="confeCtrl.onSaveConferencia()" ng-if="confeCtrl.frmData.conferencia.entity.idConferencia!=null">Guardar</button>
+    </div>
+    <div class="md-card__menu">
+        <button class="md-button md-button--icon" data-dismiss="modal" ng-click="confeCtrl.cancel()"><i class="mdi mdi-close"></i></button>
+    </div>
+</div>

@@ -1,0 +1,1 @@
+angular.module('callCenterReporteFecha',['ngAnimate', 'ngSanitize', 'ui.bootstrap','LocalStorageModule']);

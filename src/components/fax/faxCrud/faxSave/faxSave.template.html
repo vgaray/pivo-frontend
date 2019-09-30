@@ -1,0 +1,64 @@
+<div class="md-card">
+    <div class="md-card__title">
+        <h2 class="md-card__title-text">{{ctrl.frmData.nameModal}}</h2>
+    </div>
+    <div class="md-card__supporting-text">
+            <form name="formFaxGuardar" class="row">
+                <div class=" col-md-6 ">
+                    <div class="md-textfield" ng-class="{ 'is-dirty': ctrl.frmData.fax.entity.noFaxVirtual.length > 0 , 'is-invalid': formFaxGuardar.noFaxVirtual.$touched && formFaxGuardar.noFaxVirtual.$invalid} ">
+                        <label class="md-textfield__label">Nombre Virtual *</label>
+                        <input type="text" name="noFaxVirtual" class="md-textfield__input" placeholder="Ingrese Nombre"  
+                        ng-model="ctrl.frmData.fax.entity.noFaxVirtual"  ng-change="ctrl.validaTodo()" ng-required="true" >
+                        <span class="md-textfield__error" ng-show="formFaxGuardar.noFaxVirtual.$touched && formFaxGuardar.noFaxVirtual.$invalid">*Nombre es Obligatorio</span>
+                    </div>
+                </div>         
+                <div class=" col-md-6" >
+                    <div class="md-textfield" ng-class="{ 'is-dirty': ctrl.frmData.fax.entity.noCorreoAsociado.length > 0 , 'is-invalid': formFaxGuardar.noCorreoAsociado.$touched && formFaxGuardar.noCorreoAsociado.$invalid } ">
+                        <label class="md-textfield__label">Correo Asociado *</label>
+                        <input type="email" name="noCorreoAsociado" class="md-textfield__input" placeholder="Ingrese correo asociado"  
+                        ng-model="ctrl.frmData.fax.entity.noCorreoAsociado" ng-change="ctrl.validaTodo()" ng-required="true" >     
+                        <span class="md-textfield__error" ng-show="formFaxGuardar.noCorreoAsociado.$touched && formFaxGuardar.noCorreoAsociado.$invalid">*Correo es Obligatorio</span>
+                    </div>     
+                </div>          
+                <div class=" col-md-6" >
+                    <div class="md-textfield" ng-class="{'is-dirty': ctrl.frmData.fax.entity.unCallerId > 0}">
+                        <label class="md-textfield__label">Numero Caller ID</label>
+                        <input type="number" name="unCallerId" class="md-textfield__input" placeholder="Ingrese numero caller id"  
+                        ng-model="ctrl.frmData.fax.entity.unCallerId"  min="0"
+                        required onkeypress='return event.charCode >= 48 && event.charCode <= 57'>                           
+                    </div>     
+                </div>   
+                <div class=" col-md-6" >
+                    <div class="md-textfield" ng-class="{'is-dirty': ctrl.frmData.fax.entity.passwordFax > 0 , 'is-invalid': formFaxGuardar.passwordFax.$touched && formFaxGuardar.passwordFax.$invalid }">
+                        <label class="md-textfield__label">Clave *</label>
+                        <input type="password" name="passwordFax" class="md-textfield__input" placeholder="Ingrese clave"  
+                        ng-model="ctrl.frmData.fax.entity.passwordFax" ng-change="ctrl.validaTodo()" ng-required="true" >   
+                        <span class="md-textfield__error" ng-show="formFaxGuardar.passwordFax.$touched && formFaxGuardar.passwordFax.$invalid">*Clave es Obligatorio</span>
+                    </div>     
+                </div>                   
+                <div class=" col-md-6">
+                    <div class="md-textfield" ng-class="{'is-dirty': ctrl.frmData.fax.entity.noCallerId.length > 0}">
+                        <label class="md-textfield__label">Nombre Caller ID</label>
+                        <input type="text" name="noCallerId" class="md-textfield__input" placeholder="Ingrese nombre caller id"  
+                        ng-model="ctrl.frmData.fax.entity.noCallerId" >                           
+                    </div>     
+                </div>   
+                <div class=" col-md-6 ">
+                    <div class="md-select" ng-class="{ 'is-dirty': ctrl.frmData.fax.entity.idExtension > 0 ,'is-invalid': formFaxGuardar.idExtension.$touched && formFaxGuardar.idExtension.$invalid}">
+                        <label class="md-select__label">Extension *</label>
+                        <select name="idExtension" id="idExtension" class="md-select__input" ng-model="ctrl.frmData.fax.entity.idExtension" ng-required="true" 
+                        ng-options="item.id as item.name for item in ctrl.lsAnexo" ng-change="ctrl.validaTodo()">
+                            <option value=""></option>
+                        </select> 
+                        <span class="md-select__error" ng-show="formFaxGuardar.idExtension.$touched && formFaxGuardar.idExtension.$invalid">*Anexo es Obligatorio</span>             
+                    </div>     
+                </div>                                                                                                                                                                                     
+            </form>
+    </div>
+    <div class="md-card__actions text-right"> 
+        <button type="button" class="md-button" ng-disabled="ctrl.varValidacion || ctrl.disableButtonSave" ng-click="ctrl.onSaveFax()">Guardar</button>
+    </div>
+    <div class="md-card__menu">
+        <button class="md-button md-button--icon" ng-disabled="ctrl.disableButtonSave" data-dismiss="modal" ng-click="ctrl.cancel()"><i class="mdi mdi-close"></i></button>
+    </div>       
+</div>

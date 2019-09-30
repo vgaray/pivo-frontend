@@ -1,0 +1,8 @@
+npm-debug.log
+node_modules/
+bower_components/
+src/assets/css/
+npm-debug.log*
+.sass-cache/
+.vscode/
+debug.log

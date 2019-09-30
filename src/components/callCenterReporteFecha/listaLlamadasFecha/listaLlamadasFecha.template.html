@@ -1,0 +1,117 @@
+<form class="row" name="formU">
+    <div class="col-xs-12">
+        <div class="md-card animated fadeInUp">
+            <div class="md-card__title">
+                <h2 class="md-card__title-text">{{ctrl.frmData.name_page_title}}</h2>
+            </div>
+            <div class="md-card__supporting-text md-overflow">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="md-select is-dirty">
+                            <select name="" id="idNombre" class="md-select__input" ng-model="ctrl.frmData.miCombo" ng-change="habBtnBuscar()" ng-options="listaQueue as listaQueue.name 
+                            for listaQueue in ctrl.listaQueuesName
+                            track by listaQueue.name" />
+                            <label class="md-select__label">Seleccione una cola</label>
+                        </div>     
+                    </div>                                
+                    <div class="col-md-4">
+                        <datepicker date-format="dd-MM-yyyy" selector="calendar-inicio-textfield" button-prev="<i class='mdi mdi-arrow-left'></i>" button-next="<i class='mdi mdi-arrow-right'></i>">
+                            <div class="md-textfield" ng-class="{ 'is-dirty' : ctrl.dtf, 'is-invalid' : formRA.pFeIni.$invalid }">
+                                <input name="pFeIni" id="pFeIni"type="text" class="calendar-inicio-textfield md-textfield__input" uib-datepicker-popup="dd-MM-yyyy" ng-model="ctrl.dt" current-text="Hoy" clear-text="Limpiar" close-text="Cerrar"
+                                ng-change="ctrl.validaAnteriorInicio()" is-open="ctrl.opened" datepicker-options="ctrl.dateOptions" ng-required="ctrl.frmData.reporte.listarLlamadas.request.pFeIni != null" close-text="Close"
+                                input-date-validator>
+                                <button class="md-button-input">
+                                        <i class="mdi mdi-calendar"></i>
+                                </button>
+                                <label class="md-textfield__label">Fecha Inicio</label>
+                                <span class="md-textfield__error" ng-show="formU.pFeIni.$invalid">Formato incorrecto</span>
+                            </div>
+                        </datepicker>
+                    </div>
+                    <div class="col-md-4">
+                        <datepicker date-format="dd-MM-yyyy" selector="calendar-fin-textfield" button-prev="<i class='mdi mdi-arrow-left'></i>" button-next="<i class='mdi mdi-arrow-right'></i>">
+                            <div class="md-textfield" ng-class="{ 'is-dirty' : ctrl.dt, 'is-invalid' : formRA.pFeFin.$invalid }">
+                                <input name="pFeFin" id="pFeFin"type="text" class="calendar-fin-textfield md-textfield__input" uib-datepicker-popup="dd-MM-yyyy" ng-model="ctrl.dt" current-text="Hoy" clear-text="Limpiar" close-text="Cerrar"
+                                ng-change="ctrl.validaAnteriorInicio()"  is-open="ctrl.opened" datepicker-options="ctrl.dateOptions"  close-text="Close" input-date-validator>
+                                <button class="md-button-input">
+                                        <i class="mdi mdi-calendar"></i>
+                                </button>
+                                <label class="md-textfield__label">Fecha Fin</label>
+                                <span class="md-textfield__error" ng-show="formU.pFeFin.$invalid">Formato incorrecto</span>
+                            </div>
+                        </datepicker>
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button class="md-button" ng-click="ctrl.BuscarListaLlamadasAtenAbanFechas(1)" ng-model="ctrl.frmData.btnBuscar" ng-disabled="ctrl.varTotalHa">
+                                    <i class="fa fa-search"></i> Buscar
+                                </button>
+                                <div class="pull-right" ng-show="ctrl.menuState.show">
+                                    <button class="md-button dropdown-toggle" data-toggle="dropdown"> Exportar
+                                        <i class="mdi mdi-chevron-double-down"></i>
+                                    </button>
+                                    <ul class="dropdown-menu md-dropdown-menu">
+                                        <li>
+                                            <a href="" ng-click="ctrl.descargaArchivo(ctrl.excelVal)">
+                                                <i class="mdi mdi-file-excel" style="color:forestgreen"></i>Excel
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="" ng-click="ctrl.descargaArchivo(ctrl.pdfVal)">
+                                                <i class="mdi mdi-file-pdf" style="color:firebrick"></i>PDF
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="table-responsive">
+                        <table ng-hide="ctrl.validaVacio">
+                            <thead>
+                                <tr>
+                                    <th>Ningun elemento encontrado</th>
+                                </tr>
+                            </thead>
+                        </table>
+                        <table ng-hide="ctrl.validaGrilla" st-table="ctrl.lsLlamadasFecha" class="md-table table">
+                            <thead>
+                                <tr class="row-llamadaFecha">
+                                    <th class="text-center" rowspan="2">Nro</th>
+                                    <th class="text-center" rowspan="2">Fecha</th>
+                                    <th class="text-center" rowspan="2">Llamadas Atendidas</th>
+                                    <th class="text-center" colspan="2">Llamadas Abandonadas</th>
+                                </tr>
+
+                                <tr>
+                                    <th class="text-center">Menor al Minuto</th>
+                                    <th class="text-center">Mayor al Minuto</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="row in ctrl.lsLlamadasFecha">
+                                    <td class="text-center">{{row.idLlamada}}</td>
+                                    <td class="text-center">{{row.fecha}}</td>
+                                    <td class="text-center">{{row.atendidas}}</td>
+                                    <td class="text-center">{{row.abandonadasMenor}}</td>
+                                    <td class="text-center">{{row.abandonadasMayor}}</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="10" class="text-center">
+                                        <div uib-pagination total-items="ctrl.totalItems" ng-model="ctrl.currentPage" boundary-links="true" max-size="5" class="pagination-sm" ng-change="ctrl.pageChanged(0)"
+                                        first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;" last-text="&raquo;"></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

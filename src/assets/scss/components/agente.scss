@@ -1,0 +1,112 @@
+.agente{
+    #tbAgente{
+        .fa-trash{
+            color: $danger;
+        }
+        .th-center{
+            text-align: center;
+        }
+        .th-right{
+            text-align: right;
+        }
+
+        thead tr th{
+            text-align: center;
+        }
+    }
+}
+
+/*Modal*/ 
+.modal-agente {
+    #tbAgente{
+        .fa-trash{
+            color: $danger;
+        }
+        .th-center{
+            text-align: center;
+        }
+        .th-right{
+            text-align: right;
+        }
+
+        thead tr th{
+            text-align: center;
+        }
+    }
+    .table-colum-width{
+        width: 15%;
+    }    
+    .pad-top{
+        padding-top: 2%;
+    }
+    .fa-trash{
+        color: $danger;
+    }    
+    .fa-times{
+       color: $danger;
+       padding-left: 10%;
+    }    
+    .has-error {
+        .input-group-btn {
+            button {
+                border-color: #a94442;
+            }
+        }
+    }    
+    .form-group {
+        display: inline-block;
+        width: 100%;
+    }
+    /***/
+    .panel {
+        -webkit-box-shadow: none !important;
+        -moz-box-shadow: none !important;
+        box-shadow: none !important;
+    }
+    .panel-group .panel {
+        overflow: visible;
+    }
+    .panel .panel-body {
+        font-size: 13px;
+    }
+    .panel .panel-title > a:hover {
+        text-decoration: none;
+    }
+    .accordion .panel .panel-heading {
+        padding: 0;
+    }
+    .accordion .panel .panel-title {
+        padding: 0;
+    }
+    .accordion .panel .panel-title .accordion-toggle {
+        display: block;
+        padding: 10px 15px;
+    }
+    .accordion .panel .panel-title .accordion-toggle.accordion-toggle-styled {
+        background: url("../img/accordion-plusminus.png") no-repeat;
+        background-position: right -19px;
+        margin-right: 15px;
+    }
+    .accordion .panel .panel-title .accordion-toggle.accordion-toggle-styled.collapsed {
+        background-position: right 12px;
+    }
+    /***/
+}
+@media(max-width: 349px) {
+    .agente {
+        .b-permis {
+            width: 100%;
+            margin-bottom: 15px;
+            .btn-group {
+                float: left !important;
+                width: 100%;
+                .btn {
+                    width: 100%;
+                }
+            }
+            .pull-right>.dropdown-menu {
+                left: 0 !important;
+            }
+        }
+    }
+}

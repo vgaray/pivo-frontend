@@ -1,0 +1,211 @@
+<div id="modalGuardarCola" class="md-card">
+    <div class="md-card__title">
+        <h4 class="md-card__title-text">{{ctrl.frmData.nameModal}}</h4>
+    </div>
+    <div class="md-card__supporting-text">
+        <form class="row" name="formColaGuardar">
+            <div class="col-md-12">
+                <div class="md-textfield" ng-class="{ 'is-dirty' : ctrl.frmData.cola.entity.name.length > 0, 'is-invalid' : formColaGuardar.name.$touched && formColaGuardar.name.$error.required }">
+                    <input type="text" class="md-textfield__input" name="name" ng-model="ctrl.frmData.cola.entity.name"  ng-change="ctrl.validaNombre()" required="true">
+                    <label class="md-textfield__label" for="name">Nombre: </label>
+                    <span class="md-textfield__error" ng-show="formColaGuardar.name.$touched && formColaGuardar.name.$error.required">Nombre de Cola es obligatorio.</span>
+                </div>
+            </div>
+
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-target="#conf" data-toggle="tab" >Configuración</a></li>
+                <li><a data-target="#opciones" data-toggle="tab" >Otras Opciones</a></li>
+            </ul>
+            <!--ng-hide="true"-->
+            <div class="tab-content" >
+                <!--<div class="form-group"> -->
+                <div id="conf" class="tab-pane fade in active" >
+                    <div class="md-card__supporting-text">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="md-select" ng-class=" { 'is-dirty' : ctrl.frmData.cola.entity.strategy.length > 0, 'is-invalid' : formColaGuardar.strategy.$touched && formColaGuardar.strategy.$error.required } ">
+                                    <select name="strategy" class="md-select__input" ng-model="ctrl.frmData.cola.entity.strategy" ng-required="true" ng-options="item.id as item.nombre for item in ctrl.strategy" ng-change="ctrl.validaEstrategia()">
+                                        <option value=""></option>
+                                    </select>
+                                    <label class="md-select__label">Estrategia</label>
+                                    <span class="md-select__error" ng-show="formColaGuardar.strategy.$touched && formColaGuardar.strategy.$error.required">Estrategia es obligatorio.</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="md-textfield" ng-class="{ 'is-dirty' : ctrl.frmData.cola.entity.serviceLevel }">
+                                    <input type="text" name="serviceLevel" class="md-textfield__input" ng-model="ctrl.frmData.cola.entity.serviceLevel"  onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                    <label class="md-textfield__label" for="serviceLevel">Nivel de servicio: </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="md-textfield" ng-class="{ 'is-dirty' : ctrl.frmData.cola.entity.announceFrequency }">
+                                    <input type="text" name="announceFrequency" class="md-textfield__input" ng-model="ctrl.frmData.cola.entity.announceFrequency" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                    <label class="md-textfield__label" for="announceFrequency">Anunciar Frecuencia</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="md-textfield" ng-class="{ 'is-dirty' : ctrl.frmData.cola.entity.weight, 'is-invalid' : formColaGuardar.weight.$touched && formColaGuardar.weight.$error.required }">
+                                    <input type="text" name="weight" class="md-textfield__input" ng-model="ctrl.frmData.cola.entity.weight" required onkeypress='return event.charCode >= 48 && event.charCode <= 57' ng-change="ctrl.validaPeso()">
+                                    <label class="md-textfield__label" for="weight">Peso</label>
+                                    <span class="md-textfield__error" ng-show="formColaGuardar.weight.$touched && formColaGuardar.weight.$error.required">Peso es obligatorio.</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="md-textfield" ng-class="{ 'is-dirty' : ctrl.frmData.cola.entity.wrapuptime }">
+                                    <input type="text" name="wrapuptime" class="md-textfield__input" ng-model="ctrl.frmData.cola.entity.wrapuptime"  onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                    <label class="md-textfield__label" for="wrapuptime">Tiempo Finalización</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="md-textfield" ng-class="{ 'is-dirty' : ctrl.frmData.cola.entity.memberdelay }">
+                                    <input type="text" name="memberdelay" class="md-textfield__input" ng-model="ctrl.frmData.cola.entity.memberdelay"  onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                    <label class="md-textfield__label" for="memberdelay">Retraso de Miembro</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="md-textfield" ng-class="{ 'is-dirty' : ctrl.frmData.cola.entity.timeOut, 'is-invalid' : formColaGuardar.timeOut.$touched  && formColaGuardar.timeOut.$error.required }">
+                                    <input type="text" name="timeOut" class="md-textfield__input" ng-model="ctrl.frmData.cola.entity.timeOut" required onkeypress='return event.charCode >= 48 && event.charCode <= 57' ng-change="ctrl.validaTiempoFuera()">
+                                    <label class="md-textfield__label" for="timeOut">Tiempo Fuera</label>
+                                    <span class="md-textfield__error" ng-show="formColaGuardar.timeOut.$touched  && formColaGuardar.timeOut.$error.required">Tiempo Fuera es obligatorio.</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="md-textfield" ng-class="{ 'is-dirty' : ctrl.frmData.cola.entity.maxlen, 'is-invalid' : formColaGuardar.maxlen.$touched && formColaGuardar.maxlen.$error.required }">
+                                    <input type="text" name="maxlen" class="md-textfield__input" ng-model="ctrl.frmData.cola.entity.maxlen" required onkeypress='return event.charCode >= 48 && event.charCode <= 57' ng-change="ctrl.validaMaxUser()">
+                                    <label class="md-textfield__label" for="maxlen">Max. Usuarios en Cola</label>
+                                    <span class="md-textfield__error" ng-show="formColaGuardar.maxlen.$touched && formColaGuardar.maxlen.$error.required">*Max. Usuarios es obligatorio.</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="md-select" ng-class=" { 'is-dirty' : ctrl.frmData.cola.entity.monitorFormat, 'is-invalid' : formColaGuardar.monitorFormat.$touched && formColaGuardar.monitorFormat.$error.required } ">
+                                    <select name="monitorFormat" class="md-select__input" ng-model="ctrl.frmData.cola.entity.monitorFormat" ng-required="true" ng-options="item.id as item.nombre for item in ctrl.monitorFormat">
+                                        <option value=""></option>
+                                    </select>
+                                    <label class="md-select__label" for="monitorFormat">Formt. de Monitoreo</label>
+                                    <span class="md-select__error" ng-show="formColaGuardar.monitorFormat.$touched && formColaGuardar.monitorFormat.$error.required">Monitoreo es obligatorio.</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="md-textfield" ng-class="{ 'is-dirty' : ctrl.frmData.cola.entity.context.length > 0 }">
+                                    <input type="text" name="context" class="md-textfield__input" ng-model="ctrl.frmData.cola.entity.context">
+                                    <label class="md-textfield__label" for="context">Contexto</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="md-textfield" ng-class="{ 'is-dirty' : ctrl.frmData.cola.entity.retry, 'is-invalid' : formColaGuardar.retry.$touched && formColaGuardar.retry.$error.required }">
+                                    <input type="text" name="retry" class="md-textfield__input" ng-model="ctrl.frmData.cola.entity.retry" required onkeypress='return event.charCode >= 48 && event.charCode <= 57' ng-change="ctrl.validaRepetir()">
+                                    <label class="md-textfield__label" for="retry">Repetir (seg.)</label>
+                                    <span class="md-textfield__error" ng-show="formColaGuardar.retry.$touched && formColaGuardar.retry.$error.required">Repetir es obligatorio.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="opciones" class="tab-pane"> 
+                    <div class="md-card__supporting-text">
+                        <div class="row">                    
+                            <div class="col-sm-6">
+                                <div class="col-md-12">
+                                    <div class="md-checkbox">
+                                        <input id="timeoutRestart" name="timeoutRestart" type="checkbox" ng-model="ctrl.frmData.cola.entity.timeoutRestart"  ng-true-value="'yes'" ng-false-value="'no'">
+                                        <label for="timeoutRestart" class="control-label">Reiniciar Tiempo Muerto</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="md-checkbox" >                                                                    
+                                        <input id="announcePeriodic" name="announcePeriodic" type="checkbox" ng-model="ctrl.frmData.cola.entity.announcePeriodic"  ng-true-value="'yes'" ng-false-value="'no'" ng-click="ctrl.showInputPeriodic()">
+                                        <label for="announcePeriodic" class="control-label">Anuncio periódico</label>
+                                    </div>
+                                    <div ng-class="{ 'is-invalid': formColaGuardar.announcePeriodicTime.$touched && formColaGuardar.announcePeriodicTime.$invalid }" ng-hide="ctrl.showPeriodic" required onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                        <input type="text" name="announcePeriodicTime" class="form-control" ng-model="ctrl.frmData.cola.entity.announcePeriodicTime"  ng-change="ctrl.validaAnuncio()" required="true">
+                                        <small class="md-textfield__error" ng-show="formColaGuardar.announcePeriodicTime.$touched && formColaGuardar.announcePeriodicTime.$error.required"></small>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="md-checkbox" >                                               
+                                        <input id="leavewhenempty" name="leavewhenempty" type="checkbox" ng-model="ctrl.frmData.cola.entity.leavewhenempty" ng-true-value="'yes'" ng-false-value="'no'">
+                                        <label for="leavewhenempty" class="control-label">Dejar Colas Vacías</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="md-checkbox" >                                               
+                                        <input id="monitorJoin" name="monitorJoin" type="checkbox" ng-model="ctrl.frmData.cola.entity.monitorJoin" ng-true-value="'yes'" ng-false-value="'no '" ng-click="ctrl.showSelect()">
+                                        <label for="monitorJoin" class="control-label">Seguimiento</label>
+                                    </div>
+                                    <div ng-class="{ 'is-invalid': formColaGuardar.monitorJoinSelect.$touched && formColaGuardar.monitorJoinSelect.$invalid }" ng-hide="ctrl.showMonitorSelect">
+                                        <select type="text" name="monitorJoinSelect" class="form-control" ng-model="ctrl.frmData.cola.entity.monitorJoinSelect" ng-options="monitor.nomMonitor as monitor.nomMonitor for monitor in ctrl.listMonitorJoin" ng-change="ctrl.validaSeleccion()" required="true">
+                                            <option value="" selected="true">Seleccionar</option>
+                                        </select>
+                                        <small class="md-select__error" ng-show="formColaGuardar.monitorJoinSelect.$touched && formColaGuardar.monitorJoinSelect.$error.required"></small>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="md-checkbox" >                                               
+                                        <input id="eventmemberstatus" name="eventmemberstatus" type="checkbox" ng-model="ctrl.frmData.cola.entity.eventmemberstatus" ng-true-value="'yes'" ng-false-value="'no '" ng-click="ctrl.showEvent()">
+                                        <label for="eventmemberstatus" class="control-label">Tiempo antes de contactar agente</label>
+                                    </div>
+                                    <div ng-class="{ 'is-invalid': formColaGuardar.eventmemberstatusTime.$touched && formColaGuardar.eventmemberstatusTime.$invalid }" ng-hide="ctrl.showMemberstatusText" required onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                        <input type="text" name="eventmemberstatusTime" class="form-control" ng-model="ctrl.frmData.cola.entity.eventmemberstatusTime"  ng-change="ctrl.validaReinicio()" required="true">
+                                        <small class="md-textfield__error" ng-show="formColaGuardar.eventmemberstatusTime.$touched && formColaGuardar.eventmemberstatusTime.$error.required"></small>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="md-checkbox" >                                               
+                                        <input id="eventwhencalled" name="eventwhencalled" type="checkbox" ng-model="ctrl.frmData.cola.entity.eventwhencalled" ng-true-value="'yes'" ng-false-value="'no '" ng-click="ctrl.showRestart()">
+                                        <label for="eventwhencalled" class="control-label">Reseteo por tiempo de desconexión</label>
+                                    </div>
+                                    <div ng-class="{ 'is-invalid': formColaGuardar.timeoutRestartTime.$touched && formColaGuardar.timeoutRestartTime.$invalid }">
+                                        <input type="text" name="timeoutRestartTime" class="form-control" ng-model="ctrl.frmData.cola.entity.timeoutRestartTime"  ng-change="ctrl.validaReinicio()" required="true" ng-hide="ctrl.showRestartText" required onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                        <small class="md-textfield__error" ng-show="formColaGuardar.timeoutRestartTime.$touched && formColaGuardar.timeoutRestartTime.$error.required"></small>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="md-checkbox" >                                               
+                                        <input id="reportholdtime" name="reportholdtime" type="checkbox" ng-model="ctrl.frmData.cola.entity.reportholdtime" ng-true-value="'yes'" ng-false-value="'no '">
+                                        <label for="reportholdtime" class="control-label">Timbrar agente en uso</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" col-sm-6">
+                                <div class="md-text">Anuncio de Tiempo de Espera</div>
+                                <div class="md-radio-button">
+                                    <input type="radio" ng-model="ctrl.frmData.cola.entity.announceHoldtime" id="radio1" value="yes">
+                                    <label for="radio1">Si</label>
+                                </div>
+                                <div class="md-radio-button">
+                                    <input type="radio" ng-model="ctrl.frmData.cola.entity.announceHoldtime" id="radio2" value="no">
+                                    <label for="radio2">No</label>
+                                </div>
+                                <div class="md-radio-button">
+                                    <input type="radio" ng-model="ctrl.frmData.cola.entity.announceHoldtime" id="radio3" value="once">
+                                    <label for="radio3">Una vez</label>
+                                </div> 
+                                <div class="md-text">Anuncio de Tiempo de Espera</div>
+                                <div class="md-radio-button">
+                                    <input type="radio" ng-model="ctrl.frmData.cola.entity.joinEmpty" id="radio4" value="yes">
+                                    <label for="radio4">Si</label>
+                                </div>
+                                <div class="md-radio-button">
+                                    <input type="radio" ng-model="ctrl.frmData.cola.entity.joinEmpty" id="radio5" value="no">
+                                    <label for="radio5">No</label>
+                                </div>
+                                <div class="md-radio-button">
+                                    <input type="radio" ng-model="ctrl.frmData.cola.entity.joinEmpty" id="radio6" value="exigir">
+                                    <label for="radio6">Exigir</label>
+                                </div>
+                            </div> 
+
+                    </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="md-card__actions">
+        <button type="button" class="md-button" ng-disabled="ctrl.varValidacion || ctrl.disableButtonSave" ng-click="ctrl.onSaveCola()">Guardar</button>
+    </div>
+    <div class="md-card__menu">
+        <button class="md-button md-button--icon" data-dismiss="modal" ng-disabled="ctrl.disableButtonSave" ng-click="ctrl.cancel()"><i class="mdi mdi-close"></i></button>
+    </div>
+</div>

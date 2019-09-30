@@ -1,0 +1,43 @@
+.content-top {
+    background: #fff;
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 13px;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,0.25);
+}
+
+h1.al-title {
+  font-weight: $font-bold;
+  color: $default-text;
+  float: left;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.al-breadcrumb {
+  background: none;
+  color: $default-text;
+  padding: 0;
+  margin: 0;
+  float: right;
+  padding-top: 3px;
+  li {
+    font-size: 17px;
+    font-weight: $font-normal;
+  }
+}
+
+.al-look {
+  float: right;
+  margin-right: 10px;
+  padding-top: 10px;
+  > a {
+    font-size: 19px;
+  }
+}

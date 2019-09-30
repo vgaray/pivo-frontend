@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="md-card animated fadeInUp" zoom-in>
+            <div class="md-card__title">
+                <h2 class="md-card__title-text">Lista de Fax</h2>
+            </div>            
+            <div class="md-card__supporting-text">
+                <div class="table-responsive">
+                    <table class="md-table table" id="tbFax">
+                        <thead>
+                            <tr>
+                                <th class="text-center" ng-repeat="header in ctrl.table_headers">{{header.description}}</th>
+                                <th class="text-center">Editar</th>
+                                <th class="text-center">Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>                               
+                            <tr ng-repeat="fax in ctrl.lsFax | filter:ctrl.paginate ">
+                                <td class="text-center">{{fax.noFaxVirtual}}</td >
+                                <td class="text-center">{{fax.noCorreoAsociado}}</td>
+                                <td class="text-center">{{fax.unCallerId}}</td>
+                                <td class="text-center">{{fax.noCallerId}}</td>
+                                <td class="text-center"><button class="md-button md-button--icon" ng-click="ctrl.onSaveFax( ctrl.frmData.update, fax.idFax )" uib-tooltip="Editar"><i  class="mdi mdi-pencil"></i></button></td>
+                                <td class="text-center"><button class="md-button md-button--icon" ng-click="ctrl.onEliminarFax( fax.idFax )"><i class="mdi mdi-delete" uib-tooltip="Eliminar"></i></button></td>    
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="10" class="text-center">
+                                    <ul uib-pagination total-items="ctrl.totalItems" ng-model="ctrl.currentPage" max-size="10" boundary-links="true" items-per-page="ctrl.numPerPage"
+                                        class="pagination-sm" first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"
+                                        last-text="&raquo;">
+                                    </ul>
+                                </td>                                
+                            </tr>
+                        </tfoot>                            
+                    </table>
+                </div>
+            </div> 
+            <div class="md-card__menu">
+                <button type="button" class="md-button" ng-click="ctrl.onSaveFax( ctrl.frmData.add )">Crear Fax Virtual<i class="mdi mdi-plus"></i></button>
+            </div>               
+        </div>
+    </div>
+</div>
+

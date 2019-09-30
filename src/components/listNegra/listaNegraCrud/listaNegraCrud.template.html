@@ -1,0 +1,51 @@
+<div class="md-card" >
+<form name="formListaNegra">
+    <div class="md-card__title">
+        <h2 class="md-card__title-text" ng-if="ctrl.pk_numero == undefined">{{ctrl.modal.nombreNuevo}}</h2>
+        <h2 class="md-card__title-text" ng-if="ctrl.pk_numero != undefined">{{ctrl.modal.nombreEditar}}</h2>
+    </div>
+    <div class="md-card__supporting-text">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="md-select" ng-class=" { 'is-dirty': ctrl.listaNegra.coTipllam, 'is-invalid': formListaNegra.coTipllam.$touched && formListaNegra.coTipllam.$error.required } ">
+                    <select class="md-select__input" ng-model="ctrl.listaNegra.coTipllam" ng-required="true" ng-options="item.id as item.nombre for item in ctrl.tipoLlamadas">
+                        <option ng-show="false" value="" selected="true"></option>
+                    </select>
+                    <label class="md-select__label" >Tipo</label>
+                    <span class="md-select__error" ng-show="formListaNegra.coTipllam.$touched &&  formListaNegra.coTipllam.$error.required">Campo requerido</span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="md-textfield" ng-class=" { 'is-dirty': ctrl.listaNegra.nuTelefo > 0, 'is-invalid': formListaNegra.nuTelefo.$touched && formListaNegra.nuTelefo.$error.required } ">
+                    <input type="text" class="md-textfield__input" name="nuTelefo" ng-model="ctrl.listaNegra.nuTelefo" ng-required="true">
+                    <label class="md-textfield__label"  >Número Telefónico</label> 
+                    <span class="md-textfield__error" ng-show="formListaNegra.nuTelefo.$touched && formListaNegra.nuTelefo.$error.required">*campo requerido</span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="md-textfield" ng-class=" { 'is-dirty': ctrl.listaNegra.noDescri.length > 0 } ">
+                    <input type="text" class="md-textfield__input" name="descripcion" ng-model="ctrl.listaNegra.noDescri">
+                    <label class="md-textfield__label" for="descripcion" >Descripción</label>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="md-switch">
+                    <label class="md-checkbox__label">Estado: </label>
+                    <div class="md-checkbox__toggle">
+                        <input type="checkbox" class="tgl tgl-ios" id="estado" ng-model="ctrl.listaNegra.ilActivo">
+                        <label class="tgl-btn" for="estado"></label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="md-card__actions text-right">
+        <button type="button" ng-if="ctrl.pk_numero  == undefined" class="md-button" ng-disabled='!formListaNegra.$valid' ng-click="ctrl.insertaListaNegra()">Agregar</button>
+        <button type="button" ng-if="ctrl.pk_numero != undefined" class="md-button" ng-disabled='!formListaNegra.$valid' ng-click="ctrl.editaListaNegra()">Guardar</button>
+    </div>
+    <div class="md-card__menu">
+        <button type="button" class="md-button md-button--icon" data-dismiss="modal" ng-click="ctrl.cancel()"><i class="mdi mdi-close"></i></button>
+    </div>
+</form>
+</div>

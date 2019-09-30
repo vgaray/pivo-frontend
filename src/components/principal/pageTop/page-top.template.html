@@ -1,0 +1,40 @@
+<nav class="md-nav" >
+    <button class="md-menu md-button" onclick="toggleMenu()">
+      <i class="mdi mdi-menu"></i>
+    </button>
+
+    <div class="md-nav__header">
+        <div class="md-nav__brand">
+            <a ui-sref="principal" >
+              <img src="src/assets/img/logos/logo-pivo.png" alt="pivo">
+            </a>
+        </div>
+        <div class="md-search">
+            <select type="text" placeholder="filtrar por" class="form-control">
+                <option value="volvo">Filtrar por..</option>
+            </select>
+            <div class="md-search-input">
+                <input type="text" class="form-control" placeholder="Buscar">
+                <button class="md-button md-button-search"><i class="mdi mdi-magnify"></i></button>
+            </div>
+        </div>
+        <div class="md-nav__actions">
+            <div class="md-nav__action" style="cursor: default">
+              {{princtrl.instanciaRequest.noRazonSocial != null ? princtrl.instanciaRequest.noRazonSocial : "" }}
+              {{princtrl.instanciaRequest.noInstancia != null ? '-' + princtrl.instanciaRequest.noInstancia : "" }}
+            </div>
+            <div class="md-nav__action" uib-dropdown>
+                <div class="md-nav__user" uib-dropdown-toggle data-href="md-dropdown-nav"></div>
+                <ul id="md-dropdown-nav" class="md-dropdown__menu" uib-dropdown-menu>
+                    <li><a href="" class="name-profile">{{princtrl.nombreUsuario}}<div class="arrow-top"></div></a></li>
+                    <li><a href="">Editar perfil</a></li>
+                    <li class="md-nav__separator"><a href="">Ayuda</a></li>
+                    <li><a href="" ng-click="princtrl.cerrarSession()">Cerrar Sesión</a></li>
+                </ul>
+            </div>
+            <div class="md-nav__action">
+              <img class="md-nav__brand" alt="T-Contacta" src="src/assets/img/logos/logo-pivo.png">
+            </div>
+        </div>
+    </div>
+</nav>

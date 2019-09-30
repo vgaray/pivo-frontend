@@ -1,0 +1,550 @@
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="md-card animated fadeInUp">
+            <div class="md-card__title">
+                <h2 class="md-card__title-text"> Configuración</h2>
+            </div>
+            <div class="md-card__supporting-text">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="button" class="md-button" name="danger" ng-click="ctrl.funcionMenuPrincipal(1)">Agregar Raiz
+                            <i class="mdi mdi-phone-plus"></i>
+                        </button>
+                        <button type="button" class="md-button" name="danger" ng-click="ctrl.eliminarNodo()">Eliminar</button>                                
+                    </div>                    
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <div class="table-responsive" style="height: 520px;  margin-right: 24px;">
+                                <div js-tree="ctrl.treeConfig" aria-expanded="true" ng-model="ctrl.model.jsTreeData" tree="ctrl.treeInstance" ng-click="ctrl.cargaEditar()"
+                                    should-apply="ctrl.applyModelChanges()"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div ng-if="ctrl.menuPrincipal == 0">
+                                <!--<label>Selecciona o crea un IVR. </label>-->
+                            </div>
+
+                            <div ng-if="ctrl.menuPrincipal == 1">
+                                <form name="formCrearIVR" >  
+                                    <div class="table-responsive">
+                                        <div class="md-card__title">
+                                            <h2 class="md-card__title-text">Agregar IVR</h2>
+                                        </div>
+                                    <div class="md-card__supporting-text">
+                                    <div class="col-md-6">
+
+                                        <div class="md-textfield" ng-class="{ 'is-dirty':  ctrl.frmData.crear.request.pNoNombre.length > 0, 'is-invalid': (formCrearIVR.nomIvr.$dirty && formCrearIVR.nomIvr.$error.required) || ctrl.validarRepetido==1 }"  >                                 
+                                            <label class="md-textfield__label">Nombre IVR* </label>
+                                            <input type="text" name="nomIvr" class="md-textfield__input" ng-show=true placeholder="Ingrese nombre de IVR" ng-change="ctrl.cambiarNombreIVRGuion(); ctrl.validacionCrear()"
+                                                ng-model="ctrl.frmData.crear.request.pNoNombre" required="true">
+                                            <span class="md-textfield__error" ng-show="formCrearIVR.nomIvr.$dirty && formCrearIVR.nomIvr.$error.required">*Nombre es Obligatorio</span>
+                                            <span class="md-textfield__error" ng-if="ctrl.validarRepetido==1">*Nombre ya existe</span>
+                                        </div>                                                    
+            
+                                        <div class="md-textfield" ng-class="{ 'is-dirty':  ctrl.frmData.crear.request.pNoDescripcion.length > 0 }"  >
+                                            <label class="md-textfield__label">Descripción</label>
+                                            <textarea type="text" name="descripcionIvr" class="md-textfield__input" rows="5" ng-show=true placeholder="Ingrese descripción de IVR"
+                                                ng-model="ctrl.frmData.crear.request.pNoDescripcion" required="true" ng-change="ctrl.validacionCrear()"/>
+                                        </div>
+                                
+                                    </div>                              
+                                    <div class="col-md-6">                                        
+    
+                                        <div >                                 
+                                            <div class="col-input-file">
+                                                <input id="archivo" type="file" accept="audio/*" file-model="ctrl.myFile" ng-model="ctrl.valorFile">
+                                            </div>
+ 
+                                            <div >
+                                                <div class="md-textfield" ng-class="{'is-dirty' : ctrl.myFile.name.length > 0, 'is-invalid': (formCrearIVR.audioIvrCrear.$dirty && formCrearIVR.audioIvrCrear.$error.required) ||  ctrl.validarExtension()==true  }">
+                                                    <input class="md-textfield__input" ng-model="ctrl.myFile.name" id="fileSelected" name="audioIvrCrear" disabled>
+                                                    <label class="md-textfield__label" for="">Seleccionar Archivo*</label>
+                                                    <span class="md-textfield__error" ng-if="formCrearIVR.audioIvrCrear.$dirty && formCrearIVR.audioIvrCrear.$error.required" >*Audio es Obligatorio</span>  
+                                                    <span class="md-textfield__error" ng-if="ctrl.validarExtension()==true" >*Audio debe de ser mp3 o wav</span>                                                                                                                                           
+                                                </div>
+                                                <button class="md-button-input md-button-file" ng-click="ctrl.upFile()">
+                                                    <i class="mdi mdi-paperclip mdi-file"></i>
+                                                </button>
+                                            </div>
+                                            <script>
+                                                document.getElementById("archivo").onchange = function () {
+                                                    if(this.files[0]!=null){
+                                                        document.getElementById("fileSelected").value = this.files[0].name;
+                                                    }
+                                                };
+                                            </script>
+ 
+
+                                            <!--<script>
+                                                $(document).on('change', ':file', function () {
+                                                    var input = $(this),
+                                                        numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                                                        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                                                    input.trigger('fileselect', [numFiles, label]);
+                                                });
+
+                                                $(document).ready(function () {
+                                                    $(':file').on('fileselect', function (event, numFiles, label) {
+                                                        
+                                                        var input = $(this).parents('.input-group').find(':text'),
+                                                            log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+                                                        if (input.length) {
+                                                            input.val(log);
+                                                        } else {
+                                                            if (log) alert(log);
+                                                        }
+
+                                                    });
+                                                });
+                                            </script>-->
+                                        </div>
+
+                                        <div class="md-select"  ng-class="{ 'is-dirty': ctrl.frmData.crear.request.pIdGrupo > 0}">
+                                            <label class="md-select__label">Horario</label>
+                                            <select class="md-select__input" ng-model="ctrl.frmData.crear.request.pIdGrupo" ng-options="value.id as value.value for value in ctrl.arrayGrupoHorario" >
+                                            </select>
+                                        </div>
+
+                                        <div class="md-textfield" ng-class="{ 'is-dirty': ctrl.frmData.crear.request.pTiempoEspera > 0}">
+                                            <label class="md-textfield__label">Tiempo de espera (Segundos)</label>
+                                            <input class="md-textfield__input" type="number" min="0" ng-model="ctrl.frmData.crear.request.pTiempoEspera" onkeydown="return false">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">                                     
+                                        <div class="md-checkbox">
+                                            <input id="ilHorarioLlamada" type="checkbox" class="checkbox" ng-model="ctrl.frmData.crear.preview.checkMarcaAnexo" ng-true-value="1"
+                                                ng-false-value="0">
+                                            <label for="ilHorarioLlamada" > Permitir marcar anexo </label>     
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="md-checkbox">
+                                            <input id="ilMarcarAnexoPasado" type="checkbox" class="checkbox" ng-model="ctrl.frmData.crear.preview.checkMarcaAnexoTiempo"
+                                                ng-true-value="1" ng-false-value="0">
+                                            <label for="ilMarcarAnexoPasado" > Redirigir al anexo, concluido el tiempo de espera </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div  ng-hide="ctrl.frmData.crear.preview.checkMarcaAnexoTiempo == false">
+                                            <ui-select class="md-textfield md-select" style="padding: 0px;" ng-model="ctrl.frmData.crear.request.pNoAnexoTiempo" theme="bootstrap" reset-search-input="true" title="Anexo "
+                                                maxlength="5">
+                                                <ui-select-match placeholder="Digitar Anexo "> {{$select.selected}} </ui-select-match>
+                                                <ui-select-choices repeat="address in ctrl.anexosListaSeleccion track by $index " refresh="ctrl.anexosListaAutocompletar($select.search)"
+                                                    refresh-delay="0">
+                                                    <div ng-bind-html="address | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12 md-card__row-title">Agregar Opciones</div>
+                                    <div class="table-responsive md-card__supporting-text">
+                                    <div class="col-md-3">
+                                        <div class="md-select">
+                                            <label class="md-select__label">Opcion</label>
+                                            <select id="kwmodfmvdf098dvionjsonv" ng-model="ctrl.objListaopcionCrear.pNoValor" class="md-textfield__input">
+                                                <option value="" selected="true"></option>
+                                                <option ng-repeat="option in ctrl.crearIvrOpciones" value="{{option.descripcion}}">{{option.descripcion}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="md-select">
+                                            <label class="md-select__label">Tipo</label>
+                                            <select id="defasdwedebgnumm" ng-model="ctrl.objListaopcionCrear.pIdtipo" class="md-select__input"
+                                                ng-change="ctrl.limpiarCampoOpcion()">
+                                                <option value="" selected="true"></option>
+                                                <option ng-repeat="option in ctrl.crearIvrOpcionesDirige" value="{{option.value}}">{{option.descripcion}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row col-md-3">
+                                        <div class="md-textfield"  ng-class="{ 'is-dirty':  ctrl.objListaopcionCrear.pNoNombre.length > 0, 'is-invalid': (formCrearIVR.mostraranexo.$dirty && formCrearIVR.mostraranexo.$error.required) ||  ctrl.validarRepetidoOpcionCrear==1 }"  >      
+                                            <label class="md-textfield__label">Nombre</label>
+                                            <input type="text" class="md-textfield__input" name="mostraranexo" ng-change="ctrl.cambiarNombreIvrOpciGuion(); ctrl.validacionCrearOpcionIvr()" ng-if="ctrl.objListaopcionCrear.pIdtipo ==2 || ctrl.objListaopcionCrear.pIdtipo ==1"
+                                                ng-model="ctrl.objListaopcionCrear.pNoNombre"  placeholder="Nombre" required="true">
+                                            <span class="md-textfield__error" data-ng-show="formCrearIVR.mostraranexo.$error.required">*Nombre es Obligatorio para agregar Opción</span>
+                                            <span class="md-textfield__error" ng-if="ctrl.validarRepetidoOpcionCrear==1">*Nombre ya existe</span>                                                    
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <ui-select class="md-textfield md-select" ng-if="ctrl.objListaopcionCrear.pIdtipo == 2" ng-model="ctrl.objListaopcionCrear.pNuAnexo" theme="bootstrap" reset-search-input="true"
+                                            title="Anexo " maxlength="5" ng-change="ctrl.filterValue(ctrl.objListaopcionCrear, 'pNuAnexo')">
+                                            <ui-select-match placeholder="Digitar Anx."> {{$select.selected}} </ui-select-match>
+                                            <ui-select-choices repeat="address in ctrl.anexosListaSeleccion track by $index " refresh="ctrl.anexosListaAutocompletar($select.search)"
+                                                refresh-delay="0">
+                                                <div ng-bind-html="address | highlight: $select.search"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+
+                                        <div class="md-select" ng-if="ctrl.objListaopcionCrear.pIdtipo == 3">
+                                            <label class="md-select__label"></label>
+                                            <select  class="md-select__input" ng-model="ctrl.variableOpcionAgregarCB" ng-options="value.idIvrCop  as value.pNoNombre for value in ctrl.listaDeIvrApuntar">
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    </div>
+                                    <div class="col-md-12 md-card__actions">
+                                        <button type="button" class="md-button" name="button" ng-click="ctrl.cargaListaCrearRaiz()">Agregar Opcion</button>
+                                    </div>
+
+
+                                    <div class="col-md-12 ">
+                                        <div class="">
+                                            <table st-table="ctrl.listadeOpciones"  class="md-table table" >
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center">Dígito</th>
+                                                        <th class="text-center">Tipo</th>
+                                                        <th class="text-center">Nombre</th>
+                                                        <th class="text-center">Anexo Ref.</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="row in ctrl.listadeOpciones">
+                                                        <td class="text-center">{{row.pNoValor}}</td>
+                                                        <td class="text-center">
+                                                            <div ng-if="row.pIdtipo == 1">
+                                                                IVR
+                                                            </div>
+                                                            <div ng-if="row.pIdtipo == 2">
+                                                                Anexo
+                                                            </div>
+                                                            <div ng-if="row.pIdtipo == 3">
+                                                                IVR Ref
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-center">{{row.pNoNombre}}</td>
+                                                        <td class="text-center">{{row.pNuAnexo}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 md-card__supporting-text">
+                                        <button  class="md-button" type="button" ng-disabled="ctrl.validarCampos || ctrl.saving" ng-click="ctrl.crearIvr()" name="danger">Agregar IVR
+                                            <i class="mdi mdi-phone-plus"></i>
+                                        </button>
+                                        <button class="md-button md-default" type="button" ng-click="ctrl.funcionMenuPrincipal(0)" ng-disabled="ctrl.saving"  name="danger">Cancelar</button>
+                                    </div>
+                                        
+                                    </div>
+                                    </div>
+                                </form>    
+                            </div>
+
+                            <div ng-if="ctrl.menuPrincipal == 2">
+                                <form name="formOpcionIVR" >  
+                                <div >
+                                    <h2 class="md-card__title-text">Opción - Detalles</h2>
+                                </div>
+                                
+                                <div class="md-card__supporting-text">
+                                    <div class="md-textfield" ng-class="{ 'is-dirty': ctrl.frmData.editar.request.pNoNombre.length > 0 , 'is-invalid': formOpcionIVR.nomIvr.$dirty && formOpcionIVR.nomIvr.$error.required }"  >  
+                                        <label class="md-textfield__label">Nombre*</label>
+                                        <input type="text" name="nomIvr"class="md-textfield__input" ng-show=true placeholder="Ingrese nombre de IVR" ng-model="ctrl.frmData.editar.request.pNoNombre"
+                                            required="true" ng-change="ctrl.cambiarNombreIVRGuion()">
+                                        <span class="md-textfield__error" data-ng-show="formOpcionIVR.nomIvr.$error.required">*Nombre es Obligatorio</span>
+                                    </div>
+
+                                    <div class="md-textfield">
+                                        <label class="md-textfield__label">Descripción</label>
+                                        <textarea type="text" rows="4" name="descripcionIvr1"class="md-textfield__input" ng-show=true placeholder="Descripcion de Opcion"
+                                            ng-model="ctrl.frmData.editar.request.pNoDescripcion" required="true" />
+                                    </div>
+
+                                    <div class="md-select">
+                                        <label class="md-select__label">Anexo</label>
+                                        <ui-select class="md-textfield md-select"  ng-model="ctrl.frmData.editar.request.pNuAnexo" theme="bootstrap" reset-search-input="true" title="Anexo " maxlength="5">
+                                            <ui-select-match placeholder="Digitar Anexo"> {{$select.selected}} </ui-select-match>
+                                            <ui-select-choices repeat="address in ctrl.anexosListaSeleccion track by $index " refresh="ctrl.anexosListaAutocompletar($select.search)"
+                                                refresh-delay="0">
+                                                <div ng-bind-html="address | highlight: $select.search"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>                                
+
+                                    <div class="md-card__actions text-right">
+                                        <div >
+                                            <button type="button" class="md-button" ng-click="ctrl.ejecutareditarOpcion()" name="danger">Guardar</button>
+                                            <button  type="button" class="md-button md-default"  ng-click="ctrl.funcionMenuPrincipal(0)" type="button" name="danger">Cancelar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+
+                            <div ng-if="ctrl.menuPrincipal == 3">
+                                <p>Se eliminará el elemento seleccionado</p>
+                            </div>
+
+                            <div ng-if="ctrl.menuPrincipal == 4">
+                            <form name="formEditarIVR"  > 
+                                <div class="table-responsive"> 
+                                    <div class="md-card__title">
+                                        <h2 class="md-card__title-text">IVR - Detalle</h2>
+                                    </div>
+
+                                    <div class="md-card__supporting-text">
+                                        <div class="col-md-6">                                                                                            
+                                            <div class="md-textfield" ng-class="{ 'is-dirty':  ctrl.frmData.editar.request.pNoNombre.length > 0, 'is-invalid': (formEditarIVR.nomIvr.$dirty && formEditarIVR.nomIvr.$error.required) || ctrl.validarRepetido==1 }" >   
+                                                <label class="md-textfield__label">Nombre IVR</label>
+                                                <input type="text" name="nomIvr" class="md-textfield__input" ng-show=true placeholder="Ingrese nombre de IVR" ng-model="ctrl.frmData.editar.request.pNoNombre"
+                                                        ng-change="ctrl.cambiarNombreIVRGuionEdit(); ctrl.validacionEdit()" required="true">
+                                                <span class="md-textfield__error" data-ng-show="formEditarIVR.nomIvr.$error.required">*Nombre es Obligatorio</span>
+                                                <span class="md-textfield__error" ng-if="ctrl.validarRepetido==1">*Nombre ya existe</span>                                                    
+                                            </div>
+
+                                            <div class="md-textfield" ng-class="{ 'is-dirty': ctrl.frmData.editar.request.pNoDescripcion.length > 0 }"  >
+                                                <label class="md-textfield__label">Descripción</label>
+                                                <textarea type="text" rows="7" name="descripcionIvr" class="md-textfield__input" ng-show=true placeholder="Descripcion de IVR"
+                                                    ng-model="ctrl.frmData.editar.request.pNoDescripcion" required="true" />
+                                            </div>
+ 
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="md-textfield" ng-class="{ 'is-dirty': ctrl.frmData.editar.request.pNoAudio.length > 0 }"  >
+                                                <label class="md-textfield__label">Audio actual</label>
+                                                <input type="text" name="audio" class="md-textfield__input" ng-show=true placeholder="nombre de audio de IVR" ng-model="ctrl.frmData.editar.request.pNoAudio"
+                                                    required="true" disabled>
+                                            </div>
+                                        </div>
+ 
+                                            <div class="col-md-6">
+                                                <div class="md-textfield" ng-class="{'is-dirty' : ctrl.myFile.name.length > 0, 'is-invalid': (formCrearIVR.audioIvrCrear.$dirty && formCrearIVR.audioIvrCrear.$error.required) ||  ctrl.validarExtension()==true  }">
+                                                    <input class="md-textfield__input" ng-model="ctrl.myFile.name" id="fileSelected" name="audioIvrCrear" disabled>            
+                                                    <label class="md-textfield__label" ng-hide="ctrl.verificarExistenciaAudio() == false">Subir audio nuevo (.mp3 o .wav)</label>
+                                                    <label class="md-textfield__label" ng-hide="ctrl.verificarExistenciaAudio() == true">Reemplazar audio (.mp3 o .wav)</label>                                                    
+                                                    <span class="md-textfield__error" ng-if="formCrearIVR.audioIvrCrear.$dirty && formCrearIVR.audioIvrCrear.$error.required" >*Audio es Obligatorio</span>  
+                                                    <span class="md-textfield__error" ng-if="ctrl.validarExtension()==true" >*Audio debe de ser mp3 o wav</span>                                                                                                                                           
+                                                </div>
+                                                <button class="md-button-input md-button-file" ng-click="ctrl.upFile()">
+                                                    <i class="mdi mdi-paperclip mdi-file"></i>
+                                                </button>
+                                            
+                                            
+                                            <div class="col-input-file">
+                                                <input id="archivo" type="file" accept="audio/*" file-model="ctrl.myFile" ng-model="ctrl.valorFile">
+                                            </div>                                            
+                                            <script>
+                                                document.getElementById("archivo").onchange = function () {
+                                                    if(this.files[0]!=null){
+                                                        document.getElementById("fileSelected").value = this.files[0].name;
+                                                    }
+                                                };
+                                            </script>
+                                            </div>
+                                            <!--<div class="row col-md-12">
+                                                <div ng-class="{ 'has-error': ctrl.validarExtension()==true }"  >   
+                                                    <label ng-hide="ctrl.verificarExistenciaAudio() == false">Subir audio nuevo (.mp3 o .wav)</label>
+                                                    <label ng-hide="ctrl.verificarExistenciaAudio() == true">Reemplazar audio (.mp3 o .wav)</label>
+                                                    <div class="input-group">
+                                                        <label class="input-group-btn">
+                                                                <span class="btn btn-info">
+                                                                    Seleccionar&hellip; <input type="file" style="display: none;" accept="audio/*" file-model="ctrl.myFile">
+                                                                </span>
+                                                            </label>
+                                                        <input type="text" class="form-control" readonly>
+                                                    </div>
+                                                    <span class="md-textfield__error" ng-if="ctrl.validarExtension()==true" >*Audio debe de ser mp3 o wav</span>
+                                                <script>
+                                                    // Script estilo y selecion de audio
+                                                    $(document).on('change', ':file', function () {
+                                                        var input = $(this),
+                                                            numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                                                            label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                                                        input.trigger('fileselect', [numFiles, label]);
+                                                    });
+
+                                                    $(document).ready(function () {
+                                                        $(':file').on('fileselect', function (event, numFiles, label) {
+
+                                                            var input = $(this).parents('.input-group').find(':text'),
+                                                                log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+                                                            if (input.length) {
+                                                                input.val(log);
+                                                            } else {
+                                                                if (log) alert(log);
+                                                            }
+
+                                                        });
+                                                    });
+                                                </script>
+                                                </div>
+                                            </div>-->
+
+                                            <div class="col-md-6">
+                                            <div class="md-select"  ng-class="{ 'is-dirty': ctrl.frmData.editar.request.pIdGrupo > 0}">
+                                                <label class="md-select__label">Horario</label>
+                                                <select class="md-select__input" ng-model="ctrl.frmData.editar.request.pIdGrupo" ng-options="value.id  as value.value for value in ctrl.arrayGrupoHorario">
+                                                </select>
+                                            </div>                                  
+
+
+                                            <div class="md-textfield"  ng-class="{ 'is-dirty': ctrl.frmData.editar.request.pTiempoEspera > 0}">
+                                                <label class="md-textfield__label">Tiempo de espera (Segundos)</label>
+                                                <input class="md-textfield__input" type="number" min="0" ng-model="ctrl.frmData.editar.request.pTiempoEspera" onkeydown="return false">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">                                                
+                                            <div class="md-checkbox">
+                                                <input id="ilHorarioLlamada1" type="checkbox" type="checkbox" class="checkbox" ng-model="ctrl.frmData.editar.preview.checkMarcaAnexo"
+                                                    ng-true-value="1" ng-false-value="0">
+                                                <label for="ilHorarioLlamada1"> Permitir marcar anexo </label>
+                                            </div>              
+                                        </div>
+ 
+                                            <div class="col-md-6 md-checkbox">
+                                                <input id="ilMarcarAnexoPasado1" type="checkbox" class="checkbox" ng-model="ctrl.frmData.editar.preview.checkMarcaAnexoTiempo"
+                                                    ng-true-value="1" ng-false-value="0">
+                                                <label for="ilMarcarAnexoPasado1"> Redirigir al anexo, concluido el tiempo de espera </label>
+                                            </div>
+
+                                            <div class="col-md-4" ng-hide="ctrl.frmData.editar.preview.checkMarcaAnexoTiempo == false">
+                                                <ui-select class="md-textfield md-select" style="padding: 0px;" ng-model="ctrl.frmData.editar.request.pNoAnexoTiempo" theme="bootstrap" reset-search-input="true" title="Anexo "
+                                                    maxlength="5">
+                                                    <ui-select-match placeholder="Digitar Anexo "> {{$select.selected}} </ui-select-match>
+                                                    <ui-select-choices repeat="address in ctrl.anexosListaSeleccion track by $index " refresh="ctrl.anexosListaAutocompletar($select.search)"
+                                                        refresh-delay="0">
+                                                        <div ng-bind-html="address | highlight: $select.search"></div>
+                                                    </ui-select-choices>
+                                                </ui-select>
+                                            </div>                                                                         
+
+
+
+                                        <div class="col-sm-12 md-card__row-title">Agregar Opciones</div>
+                                        <div class="table-responsive md-card__supporting-text">
+                                        <div class="col-md-3">
+                                            <div class="md-select">
+                                                <label class="md-select__label">Opcion</label>
+                                                <select id="kwmodfmvdf098dvionjsonv" ng-model="ctrl.objListaopcionCrear.pNoValor" class="md-textfield__input">
+                                                    <option value="" selected="true"></option>
+                                                    <option ng-repeat="option in ctrl.crearIvrOpciones" value="{{option.descripcion}}">{{option.descripcion}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="md-select">
+                                                <label class="md-select__label">Tipo</label>
+                                                <select id="defsssdscdsdgyh" ng-model="ctrl.objListaopcionCrear.pIdtipo" class="md-textfield__input">
+                                                        <option value="" selected="true"></option>
+                                                        <option ng-repeat="option in ctrl.crearIvrOpcionesDirige" value="{{option.value}}">{{option.descripcion}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="md-textfield" ng-class="{ 'is-dirty':  ctrl.objListaopcionCrear.pNoNombre.length > 0, 'is-invalid': (formEditarIVR.mostraranexo.$dirty && formEditarIVR.mostraranexo.$error.required) ||  ctrl.validarRepetidoOpcionCrear==1}">      
+                                                <label class="md-textfield__label">Nombre</label>
+                                                <input type="text" class="md-textfield__input" name="mostraranexo" ng-change="ctrl.cambiarNombreIvrOpciGuion(); ctrl.validacionCrearOpcionIvr()" ng-if="ctrl.objListaopcionCrear.pIdtipo ==2 || ctrl.objListaopcionCrear.pIdtipo ==1"
+                                                    ng-model="ctrl.objListaopcionCrear.pNoNombre" placeholder="Nombre" required="true">
+                                                <span class="md-textfield__error" data-ng-show="formEditarIVR.mostraranexo.$error.required">*Nombre es Obligatorio para agregar Opción</span>
+                                                <span class="md-textfield__error" ng-if="ctrl.validarRepetidoOpcionCrear==1">*Nombre ya existe</span>                                                    
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <ui-select class="md-textfield md-select" ng-if="ctrl.objListaopcionCrear.pIdtipo == 2" ng-model="ctrl.objListaopcionCrear.pNuAnexo" theme="bootstrap" reset-search-input="true"
+                                                title="Anexo " maxlength="5" ng-change="ctrl.filterValue(ctrl.objListaopcionCrear, 'pNuAnexo')">
+                                                <ui-select-match placeholder="Digitar Anx."> {{$select.selected}} </ui-select-match>
+                                                <ui-select-choices repeat="address in ctrl.anexosListaSeleccion track by $index " refresh="ctrl.anexosListaAutocompletar($select.search)"
+                                                    refresh-delay="0">
+                                                    <div ng-bind-html="address | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+
+                                            <div class="md-select" ng-if="ctrl.objListaopcionCrear.pIdtipo == 3">
+                                                <label class="md-select__label"></label>
+                                                <select  class="md-select__input" ng-model="ctrl.variableOpcionAgregarCB" ng-options="value.idIvrCop  as value.pNoNombre for value in ctrl.listaDeIvrApuntar">
+                                                    </select>
+                                            </div>
+                                        </div>
+                                  </div>
+
+                                  <div class="col-md-12 md-card__actions">
+                                        <button type="button" class="md-button" name="button" ng-click="ctrl.cargaListaEditarOpcionIVR()">Agregar Opcion</button>
+                                  </div>
+
+                                    <div class="row col-md-12">
+                                        <div class="">
+                                            <table st-table="ctrl.opcionesEditar" class="md-table table">
+
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center">Dígito</th>
+                                                        <th class="text-center">Tipo</th>
+                                                        <th class="text-center">Nombre</th>
+                                                        <th class="text-center">Anexo Ref.</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="row in ctrl.opcionesEditar">
+                                                        <td class="text-center">{{row.pNoValor}}</td>
+                                                        <td class="text-center">
+                                                            <div ng-if="row.pIdtipo == 1">
+                                                                IVR
+                                                            </div>
+                                                            <div ng-if="row.pIdtipo == 2">
+                                                                Anexo
+                                                            </div>
+                                                            <div ng-if="row.pIdtipo == 3">
+                                                                IVR Ref
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-center">{{row.pNoNombre}}</td>
+                                                        <td class="text-center">{{row.pNuAnexo}}</td>
+                                                    </tr>
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 md-card__supporting-text">
+                                        <button class="md-button" type="button" ng-click="ctrl.ejecutareditarIVR()" ng-disabled="ctrl.validarCamposEdit || ctrl.saving" name="danger">Guardar IVR
+                                            <i class="mdi mdi-phone-plus"></i>
+                                        </button>
+                                        <button class="md-button md-default" type="button" ng-click="ctrl.funcionMenuPrincipal(0)" ng-disabled="ctrl.saving" name="danger">Cancelar</button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </form>
+                            </div>
+
+                            <div ng-if="ctrl.menuPrincipal == 5">
+                                <h2 class="md-card__title-text">IVR Referencial</h2>
+                                <div class="md-card__supporting-text">
+
+                                    <div class="md-select">
+                                        <label class="md-select__label">IVR referencial</label>
+                                        <select class="md-select__input" ng-model="ctrl.frmData.editar.request.pNoDescripcion" ng-options="value.idIvrCop  as value.pNoNombre for value in ctrl.listaDeIvrApuntar">
+                                        </select>
+                                    </div>
+                                </div>
+                                    <div class="col-md-12 md-card__actions">
+                                        <button  type="button" class="md-button" ng-click="ctrl.ejecutarEditarIvrRef()" name="danger">Guardar</button>
+                                        <button type="button" class="md-button md-default" ng-click="ctrl.funcionMenuPrincipal(0)" type="button" name="danger">Cancelar</button>
+                                    </div>
+                                <!--</div>-->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

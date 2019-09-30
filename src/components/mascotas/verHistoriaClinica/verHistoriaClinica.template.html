@@ -1,0 +1,64 @@
+<div class="md-card">
+    <form name="formVerHC">
+        <div class="md-card__title">
+            <h2 class="md-card__title-text">{{Ctrl.frmData.name_page_title}}</h4>
+        </div>
+        <div class="md-card__supporting-text">
+            <div class="row">
+                <div class="col-sm-12 md-card__row-title">{{Ctrl.frmData.name_content}}</div>
+                <div class="col-sm-6">
+                    <div class="md-textfield" ng-class="{ 'is-dirty': Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noNombreMascota.length > 0,'is-invalid': formVerHC.noMascota.$touched && formVerHC.noMascota.$invalid}">
+                        <input type="text" name="noMascota" ng-disabled="true" class="md-textfield__input" ng-model="Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noNombreMascota">
+                        <!-- required -->
+                        <label class="md-textfield__label" for="noMascota">Nombre*</label>
+                        <!-- <span class="md-textfield__error" ng-show="formVerHC.noMascota.$touched && formVerHC.noMascota.$invalid">*campo alfabético de requerido.</span> -->
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-textfield" ng-class="{ 'is-dirty': Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noNombreEstadoReproductivo.length > 0,'is-invalid': formVerHC.eReproductivo.$touched && formVerHC.eReproductivo.$invalid}">
+                        <input type="text" class="md-textfield__input" name="eReproductivo" ng-disabled="true" ng-model="Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noNombreEstadoReproductivo">
+                        <!-- required -->
+                        <label class="md-textfield__label" for="eReproductivo">Estado Reproductivo</label>
+                        <!-- <span class="md-textfield__error" ng-show="formVerHC.eReproductivo.$touched && formVerHC.eReproductivo.$invalid">*nro de chip válido requerido.</span> -->
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-textfield" ng-class="{ 'is-dirty': Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noDescripcionTipoAlimentacion.length > 0,'is-invalid': formVerHC.tAlimentacion.$touched && formVerHC.tAlimentacion.$invalid}">
+                        <input type="text" name="tAlimentacion" class="md-textfield__input" ng-disabled="true" ng-model="Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noDescripcionTipoAlimentacion">
+                        <!-- required -->
+                        <label class="md-textfield__label" for="tAlimentacion">Tipo de Alimentacion</label>
+                        <!-- <span class="md-textfield__error" ng-show="formVerHC.tAlimentacion.$touched && formVerHC.tAlimentacion.$invalid">*campo alfabético requerido.</span> -->
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-textfield" ng-class="{ 'is-dirty': Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noAlergias.length > 0,'is-invalid': formVerHC.noAlergias.$touched && formVerHC.noAlergias.$invalid}">
+                        <input type="text" name="noAlergias" class="md-textfield__input" ng-disabled="true" ng-model="Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noAlergias">
+                        <!-- required -->
+                        <label class="md-textfield__label" for="noAlergias">Alergias</label>
+                        <!-- <span class="md-textfield__error" ng-show="formVerHC.noAlergias.$touched && formVerHC.noAlergias.$invalid">*campo alfabético requerido.</span> -->
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="md-textfield" ng-class="{ 'is-dirty': Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noAntFamiliares.length > 0,'is-invalid': formVerHC.noAntecedentes.$touched && formVerHC.noAntecedentes.$invalid}">
+                        <input type="text" name="noAntecedentes" class="md-textfield__input" ng-disabled="true" ng-model="Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noAntFamiliares">
+                        <!-- maxlength="10" required -->
+                        <label class="md-textfield__label" for="noAntecedentes">Antecedentes Familiares</label>
+                        <!-- <span class="md-textfield__error" ng-show="formVerHC.noAntecedentes.$touched && formVerHC.noAntecedentes.$invalid">*fecha válida requerido.</span> -->
+                    </div>
+                </div>
+
+            </div>
+          
+        </div>
+
+        <div class="md-card__menu">
+            <button class="md-button md-button--icon" data-dismiss="modal" ng-click="Ctrl.cancel()">
+                <i class="mdi mdi-close"></i>
+            </button>
+        </div>
+        <!-- <div class="md-card__actions text-right">
+            <button type="button" class="md-button" ng-disabled='!formVerHC.$valid' ng-click="Ctrl.raMascota()">Guardar</button>
+        </div> -->
+    </form>
+</div>

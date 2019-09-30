@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="md-card animated fadeInUp">
+            <div class="md-card__title">
+                <h2 class="md-card__title-text">{{ctrl.frmData.titulo}}</h2>
+            </div>
+            <div class="md-card__supporting-text">
+                <div class="table-responsive">
+                    <table class="md-table table" id="tbACC">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Clase</th>
+                                <th class="text-center">Editar</th>
+                                <th class="text-center">Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="mu in ctrl.lsMusica">
+                                <!--| filter:ctrl.paginate-->
+                                <td class="text-center">{{mu.noClase}}</td>
+                                <td class="text-center"><button class="md-button md-button--icon" uib-tooltip="Editar" ng-click="ctrl.onSaveMusica(ctrl.frmData.update, mu.idClase, mu.noClase)"><i class="mdi mdi-pencil" aria-hidden="true"></i></button></td>
+                                <!---->
+                                <td class="text-center"><button class="md-button md-button--icon"  uib-tooltip="Eliminar"  ng-click="ctrl.onEliminarMusica(mu.idClase, mu.noClase)"><i class="mdi mdi-delete" aria-hidden="true"></i></button></td>
+                                <!--href="" ng-click="ctrl.onEliminarCentralExterna( lsc.idEmpresa )"-->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="md-card__menu">
+                <button type="button" ng-click="ctrl.onSaveMusica( ctrl.frmData.add )" class="md-button" > Nueva Musica y Audio(s)
+                    <!--ng-click="ctrl.onSaveCentral( ctrl.frmData.add )" -->
+                    <i class="mdi mdi-add"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

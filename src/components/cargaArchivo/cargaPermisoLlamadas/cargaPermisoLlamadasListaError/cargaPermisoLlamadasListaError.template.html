@@ -1,0 +1,25 @@
+<div class="md-card">
+  <div class="md-card__supporting-text">
+    <div class=" row">
+      <form name="formAreaCentroCostoSave">
+        <div>
+          <div class="md-card__title">
+            <h2 class="md-card__title-text">Mensajes de Error</h2>
+          </div>
+          <div class="md-card__supporting-text">
+   
+              <div class="col-md-12" style="text-align:center">
+                <h5>Se encontraron los siguientes problemas en el documento que intento subir </h5>
+                <h5 class="col-md-12" ng-repeat="error in cargaPermisoLlamadasListaErrorCtrl.listError" style="color:	#FF0000">Error: {{error}} </h5>
+              </div>
+
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="md-card__menu">
+      <button type="button" class="md-button md-button--icon" data-dismiss="modal" ng-click="cargaPermisoLlamadasListaErrorCtrl.aceptar()"><i class="mdi mdi-close"></i></button>
+    </div>
+  </div>
+
+</div>

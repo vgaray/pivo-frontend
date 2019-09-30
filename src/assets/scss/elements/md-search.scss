@@ -1,0 +1,38 @@
+.md-search{
+    
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    border: 2px solid $color-default;
+
+    select{
+        width: 150px;
+        margin:0;
+        float: left;
+        border-radius: 0;
+        border: 2px solid;
+        border-color: transparent;
+        border-right-color: $color-default; 
+        box-shadow:none;
+    }
+
+    .md-search-input{
+        width: calc(100% - 150px);
+        float: right;
+        margin: 0;
+        border-radius: 0;
+        button{
+            max-width: 40px;
+            float: right;
+            padding: 0 5px;
+            line-height: 32px;
+        }
+        input{
+            width: calc(100% - 40px); 
+            float: left;
+            border-radius: 0;
+            box-shadow: none;
+            border-color: transparent;
+        }
+    }
+}

@@ -1,0 +1,134 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="md-card animated fadeInUp">
+            <div class="md-card__title">
+                <h2 class="md-card__title-text">
+                    {{Ctrl.frmData.name_page_title}}
+                </h2>
+            </div>
+            <div class="md-card__supporting-text md-overflow">
+                <form name="formAA">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="md-select md-textfield is-dirty">
+                                <select class="md-select__input" name="selectCola" ng-model="Ctrl.frmData.reporte.listarAtenAban.request" ng-options="nombreCola as nombreCola.name for nombreCola in Ctrl.lsCola track by nombreCola.name"
+                                    ng-required="true" ng-change="Ctrl.changeAgente(Ctrl.frmData.reporte.listarAtenAban.request); Ctrl.validateCola()">
+                                    <option value="" >Seleccione Cola</option>
+                                </select>
+                                <label class="md-select__label">Cola:</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="md-select md-textfield is-dirty">
+                                <select  class="md-select__input" id="selectAgente" name="selectAgente" ng-model="Ctrl.frmData.reporte.listarAgente.request" ng-options="nombreAgente as nombreAgente.noAgente for nombreAgente in Ctrl.lsAgentePorCola track by nombreAgente.noAgente">
+                                    <option value="">Seleccione Agente</option>
+                                </select>
+                                <label class="md-select__label">Agente: </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <datepicker date-format="dd-MM-yyyy" selector="calendar-inicio-textfield" button-prev="<i class='mdi mdi-arrow-left'></i>"
+                                button-next="<i class='mdi mdi-arrow-right'></i>">
+                                <div class="md-textfield has-placeholder" ng-class="{ 'is-invalid' : formAA.feIni.$dirty  && formAA.feIni.$error.required }">
+                                    <input type="text"  class="calendar-inicio-textfield md-textfield__input" id="feIni" name="feIni" uib-datepicker-popup="dd-MM-yyyy" ng-model="Ctrl.dt" current-text="Hoy" clear-text="Limpiar" close-text="Cerrar"
+                                    is-open="Ctrl.opened" datepicker-options="Ctrl.dateOptions" ng-required="true" close-text="Close" ng-change="Ctrl.dt ; Ctrl.validateDateini()" input-date-validator>                            
+                          
+                                    <button class="md-button-input" >
+                                        <i class="mdi mdi-calendar"></i>
+                                    </button>
+                                    <label class="md-textfield__label">Desde fecha:</label>
+                                    <small class="md-textfield__error" ng-show="formAA.feIni.$dirty && formAA.feIni.$error.required">{{Ctrl.frmData.msjError.feIni}}</small>
+                                </div>
+                            </datepicker>
+                        </div>
+                        <div class="col-md-6">
+                            <datepicker date-format="dd-MM-yyyy" selector="calendar-fin-textfield" button-prev="<i class='mdi mdi-arrow-left'></i>" button-next="<i class='mdi mdi-arrow-right'></i>">
+                                <div class="md-textfield has-placeholder" ng-class="{ 'is-invalid' : formAA.feFin.$dirty && formAA.feFin.$error.required }">
+                                    <input type="text"  class="calendar-fin-textfield md-textfield__input" id="feFin" name="feFin" uib-datepicker-popup="dd-MM-yyyy" ng-model="Ctrl.dtf" current-text="Hoy" clear-text="Limpiar" close-text="Cerrar"
+                                    is-open="Ctrl.opened2" datepicker-options="Ctrl.dateOptions" ng-required="true" close-text="Close" ng-change="Ctrl.validateDateFin()" input-date-validator>                            
+
+                                    <button class="md-button-input">
+                                        <i class="mdi mdi-calendar"></i>
+                                    </button>
+                                    <label class="md-textfield__label">Hasta fecha:</label>
+                                    <small class="md-textfield__error" ng-show="formAA.feFin.$dirty && formAA.feFin.$error.required">{{Ctrl.frmData.msjError.feFin}}</small>
+                                </div>
+                            </datepicker>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="md-button" ng-click="Ctrl.BuscarLlamadasAtendidasAbandonadas(1)" ng-disabled="Ctrl.frmData.habFinal">
+                                <label>Buscar</label>
+                                <i class="mdi mdi-magnify"></i>
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="btn-group pull-right" ng-hide='Ctrl.menuState.show'>
+                                <button class="md-button dropdown-toggle" data-toggle="dropdown">Exportar
+                                    <i class="mdi mdi-chevron-double-down"></i>
+                                </button>
+                                <ul class="dropdown-menu pull-right">
+                                    <li>
+                                        <a href="" ng-click="Ctrl.descargarDocumento(Ctrl.excelVal)">
+                                            <i class="mdi mdi-file-excel" style="color:forestgreen"></i>Excel</a>
+                                    </li>
+                                    <li>
+                                        <a href="" ng-click="Ctrl.descargarDocumento(Ctrl.pdfVal)">
+                                            <i class="mdi mdi-file-pdf" style="color:firebrick"></i>PDF</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="row-fluid">
+                    <div class="row-fluid" ng-hide=Ctrl.frmData.show.text>
+                        <h5>{{Ctrl.frmData.texto}}</h5>
+                    </div>
+                    <div class="table-responsive" ng-hide=Ctrl.frmData.show.table>
+                        <table st-table="Ctrl.lsLlamadaAtendidaAbandonada" class="md-table table">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th class="text-center">Cola</th>
+                                    <th class="text-center">Agente</th>
+                                    <th class="text-center">Nro. Agente</th>
+                                    <th class="text-center">Cantidad</th>
+                                    <th class="text-center">Porm. Espera</th>
+                                    <th class="text-center">Prom. Conversación</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="row in Ctrl.lsLlamadaAtendidaAbandonada">
+                                    <td class="text-center">{{row.idQueueName}}</td>
+                                    <td class="text-center">{{row.noQueueName}}</td>
+                                    <td class="text-center">{{row.noAgente}}</td>
+                                    <td class="text-right">{{row.data5}}</td>
+                                    <td class="text-right">{{row.contestadas}}</td>
+                                    <td class="text-center">{{row.prEspera}}</td>
+                                    <td class="text-center">{{row.prConversa}}</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td class="text-center" colspan="10">
+                                        <div uib-pagination total-items="Ctrl.totalItems" 
+                                            ng-model="Ctrl.currentPage" 
+                                            boundary-links="true" 
+                                            max-size="5" 
+                                            class="Ctrl.pagination-sm" 
+                                            ng-change="Ctrl.pageChanged(0)"
+                                            first-text="&laquo;" 
+                                            previous-text="&lsaquo;" 
+                                            next-text="&rsaquo;"
+                                            last-text="&raquo;">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+</div>

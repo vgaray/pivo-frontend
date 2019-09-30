@@ -1,0 +1,70 @@
+<div class="row">
+        <div class="col-xs-12">
+            <div class="md-card animated fadeInUp">
+                <div class="md-card__title">
+                    <h2 class="md-card__title-text">Lista de Historias clinicas</h2>
+                </div>
+                <div class="md-card__supporting-text">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="md-textfield"
+                                ng-class="{ 'is-dirty' : Ctrl.frmData.historiaClinicaService.request.pNuChip.length > 0 }">
+                                <input type="text" class="md-textfield__input" name="nuchip"
+                                    ng-model="Ctrl.frmData.historiaClinicaService.request.pNuChip"
+                                    ng-change="Ctrl.listaHistoriaClinica()">
+                                <label class="md-textfield__label" for="nuchip">N°Chip</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="md-table table" id="tbMascota">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Nro Historia</th>
+                                    <th class="text-center">Nro Chip</th>
+                                    <th class="text-center">Nombre</th>
+                                    <th class="text-center">Edad</th>
+                                    <th class="text-center">Sexo</th>
+                                    <th class="text-center">Raza</th>
+                                    <th class="text-center">Especie</th>
+                                    <th class="text-center">Fecha de Admision</th>
+                                    <!-- <th class="text-center">G.Ficha Clínica</th> -->
+                                    <!-- <th class="text-center">Eliminar</th> -->
+                                    <th class="text-center">Visualizar HC</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="hc in Ctrl.lsHistoriaClinica | filter:Ctrl.paginate">
+                                    <td class="text-center">{{hc.nuHistoria}}</td>
+                                    <td class="text-center">{{hc.nuChip}}</td>
+                                    <td class="text-center">{{hc.noNombre}}</td>
+                                    <td class="text-center">{{hc.nuEdad}}</td>
+                                    <td class="text-center">{{hc.noSexo}}</td>
+                                    <td class="text-center">{{hc.noRaza}}</td>
+                                    <td class="text-center">{{hc.noEspecie}}</td>
+                                    <td class="text-center">{{hc.feAdmision}}</td>
+                                    <td class="text-center">
+                                        <button class="md-button md-button--icon" uib-tooltip="Gestionar"
+                                            ng-click="Ctrl.historiaClinicaAR(hc.idMascota,hc.noNombre,hc.nuChip)">
+                                            <i class="mdi mdi-book-open" aria-hidden="true"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="13" class="text-center">
+                                        <div uib-pagination total-items="Ctrl.totalItems" ng-model="Ctrl.currentPage"
+                                            max-size="5" boundary-links="true" items-per-page="Ctrl.numPerPage"
+                                            class="pagination-sm" first-text="&laquo;" previous-text="&lsaquo;"
+                                            next-text="&rsaquo;" last-text="&raquo;">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

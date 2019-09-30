@@ -1,0 +1,129 @@
+<form class="row" name="formTE">
+    <div class="col-md-12">
+        <div class="md-card animated fadeInUp">
+            <div class="md-card__title">
+                <h2 class="md-card__title-text">{{Ctrl.frmData.name_page_title}}</h2>
+            </div>
+            <div class="md-card__supporting-text md-overflow">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="md-select" ng-class="{ 'is-dirty' : Ctrl.frmData.reporte.consTiempoEspera.request.idQueues, 'is-invalid' : formTE.selectCola.$invalid || formTE.selectCola.$touched && formTE.selectCola.$error.required }">
+                            <select name="selectCola" type="text" class="md-select__input" ng-model="Ctrl.frmData.reporte.consTiempoEspera.request" ng-options="nombreCola as nombreCola.name for nombreCola in Ctrl.lsCola"
+                                ng-change="Ctrl.validateCola()" ng-required="true">
+                                <option ng-show="false" value="" selected="true"></option>
+                            </select>
+                            <label class="md-select__label">Cola:</label>
+                            <span class="md-select__error" ng-show="formTE.selectCola.$invalid || formTE.selectCola.$touched && formTE.selectCola.$error.required">{{Ctrl.frmData.msjError.colas}}</span>
+                        </div>
+                    </div>
+                    <!-- fecha inicial -->
+                    <div class="col-md-4">
+                        <datepicker date-format="dd-MM-yyyy" selector="calendar-inicio-textfield" button-prev="<i class='mdi mdi-arrow-left'></i>"
+                            button-next="<i class='mdi mdi-arrow-right'></i>">
+                            <div class="md-textfield" ng-class="{ 'is-dirty' : Ctrl.dt, 'is-invalid' : formTE.feIni.$invalid }">
+                                <input id="feIni" name="feIni" type="text" class="calendar-inicio-textfield md-textfield__input" uib-datepicker-popup="dd-MM-yyyy"
+                                    ng-model="Ctrl.dt" current-text="Hoy" clear-text="Limpiar" close-text="Cerrar" is-open="Ctrl.opened"
+                                    datepicker-options="Ctrl.dateOptions" ng-required="true" close-text="Close" ng-change="Ctrl.validateDateIni()"
+                                    input-date-validator>
+                                <button class="md-button-input">
+                                    <i class="mdi mdi-calendar"></i>
+                                </button>
+                                <label class="md-textfield__label" for="feIni">Fecha Inicio</label>
+                                <span class="md-textfield__error" ng-show="formTE.feIni.$invalid">{{Ctrl.frmData.msjError.feIni}}</span>
+                            </div>
+                        </datepicker>
+                    </div>
+                    <!-- fecha final -->
+                    <div class="col-md-4">
+                        <datepicker date-format="dd-MM-yyyy" selector="calendar-fin-textfield" button-prev="<i class='mdi mdi-arrow-left'></i>" button-next="<i class='mdi mdi-arrow-right'></i>">
+                            <div class="md-textfield" ng-class="{ 'is-dirty' : Ctrl.dtf, 'is-invalid' : formTE.feFin.$invalid }">
+                                <input id="feFin" name="feFin" type="text" class="calendar-fin-textfield md-textfield__input" uib-datepicker-popup="dd-MM-yyyy"
+                                    ng-model="Ctrl.dtf" current-text="Hoy" clear-text="Limpiar" close-text="Cerrar" is-open="Ctrl.openedf"
+                                    datepicker-options="Ctrl.dateOptions" ng-required="true" close-text="Close" ng-change="Ctrl.validateDateFin()"
+                                    input-date-validator>
+                                <button class="md-button-input">
+                                    <i class="mdi mdi-calendar"></i>
+                                </button>
+                                <label class="md-textfield__label" for="feFin">Fecha Fin</label>
+                                <span class="md-textfield__error" ng-show="formTE.feFin.$invalid">{{Ctrl.frmData.msjError.feFin}}</span>
+                            </div>
+                        </datepicker>
+                    </div>
+
+                    <!-- BOTONES -->
+                    <div class="col-md-12">
+                        <button class="md-button" ng-click="Ctrl.consolidadoTiempoEspera()" ng-disabled="Ctrl.frmData.habFinal">
+                            <label class="">Buscar</label>
+                            <i class="mdi mdi-magnify"></i>
+                        </button>
+                        <div class="pull-right" ng-hide='Ctrl.menuState.show'>
+                            <button class="md-button dropdown-toggle" data-toggle="dropdown"> Exportar
+                                <i class="mdi mdi-chevron-double-down"></i>
+                            </button>
+                            <ul class="dropdown-menu md-dropdown-menu">
+                                <li>
+                                    <a href="" ng-click="Ctrl.descargarDocumento(Ctrl.excelVal)">
+                                        <i class="mdi mdi-file-excel" style="color:forestgreen"></i>Excel
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" ng-click="Ctrl.descargarDocumento(Ctrl.pdfVal)">
+                                        <i class="mdi mdi-file-pdf" style="color:firebrick"></i>PDF
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- TABLA -->
+                <div class="row-fluid form-group" ng-hide=Ctrl.frmData.show.table.espera>
+                    <h4>Tiempo Promedio de Espera:</h4>
+                    <div class="table-responsive">
+                        <table st-table="Ctrl.lsConsPromEspera" class="md-table table">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Promedio</th>
+                                    <th class="text-center">Mínimo</th>
+                                    <th class="text-center">Máximo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="row in Ctrl.lsConsPromEspera">
+                                    <td class="text-center">{{row.nuPromedio}}</td>
+                                    <td class="text-center">{{row.nuMinimo}}</td>
+                                    <td class="text-center">{{row.nuMaximo}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row-fluid form-group" ng-hide=Ctrl.frmData.show.table.conversa>
+                    <h4>Tiempo Promedio de Conversación:</h4>
+                    <div class="table-responsive">
+                        <table st-table="Ctrl.lsConsPromConversa" class="md-table table">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Promedio</th>
+                                    <th class="text-center">Mínimo</th>
+                                    <th class="text-center">Máximo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="row in Ctrl.lsConsPromConversa">
+                                    <td class="text-center">{{row.nuPromedio}}</td>
+                                    <td class="text-center">{{row.nuMinimo}}</td>
+                                    <td class="text-center">{{row.nuMaximo}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="row-fluid" ng-hide=Ctrl.frmData.show.text>
+                        <h5>{{Ctrl.frmData.texto}}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

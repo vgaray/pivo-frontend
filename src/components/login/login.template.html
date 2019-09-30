@@ -1,0 +1,433 @@
+<nav class="md-nav" >
+    <div class="md-nav__header" style="background-color:black;">
+        <div class="md-va__headers" style="display:inherit; padding-left: 69px;">
+            <div class="md-nav__brand" style="margin-left: 21px; align-self: center; color:white;">
+                <label>PIVO</label>
+            </div>
+            <div class="md-nav__brand" style="margin-left: 21px;">
+                <a ui-sref="principal" >
+                    <img href="welcome" src="src/assets/img/logos/logo-pivo.png" alt="pivo">
+                </a>
+            </div>
+        </div>
+        <div class="md-nav__actions" >
+            <div class="md-nav__action">
+                <a style="color:white;" href="#SERVICIOS">SERVICIOS</a>
+            </div>
+            <div class="md-nav__action">
+                <a style="color:white;"href="#ACERCA">ACERCA</a>
+            </div>
+            <div class="md-nav__action">
+                <a  style="color:white;" href="#EQUIPO">EQUIPO</a>
+            </div>
+            <div class="md-nav__action">
+                <a style="color:white;" href="#contacto">CONTACTO</a>
+            </div>
+            <div class="md-nav__action"> 
+                    <button class="md-button" ng-click="ctrl.btnLogHide()">
+                            <div class="md-nav__user"></div>
+                    </button>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+<main id="logincontent" class="md-content" >
+    <div>
+        <div class="md-t-integro center" >
+                <p style="color:black;" class="login-text login-text__head">Bienvenido a nuestra</p>
+                <p style="color:black;" class="login-text login-text__subhead">Central Veterinaria</p>
+            </div>
+        <div class="md-card md-card__login log" id="ShowL">
+            <form name="frmlLogin">
+                <div class="text-center md-card__title">
+                    <img alt="T-contacta" src="src/assets/img/logos/logo-pivo.png" class="img-login__card">
+                    <h2 class="md-card__title-text">Ingresa a tu cuenta</h2>
+                </div>
+                <div class="card-login" id="card-login">
+                    <div class="md-card__supporting-text">
+                        <div class="md-textfield" ng-class="{'is-dirty' : ctrl.dataUsuario.username.length > 0,'is-invalid' : frmlLogin.username.$dirty &&  frmlLogin.username.$error.required }">
+                            <input type="text" class="md-textfield__input" name="username" placeholder="Usuario" ng-model="ctrl.dataUsuario.username" ng-required="true" >
+                            <label class="md-textfield__label">Usuario</label>
+                            <span class="md-textfield__error" ng-show="frmlLogin.username.$dirty && frmlLogin.username.$error.required">*Campo requerido</span>
+                        </div>
+                        <div class="md-textfield" ng-class="{'is-dirty' : ctrl.dataUsuario.password, 'is-invalid' : frmlLogin.password.$dirty && frmlLogin.password.$error.required }">
+                            <input type="password" class="md-textfield__input" name="password" placeholder="Contraseña" ng-model="ctrl.dataUsuario.password" required
+                            ng-keypress="ctrl.loginID($event)">
+                            <label class="md-textfield__label">Contraseña</label>
+                            <span class="md-textfield__error" ng-show="frmlLogin.password.$dirty && frmlLogin.password.$error.required">*Campo requerido</span>
+                        </div>
+                    </div>
+                    <div class="md-card__actions text-left">
+                        <button class="md-button md-button__login" ng-click="ctrl.login()">Ingresar</button>
+                        <button class="md-button md-button__forget" ng-click="ctrl.btnChangePassword()">¿Olvidaste tu contraseña?</button>   
+                    </div>
+                    <button class="md-button md-button--icon" ng-click="ctrl.btnLogShow()"><i class="mdi mdi-arrow-left-bold"></i></button>
+                </div>
+                <div class="card-replace-login" id="card-replace-login">
+                    <div class="md-card__supporting-text">
+                        <div class="md-textfield" ng-class="">
+                            <input type="text" class="md-textfield__input" ng-model="ctrl.ActualizarPassword.request1.pCodUsuario" name="" placeholder="" ng-required="true" >
+                            <label class="md-textfield__label">Usuario</label>
+                            <span class="md-textfield__error" ng-show="">*Campo requerido</span>
+                        </div>
+                        <div class="md-textfield" ng-class="">
+                            <input type="password" class="md-textfield__input" ng-model="ctrl.ActualizarPassword.request1.pNewPassword" name="" placeholder="" ng-required="true" >
+                            <label class="md-textfield__label">Nueva Contraseña</label>
+                            <span class="md-textfield__error" ng-show="">*Campo requerido</span>
+                        </div>
+                    </div>
+                        
+                    <div class="md-card__actions">
+                        <button class="md-button md-button__send" ng-click="ctrl.verMensaje(1);ctrl.cambioPassword()">Enviar</button>
+                    </div>
+                    <button class="md-button md-button--icon button-backlogin" ng-click="ctrl.loginBack()"><i class="mdi mdi-arrow-left-bold"></i></button>
+                </div>
+            </form>
+        </div>
+        <div class="background1">
+                <img style="width:100%;" src="src/assets/img/fotoPerfil/main.jpg" alt="">
+        </div>
+    </div>
+    <div id="SERVICIOS" style="background-color:GREY">
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                <h2 class="white-text">Servicios ofrecidos</h2>
+                <h3 class="white-text">Todo esto y más al formar parte de nuestra plataforma</h3>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-3">
+                    <button class="md-button md-button--icon md-login white-logo">
+                        <i class="mdi mdi-library-books"></i>
+                    </button>
+                    <h4 class="white-text">Historia Clínica Integrada</h4>
+                    <p class="white-text"> historia clínica única oportuna,confidencial y accesible</p>
+                </div>
+                <div class="col-md-3">
+                    <button class="md-button md-button--icon md-login white-logo">
+                        <i class="mdi mdi-account-settings-variant"></i>
+                    </button>
+                    <h4 class="white-text">Gestion Personal</h4>
+                    <p class="white-text">Deja claras las funciones y los puestos de tu personal.</p>
+                    
+                </div>
+                <div class="col-md-3">
+                    <button class="md-button md-button--icon md-login white-logo">
+                        <i class="mdi mdi-book-open-page-variant"></i>
+                    </button>
+                    <h4 class="white-text">Gestión Registro de Citas</h4>
+                    <p class="white-text">Gestiona las citas de tus clientes en cualquier momento del día.</p>
+                </div>
+                <div class="col-md-3">
+                    <button class="md-button md-button--icon md-login white-logo">
+                        <i class="mdi mdi-book-open"></i>
+                    </button>
+                    <h4 class="white-text">Registro Atenciones</h4>
+                    <p class="white-text"> Registros médicos y estadísticos.</p>
+                </div>
+                <div class="col-md-4">
+                    <button class="md-button md-button--icon md-login white-logo">
+                        <i class="mdi mdi-map-marker"></i>
+                    </button>
+                    <h4 class="white-text">Ubicar veterinarias</h4>
+                    <p class="white-text">Ubica las vetirinarias asociadas a la plataforma.</p>
+                </div>
+                <div class="col-md-4">
+                    <button class="md-button md-button--icon md-login white-logo">
+                        <i class="mdi mdi-paw"></i>
+                    </button>
+                    <h4 class="white-text">Control y Seguimiento de tu mascota</h4>
+                    <p class="white-text">Siempre al tanto de tu mascota.</p>
+                </div>
+                <div class="col-md-4">
+                    <button class="md-button md-button--icon md-login white-logo">
+                        <i class="mdi mdi-book-plus"></i>
+                    </button>
+                    <h4 class="white-text">Reserva tu Cita</h4>
+                    <p class="white-text">Reservas y consultas online.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="ACERCA">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                <h2 class="section-heading text-uppercase">Historia</h2>
+                <h3 class="section-subheading text-muted">Inicio del proyecto</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                <ul class="timeline">
+                    <li>
+                    <div class="timeline-image">
+                        <img class="rounded-circle img-fluid" src="src/assets/img/fotoPerfil/1.jpg" alt="">
+                    </div>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                        <h4>2017</h4>
+                        <h4 class="subheading black-text">Idea</h4>
+                        </div>
+                        <div class="timeline-body">
+                        <p class="black-text">El proyecto empezo con las problematica de las veterinarias</p>
+                        </div>
+                    </div>
+                    </li>
+                    <li class="timeline-inverted">
+                    <div class="timeline-image">
+                        <img class="rounded-circle img-fluid" src="src/assets/img/fotoPerfil/1.jpg" alt="">
+                    </div>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                        <h4>Marzo 2018</h4>
+                        <h4 class="subheading black-text">Formación</h4>
+                        </div>
+                        <div class="timeline-body">
+                        <p class="black-text">Se consolido el grupo</p>
+                        </div>
+                    </div>
+                    </li>
+                    
+                    <li>
+                    <div class="timeline-image">
+                        <img class="rounded-circle img-fluid" src="src/assets/img/fotoPerfil/1.jpg" alt="">
+                    </div>
+                    </li>
+                </ul>
+                </div>
+            </div>
+        </div>  
+    </div>
+    <div id="EQUIPO" style="background-color:GREY">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                <h2 class="section-heading text-uppercase white-text">Equipo</h2>
+                <h3 cl-ass="section-subheading white-text ">Taller de proyectos 2018-I</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                <div class="team-member white-text">
+                    <img class="mx-auto rounded-circle" src="src/assets/img/fotoPerfil/zero.jpg" alt="">
+                    <h4>Victor Hugo Garay Chumpitaz</h4>
+                    <p class="white-text">Gerente</p>
+                    <ul class="list-inline social-buttons">
+                    <li class="list-inline-item">
+                        <button href="#" class="md-button md-button--icon md-login white-logo">
+                            <i class="mdi mdi-twitter-box"></i>
+                        </button>
+                    </li>
+                    <li class="list-inline-item">
+                        <button href="#" class="md-button md-button--icon md-login white-logo">
+                            <i class="mdi mdi-facebook-box"></i>
+                        </button>
+                    </li>
+                    <li class="list-inline-item">
+                        <button href="#" class="md-button md-button--icon md-login white-logo">
+                            <i class="mdi mdi-linkedin-box"></i>
+                        </button>
+                    </li>
+                    </ul>
+                </div>
+                </div>
+                <div class="col-sm-4">
+                <div class="team-member white-text">
+                    <img class="mx-auto rounded-circle" src="src/assets/img/fotoPerfil/mega.jpg" alt="">
+                    <h4>Faviana Fiori Orbegoso</h4>
+                    <p class="white-text">Gerente</p>
+                    <ul class="list-inline social-buttons">
+                        <li class="list-inline-item">
+                            <button href="#" class="md-button md-button--icon md-login white-logo">
+                                <i class="mdi mdi-twitter-box"></i>
+                            </button>
+                        </li>
+                        <li class="list-inline-item">
+                            <button href="#" class="md-button md-button--icon md-login white-logo">
+                                <i class="mdi mdi-facebook-box"></i>
+                            </button>
+                        </li>
+                        <li class="list-inline-item">
+                            <button href="#" class="md-button md-button--icon md-login white-logo">
+                                <i class="mdi mdi-linkedin-box"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                </div>
+                <div class="col-sm-4">
+                <div class="team-member white-text">
+                    <img class="mx-auto rounded-circle"src="src/assets/img/fotoPerfil/mega.jpg" alt="">
+                    <h4>Miguel Salazar Morales</h4>
+                    <p class="white-text">TP-4</p>
+                    <ul class="list-inline social-buttons">
+                        <li class="list-inline-item">
+                            <button href="#" class="md-button md-button--icon md-login white-logo">
+                                <i class="mdi mdi-twitter-box"></i>
+                            </button>
+                        </li>
+                        <li class="list-inline-item">
+                            <button href="#" class="md-button md-button--icon md-login white-logo">
+                                <i class="mdi mdi-facebook-box"></i>
+                            </button>
+                        </li>
+                        <li class="list-inline-item">
+                            <button href="#" class="md-button md-button--icon md-login white-logo">
+                                <i class="mdi mdi-linkedin-box"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                </div>
+                <div class="col-sm-4">
+                <div class="team-member white-text">
+                    <img class="mx-auto rounded-circle" src="img/team/2.jpg" alt="">
+                    <h4>Jonathan Tapia Sifuentes</h4>
+                    <p class="white-text">TP-4</p>
+                    <ul class="list-inline social-buttons">
+                        <li class="list-inline-item">
+                            <button href="#" class="md-button md-button--icon md-login white-logo">
+                                <i class="mdi mdi-twitter-box"></i>
+                            </button>
+                        </li>
+                        <li class="list-inline-item">
+                            <button href="#" class="md-button md-button--icon md-login white-logo">
+                                <i class="mdi mdi-facebook-box"></i>
+                            </button>
+                        </li>
+                        <li class="list-inline-item">
+                            <button href="#" class="md-button md-button--icon md-login white-logo">
+                                <i class="mdi mdi-linkedin-box"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="team-member white-text">
+                        <img class="mx-auto rounded-circle" src="img/team/2.jpg" alt="">
+                        <h4>Pedro Aguilar Quispe</h4>
+                        <p class="white-text">TP-3</p>
+                        <ul class="list-inline social-buttons">
+                            <li class="list-inline-item">
+                                <button href="#" class="md-button md-button--icon md-login white-logo">
+                                    <i class="mdi mdi-twitter-box"></i>
+                                </button>
+                            </li>
+                            <li class="list-inline-item">
+                                <button href="#" class="md-button md-button--icon md-login white-logo">
+                                    <i class="mdi mdi-facebook-box"></i>
+                                </button>
+                            </li>
+                            <li class="list-inline-item">
+                                <button href="#" class="md-button md-button--icon md-login white-logo">
+                                    <i class="mdi mdi-linkedin-box"></i>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="team-member white-text">
+                        <img class="mx-auto rounded-circle" src="img/team/2.jpg" alt="">
+                        <h4>Milagros Huerta Melendez</h4>
+                        <p class="white-text">TP-2</p>
+                        <ul class="list-inline social-buttons">
+                            <li class="list-inline-item">
+                                <button href="#" class="md-button md-button--icon md-login white-logo">
+                                    <i class="mdi mdi-twitter-box"></i>
+                                </button>
+                            </li>
+                            <li class="list-inline-item">
+                                <button href="#" class="md-button md-button--icon md-login white-logo">
+                                    <i class="mdi mdi-facebook-box"></i>
+                                </button>
+                            </li>
+                            <li class="list-inline-item">
+                                <button href="#" class="md-button md-button--icon md-login white-logo">
+                                    <i class="mdi mdi-linkedin-box"></i>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                <div class="team-member white-text">
+                    <img class="mx-auto rounded-circle" src="img/team/3.jpg" alt="">
+                    <h4>Jerson Miranda Quispe</h4>
+                    <p class="white-text">TP-1</p>
+                    <ul class="list-inline social-buttons">
+                        <li class="list-inline-item">
+                            <button href="#" class="md-button md-button--icon md-login white-logo">
+                                <i class="mdi mdi-twitter-box"></i>
+                            </button>
+                        </li>
+                        <li class="list-inline-item">
+                            <button href="#" class="md-button md-button--icon md-login white-logo">
+                                <i class="mdi mdi-facebook-box"></i>
+                            </button>
+                        </li>
+                        <li class="list-inline-item">
+                            <button href="#" class="md-button md-button--icon md-login white-logo">
+                                <i class="mdi mdi-linkedin-box"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="contacto">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                <h2 class="section-heading text-uppercase">Contáctanos</h2>
+                <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                </div>
+            </div>
+            <div class="row">
+                <form name="frmlLogin">
+                    <div class="text-center md-card__title">
+                        <h2 class="md-card__title-text">Contáctanos</h2>
+                    </div>
+                    <div class="card-feedback">
+                        <div class="container">
+                        <div class="row">
+                            <div class="md-card__supporting-text ">
+                                <div class="md-textfield col-sm-6" ng-class="{'is-dirty' : ctrl.dataUsuario.username.length > 0,'is-invalid' : frmlLogin.username.$dirty &&  frmlLogin.username.$error.required }">
+                                    <input type="text" class="md-textfield__input" name="username" placeholder="Usuario" ng-model="ctrl.dataUsuario.username" ng-required="true" >
+                                    <label class="md-textfield__label">Nombre</label>
+                                </div>
+                                <div class="md-textfield col-sm-6" ng-class="{'is-dirty' : ctrl.dataUsuario.username.length > 0,'is-invalid' : frmlLogin.username.$dirty &&  frmlLogin.username.$error.required }">
+                                    <input type="text" class="md-textfield__input" name="username" placeholder="Usuario" ng-model="ctrl.dataUsuario.username" ng-required="true" >
+                                    <label class="md-textfield__label">Email</label>
+                                </div>
+                                <div class="md-textfield col-sm-6" ng-class="{'is-dirty' : ctrl.dataUsuario.username.length > 0,'is-invalid' : frmlLogin.username.$dirty &&  frmlLogin.username.$error.required }">
+                                    <input type="text" class="md-textfield__input" name="username" placeholder="Usuario" ng-model="ctrl.dataUsuario.username" ng-required="true" >
+                                    <label class="md-textfield__label">Teléfono</label>
+                                </div>
+                                <div class="md-textfield col-sm-6" ng-class="{'is-dirty' : ctrl.dataUsuario.username.length > 0,'is-invalid' : frmlLogin.username.$dirty &&  frmlLogin.username.$error.required }">
+                                    <input type="text" class="md-textfield__input" name="username" placeholder="Usuario" ng-model="ctrl.dataUsuario.username" ng-required="true" >
+                                    <label class="md-textfield__label">Comentarios</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div ng-class="{ 'is-visibility' : ctrl.accCorrecto==false }" class="md-toaster" close="ctrl.closeAlert()">{{ctrl.alerts}}</div>
+</main>
+  

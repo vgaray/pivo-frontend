@@ -1,0 +1,180 @@
+.permiso-llamadas {
+    .table-permiso-llamadas {
+        .a-ion-user{
+            position: relative;
+            top: 6px;
+        }
+        .a-ion-check{
+            span.label.label-success.ng-scope:hover {
+                border: 1px solid $success;
+                border-radius: 3px;
+            }
+
+            span.label.label-danger.ng-scope:hover{
+                border: 1px solid $danger;
+                border-radius: 3px;
+                padding: 5px 6px 0px 6px
+            }
+
+            .label{
+                padding: 5px 4px 0px 4px;
+            }
+        }
+        .label-success {
+            background: none;
+            // border: 1px solid $success;
+            // padding: 7px 7px 4px;
+            i {
+                color: $success;
+                font-size: 19px;
+            }
+        }
+        .label-danger {
+            background: none;
+            // border: 1px solid $danger ;
+            // padding: 7px 7px 4px;
+            i {
+                color: $danger;
+                font-size: 19px;
+            }
+        }
+        .label-block-user {
+            background: none;
+            i {
+                color: $danger;
+                font-size: x-large;
+            }
+        }
+        .label-success-user {
+            background: none;
+            i {
+                color: $success;
+                font-size: x-large;
+            }
+        }
+        .fa-trash {
+            color: $danger;
+        }
+        .colum-width {
+            min-width: 95px;
+            padding-right: 0px;
+            padding-left: 0px;
+        }
+    }
+}
+
+.modal-permiso {
+    .modalPermisoLlamada {
+        .has-error {
+            .input-group-btn {
+                button {
+                    border-color: #a94442;
+                }
+            }
+        }
+        .min-dispo {
+            width: 100%;
+            display: inline-block;
+        }
+        .checkbox-bolsa {
+            margin-left: 5px;
+            margin-top: 15px;
+        }
+        .table-det-bolsa {
+            font-size: 12px;
+            text-align: center;
+            &> thead > tr > th {
+
+                font-weight: bold;
+                text-align: center;
+            }
+            .fa-trash {
+                color: $danger;
+            }
+        }
+    }
+}
+
+@media(max-width: $resL) {
+    .modal-permiso {
+        .check-permiso {
+            .control-label {
+                text-align: left;
+            }
+            .form-inline {
+                .checkbox {
+                    display: inline-block;
+                    margin-left: 2px;
+                }
+            }
+        }
+    }
+}
+
+// @media (min-width: $resM) {
+//     .modal-permiso {
+//         // width: 660px;
+//         // margin: 30px auto;
+//     }
+// }
+@media (max-width: $resM) {
+    .modal-permiso {
+        .check-permiso {
+            .control-label {
+                margin-bottom: 3px;
+            }
+            .form-inline {
+                .checkbox {
+                    display: inline-block;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .modal-permiso {
+        // width: 100%;
+        .check-permiso {
+            .control-label {
+                margin-bottom: 3px;
+            }
+            .form-inline {
+                .checkbox {
+                    display: inline-block;
+                    padding-left: 19px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: $resXS) {
+    .modal-permiso {
+        .checkbox-bolsa {
+            margin-top: 0;
+        }
+        .col-modal-bolsa {
+            width: 100%
+        }
+    }
+}
+
+@media(max-width: 349px) {
+    .permiso-llamadas {
+        .b-permis {
+            width: 100%;
+            margin-bottom: 15px;
+            .btn-group {
+                float: left !important;
+                width: 100%;
+                .btn {
+                    width: 100%;
+                }
+            }
+            .pull-right>.dropdown-menu {
+                left: 0 !important;
+            }
+        }
+    }
+}

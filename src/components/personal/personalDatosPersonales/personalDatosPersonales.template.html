@@ -1,0 +1,40 @@
+<div class="md-card">
+    <div class="md-card__title">
+        <h2 class="md-card__title-text">Datos de Contacto</h4>
+    </div>
+    <div class="md-card__supporting-text">
+            <div class="row">
+                <div class="col-sm-12 md-card__row-title">Personal</div>
+                <div class="col-sm-6">
+                    <div class="md-textfield" ng-class="{ 'is-dirty': Ctrl.noDireccion.length > 0}">
+                        <input type="text"  ng-disabled="true" name="direccion" class="md-textfield__input" ng-model="Ctrl.noDireccion" required>
+                        <label class="md-textfield__label" for="direccion">Dirección</label>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-textfield" ng-class="{ 'is-dirty': Ctrl.nuTelefono.length > 0}">
+                        <input type="text" ng-disabled="true" class="md-textfield__input" ng-model="Ctrl.nuTelefono" maxlength="9"
+                            required>
+                        <label class="md-textfield__label" for="phoneRef">Teléfono</label>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-textfield" ng-class="{ 'is-dirty': Ctrl.nuCelular.length > 0}">
+                        <input type="text" ng-disabled="true" name="phone2Ref" class="md-textfield__input" ng-model="Ctrl.nuCelular">
+                        <label class="md-textfield__label" for="phone2Ref">Celular</label>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                        <div class="md-textfield" ng-class="{ 'is-dirty': Ctrl.noCorreo.length > 0}">
+                            <input type="text" ng-disabled="true" name="phone2Ref" class="md-textfield__input" ng-model="Ctrl.noCorreo">
+                            <label class="md-textfield__label" for="phone2Ref">Correo</label>
+                        </div>
+                    </div>
+            </div> 
+    </div>
+    <div class="md-card__menu">
+        <button class="md-button md-button--icon" data-dismiss="modal" ng-click="Ctrl.cancel()">
+            <i class="mdi mdi-close"></i>
+        </button>
+    </div>
+</div>

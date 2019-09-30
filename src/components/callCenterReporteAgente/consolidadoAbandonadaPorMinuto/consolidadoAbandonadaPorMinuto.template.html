@@ -1,0 +1,114 @@
+<div class="widgets">
+    <form name="form">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="md-card animated fadeInUp">
+                    <div class="md-card__title">
+                        <h2 class="md-card__title-text">Reporte:Consolidado Llamadas Abandonadas por Minuto</h2>
+                    </div>
+                    <div class="md-card__supporting-text md-overflow">
+                        <div class="row">
+                            <!-- cola -->
+                            <div class="col-md-4">
+                                <div class="md-select" ng-class="{ 'is-dirty' : Ctrl.frmData.reporte.consAbanPorMin.request.length}">
+                                    <select type="text" class="md-select__input" ng-model="Ctrl.frmData.reporte.consAbanPorMin.request" ng-change="Ctrl.validateCola()"
+                                        ng-options="nombreCola as nombreCola.name for nombreCola in Ctrl.lsCola">
+                                        <option ng-show="false" value="" selected="true"></option>
+                                    </select>
+                                    <label class="md-select__label">Cola</label>
+                                </div>
+                            </div>
+                            <!-- Fecha Inicio-- >
+                            <!-- -->
+                            <div class="col-md-4">
+                                <datepicker date-format="dd-MM-yyyy" selector="calendar-inicio-textfield" button-prev="<i class='mdi mdi-arrow-left'></i>"
+                                    button-next="<i class='mdi mdi-arrow-right'></i>">
+                                    <div class="md-textfield has-placeholder" ng-class="{ 'is-invalid': form.feIni.$dirty && form.feIni.$error.required }">
+                                        <input input-date-validator type="text" maxlength="10" uib-datepicker-popup="dd-MM-yyyy" class="calendar-inicio-textfield md-textfield__input"
+                                            close-text="Cerrar" current-text="Hoy" clear-text="Limpiar" id="feIni" name="feIni"
+                                            ng-model="Ctrl.dt" is-open="Ctrl.opened" datepicker-options="Ctrl.dateOptions" ng-required="Ctrl.frmData.reporte.consAbanPorMin.request.feIni != null"
+                                            ng-change="Ctrl.validateDateIni()" />
+                                        <button class="md-button-input">
+                                            <i class="mdi mdi-calendar"></i>
+                                        </button>
+                                        <label class="md-textfield__label">Desde Fecha</label>
+                                        <span class="md-textfield__error" ng-show="form.feIni.$dirty && form.feIni.$error.required">*Campo Requerido</span>
+                                    </div>
+                                </datepicker>
+                            </div>
+                            <!-- Fecha fin-->
+                            <div class="col-md-4">
+                                <datepicker date-format="dd-MM-yyyy" selector="calendar-inicio-textfield" button-prev="<i class='mdi mdi-arrow-left'></i>"
+                                    button-next="<i class='mdi mdi-arrow-right'></i>">
+                                    <div class="md-textfield has-placeholder" ng-class="{ 'is-invalid': form.feFin.$dirty && form.feFin.$error.required }">
+                                        <input input-date-validator type="text" maxlength="10" uib-datepicker-popup="dd-MM-yyyy" class="calendar-inicio-textfield md-textfield__input"
+                                            close-text="Cerrar" current-text="Hoy" clear-text="Limpiar" id="feFin" name="feFin"
+                                            ng-model="Ctrl.dtf" is-open="Ctrl.openedf" datepicker-options="Ctrl.dateOptions"
+                                            ng-required="Ctrl.frmData.reporte.consAbanPorMin.request.feFin != null" ng-change="Ctrl.validateDateFin()"
+                                        />
+                                        <button class="md-button-input">
+                                            <i class="mdi mdi-calendar"></i>
+                                        </button>
+                                        <label class="md-textfield__label">Fecha Fin</label>
+                                        <span class="md-textfield__error" ng-show="form.feFin.$dirty && form.feFin.$error.required">*Campo Requerido</span>
+                                    </div>
+                                </datepicker>
+                            </div>
+
+                            <!--Botones-->
+                            <div class="col-md-12">
+                                <button type="button" class="md-button" ng-disabled="Ctrl.frmData.habFinal" ng-click="Ctrl.consolidadoAbanPorMin()">Buscar
+                                    <i class="mdi mdi-magnify"></i>
+                                </button>
+                                <div class="btn-group pull-right" ng-hide='Ctrl.menuState.show'>
+                                    <button class="md-button  dropdown-toggle " ng-disabled="Ctrl.enades" data-toggle="dropdown">Exportar
+                                        <i class="mdi mdi-chevron-double-down"></i>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li>
+                                            <a href="" ng-click="Ctrl.descargarDocumento(Ctrl.excelVal)">
+                                                <i class="mdi mdi-file-excel" style="color:forestgreen"></i> Excel
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="" ng-click="Ctrl.descargarDocumento(Ctrl.pdfVal)">
+                                                <i class="mdi mdi-file-pdf" style="color:firebrick"></i> pdf
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- 
+                                  <div class="col-md-12">
+                             
+                            </div>
+                            -->
+                        </div>
+                    </div>
+                    <!-- Tabla -->
+                    <div class="text-center" ng-hide=Ctrl.frmData.show.text>
+                        <h5>{{Ctrl.frmData.texto}}</h5>
+                    </div>
+                    <div class="table-responsive">
+                        <table st-table="Ctrl.lsAbanPorMinuto" class="md-table table" ng-hide="Ctrl.frmData.show.table">
+                            <thead>
+                                <tr>
+                                    <th>Atendidas</th>
+                                    <th>Abandonadas Menor a Min.</th>
+                                    <th>Abandonadas Mayor a Min.</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="row in Ctrl.lsAbanPorMinuto">
+                                    <td>{{row.nuLlam}}</td>
+                                    <td>{{row.abaMenor}}</td>
+                                    <td>{{row.abaMayor}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,133 @@
+<div class="md-card">
+    <div class="md-card__title">
+        <h2 class="md-card__title-text">{{ctrl.frmData.nameModal}}</h2>
+    </div>
+    <div class="md-card__supporting-text">
+        <form name="formUsuarioGesI" novalidate>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="md-textfield"
+                        ng-class="{ 'is-invalid': formUsuarioGesI.nomUsuario.$touched && formUsuarioGesI.nomUsuario.$invalid, 'is-dirty': ctrl.frmData.usuario.entity.noNombre.length > 0 }">
+                        <input type="text" name="nomUsuario" class="md-textfield__input"
+                            placeholder="Ingrese el o los nombre del Usuario"
+                            ng-model="ctrl.frmData.usuario.entity.noNombre" required="true">
+                        <label class="md-textfield__label">Nombre(s)</label>
+                        <div ng-messages="formUsuarioGesI.nomUsuario.$error"
+                            ng-if="formUsuarioGesI.nomUsuario.$touched">
+                            <div ng-messages-include="src/shared/partials/validationMessages.template.html"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-textfield"
+                        ng-class="{ 'is-invalid': formUsuarioGesI.apeUsuario.$touched && formUsuarioGesI.apeUsuario.$invalid, 'is-dirty': ctrl.frmData.usuario.entity.noApellido.length > 0 }">
+                        <input type="text" name="apeUsuario" class="md-textfield__input"
+                            placeholder="Ingrese los apellidos del Usuario"
+                            ng-model="ctrl.frmData.usuario.entity.noApellido" required="true">
+                        <label class="md-textfield__label">Apellidos</label>
+                        <div ng-messages="formUsuarioGesI.apeUsuario.$error"
+                            ng-if="formUsuarioGesI.apeUsuario.$touched">
+                            <div ng-messages-include="src/shared/partials/validationMessages.template.html"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="md-select"
+                        ng-class="{ 'is-dirty':Ctrl.frmData.Personal.registrarActualizar.request.personal.noAbreviatura.length > 0,'is-invalid': formPersonal.tipoDoc.$touched && formPersonal.tipoDoc.$invalid}">
+                        <select class="md-select__input" name="tipoDoc"
+                            ng-change="Ctrl.combochangeDocumento(Ctrl.frmData.Personal.registrarActualizar.request.personal.idTipoDocumento)"
+                            ng-model="Ctrl.frmData.Personal.registrarActualizar.request.personal.idTipoDocumento"
+                            ng-options="tiposdoc as tiposdoc.noAbreviatura for tiposdoc in Ctrl.comboTipoDocumento"
+                            required>
+                            <option ng-show="false" value="" selected="true">
+                                {{Ctrl.frmData.Personal.registrarActualizar.request.personal.noAbreviatura}}</option>
+                        </select>
+                        <label class="md-select__label" for="tipoDoc">Tipo de Identificación*</label>
+                        <span class="md-textfield__error"
+                            ng-show="formPersonal.tipoDoc.$touched && formPersonal.tipoDoc.$invalid">*Tipo documento
+                            requerido.</span>
+                    </div>
+
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-textfield"
+                        ng-class="{ 'is-dirty': Ctrl.frmData.Personal.registrarActualizar.request.personal.nuDocumento.length > 0,'is-invalid': formPersonal.noDni.$touched && formPersonal.noDni.$invalid}">
+                        <input type="text" class="md-textfield__input" name="noDni" ng-pattern="Ctrl.patronDocumento"
+                            ng-model="Ctrl.frmData.Personal.registrarActualizar.request.personal.nuDocumento"
+                            maxlength="8" required>
+                        <label class="md-textfield__label" for="noDni">N°Documento*</label>
+                        <span class="md-textfield__error"
+                            ng-show="formPersonal.noDni.$touched && formPersonal.noDni.$invalid">*nro válido de
+                            documento requerido.</span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-textfield"
+                        ng-class="{ 'is-invalid': formUsuarioGesI.emailUsuario.$touched && formUsuarioGesI.emailUsuario.$invalid, 'is-dirty': ctrl.frmData.usuario.entity.email.length > 0  }">
+                        <input type="email" name="emailUsuario" class="md-textfield__input"
+                            placeholder="ejemplo@gmail.com" ng-model="ctrl.frmData.usuario.entity.email"
+                            ng-change="ctrl.validaEmail()" required="true">
+                        <label class="md-textfield__label">Email</label>
+                        <div ng-messages="formUsuarioGesI.emailUsuario.$error"
+                            ng-if="formUsuarioGesI.emailUsuario.$touched">
+                            <div ng-messages-include="src/shared/partials/validationMessages.template.html"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-select is-dirty" ng-class="{ 'is-dirty' : ctrl.frmData.comboRol.length > 0 }">
+                        <select type="text" class="md-select__input" ng-model="ctrl.frmData.comboRol"
+                            ng-options="rol as rol.noRol for rol in ctrl.nombreRol track by rol.noRol"
+                            ng-selected="$first"></select>
+                        <label class="md-select__label">Rol</label>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <div class="col-sm-12 md-card__row-title">Datos de Ingreso</div>
+        </div>
+        <form name="formUsuarioGesI2" novalidate>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="md-textfield"
+                        ng-class="{ 'is-invalid': formUsuarioGesI2.loginUsuario.$touched && formUsuarioGesI2.loginUsuario.$invalid, 'is-dirty': ctrl.frmData.usuario.entity.noLogin.length > 0, 'is-disabled' : ctrl.frmData.btnHabilitar }">
+                        <input type="text" name="loginUsuario" class="md-textfield__input"
+                            placeholder="Ingrese el login a usar" ng-model="ctrl.frmData.usuario.entity.noLogin"
+                            ng-change="ctrl.validarLogin()" required="true" ng-disabled="ctrl.frmData.btnHabilitar">
+                        <label class="md-textfield__label">Login</label>
+                        <div ng-messages="formUsuarioGesI2.loginUsuario.$error"
+                            ng-if="formUsuarioGesI2.loginUsuario.$touched">
+                            <div ng-messages-include="src/shared/partials/validationMessages.template.html"></div>
+                        </div>
+                    </div>
+                    <h6 style="color:#B22222 ">{{ctrl.frmData.usuario.mensajeValida}}</h6>
+                </div>
+                <div class="form-group col-md-6" ng-show="ctrl.check">
+                    <p> <input type="checkbox" aria-label="opcion checkbox" ng-model="ctrl.verContra"
+                            ng-change="ctrl.habCon()"> ¿Cambiar Contraseña?</p>
+                </div>
+                <div class="col-sm-6" ng-show="ctrl.verContra">
+                    <div class="md-textfield"
+                        ng-class="{ 'is-invalid': formUsuarioGesI2.passUsuario.$touched && formUsuarioGesI2.passUsuario.$invalid}">
+                        <input type="password" name="passUsuario" class="md-textfield__input"
+                            placeholder="Ingrese el password a usar" ng-model="ctrl.frmData.usuario.password"
+                            required="true" maxlength="30" ng-minlength="8">
+                        <label class="md-textfield__label">Password</label>
+                        <div ng-messages="formUsuarioGesI2.passUsuario.$error"
+                            ng-if="formUsuarioGesI2.passUsuario.$touched">
+                            <div ng-messages-include="src/shared/partials/validationMessages.template.html"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="md-card__actions">
+        <button type="button" class="md-button" ng-click="ctrl.onSaveUsuario()">Guardar</button>
+    </div>
+    <div class="md-card__menu">
+        <button type="button" class="md-button md-button--icon" data-dismiss="modal" ng-click="ctrl.cancel()"><i
+                class="mdi mdi-close"></i></button>
+    </div>
+</div>

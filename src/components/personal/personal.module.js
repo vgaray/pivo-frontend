@@ -1,0 +1,1 @@
+angular.module('personal',['ngAnimate', 'ngSanitize', 'ui.bootstrap','chart.js']); 

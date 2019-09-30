@@ -1,0 +1,1 @@
+angular.module('callCenterReporteAgente', ['ngSanitize', 'ui.bootstrap','LocalStorageModule'] );

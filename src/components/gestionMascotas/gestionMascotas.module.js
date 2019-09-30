@@ -1,0 +1,1 @@
+angular.module('gestionMascotas',['ngAnimate', 'ngSanitize', 'ui.bootstrap']); 

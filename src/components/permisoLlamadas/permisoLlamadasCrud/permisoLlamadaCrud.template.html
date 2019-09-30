@@ -1,0 +1,316 @@
+<div class="md-card">
+    <div class="md-card__title">
+        <h4 class="modal-title" ng-if="ctrl.usuario.idUsuario==undefined">{{ctrl.modal.nombreNuevo}}</h4>
+        <h4 class="modal-title" ng-if="ctrl.usuario.idUsuario!=undefined">{{ctrl.modal.nombreEditar}}</h4>
+    </div>
+    <uib-tabset active="active">
+        <uib-tab index="0" heading="Usuario">
+            <div class="md-card__supporting-text">
+                <form name="formLlamadaCrud" class="form-horizontal portlet-body form">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="md-textfield" ng-class="{ 'is-dirty' : ctrl.usuario.noNombre.length > 0 , 'is-invalid': formLlamadaCrud.noNombre.$dirty && formLlamadaCrud.noNombre.$error.required }">
+                                <input type="text" name="noNombre" class="md-textfield__input" ng-model="ctrl.usuario.noNombre" required="required" onkeypress='return event.charCode <= 48 || event.charCode >= 57'>
+                                <label class="md-textfield__label" for="noNombre">Nombres</label>
+                                <span class="md-textfield__error" ng-show="formLlamadaCrud.noNombre.$dirty && formLlamadaCrud.noNombre.$error.required">Nombre es obligatorio.</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="md-textfield" ng-class="{ 'is-dirty' : ctrl.usuario.noApepat.length > 0 , 'is-invalid': formLlamadaCrud.noApepat.$dirty && formLlamadaCrud.noApepat.$error.required}" >
+                                <input type="text" name="noApepat" class="md-textfield__input" ng-model="ctrl.usuario.noApepat" required="required" onkeypress='return event.charCode <= 48 || event.charCode >= 57'>
+                                <label class="md-textfield__label" for="noApepat">Apellido Paterno</label>
+                                <span class="md-textfield__error" ng-show="formLlamadaCrud.noApepat.$dirty && formLlamadaCrud.noApepat.$error.required">Apellido paterno es obligatorio.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="md-textfield" ng-class="{ 'is-dirty' : ctrl.usuario.noApemat.length >0, 'is-invalid' : formLlamadaCrud.noApemat.$dirty && formLlamadaCrud.noApemat.$error.required }" >
+                                <input type="text" name="noApemat" class="md-textfield__input" ng-model="ctrl.usuario.noApemat" required="required" onkeypress='return event.charCode <= 48 || event.charCode >= 57'>
+                                <label class="md-textfield__label" for="noApemat">Apellido Materno</label>
+                                <span class="md-textfield__error" ng-show="formLlamadaCrud.noApemat.$dirty && formLlamadaCrud.noApemat.$error.required">Apellido materno es obligatorio</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">                       
+                                <div class="md-textfield" ng-if="ctrl.usuario.idUsuario==undefined" data-ng-class="{ 'is-dirty' : ctrl.usuario.nuPin >-1, 'is-invalid' : (formLlamadaCrud.nuPin.$dirty && formLlamadaCrud.nuPin.$error.required) || formLlamadaCrud.nuPin.$error.maxlength || ctrl.resultadoPin==true }">
+                                    <label class="md-textfield__label">Numero de PIN</label>                                
+                                    <input type="password" id="nuPin" name="nuPin" class="md-textfield__input"  ng-model="ctrl.usuario.nuPin" required="required" min="0" ng-maxlength="4" ng-change="ctrl.buscarPin()" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                    <span class="md-textfield__error" ng-show="formLlamadaCrud.nuPin.$dirty && formLlamadaCrud.nuPin.$error.required">*Número de pin es obligatorio.</span>
+                                    <span class="md-textfield__error" ng-show="formLlamadaCrud.nuPin.$error.maxlength ">*Excede los digitos.</span>
+                                    <span class="md-textfield__error" ng-show="ctrl.resultadoPin">*Numero pin ya existe.</span>
+                                </div>
+                                <div ng-if="ctrl.usuario.idUsuario!=undefined" class="md-input-group">
+                                    <div class="md-checkbox"> 
+                                        <input id="checkGenerate1" type="checkbox"  ng-model="num_pin">
+                                        <label for="checkGenerate1"></label>
+                                    </div>                                     
+                                         
+                                    <div class="md-textfield" data-ng-class="{ 'is-dirty' : ctrl.usuario.nuPin.length >0, 'is-invalid' : (formLlamadaCrud.nuPin.$dirty && formLlamadaCrud.nuPin.$error.required) || formLlamadaCrud.nuPin.$error.maxlength || ctrl.resultadoPin==true }">
+                                        <label class="md-textfield__label">Numero de PIN</label>   
+                                        <!--<span class="input-group-addon">
+                                            <input type="checkbox" ng-model="num_pin">
+                                        </span>-->
+                                        <input type="password" id="nuPin1" name="nuPin" class="md-textfield__input"  ng-model="ctrl.usuario.nuPin" min="0" ng-maxlength="4" ng-change="ctrl.buscarPin()" ng-disabled="!num_pin">
+                                    </div>
+                                    <span class="md-textfield__error" ng-show="formLlamadaCrud.nuPin.$error.maxlength">*Excede los digitos.</span>
+                                    <span class="md-textfield__error" ng-show="ctrl.resultadoPin">*Numero pin ya existe.</span>
+                                    
+                                </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="md-textfield" ng-class="{ 'is-dirty' : ctrl.usuario.noPuesto.length > 0 }">
+                                <input type="text" name="puesto" class="md-textfield__input" ng-model="ctrl.usuario.noPuesto">
+                                <label class="md-textfield__label" for="puesto">Puesto</label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-6 md-input-group">                                                
+                            <div class="md-checkbox"> 
+                                <input id="checkGenerate" type="checkbox" ng-model="checked">
+                                <label for="checkGenerate"></label>
+                            </div>  
+                            <div class="md-textfield" ng-class="{ 'is-dirty' : ctrl.usuario.tiLlamad > -1,'is-invalid': (formFaxGuardar.tiLlamad.$dirty && formFaxGuardar.tiLlamad.$error.required) || formLlamadaCrud.tiLlamad.$error.maxlength}">                          
+                                <label class="md-textfield__label">Tiempo Max (min.)</label>
+                                <!--<div class="input-group" data-ng-class="{ 'has-error': formLlamadaCrud.tiLlamad.$invalid && formLlamadaCrud.tiLlamad.$touched}">-->
+                                    <!--<span class="input-group-addon">
+                                        <input type="checkbox" ng-model="checked" >
+                                    </span>-->
+                                <input type="number" name="tiLlamad" min="0" ng-maxlength="4" ng-model="ctrl.usuario.tiLlamad" ng-disabled="!checked" class="md-textfield__input"  >
+                                <!--</div>-->
+                                <span class="md-textfield__error" data-ng-show="formLlamadaCrud.tiLlamad.$error.maxlength">*Excede los digitos.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="md-select" ng-class="{ 'is-dirty' : ctrl.empresaArea.idPadre, 'is-invalid' : formLlamadaCrud.$invalid && formLlamadaCrud.idPadre.$error.required }">
+                                <select name="idPadre" class="md-select__input" ng-model="ctrl.empresaArea.idPadre" ng-change="ctrl.empresaAreaPorCentroListar()" ng-options="empresaArea.idEmpare as empresaArea.nombre for empresaArea in ctrl.empresaAreaListar" required="required">
+                                    <option value="" selected=""></option>
+                                </select>
+                                <label class="md-select__label" for="idPadre">Área</label>
+                                <span class="md-select__error" data-ng-show="formLlamadaCrud.$invalid && formLlamadaCrud.idPadre.$error.required">Área es obligatorio.</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="md-select" ng-class="{ 'is-dirty' : ctrl.usuario.idEmpare, 'is-invalid' : formLlamadaCrud.$invalid && formLlamadaCrud.idEmpare.$error.required }">
+                                <select name="idEmpare" class="md-select__input" ng-model="ctrl.usuario.idEmpare" ng-options="empresaAreaXCentro.idEmpare as empresaAreaXCentro.nombre for empresaAreaXCentro in ctrl.empresaAreaXCentroListar" required="required">
+                                    <option value="" selected=""></option>
+                                </select>
+                                <label class="md-select__label" for="idEmpare">Centro Costo:</label>
+                                <span class="md-select__error" data-ng-show="formLlamadaCrud.$invalid && formLlamadaCrud.idEmpare.$error.required">Centro costo es obligatorio.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">                    
+                        <div class="col-sm-6">
+                            <div class="md-select" ng-class="{ 'is-dirty' : ctrl.usuario.idSip }">
+                                <select name="idSip" class="md-select__input" ng-model="ctrl.usuario.idSip" ng-options="extensionListar.idSip as extensionListar.nombre for extensionListar in ctrl.extensionListar">
+                                    <option value="" selected=""></option>
+                                </select>
+                                <label class="md-select__label" for="idSip">Extension </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <label class="col-md-12 md-card__row-title">Fijo</label>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="md-checkbox">
+                                <input type="checkbox" id="ilfijloca" name="ilfijloca" ng-model="ctrl.usuario.ilfijloca" ng-true-value="1" ng-false-value="0">
+                                <label for="ilfijloca" >Local</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="md-checkbox">
+                                <input type="checkbox" id="ilfijnaci" name="ilfijnaci" ng-model="ctrl.usuario.ilfijnaci" ng-true-value="1" ng-false-value="0">
+                                <label for="ilfijnaci" >Nacional</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="md-checkbox">
+                                <input type="checkbox" id="ilfijinte" name="ilfijinte" ng-model="ctrl.usuario.ilfijinte" ng-true-value="1" ng-false-value="0">
+                                <label for="ilfijinte" >Internacional</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <label class="col-md-12 md-card__row-title">Celular</label>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="md-checkbox">
+                                <input type="checkbox" id="ilcelRpm" name="ilcelRpm" ng-model="ctrl.usuario.ilcelRpm" ng-true-value="1" ng-false-value="0">
+                                <label for="ilcelRpm" >RPM</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="md-checkbox">
+                                <input type="checkbox" id="ilcelNac" name="ilcelNac" ng-model="ctrl.usuario.ilcelNac" ng-true-value="1" ng-false-value="0">
+                                <label for="ilcelNac" >Nacional</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="md-checkbox">
+                                <input type="checkbox" id="ilcelInt" name="ilcelInt" ng-model="ctrl.usuario.ilcelInt" ng-true-value="1" ng-false-value="0">
+                                <label for="ilcelInt" >Internacional</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="md-card__actions text-right">
+                <button type="button" ng-if="ctrl.usuario.idUsuario==undefined" class="md-button" ng-disabled='!formLlamadaCrud.$valid || ctrl.resultadoPin' ng-click="ctrl.insertarUsuario()">Agregar</button>
+                <button type="button" ng-if="ctrl.usuario.idUsuario!=undefined" class="md-button" ng-disabled='!formLlamadaCrud.$valid || ctrl.resultadoPin' ng-click="ctrl.actualizarUsuario()">Guardar</button>
+            </div>
+        </uib-tab>
+        <uib-tab index="1" heading="Bolsa de llamadas"  ng-if="ctrl.usuario.idUsuario!=undefined" ng-show="ctrl.usuario.idUsuario!=undefined" ng-click="ctrl.listaBolsaUsuario()">
+            <div class="md-card__supporting-text md-overflow">
+                <form name="formBolsaLlam">
+                    <div class="row">
+                           <!--<div class="col-sm-12 md-card__row-title">
+                               AREA: {{ctrl.empresaArea.nombre}} 
+                               CENTRO: {{ctrl.centroCosto.nombre}}
+                           </div>-->
+                        <div class="col-md-12 md-card__row-title">
+                            <p>AREA: {{ctrl.empresaArea.nombre}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CENTRO: {{ctrl.centroCosto.nombre}}</p>
+                        </div>
+                        <!-- <div class="col-sm-4 md-card__row-title">{{ctrl.empresaArea.nombre}}</div> -->
+                          <!-- <div class="col-sm-6 md-card__row-title">CENTRO: {{ctrl.centroCosto.nombre}}</div>-->
+                        <!-- <div class="col-sm-4 md-card__row-title">{{ctrl.centroCosto.nombre}}</div> -->
+                    
+                        <div class="col-sm-4">
+                            <div class="md-select" ng-class="{ 'is-dirty' : ctrl.destinoOption !=null}">
+                                <select class="md-select__input" name="destino" ng-model="ctrl.destinoOption" ng-change="ctrl.cambiaTipo();ctrl.tiempoBolsaDisponible();ctrl.ValidaOpciones();ctrl.habilitaMensaje()" ng-disabled="ctrl.pkBolsaUsuario!=null" ng-options="opt.valueDestino as opt.nomDestino for opt in ctrl.destino">
+                                    <option ng-show="false" value="" selected="true">{{ctrl.destinoOption}}</option>
+                                </select>
+                                <label class="md-select__label">Tipo de Identificación</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <datepicker date-format="dd-MM-yyyy" selector="calendar-inicio-textfield" button-prev="<i class='mdi mdi-arrow-left'></i>" button-next="<i class='mdi mdi-arrow-right'></i>">
+                                <div class="md-textfield has-placeholder" ng-class="{ 'is-invalid' : formBolsaLlam.feIniBol.$invalid && formBolsaLlam.feIniBol.$touched || formBolsaLlam.feIniBol.$error.required }">
+                                    <input type="text" class="calendar-inicio-textfield md-textfield__input" id="feIniBol" name="feIniBol" uib-datepicker-popup="dd-MM-yyyy" ng-model="ctrl.bolsaUsuario.feIniBol"  current-text="Hoy" clear-text="Limpiar" close-text="Cerrar"
+                                    is-open="ctrl.opened" datepicker-options="ctrl.dateOptions"  ng-required="true" close-text="Close" ng-change="ctrl.fechaInicioHoy();ctrl.tiempoBolsaDisponible();ctrl.ValidaOpciones();ctrl.mostrarFechaAutomensual();ctrl.habilitaMensaje()" input-date-validator>
+                                    <button class="md-button-input" ng-disabled="ctrl.pkBolsaUsuario!=null">
+                                            <i class="mdi mdi-calendar"></i>
+                                    </button>
+                                    <label class="md-textfield__label">Fecha Inicio</label>
+                                    <span class="md-textfield__error" ng-show="formBolsaLlam.feIniBol.$invalid && formBolsaLlam.feIniBol.$error.required">*Campo Requerido</span>
+                                </div>
+                            </datepicker>
+                        </div>
+                        <div class="col-sm-4">
+                            <datepicker date-format="dd-MM-yyyy" selector="calendar-fin-textfield" button-prev="<i class='mdi mdi-arrow-left'></i>" button-next="<i class='mdi mdi-arrow-right'></i>">
+                                <div class="md-textfield has-placeholder" ng-class="{ 'is-invalid' : formBolsaLlam.feFinBol.$dirty && formBolsaLlam.feFinBol.$error.required }">
+                                    <input id="feFinBol" name="feFinBol" type="text" class="md-textfield__input calendar-fin-textfield" ng-model="ctrl.bolsaUsuario.feFinBol" uib-datepicker-popup="dd-MM-yyyy" is-open="ctrl.opened1"
+                                        datepicker-options="ctrl.dateOptions1" close-text="Cerrar" current-text="Hoy" clear-text="Limpiar" ng-required="true" ng-change="ctrl.tiempoBolsaDisponible();ctrl.fechaFin();ctrl.ValidaOpciones();ctrl.habilitaMensaje()" ng-disabled="ctrl.disabRenovarMensual"/>
+                                    <button type="button" class="md-button-input"  ng-disabled="ctrl.disabRenovarMensual">
+                                            <i class="mdi mdi-calendar"></i>
+                                    </button>
+                                    <label for="feFinBol" class="md-textfield__label">Fecha Final</label>
+                                    <span class="md-textfield__error" ng-show="formBolsaLlam.feFinBol.$dirty &&  formBolsaLlam.feFinBol.$error.required">*campo Requerido.</span>
+                                </div>
+                            </datepicker>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="md-textfield" ng-class="{'is-dirty': ctrl.bolsaUsuario.caMinBol !=null, 'is-invalid': formBolsaLlam.caMinBol.$touched && formBolsaLlam.caMinBol.$error.required || ctrl.minDisponible < 0 || formBolsaLlam.caMinBol.$error.min || formBolsaLlam.caMinBol.$error.max}">
+                                <input id="caMinBol" name="caMinBol" type="number" min="0" max="999999" class="md-textfield__input" ng-model="ctrl.bolsaUsuario.caMinBol" required="true" ng-change="ctrl.restaMinutos();ctrl.ValidaOpciones();ctrl.habilitaMensaje()"
+                                onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                <label class="md-textfield__label" for="caMinBol">Cuota de Minutos</label>
+                                <small class="md-textfield__error" ng-show=" formBolsaLlam.caMinBol.$error.required">*Campo requerido</small>
+                                <small class="md-textfield__error" ng-show="formBolsaLlam.caMinBol.$valid && formBolsaLlam.caMinBol.$error.min">*Minimo</small>
+                                <small class="md-textfield__error" ng-show="formBolsaLlam.caMinBol.$error.max">*Excede los digitos.</small>
+                                <small class="md-textfield__error" ng-show="ctrl.minDisponible < 0">*Excede los minutos disponibles</small>
+                                
+                            </div>
+                            <small class="text-primary" ng-show="formBolsaLlam.caMinBol.$valid && !formBolsaLlam.caMinBol.$error.min && ctrl.minDisponible >= 0">min disponibles: {{ctrl.minDisponible}}</small>
+                            
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="md-checkbox">
+                                <input id="ilActMes" name="ilActMes" type="checkbox"  ng-model="ctrl.bolsaUsuario.ilActMes" ng-change="ctrl.ValidaOpciones();ctrl.habilitaFecFin();ctrl.mostrarFechaAutomensual()" ng-click="ctrl.habilitaFecFin();ctrl.mostrarFechaAutomensual();ctrl.habilitaMensaje()">
+                                <label for="ilActMes">Autorenovar Mensual</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="md-checkbox">
+                                <input id="ilActivo" name="ilActivo" type="checkbox"  ng-model="ctrl.bolsaUsuario.ilActivo"  ng-change="ctrl.ValidaOpciones()" >
+                                <label for="ilActivo">Activo</label>
+                            </div>
+                        </div>
+                        <label class="col-sm-12 md-card__row-title" ng-hide="ctrl.msjMinCuota">{{ctrl.mensajeRegistrar}}</label>
+                        <div class="col-sm-12 md-card__row-title">
+                            Buscar Bolsa
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="md-select">
+                                <select name="destino" id="destino" class="md-select__input" ng-model="ctrl.bolsaUsuarioFiltrador"  ng-change="ctrl.funcionFiltradorUsuario()" ng-options="opt.idFiltro as opt.nomFiltro for opt in ctrl.destinoFiltroUsuario">
+                                    <option ng-show="false" value="" selected="true">{{ctrl.bolsaUsuarioFiltrador}}</option>
+                                </select>
+                                <label class="md-select__label">Filtrar por:</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="md-checkbox">
+                                <input id="ilActivoShow" name="ilActivoShow" type="checkbox" ng-true-value="1" ng-false-value="0" ng-model="ctrl.bolsaUsuario.ilActivoFiltro" ng-change="ctrl.funcionFiltradorUsuario()">
+                                <label for="ilActivoShow">Mostrar Todas</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="md-table table">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" ng-repeat="headers in ctrl.bolsaUsuarioHeader">{{headers.nameHeader}}</th>
+                                    <th><i class="mdi mdi-pencil" uib-tooltip="Editar"></i></th>
+                                    <th><i class="mdi mdi-delete"  uib-tooltip="Eliminar"></i></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="itemBolsa in ctrl.listBolsaUsuario | filter: ctrl.paginate" >
+                                    <td class="text-center">{{itemBolsa.nomTipTel +' '+ itemBolsa.nomClave}}</td>
+                                    <td class="text-right">{{itemBolsa.caMinBol}}</td>
+                                    <td class="text-right">{{itemBolsa.caConSeg}}</td>
+                                    <td class="text-center">{{itemBolsa.feIniBol}}</td>
+                                    <td class="text-center">{{itemBolsa.feFinBol}}</td>
+                                    <td><span ng-if="itemBolsa.ilActMes==true">SI</span><span ng-if="itemBolsa.ilActMes==false">NO</span></td>
+                                    <td><span ng-if="itemBolsa.ilActivo==true">SI</span><span ng-if="itemBolsa.ilActivo==false">NO</span></td>
+                                    <td class="text-center">
+                                        <button class="md-button md-button--icon" ng-click="ctrl.obtenDataEditar(itemBolsa.idTipTel,itemBolsa.idClave,itemBolsa.caMinBol,itemBolsa.feIniBol,itemBolsa.feFinBol,itemBolsa.ilActMes,itemBolsa.ilActivo)" ng-hide="ctrl.compararFechaCaducacion(itemBolsa.feFinBol)">
+                                            <i class="mdi mdi-pencil" aria-hidden="true"></i>
+                                        </button>
+                                    </td>
+                                    <td class="text-center">
+                                        <button class="md-button md-button--icon" ng-click="ctrl.modalDeleteBolsaUsuario(itemBolsa.idUsuari,itemBolsa.idTipTel,itemBolsa.idClave,itemBolsa.feIniBol, itemBolsa.nomTipTel +' '+ itemBolsa.nomClave)" ng-hide="ctrl.compararFechaCaducacion(itemBolsa.feFinBol)">
+                                        <i class="mdi mdi-delete" ></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="9" class="text-center">
+                                        <ul uib-pagination total-items="ctrl.totalItems" ng-model="ctrl.currentPage" max-size="5" boundary-links="true" items-per-page="ctrl.numPerPage" 
+                                        class="pagination-sm" first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;" last-text="&raquo;">
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </form>
+            </div>
+            <div class="md-card__actions">
+                <button type="button" id="insertaBolsa" ng-if="ctrl.pkBolsaUsuario==null" ng-click="ctrl.insertaBolsaUsuario()" class="md-button" ng-disabled='!formBolsaLlam.$valid || ctrl.minDisponible < 0'>Agregar</button>
+                <button type="button" ng-if="ctrl.pkBolsaUsuario!=null" id="editaBolsa" ng-click="ctrl.editaBolsaUsuario()" class="md-button" data-ng-disabled='!formBolsaLlam.$valid || ctrl.minDisponible < 0'>Guardar</button>
+            </div>
+        </uib-tab>
+    </uib-tabset>
+    <div class="md-card__menu">
+        <button type="button" class="md-button md-button--icon" data-dismiss="modal" ng-click="ctrl.cancel()"><i class="mdi mdi-close"></i></button>
+    </div>
+</div>
+<!-- /.modal-content -->

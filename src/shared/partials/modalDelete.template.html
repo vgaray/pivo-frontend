@@ -1,0 +1,16 @@
+<div class="md-card md-card-delete">
+    <div class="md-card__title">
+        <h2 class="md-card__title-text">{{title}}</h4>
+    </div>
+    <div class="md-card__supporting-text">
+        <div class="row">
+            <div class="col-sm-12 md-card__row-delete">
+                {{content}}
+            </div>
+        </div>
+    </div>
+    <div class="md-card__actions text-right">
+        <button type="button" class="md-button md-default" data-ng-click="callbackButtonLeft(); event.stopPropagation()">Cancelar</button>
+        <button type="button" class="md-button" data-ng-click="callbackButtonRight(); $event.stopPropagation()">Aceptar</button>
+    </div>
+</div>

@@ -1,0 +1,130 @@
+/*variables perzonalizadas*/
+
+// $font-family: 'Roboto', sans-serif;
+// $font-family: 'Lato', sans-serif;
+// $font-family: 'Oswald', sans-serif;
+/*
+$font-family: 'Open Sans', sans-serif;
+
+$default: #ffffff;
+$body-bg: rgba(245,245,245,0.7);
+$default-text: #333;
+$help-text: #949494;
+$label-text: #ffffff;
+
+$disabled: #9e9e9e;
+$disabled-bg: tint($disabled, 15%);
+$border: #d6d6d6;
+$border-light: tint($border, 15%);
+$input-border: shade($border, 5%);
+$input-background: #ffffff;
+
+$page-top-bg: #fff;
+$page-top-text:#fff;
+$sidebar: #0069b3 ;
+$sidebar-text: #fff;
+$sidebar-text-hover: rgba(255,255,255,0.5);
+$sidebar-active : rgba(14, 21, 90, 0.33);
+$dropdown-text: #7d7d7d;
+$bootstrap-panel-text: #7d7d7d;
+$bootstrap-panel-bg: #ffffff;
+$mail-box: whitesmoke;
+$auth-panel-background: #ffffff;
+$progress-background: rgba(#000000, 0.07);
+$progress-default: rgba(#000000, 0.15);
+
+$primary: #2BAED4 !default;
+$info: #2BAED4 !default;
+$success: #009523 !default;
+$warning: #EED600 !default;
+$danger: #D8000C !default;
+
+$primary-light: tint($primary, 30%);
+$info-light: tint($info, 30%);
+$success-light: tint($success, 30%);
+$warning-light: tint($warning, 30%);
+$danger-light: tint($danger, 30%);
+
+$primary-dark: shade($primary, 15%);
+$info-dark: shade($info, 15%);
+$success-dark: shade($success, 15%);
+$warning-dark: shade($warning, 15%);
+$danger-dark: shade($danger, 15%);
+
+$primary-bg: tint($primary, 20%);
+$info-bg: tint($info, 20%);
+$success-bg: tint($success, 20%);
+$warning-bg: tint($warning, 20%);
+$danger-bg: tint($danger, 20%);
+
+
+$activelink: $primary;
+$hoverlink: $primary-dark;
+
+$resXXL: 1280px;
+$resXL: 1170px;
+$resL: 991px;
+$resM: 768px;
+$resS: 660px;
+$resXS: 500px;
+$resXXS: 435px;
+$resMin: 320px;
+
+$top-height: 66px;
+
+$small-panel-height: 114px;
+$xsmall-panel-height: 187px;
+$medium-panel-height: 400px;
+$extra-medium-panel-height: 550px;
+$large-panel-height: 974px;
+
+$default-animation-duration: 0.2s;
+$default-animation-style: ease-out;
+
+$assets-root: 'src/assets/';
+$images-root: $assets-root + 'img/';
+$fonts-root: $assets-root + 'fonts/';
+$font-thin: 100;
+$font-light: 300;
+$font-normal: 400;
+$font-semiBold: 600;
+$font-bold: 700;
+$font-ultraBold: 800;
+
+$facebook-color: #3b5998;
+$twitter-color: #55acee;
+$google-color: #dd4b39;
+$linkedin-color: #0177B5;
+$github-color: #6b6b6b;
+$stackoverflow-color: #2F96E8;
+$dribble-color: #F26798;
+$behace-color: #0093FA;
+*/
+
+//NUEVO DISEÑO
+// bg Colores
+$bg-white: #FFFFFF;
+$bg-black: #000000;
+$bg-light_grey: #FAFAFA;
+
+//size fonts
+$size-card: 14px;
+$size-title: 18px;
+$size-supporting-text: 14px;
+$size-actions: 16px;
+$size-button: 14px;
+$size-button-icon: 14px;
+$size-height-nav: 64px;
+
+//weight fonts
+$weight-card: 400;
+$weight-title: 600;
+$weight-button: 600;
+
+// Modulos
+$color-default: #83CCFC;
+$color-error: #D32F2F;
+$color-white: #FFFFFF;
+$color-black: #424242;
+$color-button-icon: #757575;
+$color-tooltip: #616161;

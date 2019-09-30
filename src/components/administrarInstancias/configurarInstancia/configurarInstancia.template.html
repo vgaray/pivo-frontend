@@ -1,0 +1,65 @@
+<div class="md-card">
+    <div class="md-card__title">
+        <progress-bar-custom id="pbModalConfigInstance"></progress-bar-custom>
+        <h2 class="md-card__title-text">{{frmData.title}}</h2>
+    </div>
+    <div class="md-card__supporting-text">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <button type="button" class="md-button" ng-click="onInstallAll(item)" ng-if="!ui.installationFinished" ng-disabled="ui.isExecuting">
+                    <i class="mdi mdi-play"></i> Ejecutar todo
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div ng-repeat="item in frmData.lsStatusBash">
+                    <div class="item-config">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-7">{{item.noDescripBash}}</div>
+                                <div class="col-md-2">{{item.noStatusBash}}</div>
+                                <div class="col-md-2" ng-if="item.nuStatusBash==3 || item.nuStatusBash==1">
+                                    <button type="button" class="btn btn-default" ng-click="onInstall(item)" ng-if="(item.ilNext && !ui.isInstallAll) || (item.ilNext && item.nuStatusBash==3)">
+                                        <i class="mdi mdi-play"></i> Ejecutar
+                                    </button>
+                                </div>
+                                <div class="col-md-1 success" ng-if="item.nuStatusBash==2">
+                                    <i class="glyphicon glyphicon-ok" aria-hidden="true"></i>
+                                </div>
+                                <div class="col-md-1 error" ng-if="item.nuStatusBash==3">
+                                    <i class="glyphicon glyphicon-remove" aria-hidden="true"></i>
+                                </div>
+                                <div class="col-md-1 info" ng-if="item.nuStatusBash==4">
+                                    <i class="glyphicon glyphicon-refresh"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="ui.installationFinished">
+            <div class="col-md-12">
+                <div class="alert alert-success" role="alert">¡Instalación y configuración terminados exitosamente!</div>
+            </div>
+        </div>
+        <div class="row" ng-if="ui.existError">
+            <div class="col-md-12">
+                <div class="alert alert-danger" role="alert">Ocurrió un error. Se detuvo la instalación.</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="md-textfield is-dirty" >
+                    <label class="md-textfield__label">Descripción:</label>
+                    <textarea rows="10" class="md-textfield__input" ng-value="frmData.info" placeholder="Informe de la Instalación" disabled="true">
+                    </textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="md-card__menu">
+        <button class="md-button md-button--icon" data-dismiss="modal" ng-click="cancel()"><i class="mdi mdi-close"></i></button>
+    </div>    
+</div>

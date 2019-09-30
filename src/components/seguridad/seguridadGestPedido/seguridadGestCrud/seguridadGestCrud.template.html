@@ -1,0 +1,57 @@
+<div class="widgets seguridad-crud">
+    <label ng-repeat="role in ctrls.roles">
+        <input type="checkbox" checklist-model="ctrls.user.roles" checklist-value="role.id"> {{role.text}}
+    </label>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="md-card animated zoomIn">
+                <div class="md-card__title clearfix">
+                    <h3 class="md-card__title-text" ng-if="ctrls.requestCarga.idRol==null">Nuevo Rol</h3>
+                    <h3 class="md-card__title-text" ng-if="ctrls.requestCarga.idRol!=null">Editar Rol</h3>
+                </div>
+                <div class="md-card__supporting-text">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="md-textfield" ng-class="{'is-dirty': ctrls.rolRequest.noRol.length > 0 || ctrls.rolEditarRequest.noRol.length > 0}">
+                                <label class="md-textfield__label">Rol</label>
+                                <input type="text" name="" ng-model="ctrls.rolRequest.noRol" ng-if="ctrls.rolEditarRequest.idRol == null" class="md-textfield__input"
+                                    placeholder="Ingrese nombre del Rol">
+                                <input type="text" name="" ng-model="ctrls.rolEditarRequest.noRol" ng-if="ctrls.rolEditarRequest.idRol != null" class="md-textfield__input"
+                                    placeholder="Ingrese nombre del Rol">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="md-textfield" ng-class="{'is-dirty': ctrls.rolEditarRequest.noDescri.length > 0 || ctrls.rolRequest.noDescri.length > 0}">
+                                <label class="md-textfield__label">Descripción</label>
+                                <input type="text" name="" ng-model="ctrls.rolRequest.noDescri" ng-if="ctrls.rolEditarRequest.idRol == null" class="md-textfield__input"
+                                    placeholder="Ingrese la descripción del Rol">
+                                <input type="text" name="" ng-model="ctrls.rolEditarRequest.noDescri" ng-if="ctrls.rolEditarRequest.idRol != null" class="md-textfield__input"
+                                    placeholder="Ingrese la descripción del Rol">
+                            </div>
+                        </div>                        
+
+                        <div class="col-sm-12 md-card__row-title">Asignaci&oacute;n de p&aacute;ginas al Rol</div>
+                        <div class="listapagina col-sm-12" ng-repeat="seccion in ctrls.seccionList">
+                            <div class="borde">
+                                <strong ng-model="ctrls.noPagina">{{seccion.noPagina}}</strong>
+                                <div class="clearfix"></div>                                
+                                <div class="dataHijo col-sm-2" ng-repeat="pagina in seccion.listHijos">
+                                    <div class="md-checkbox">
+                                        <input id="x+{{pagina.idPagina}}" type="checkbox" class="default" checklist-model="ctrls.paginaHijo.idPagina" checklist-value="pagina.idPagina"/>
+                                        <label for="x+{{pagina.idPagina}}">{{pagina.noPagina}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" ng-click="ctrls.cerrarRol()" class="md-button md-default">Cerrar</button>
+                    <button type="submit" ng-if="ctrls.rolEditarRequest.idRol == null" ng-click="ctrls.crearRol()" class="md-button">Agregar</button>
+                    <button type="submit" ng-if="ctrls.rolEditarRequest.idRol != null" ng-click="ctrls.actualizarRol()" class="md-button">Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,191 @@
+<div class="widgets cc-llamada-at-ab">
+    <form name="formLlC">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="md-card animated fadeInUp">
+                    <div class="portlet-title">
+                    <div class="md-card__title">
+                        <h2 class="md-card__title-text">{{LlConCtrl.frmData.name_page_title}}</h2>
+                    </div>
+                        <div class="md-card__supporting-text md-overflow">
+                            <div class="row">
+                                <!--Cola-->
+                                <div class="col-md-4">
+                                    <div class="md-select" ng-class="{ 'is-dirty': LlConCtrl.listaQueuesName.length > 0}">
+                                        <select class="md-select__input" name="selectCola" id="selectCola" ng-model="LlConCtrl.frmData.miCombo" ng-options="listaQueue as listaQueue.name for listaQueue in LlConCtrl.listaQueuesName track by listaQueue.name"
+                                            ng-change="LlConCtrl.changeComboColasxAgente(LlConCtrl.frmData.miCombo.idQueues); LlConCtrl.validateColas();">
+                                            <option ng-show="false" value="" selected="true">Seleccione una cola</option>
+                                        </select>
+                                        <label class="md-select__label">Cola</label>
+                                    </div>
+                                </div>
+
+                                <!--Agente-->
+                                <div class="col-md-4 ">
+                                    <div class="md-select" ng-class="{ 'is-dirty': LlConCtrl.listaAgenteLContest.length >= 0}">
+                                        <select class="md-select__input" name="" id="idAgenteC" ng-model="LlConCtrl.comboAgente" ng-options="listaAgente as listaAgente.noAgente for listaAgente in LlConCtrl.listaAgenteLContest track by listaAgente.noAgente">
+                                            <option ng-show="false" value="" selected="true">Seleccione un Agente</option>
+                                        </select>
+                                        <label class="md-select__label">Agente</label>
+                                    </div>
+                                </div>
+
+
+                                <!--Fecha Inicio-->
+                                <div class="col-md-4">
+                                    <datepicker date-format="dd-MM-yyyy" selector="calendar-inicio-textfield" button-prev="<i class='mdi mdi-arrow-left'></i>"
+                                        button-next="<i class='mdi mdi-arrow-right'></i>">
+                                        <div class="md-textfield has-placeholder" ng-class="{ 'is-invalid': formLlC.pFeIni.$dirty && formLlC.pFeIni.$error.required }">
+                                            <input input-date-validator type="text" maxlength="10" uib-datepicker-popup="dd-MM-yyyy" class="calendar-inicio-textfield md-textfield__input"
+                                                close-text="Cerrar" current-text="Hoy" clear-text="Limpiar" id="pFeIni" name="pFeIni"
+                                                ng-model="LlConCtrl.dt" is-open="LlConCtrl.opened" datepicker-options="LlConCtrl.dateOptions"
+                                                ng-required="true" ng-change="LlConCtrl.validaAnteriorInicio()" />
+                                            <button class="md-button-input">
+
+                                                <i class="mdi mdi-calendar"></i>
+                                            </button>
+                                            <label class="md-textfield__label">Desde fecha</label>
+                                            <span class="md-textfield__error" ng-show="formLlC.pFeIni.$dirty && formLlC.pFeIni.$error.required">*Campo Requerido</span>
+                                        </div>
+                                    </datepicker>
+                                </div>
+
+                                <!--Fecha Fin-->
+                                <div class="col-md-4">
+                                    <datepicker date-format="dd-MM-yyyy" selector="calendar-inicio-textfield" button-prev="<i class='mdi mdi-arrow-left'></i>"
+                                        button-next="<i class='mdi mdi-arrow-right'></i>">
+                                        <div class="md-textfield has-placeholder" ng-class="{ 'is-invalid': formLlC.pFeFin.$dirty && formLlC.pFeFin.$error.required }">
+                                            <input input-date-validator type="text" maxlength="10" uib-datepicker-popup="dd-MM-yyyy" class="calendar-inicio-textfield md-textfield__input"
+                                                close-text="Cerrar" current-text="Hoy" clear-text="Limpiar" id="pFeFin" name="pFeFin"
+                                                ng-model="LlConCtrl.dtf" is-open="LlConCtrl.openedf" datepicker-options="LlConCtrl.dateOptions"
+                                                ng-required="true" ng-change="LlConCtrl.validaAnteriorFin()" />
+                                            <button class="md-button-input">
+
+                                                <i class="mdi mdi-calendar"></i>
+                                            </button>
+                                            <label class="md-textfield__label">Hasta fecha</label>
+                                            <span class="md-textfield__error" ng-show="formLlC.pFeFin.$dirty && formLlC.pFeFin.$error.required">*Campo Requerido</span>
+                                        </div>
+                                    </datepicker>
+                                </div>
+
+                                <!--Hora Inicio-->
+                                <div class="col-md-4">
+                                    <div class="md-textfield has-placeholder" ng-class="{ 'is-invalid' : formLlC.hoIni.$dirty && formLlC.hoIni.$error.required }">
+
+                                        <input type="text" class="md-textfield__input" id="hoIni" name="hoIni" ng-model="LlConCtrl.horaInicio" ng-required="LlConCtrl.frmData.reporte.listarLlContestadas.request.horaIniC != null"
+                                            ng-change="LlConCtrl.validaHoraInicio()" />
+                                        <button class="md-button-input">
+                                            <i class="mdi mdi-clock"></i>
+                                        </button>
+                                        <label class="md-textfield__label">Desde hora</label>
+
+                                    </div>
+                                    <script type="text/javascript">
+                                        $('#hoIni').timepicker({
+                                            defaultTime: 'default',
+                                            minuteStep: 1,
+                                            showMeridian: false,
+                                            timeFormat: 'HH:MM'
+                                        })
+                                    </script>
+                                </div>
+
+                                <!--Hora Fin-->
+                                <div class="col-md-4">
+                                    <div class="md-textfield has-placeholder" ng-class="{ 'is-invalid' : formLlC.hoFi.$dirty && formLlC.hoFi.$error.required }">
+                                        <input type="text" class="md-textfield__input" id="hoFi" name="hoFi" ng-model="LlConCtrl.horaFin" ng-required="LlConCtrl.frmData.reporte.listarLlContestadas.request.horaFinC != null "
+                                            ng-change="LlConCtrl.validaHoraFin()" />
+                                        <button class="md-button-input">
+                                            <i class="mdi mdi-clock"></i>
+                                        </button>
+                                        <label class="md-textfield__label">Hasta hora</label>
+                                    </div>
+                                    <script type="text/javascript">
+                                        $('#hoFi').timepicker({
+                                            defaultTime: '23:59',
+                                            minuteStep: 1,
+                                            showMeridian: false,
+                                            timeFormat: 'HH:MM'
+                                        })
+                                    </script>
+                                </div>
+
+                                <!--Botones-->
+                                <div class="col-md-12">
+                                    <button type="button" class="md-button" ng-click="LlConCtrl.BuscarListaLlamadasContestadas(1)" ng-disabled="LlConCtrl.varTotalHa">Buscar
+                                        <i class="mdi mdi-magnify"></i>
+                                    </button>
+                                    <div class="btn-group pull-right" ng-show="LlConCtrl.menuState.show">
+                                        <button class="md-button  dropdown-toggle " data-toggle="dropdown">Exportar
+                                            <i class="mdi mdi-chevron-double-down"></i>
+                                        </button>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li>
+                                                <a href="" ng-click="LlConCtrl.descargarArchivo(LlConCtrl.excelVal)">
+                                                    <i class="mdi mdi-file-excel" style="color:forestgreen"></i> Excel
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="" ng-click="LlConCtrl.descargarArchivo(LlConCtrl.pdfVal)">
+                                                    <i class="mdi mdi-file-pdf" style="color:firebrick"></i> pdf
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- Tabla-->
+                            </div>
+                            <div class="table-responsive">
+                                <table ng-hide="LlConCtrl.validaVacio" class="md-table table">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Ningun elemento encontrado
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                                <table ng-hide="LlConCtrl.validaGrilla" st-table="LlConCtrl.lsLlamadasContestadas" class="md-table table">
+                                    <thead>
+                                        <tr>
+                                            <th>Nro</th>
+                                            <th>Cola</th>
+                                            <th>Agente</th>
+                                            <th>Fecha</th>
+                                            <th>Hora</th>
+                                            <th>Numero</th>
+                                            <th>Duracion</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="row in LlConCtrl.lsLlamadasContestadas">
+                                            <td>{{row.idLlamadaC}}</td>
+                                            <td>{{row.noCola}}</td>
+                                            <td>{{row.noAgente}}</td>
+                                            <td>{{row.fecha}}</td>
+                                            <td>{{row.hora}}</td>
+                                            <td>{{row.duracion}}</td>
+                                            <td>{{row.numero}}</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td class="text-center" colspan="10">
+                                                <div uib-pagination total-items="LlConCtrl.totalItems" ng-model="LlConCtrl.currentPage" boundary-links="true" max-size="5"
+                                                    class="pagination-sm" ng-change="LlConCtrl.pageChanged(0)" previous-text="&lsaquo;"
+                                                    next-text="&rsaquo;" last-text="&raquo;" first-text="&laquo;"></div>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+</form>
+</div>

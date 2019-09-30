@@ -1,0 +1,56 @@
+.usuario{
+    #tbUsuario{
+        .fa-trash{
+            color: $danger;
+        }
+    }
+}
+
+/*Modal*/
+.modal-usuario {
+    .has-error {
+        .input-group-btn {
+            button {
+                border-color: #a94442;
+            }
+        }
+    }
+    .form-group {
+        display: inline-block;
+        width: 100%;
+    }
+    /***/
+    .panel {
+        -webkit-box-shadow: none !important;
+        -moz-box-shadow: none !important;
+        box-shadow: none !important;
+    }
+    .panel-group .panel {
+        overflow: visible;
+    }
+    .panel .panel-body {
+        font-size: 13px;
+    }
+    .panel .panel-title > a:hover {
+        text-decoration: none;
+    }
+
+}
+@media(max-width: 349px) {
+    .usuario {
+        .b-permis {
+            width: 100%;
+            margin-bottom: 15px;
+            .btn-group {
+                float: left !important;
+                width: 100%;
+                .btn {
+                    width: 100%;
+                }
+            }
+            .pull-right>.dropdown-menu {
+                left: 0 !important;
+            }
+        }
+    }
+}

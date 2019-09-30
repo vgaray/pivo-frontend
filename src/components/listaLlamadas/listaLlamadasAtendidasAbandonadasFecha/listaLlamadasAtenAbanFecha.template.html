@@ -1,0 +1,40 @@
+<div class="widgets">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="pane with-scroll animated zoomIn" zoom-in>
+                <div class="panel-heading clearfix">
+                    <h3 class="panel-title">Listado Atendidas y Abandonadas Fecha</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="add-row-editable-table">
+                        <div class="row">
+                            <div class="col-xs-6 b-permis col-sm-7 col-md-8">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover" >
+                            <thead>
+                                <tr>
+                                    <th ng-repeat="header in ctrl.headersListaLlamadas">{{ctrl.description}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="tbLlamadas in ctrl.tbListarLlamadas">
+                                    <td>{{tbListarLlamadas.idLlamadas}}</td>
+                                    <td>{{tbListarLlamadas.fecha}}</td>
+                                    <td>{{tbListarLlamadas.atendidas}}</td>
+                                    <td>{{tbListarLlamadas.abandonadasMenor}}</td>
+                                    <td>{{tbListarLlamadas.abandonadasMayor}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <span>Hola</span>
+</div>

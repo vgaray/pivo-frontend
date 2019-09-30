@@ -1,0 +1,86 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="md-card animated fadeInUp">
+            <div class="md-card__title">
+                <h2 class="md-card__title-text">{{Ctrl.frmData.name_page_title}}</h2>
+            </div>
+            <div class="md-card__supporting-text">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="md-textfield"
+                            ng-class="{ 'is-dirty' : Ctrl.frmData.cita.listar.request.pNuDocumento.length > 0 }">
+                            <input type="text" class="md-textfield__input" type="number"
+                                ng-model="Ctrl.frmData.cita.listar.request.pNuDocumento" ng-change="Ctrl.listarCita()">
+                            <label class="md-textfield__label">N°Documento</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="md-select is-dirty"
+                            ng-class="{ 'is-dirty' :  Ctrl.frmData.cita.listar.request.pIdEstado.length >0 }">
+                            <select class="md-select__input" ng-model=" Ctrl.frmData.cita.listar.request.pIdEstado"
+                                ng-options="estado as estado.noEstado for estado in Ctrl.comboEstado"
+                                ng-change="Ctrl.combochangeEstado( Ctrl.frmData.cita.listar.request.pIdEstado)">
+                                <option ng-show="false" value="" selected="true">{{Ctrl.noEstado}}</option>
+                            </select>
+                            <label class="md-select__label">Estado</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="md-table table" id="tbPersonal">
+                        <thead>
+                            <tr>
+                                <th class="text-center">nombre</th>
+                                <th class="text-center">descripción</th>
+                                <th class="text-center">fecha registro</th>
+                                <th class="text-center">turno</th>
+                                <th class="text-center">H.Inicio</th>
+                                <th class="text-center">H.Fin</th>
+                                <th class="text-center">fecha reserva</th>
+                                <th class="text-center">dueño</th>
+                                <th class="text-center">nª chip</th>
+                                <th class="text-center">mascota</th>
+                                <th class="text-center">personal asignado</th>
+                                <th class="text-center">actividad</th>
+                                <th class="text-center">estado</th>
+                                <th class="text-center">editar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="ci in Ctrl.listaCita | filter:Ctrl.paginate">
+                                <td class="text-center">{{ci.noCita}}</td>
+                                <td class="text-center">{{ci.noDescripcion}}</td>
+                                <td class="text-center">{{ci.feRegistro}}</td>
+                                <td class="text-center">{{ci.noPeriodo}}</td>
+                                <td class="text-center">{{ci.hoInicio}}</td>
+                                <td class="text-center">{{ci.hoFinal}}</td>
+                                <td class="text-center">{{ci.feReserva}}</td>
+                                <td class="text-center">{{ci.noDuenio}}</td>
+                                <td class="text-center">{{ci.nuChip}}</td>
+                                <td class="text-center">{{ci.noMascota}}</td>
+                                <td class="text-center">{{ci.noPersonal}}</td>
+                                <td class="text-center">{{ci.noActividad}}</td>
+                                <td class="text-center">{{ci.noEstado}}</td>
+
+                                <td class="text-center">
+                                    <button class="md-button md-button--icon" uib-tooltip="Eliminar"
+                                        ng-click="Ctrl.RAcitasVeterinaria(ci)">
+                                        <i class="mdi mdi-pencil" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+
+            <div class="md-card__menu">
+                <button class="md-button" ng-click="Ctrl.RAcitasVeterinaria()">
+                    <label class="">Registrar cita</label>
+                    <i class="mdi mdi-folder-plus"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

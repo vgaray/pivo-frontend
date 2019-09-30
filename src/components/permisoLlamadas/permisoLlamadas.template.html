@@ -1,0 +1,129 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="md-card animated fadeInUp" >
+            <div class="md-card__title">
+                <h2 class="md-card__title-text">Listado Usuario</h2>
+            </div>
+            <div class="md-card__supporting-text">
+                <div class="add-row-editable-table">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div  class="md-textfield">
+                                <label class="md-textfield__label">Nombre:</label>
+                                <input type="nombre" class="md-textfield__input" id="noNombre" name="noNombre" ng-model="ctrl.frmData.request.noNombre" ng-required="true" ng-disabled="ctrl.pk_numero != null" ng-change="ctrl.validateNombre();" onkeypress='return event.charCode <= 48 || event.charCode >= 57'>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <button type="button" class="md-button" ng-click="ctrl.BuscarPermisoLlamadas()" ng-disabled="ctrl.frmData.active.button"> Buscar 
+                                <i class="mdi mdi-magnify"></i>
+                            </button>
+
+                         
+                            <div class="btn-group pull-right">
+                                <button type="button" class="md-button" ng-click="ctrl.modalOption()"> Agregar Usuario
+                                    <i class="mdi mdi-plus"></i>
+                                </button>                                   
+                                <button class="md-button dropdown-toggle" data-toggle="dropdown">Herramientas
+                                    <i class="mdi mdi-chevron-double-down"></i>
+                                </button>
+                                <ul class="dropdown-menu pull-right">
+
+                                    <li>
+                                        <a ui-sref="principal.excelPermisosUsuario({idInstancia: ctrl.dataInfo.idInstancia})"> <i class="mdi mdi-arrow-down-bold"></i> Descargar Plantilla
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a ui-sref="principal.cargaPermisoLlamadas({idInstancia: ctrl.dataInfo.idInstancia})"> <i class="mdi mdi-folder-upload"></i>Subir Plantilla
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>                            
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="table-responsive">
+                    <table class="md-table table" >
+                        <thead>
+                            <tr>
+                                <th rowspan="2">Nombre</th>
+                                <th rowspan="2" class="text-center">Estado</th>
+                                <th colspan="3" class="text-center">Llamada Fija</th>
+                                <th colspan="5" class="text-center">Llamada Celular</th>
+                            </tr>
+                            <tr>
+                                <th class="text-center colum-width" ng-repeat="header in ctrl.headers">{{header.description}}</th>
+                                <th><i class="mdi mdi-pencil" uib-tooltip="Editar"></i></th>
+                                <th><i class="mdi mdi-delete" uib-tooltip="Eliminar"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="tbUsuario in ctrl.listTbUsuario">
+                                <td class="hidden">{{tbUsuario.idUsuari}}</td>
+                                <td class="text-left">{{tbUsuario.noNombre}}</td>
+                                <td class="text-center">
+                                    <a href="" ng-click="ctrl.modificaEstadoPing(tbUsuario.idUsuari,tbUsuario.ilActivo)" class="a-ion-user">
+                                        <span ng-if="tbUsuario.ilActivo==1" class="label label-success"><i  class="mdi mdi-account"></i></span>
+                                        <span ng-if="tbUsuario.ilActivo==0" class="label label-danger"><i  class="mdi mdi-account"></i></span>
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    <a href="" ng-click="ctrl.flagPin(tbUsuario.idUsuari,1,1,tbUsuario.ilfijloca)" class="a-ion-check">
+                                        <span ng-if="tbUsuario.ilfijloca==1" class="label label-success"><i  class="mdi mdi-check"></i></span>
+                                        <span ng-if="tbUsuario.ilfijloca==0" class="label label-danger"><i  class="mdi mdi-close"></i></span></a>
+                                </td>
+                                <td class="text-center">
+                                    <a href="" ng-click="ctrl.flagPin(tbUsuario.idUsuari,2,1,tbUsuario.ilfijnaci)" class="a-ion-check">
+                                        <span ng-if="tbUsuario.ilfijnaci==1" class="label label-success"><i  class="mdi mdi-check"></i></span>
+                                        <span ng-if="tbUsuario.ilfijnaci==0" class="label label-danger"><i  class="mdi mdi-close"></i></span></a>
+                                </td>
+                                <td class="text-center">
+                                    <a href="" ng-click="ctrl.flagPin(tbUsuario.idUsuari,3,1,tbUsuario.ilfijinte)" class="a-ion-check">
+                                        <span ng-if="tbUsuario.ilfijinte==1" class="label label-success"><i  class="mdi mdi-check"></i></span>
+                                        <span ng-if="tbUsuario.ilfijinte==0" class="label label-danger"><i  class="mdi mdi-close"></i></span></a>
+                                </td>
+                                <td class="text-center">
+                                    <a href="" ng-click="ctrl.flagPin(tbUsuario.idUsuari,2,2,tbUsuario.ilcelnaci)" class="a-ion-check">
+                                        <span ng-if="tbUsuario.ilcelnaci==1" class="label label-success"><i  class="mdi mdi-check"></i></span>
+                                        <span ng-if="tbUsuario.ilcelnaci==0" class="label label-danger"><i  class="mdi mdi-close"></i></span></a>
+                                </td>
+                                <td class="text-center">
+                                    <a href="" ng-click="ctrl.flagPin(tbUsuario.idUsuari,3,2,tbUsuario.ilcelinte)" class="a-ion-check">
+                                        <span ng-if="tbUsuario.ilcelinte==1" class="label label-success"><i  class="mdi mdi-check"></i></span>
+                                        <span ng-if="tbUsuario.ilcelinte==0" class="label label-danger"><i  class="mdi mdi-close"></i></span></a>
+                                </td>
+                                <td class="text-center">
+                                    <a href="" ng-click="ctrl.flagPin(tbUsuario.idUsuari,4,2,tbUsuario.ilcelrpm)" class="a-ion-check">
+                                        <span ng-if="tbUsuario.ilcelrpm==1" class="label label-success"><i  class="mdi mdi-check"></i></span>
+                                        <span ng-if="tbUsuario.ilcelrpm==0" class="label label-danger"><i  class="mdi mdi-close"></i></span></a>
+                                </td>
+                                <td><button class="md-button md-button--icon" ng-click="ctrl.modalOption(tbUsuario.idUsuari)"><i class="mdi mdi-pencil" uib-tooltip="Editar"></i></button></td>
+                                <td><button class="md-button md-button--icon" ng-click="ctrl.modalEliminarUsuario(tbUsuario.idUsuari)" uib-tooltip="Eliminar"><i class="mdi mdi-delete"></i></button></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="10" class="text-center">
+                                    <ul uib-pagination
+                                            total-items="ctrl.numTotalReg"
+                                            ng-model="ctrl.currentPage"
+                                            max-size="5"
+                                            boundary-links="true"
+                                            items-per-page="ctrl.numPerPage"
+                                            class="pagination-sm"
+                                            first-text="&laquo;"
+                                            previous-text="&lsaquo;"
+                                            next-text="&rsaquo;"
+                                            last-text="&raquo;"
+                                            ng-click="ctrl.cambiaPaginaTbUsuario()"
+                                            >
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

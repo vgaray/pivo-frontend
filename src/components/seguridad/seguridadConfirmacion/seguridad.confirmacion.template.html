@@ -1,0 +1,9 @@
+<div class="modal-header">
+    <span class="modal-title"><strong>No se pudo eliminar el rol</strong></span>
+</div>
+<div class="modal-body text-center">
+    <span ng-repeat="confirmacion in ctrl.frmData.confirmacionList">{{confirmacion.mensaje}}</span>
+</div>
+<div class="modal-footer">
+    <button type="button" ng-click="ctrl.cancel()" class="btn btn-primary">Entendido</button>
+</div>

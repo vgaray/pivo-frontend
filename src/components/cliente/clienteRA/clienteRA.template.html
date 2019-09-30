@@ -1,0 +1,124 @@
+<div class="md-card">
+    <div class="md-card__title">
+        <h2 class="md-card__title-text">{{Ctrl.frmData.name_page_title}}</h4>
+    </div>
+    <div class="md-card__supporting-text">
+        <form name="formCliente">
+            <div class="row">
+                <div class="col-sm-12 md-card__row-title">{{Ctrl.frmData.contentCliente}}</div>
+                <div class="col-sm-6">
+                    <div class="md-textfield" ng-class="{ 'is-dirty': Ctrl.frmData.Cliente.registrarActualizar.request.clienteN.noRazonSocial.length > 0,'is-invalid': formCliente.razonSocial.$dirty && formCliente.razonSocial.$touched && formCliente.razonSocial.$invalid || formCliente.razonSocial.$error.required}">
+                        <input type="text" name="razonSocial" class="md-textfield__input" ng-model="Ctrl.frmData.Cliente.registrarActualizar.request.clienteN.noRazonSocial"
+                            required>
+                        <label class="md-textfield__label">Razón Social</label>
+                        <span class="md-textfield__error" ng-show="formCliente.razonSocial.$dirty && formCliente.razonSocial.$touched && formCliente.razonSocial.$invalid || formCliente.razonSocial.$error.required">*razón social requerido</span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-textfield" ng-class="{ 'is-dirty': Ctrl.frmData.Cliente.registrarActualizar.request.clienteN.direcc.length > 0,'is-invalid': formCliente.direccion.$dirty && formCliente.direccion.$touched && formCliente.direccion.$invalid || formCliente.direccion.$error.required}">
+                        <input type="text" name="direccion" class="md-textfield__input" ng-model="Ctrl.frmData.Cliente.registrarActualizar.request.clienteN.direcc"
+                            required>
+                        <label class="md-textfield__label" for="direccion">Dirección</label>
+                        <span class="md-textfield__error" ng-show="formCliente.direccion.$dirty && formCliente.direccion.$touched && formCliente.direccion.$invalid || formCliente.direccion.$error.required">*dirección requerida</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="md-select" ng-class="{ 'is-dirty': Ctrl.comborecentEmpresa.length > 0}">
+                        <select class="md-select__input" ng-change="Ctrl.combochangeEmpresa(Ctrl.scope.frmData.Cliente.registrarActualizar.request.clienteN.idTipdoc)"
+                            ng-model="Ctrl.scope.frmData.Cliente.registrarActualizar.request.clienteN.idTipdoc" ng-options="tiposdoc as tiposdoc.noTipo for tiposdoc in Ctrl.itemComboConstantsEmpresa">
+                            <option ng-show="false" value="" selected="true">{{Ctrl.comborecentEmpresa}}</option>
+                        </select>
+                        <label class="md-select__label">Tipo de Identificación</label>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-textfield" ng-class="{ 'is-dirty': Ctrl.frmData.Cliente.registrarActualizar.request.clienteN.nuDocIde > 0,'is-invalid': formCliente.tIdenti.$dirty && formCliente.tIdenti.$touched && formCliente.tIdenti.$invalid || formCliente.tIdenti.$error.required}">
+                        <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="tIdenti" class="md-textfield__input"
+                            ng-model="Ctrl.frmData.Cliente.registrarActualizar.request.clienteN.nuDocIde" maxlength="11" required>
+                        <label class="md-textfield__label">N° de Identificación</label>
+                        <span class="md-textfield__error" ng-show="formCliente.tIdenti.$dirty && formCliente.tIdenti.$touched && formCliente.tIdenti.$invalid || formCliente.tIdenti.$error.required">*nº identificación requerido</span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-textfield" ng-class="{ 'is-dirty': Ctrl.frmData.Cliente.registrarActualizar.request.clienteN.correoEle.length > 0,'is-invalid': formCliente.no_email.$dirty && formCliente.no_email.$touched && formCliente.no_email.$invalid || formCliente.no_email.$error.required}">
+                        <input type="email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" name="no_email" class="md-textfield__input" ng-model="Ctrl.frmData.Cliente.registrarActualizar.request.clienteN.correoEle"
+                            required>
+                        <label class="md-textfield__label" for="email">Correo</label>
+                        <span class="md-textfield__error" ng-show="formCliente.no_email.$dirty && formCliente.no_email.$touched && formCliente.no_email.$invalid || formCliente.no_email.$error.required">*correo requerido</span>
+
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-textfield" ng-class="{ 'is-dirty': Ctrl.frmData.Cliente.registrarActualizar.request.clienteN.telef.length > 0,'is-invalid': formCliente.phone.$dirty && formCliente.phone.$touched && formCliente.phone.$invalid || formCliente.phone.$error.required}">
+                        <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="phone" class="md-textfield__input"
+                            ng-model="Ctrl.frmData.Cliente.registrarActualizar.request.clienteN.telef" maxlength="9" required>
+                        <label class="md-textfield__label" for="phone">Teléfono</label>
+                        <span class="md-textfield__error" ng-show="formCliente.phone.$dirty && formCliente.phone.$touched && formCliente.phone.$invalid || formCliente.phone.$error.required">*nº telefónico requerido</span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class='md-switch'>
+                        <label class="md-checkbox__label">Estado</label>
+                        <div class="md-checkbox__toggle">
+                            <input class="tgl tgl-ios" id="estado" type="checkbox" ng-model="Ctrl.frmData.Cliente.registrarActualizar.request.clienteN.estado"
+                            />
+                            <label class="tgl-btn" for="estado"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 md-card__row-title">{{Ctrl.frmData.contentReferencia}}</div>
+                <div class="col-sm-12">
+                    <div class="md-textfield" ng-class="{ 'is-dirty': Ctrl.frmData.Cliente.registrarActualizar.request.clienteN.personRef.length > 0,'is-invalid': formCliente.nameRef.$dirty && formCliente.nameRef.$touched && formCliente.nameRef.$invalid || formCliente.nameRef.$error.required}">
+                        <input type="text" name="nameRef" class="md-textfield__input" ng-model="Ctrl.frmData.Cliente.registrarActualizar.request.clienteN.personRef"
+                            required>
+                        <label class="md-textfield__label" for="nameRef">Nombres</label>
+                        <span class="md-textfield__error" ng-show="formCliente.nameRef.$dirty && formCliente.nameRef.$touched && formCliente.nameRef.$invalid || formCliente.nameRef.$error.required">*nombre requerido</span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-select" ng-class="{ 'is-dirty': Ctrl.comborecentReferente.length > 0}">
+                        <select class="md-select__input" ng-change="Ctrl.combochangeReferente(Ctrl.scope.frmData.Cliente.registrarActualizar.request.clienteN.idTipdocPref)"
+                            ng-model="Ctrl.scope.frmData.Cliente.registrarActualizar.request.clienteN.idTipdocPref" ng-options="tiposdoc as tiposdoc.noTipo for tiposdoc in Ctrl.itemComboConstantsReferente ">
+                            <option ng-show="false" value="" selected="true">{{Ctrl.comborecentReferente}}</option>
+                        </select>
+                        <label class="md-select__label">Tipo de Identificación</label>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-textfield" ng-class="{ 'is-dirty': Ctrl.frmData.Cliente.registrarActualizar.request.clienteN.nuDocumentoPref.length > 0,'is-invalid': formCliente.tIdentiPref.$dirty && formCliente.tIdentiPref.$touched && formCliente.tIdentiPref.$invalid || formCliente.tIdentiPref.$error.required}">
+                        <input name="tIdentiPref" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="md-textfield__input"
+                            ng-model="Ctrl.frmData.Cliente.registrarActualizar.request.clienteN.nuDocumentoPref" maxlength="11"
+                            required>
+                        <label class="md-textfield__label">N° de Identificación</label>
+                        <span class="md-textfield__error" ng-show="formCliente.tIdentiPref.$dirty && formCliente.tIdentiPref.$touched && formCliente.tIdentiPref.$invalid || formCliente.tIdentiPref.$error.required">*nº identificación requerido</span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-textfield" ng-class="{ 'is-dirty': Ctrl.frmData.Cliente.registrarActualizar.request.clienteN.nuFijoPref.length > 0,'is-invalid': formCliente.phoneRef.$dirty && formCliente.phoneRef.$touched && formCliente.phoneRef.$invalid || formCliente.phoneRef.$error.required}">
+                        <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="phoneRef" class="md-textfield__input"
+                            ng-model="Ctrl.frmData.Cliente.registrarActualizar.request.clienteN.nuFijoPref" maxlength="9" required>
+                        <label class="md-textfield__label" for="phoneRef">Teléfono</label>
+                        <span class="md-textfield__error" ng-show="formCliente.phoneRef.$dirty && formCliente.phoneRef.$touched && formCliente.phoneRef.$invalid || formCliente.phoneRef.$error.required">*nº telefónico requerido</span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-textfield" ng-class="{ 'is-dirty': Ctrl.frmData.Cliente.registrarActualizar.request.clienteN.nuCelularPref.length > 0,'is-invalid': formCliente.phone2Ref.$dirty && formCliente.phone2Ref.$touched && formCliente.phone2Ref.$invalid || formCliente.phone2Ref.$error.required}">
+                        <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="phone2Ref" class="md-textfield__input"
+                            ng-model="Ctrl.frmData.Cliente.registrarActualizar.request.clienteN.nuCelularPref" maxlength="9"
+                            required>
+                        <label class="md-textfield__label" for="phone2Ref">Celular</label>
+                        <span class="md-textfield__error" ng-show="formCliente.phone2Ref.$dirty && formCliente.phone2Ref.$touched && formCliente.phone2Ref.$invalid || formCliente.phone2Ref.$error.required">*nº celular requerido</span>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="md-card__actions text-right">
+        <button type="button" class="md-button" ng-disabled='!formCliente.$valid' ng-click="Ctrl.raCliente()">Guardar</button>
+    </div>
+    <div class="md-card__menu">
+        <button class="md-button md-button--icon" data-dismiss="modal" ng-click="Ctrl.cancel()">
+            <i class="mdi mdi-close"></i>
+        </button>
+    </div>
+</div>

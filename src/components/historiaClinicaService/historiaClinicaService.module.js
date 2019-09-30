@@ -1,0 +1,1 @@
+angular.module('historiaClinicaService',['ngAnimate', 'ngSanitize', 'ui.bootstrap']);

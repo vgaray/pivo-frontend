@@ -1,0 +1,60 @@
+<form class="row" id="">
+    <div class="col-md-12">
+        <div class="md-card animated fadeInUp">
+            <div class="md-card__title">
+                <h3 class="md-card__title-text">Lista de Colas</h3>
+            </div>
+            <div class="md-card__supporting-text">
+                <div class="table-responsive">
+                    <table class="md-table table" id="tbCola">
+                        <thead>
+                            <tr>
+                                <th class="text-center" ng-repeat="header in ctrl.table_headers">{{header.description}}</th>
+                                <th class="text-center">Editar</th>
+                                <th class="text-center">Eliminar</th>
+                                <th class="text-center">Asignar Agente</th>
+                            </tr>
+                        </thead>
+                        <tbody>                               
+                            <tr ng-repeat="cola in ctrl.lsColas | filter:ctrl.paginate ">
+                                <td>{{cola.name}}</td>
+                                <td>{{cola.musiconHold}}</td>
+                                <td>{{cola.announce}}</td>
+                                <td class="text-right">{{cola.weight}}</td>
+                                <td class="text-right">{{cola.timeOut}}</td>
+                                <td class="text-center">
+                                    <button class="md-button md-button--icon" ng-click="ctrl.onSaveCola( ctrl.frmData.update, cola.idQueues )" uib-tooltip="Editar">
+                                        <i class="mdi mdi-pencil"></i>
+                                    </button>
+                                </td>
+                                <td class="text-center">
+                                    <button class="md-button md-button--icon" ng-click="ctrl.onEliminarCola( cola.idQueues, cola.name )"  uib-tooltip="Eliminar">
+                                        <i class="mdi mdi-delete"></i>
+                                    </button>
+                                </td>
+                                <td class="text-center">
+                                    <button class="md-button md-button--icon" ng-click="ctrl.onAssignAgenteCola (ctrl.frmData.update, cola.idQueues,cola.name)" uib-tooltip="Asignar Agentes a Cola">
+                                        <i class="mdi mdi-account-plus"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="13" class="text-center">
+                                    <div uib-pagination total-items="ctrl.totalItems" ng-model="ctrl.currentPage" max-size="5" boundary-links="true" items-per-page="ctrl.numPerPage" class="pagination-sm" first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;" last-text="&raquo;">
+                                    </div>
+                                </td>
+                            </tr>
+                        </tfoot>                            
+                    </table>
+                </div>
+                <div class="md-card__menu">
+                    <button class="md-button" ng-click="ctrl.onSaveCola( ctrl.frmData.add )">
+                        <label class="">Agregar Cola</label>
+                        <i class="mdi mdi-plus"></i>
+                    </button>
+                </div>
+        </div>
+    </div>
+</form>

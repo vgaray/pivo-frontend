@@ -1,0 +1,46 @@
+<div ng-controller="cargaPermisoLlamadasCtrl as archivoCtrl" >
+    <div class="row">
+        <div class="col-md-12">
+            <div class="md-card animated fadeInUp">
+                <div class="md-card__title">
+                    <h2 class="md-card__title-text"> {{archivoCtrl.frmData.name_page_title}}</h2>
+                </div>
+                <div class="md-card__supporting-text">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <div class="btn-group" >
+                                <a >
+                                <button type="button" class="md-button"  ng-click="archivoCtrl.atras()"> Atras</button>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-input-file">
+                            <input id="archivo"  type="file" file-model="archivoCtrl.myFile"  ng-model="archivoCtrl.valorFile"/>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="md-button" ng-click="archivoCtrl.uploadFile()">Subir Excel
+                                <i class="mdi mdi-file-excel"></i>
+                            </button>
+                        </div>
+                        <div class="col-xs-4">
+                                <div class="md-textfield" ng-class="{'is-dirty' : archivoCtrl.myFile.name.length > 0}">
+                                    <input class="md-textfield__input" ng-model="archivoCtrl.archivoSelec" id="fileSelected" disabled>
+                                    <label class="md-textfield__label" for="">Seleccionar Archivo</label>
+                                </div>
+                                <button class="md-button-input md-button-file" ng-click="archivoCtrl.upFile()">
+                                    <i class="mdi mdi-paperclip mdi-file"></i>
+                                </button>
+                        </div>
+                        <script>
+                                document.getElementById("archivo").onchange = function () {
+                                    if(this.files[0]!=null){
+                                        document.getElementById("fileSelected").value = this.files[0].name;
+                                    }
+                            };
+                        </script>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

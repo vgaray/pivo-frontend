@@ -1,0 +1,174 @@
+<div class="md-card">
+    <div class="md-card__title">
+        <h2 class="md-card__title-text">{{ctrl.modal.nombreNuevo}}</h4>
+    </div>
+    <div class="md-card__supporting-text">
+        <form name="formInstanciaRegistrar">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="md-input-group__button" ng-class="{ 'is-dirty': ctrl.BuscaClienteBtn.request.pNudocide.length > 0}">
+                        <ui-select class="md-select" ng-change="ctrl.listarClic()" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                            name="buscaCli" id="buscaCli" ng-model="ctrl.nuAnexos" theme="bootstrap" reset-search-input="true"
+                            title="Selec. Anexo" ng-click="ctrl.listarClic()">
+                            <ui-select-match placeholder="selec nªdocumento">{{$select.selected}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="ruc in ctrl.Listacli track by $index" refresh="ctrl.nuDocumentoAutocompletar($select.search)"
+                                refresh-delay="0">
+                                <div ng-bind-html="ruc| highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-textfield" ng-class="{ 'is-dirty': ctrl.nombre.length > 0, 'is-invalid': formInstanciaRegistrar.nombreCli.$dirty && formInstanciaRegistrar.nombreCli.$touched && formInstanciaRegistrar.nombreCli.$invalid || formInstanciaRegistrar.nombreCli.$error.required}">
+                        <input ng-disabled="true" type="text" name="nombreCli" class="md-textfield__input" ng-model="ctrl.nombre" required>
+                        <label class="md-textfield__label" >Cliente</label>
+                        <span class="md-textfield__error" ng-show="formInstanciaRegistrar.nombreCli.$dirty && formInstanciaRegistrar.nombreCli.$touched && formInstanciaRegistrar.nombreCli.$invalid || formInstanciaRegistrar.nombreCli.$error.required">*Falta seleccionar Cliente</span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-select" ng-class="{ 'is-dirty': ctrl.comborecentEmpresa.length > 0, 'is-invalid': formInstanciaRegistrar.comborecentEmpresa.$dirty && formInstanciaRegistrar.comborecentEmpresa.$touched && formInstanciaRegistrar.comborecentEmpresa.$invalid || formInstanciaRegistrar.comborecentEmpresa.$error.required}">
+                        <select class="md-select__input" ng-change="ctrl.listadoPlan(ctrl.plan.request.pIdPlan)" ng-model="ctrl.plan.request.pIdPlan"
+                            ng-options="depedi as depedi.noDetallePedido for depedi in ctrl.lsdetallepedido" name="comborecentEmpresa"
+                            required>
+                            <option ng-show="false" value="" selected="true"></option>
+                        </select>
+                        <label class="md-select__label">Seleccione un detalle pedido</label>
+                        <span class="md-select__error" ng-show="formInstanciaRegistrar.comborecentEmpresa.$dirty && formInstanciaRegistrar.comborecentEmpresa.$touched && formInstanciaRegistrar.comborecentEmpresa.$invalid || formInstanciaRegistrar.comborecentEmpresa.$error.required">*detalle pedido requerido</span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-textfield" ng-class="{ 'is-dirty': ctrl.Instancia.request.instanciaN.inicial > 0}">
+                        <input ng-disabled="true" type="number" name="Cantidad" class="md-textfield__input" ng-model="ctrl.Instancia.request.instanciaN.inicial">
+                        <label class="md-textfield__label" for="Cantidad">Cantidad</label>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-textfield" ng-class="{ 'is-dirty': ctrl.Instancia.request.instanciaN.ip_asterisk.length > 0 , 'is-invalid': formInstanciaRegistrar.ip_asterisk.$dirty && formInstanciaRegistrar.ip_asterisk.$touched && formInstanciaRegistrar.ip_asterisk.$invalid || formInstanciaRegistrar.ip_asterisk.$error.required}">
+                        <input type="text" name="ip_asterisk" class="md-textfield__input" ng-ip-address ng-model="ctrl.Instancia.request.instanciaN.ip_asterisk"
+                            required>
+                        <label class="md-textfield__label">Ip Asterisk</label>
+                        <span class="md-textfield__error" ng-show="formInstanciaRegistrar.ip_asterisk.$dirty && formInstanciaRegistrar.ip_asterisk.$touched && formInstanciaRegistrar.ip_asterisk.$invalid || formInstanciaRegistrar.ip_asterisk.$error.required">*IP Asterisk requerido</span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-textfield" ng-class="{ 'is-dirty': ctrl.Instancia.request.instanciaN.no_mascara_red_lan.length > 0 , 'is-invalid': formInstanciaRegistrar.redlan.$dirty && formInstanciaRegistrar.redlan.$touched && formInstanciaRegistrar.redlan.$invalid || formInstanciaRegistrar.redlan.$error.required}">
+                        <input type="text" name="redlan" class="md-textfield__input" ng-ip-address ng-model="ctrl.Instancia.request.instanciaN.no_mascara_red_lan"
+                            required>
+                        <label class="md-textfield__label">Nombre Mascara Red Lan</label>
+                        <span class="md-textfield__error" ng-show="formInstanciaRegistrar.redlan.$dirty && formInstanciaRegistrar.redlan.$touched && formInstanciaRegistrar.redlan.$invalid || formInstanciaRegistrar.redlan.$error.required">*ip red lan requerido</span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-textfield" ng-class="{ 'is-dirty': ctrl.Instancia.request.instanciaN.no_mascara_open_vpn.length > 0 , 'is-invalid': formInstanciaRegistrar.mascaraop.$dirty && formInstanciaRegistrar.mascaraop.$touched && formInstanciaRegistrar.mascaraop.$invalid || formInstanciaRegistrar.mascaraop.$error.required}">
+                        <input type="text" name="mascaraop" class="md-textfield__input" ng-ip-address ng-model="ctrl.Instancia.request.instanciaN.no_mascara_open_vpn"
+                            required>
+                        <label class="md-textfield__label">Nombre Mascara Open VPN</label>
+                        <span class="md-textfield__error" ng-show="formInstanciaRegistrar.mascaraop.$dirty && formInstanciaRegistrar.mascaraop.$touched && formInstanciaRegistrar.mascaraop.$invalid || formInstanciaRegistrar.mascaraop.$error.required">*ip ope vpn requerido</span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-textfield is-dirty" ng-class="{ 'is-dirty':ctrl.Instancia.request.instanciaN.puerto_ssh_asterisk.length > 0}">
+                        <input min="22" ng-disabled="true" type="number" name="puertoSh" class="md-textfield__input" ng-model="ctrl.Instancia.request.instanciaN.puerto_ssh_asterisk">
+                        <label class="md-textfield__label" for="puertoSh">Puerto SSH Asterisk</label>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-textfield" ng-class="{ 'is-dirty':ctrl.Instancia.request.instanciaN.puerto_openvpn.length > 0, 'is-invalid': formInstanciaRegistrar.puerto_openvpn.$dirty && formInstanciaRegistrar.puerto_openvpn.$touched && formInstanciaRegistrar.puerto_openvpn.$invalid || formInstanciaRegistrar.puerto_openvpn.$error.required}">
+                        <input min="30000" max="65536" type="number" name="puerto_openvpn" class="md-textfield__input" ng-model="ctrl.Instancia.request.instanciaN.puerto_openvpn"
+                            required>
+                        <label class="md-textfield__label">Puerto openvpn</label>
+                        <span class="md-textfield__error" ng-show="formInstanciaRegistrar.puerto_openvpn.$dirty && formInstanciaRegistrar.puerto_openvpn.$touched && formInstanciaRegistrar.puerto_openvpn.$invalid || formInstanciaRegistrar.puerto_openvpn.$error.required">*IP puerto openvpn requerido</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="md-select" ng-class="{ 'is-dirty': ctrl.Instancia.request.instanciaN.sim_pais.length > 0,'is-invalid': formInstanciaRegistrar.comboPais.$dirty && formInstanciaRegistrar.comboPais.$touched && formInstanciaRegistrar.comboPais.$invalid || formInstanciaRegistrar.comboPais.$error.required}">
+                        <select class="md-select__input" ng-change="ctrl.combochangeP()" ng-model="ctrl.Instancia.request.instanciaN.sim_pais" ng-options="territorio.codigo as territorio.nombre for territorio in ctrl.lspaises" name="comboPais" required >
+                            <option ng-show="false" value="" selected="true"></option>
+                        </select>
+                        <label class="md-select__label">Seleccione un país</label>
+                        <span class="md-select__error" ng-show="formInstanciaRegistrar.comboPais.$dirty && formInstanciaRegistrar.comboPais.$touched && formInstanciaRegistrar.comboPais.$invalid || formInstanciaRegistrar.comboPais.$error.required">*país requerido</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="md-select" ng-class="{ 'is-dirty': ctrl.Instancia.request.instanciaN.sim_provincia.length > 0,'is-invalid': formInstanciaRegistrar.comboProvincia.$dirty && formInstanciaRegistrar.comboProvincia.$touched && formInstanciaRegistrar.comboProvincia.$invalid || formInstanciaRegistrar.comboProvincia.$error.required}">
+                        <select class="md-select__input" ng-change="ctrl.combochangeC(ctrl.Instancia.request.instanciaN.sim_provincia)" ng-model="ctrl.Instancia.request.instanciaN.sim_provincia"
+                            ng-click="ctrl.listarciudad()" ng-options="ciudad as ciudad.nombre for ciudad in ctrl.lsciudades" name="comboProvincia" required>
+                            <option ng-show="false" value="" selected="true">{{ctrl.Instancia.request.instanciaN.sim_provincia}}</option>
+                        </select>
+                        <label class="md-select__label">Seleccione una provincia</label>
+                        <span class="md-select__error" ng-show="formInstanciaRegistrar.comboProvincia.$dirty && formInstanciaRegistrar.comboProvincia.$touched && formInstanciaRegistrar.comboProvincia.$invalid || formInstanciaRegistrar.comboProvincia.$error.required">*provincia requerida</span>
+                    </div>
+                </div>
+               
+                <div class="col-sm-6">
+                    <div class="md-textfield" ng-class="{ 'is-dirty':ctrl.Instancia.request.instanciaN.full_provincia.length > 0,'is-invalid': formInstanciaRegistrar.locacion.$dirty && formInstanciaRegistrar.locacion.$touched && formInstanciaRegistrar.locacion.$invalid || formInstanciaRegistrar.locacion.$error.required}">
+                        <input type="text" name="locacion" class="md-textfield__input" ng-model="ctrl.Instancia.request.instanciaN.full_provincia"
+                            required>
+                        <label class="md-textfield__label">Locación</label>
+                        <span class="md-textfield__error" ng-show="formInstanciaRegistrar.locacion.$dirty && formInstanciaRegistrar.locacion.$touched && formInstanciaRegistrar.locacion.$invalid || formInstanciaRegistrar.locacion.$error.required">*locación requerida</span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-textfield" ng-class="{ 'is-dirty':ctrl.Instancia.request.instanciaN.no_organi.length > 0}">
+                        <input ng-disabled="true" type="text" name="organizacion" class="md-textfield__input" ng-model="ctrl.Instancia.request.instanciaN.no_organi">
+                        <label class="md-textfield__label" for="organizacion">Organización</label>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-textfield" ng-class="{ 'is-dirty' : ctrl.Instancia.request.instanciaN.no_email.length > 0,'is-invalid': formInstanciaRegistrar.no_email.$dirty && formInstanciaRegistrar.no_email.$touched && formInstanciaRegistrar.no_email.$invalid || formInstanciaRegistrar.no_email.$error.required}">
+                        <input type="email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" name="no_email" class="md-textfield__input" ng-model="ctrl.Instancia.request.instanciaN.no_email"
+                            required>
+                        <label class="md-textfield__label" for="no_email">Email</label>
+                        <span class="md-textfield__error" ng-show="formInstanciaRegistrar.no_email.$dirty && formInstanciaRegistrar.no_email.$touched && formInstanciaRegistrar.no_email.$invalid || formInstanciaRegistrar.no_email.$error.required">*Email requerido</span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-textfield" ng-class="{ 'is-dirty':ctrl.Instancia.request.instanciaN.no_instancia.length > 0,'is-invalid': formInstanciaRegistrar.no_instancia.$dirty && formInstanciaRegistrar.no_instancia.$touched && formInstanciaRegistrar.no_instancia.$invalid || formInstanciaRegistrar.no_instancia.$error.required}">
+                        <input type="text" name="no_instancia" class="md-textfield__input" ng-model="ctrl.Instancia.request.instanciaN.no_instancia"
+                            required>
+                        <label class="md-textfield__label">Nombre Instancia</label>
+                        <span class="md-textfield__error" ng-show="formInstanciaRegistrar.no_instancia.$dirty && formInstanciaRegistrar.no_instancia.$touched && formInstanciaRegistrar.no_instancia.$invalid || formInstanciaRegistrar.no_instancia.$error.required">*nombre requerido</span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-textfield" ng-class="{ 'is-dirty':ctrl.Instancia.request.instanciaN.no_password_ldap.length > 0,'is-invalid': formInstanciaRegistrar.secret.$dirty && formInstanciaRegistrar.secret.$touched && formInstanciaRegistrar.secret.$invalid || formInstanciaRegistrar.secret.$error.required}">
+                        <input type="text" ng-disabled="true" name="secret" class="md-textfield__input" data-ng-model="ctrl.Instancia.request.instanciaN.no_password_ldap"
+                            required>
+                        <label class="md-textfield__label">Password</label>
+                        <span class="md-textfield__error" ng-show="formInstanciaRegistrar.secret.$dirty && formInstanciaRegistrar.secret.$touched && formInstanciaRegistrar.secret.$invalid || formInstanciaRegistrar.secret.$error.required">*password requerido</span>
+                    </div>
+                    <button type="button" class="md-button" data-password-generator data-field="ctrl.Instancia.request.instanciaN.no_password_ldap"
+                        data-button-text="Generar" data-password-length="12" data-uppercase="true" data-numbers="true" data-specials="false"
+                        data-similar-chars="false" data-prefix=""></button>
+                </div>
+                <div class="col-sm-3">
+                    <div class='md-switch'>
+                        <label class="md-checkbox__label">Estado</label>
+                        <div class="md-checkbox__toggle is-disabled">
+                            <input class="tgl tgl-ios" id="estado" type="checkbox" ng-model="ctrl.Instancia.request.instanciaN.il_estado" />
+                            <label class="tgl-btn" for="estado"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class='md-switch'>
+                        <label class="md-checkbox__label">Seguridad TLS/SRTP </label>
+                        <div class="md-checkbox__toggle">
+                            <input class="tgl tgl-ios" id="security" type="checkbox" ng-model="ctrl.Instancia.request.instanciaN.il_seguridad" />
+                            <label class="tgl-btn" for="security"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="md-card__actions text-right">
+        <button type="button" class="md-button" ng-disabled='!formInstanciaRegistrar.$valid' ng-click="ctrl.registrarInstancia()">Guardar</button>
+    </div>
+    <div class="md-card__menu">
+        <button class="md-button md-button--icon" data-dismiss="modal" ng-click="ctrl.cancel()">
+            <i class="mdi mdi-close"></i>
+        </button>
+    </div>
+</div>

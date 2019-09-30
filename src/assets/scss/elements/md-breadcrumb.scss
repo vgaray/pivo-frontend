@@ -1,0 +1,68 @@
+.md-breadcrumb {
+  background-color: transparent;
+  padding: 8px 16px;
+  margin-bottom: 15px;
+  list-style:none;
+  display: inline-block;
+  border-radius: 2px;
+  width: 100%;
+  //box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12), 0 3px 1px -2px rgba(0, 0, 0, .2);
+
+  & li:first-of-type a i {
+    color: $color-black;
+    font-size: 14px;
+    line-height: 24px;
+    margin-right: 5px;
+  }
+
+  &>li {
+    display: inline-block;
+    color: $color-black;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 24px;
+    text-transform: initial;
+    background: #e4e4e4;
+    -webkit-transform: skew(-20deg);
+    -moz-transform: skew(-20deg);
+    -ms-transform: skew(-20deg);
+    -o-transform: skew(-20deg);
+    transform: skew(-20deg);
+    padding: 5px 20px;
+
+    &:nth-child(2){
+      background: #606060;
+      color: #FFFFFF;
+    }
+
+    &:last-child{
+      background:$color-default;
+      color: #FFFFFF;
+    }
+
+    &>a {
+      color: $color-black;
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 24px;
+      text-transform: initial;
+      text-decoration: none;
+    }
+
+    // &::after {
+    //   content: "\F142";
+    //   font: normal normal normal 24px/1 "Material Design Icons";
+    //   font-size: 14px;
+    //   font-weight: 600;
+    //   margin-left: 8px;
+    //   line-height: 24px;
+    //   color: $color-black;
+    // }
+  }
+
+  &>li:last-of-type {
+    &:after {
+      content: none;
+    }
+  }
+}

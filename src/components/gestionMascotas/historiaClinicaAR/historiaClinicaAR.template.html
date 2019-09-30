@@ -1,0 +1,129 @@
+<div class="md-card">
+    <form name="formHC">
+        <div class="md-card__title">
+            <h2 class="md-card__title-text">{{Ctrl.frmData.name_page_title}}</h4>
+        </div>
+        <div class="md-card__supporting-text">
+            <div class="row">
+                <div class="col-sm-12 md-card__row-title">{{Ctrl.frmData.name_content}}</div>
+                <div class="col-sm-6" ng-hide="Ctrl.ilActivo">
+                    <div class="md-textfield"
+                        ng-class="{ 'is-dirty': Ctrl.frmData.HistoriaClinica.listar.request.pNoPass.length > 0,'is-invalid': formHC.noPass.$touched && formHC.noPass.$invalid}">
+                        <input type="password" name="noPass" class="md-textfield__input"
+                            ng-model="Ctrl.frmData.HistoriaClinica.listar.request.pNoPass">
+                        <label class="md-textfield__label" for="noPass">Contraseña de H.C</label>
+                    </div>
+
+                </div>
+                <div class="col-sm-6" ng-hide="Ctrl.ilActivo">
+                    <div class="md-card__actions text-right">
+                        <button type="button" class="md-button" ng-click="Ctrl.cargaDatos()">Ingresar</button>
+                    </div>
+                </div>
+                <div class="tabbable" ng-show="Ctrl.ilActivo">
+                    <!-- Only required for left/right tabs -->
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="" data-target="#tab1" data-toggle="tab" ng-click="Ctrl.showTab1()">Datos
+                                Mascota</a>
+                        </li>
+                        <li><a href="" data-target="#tab2" data-toggle="tab" ng-click="Ctrl.showTab2()">Estado</a>
+                        </li>
+                        <li><a href="" data-target="#tab3" data-toggle="tab" ng-click="Ctrl.showTab3()">Constantes</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="row" ng-show="Ctrl.tab1">
+                            <div class="col-sm-6">
+                                <div class="md-textfield"
+                                    ng-class="{ 'is-dirty': Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noNombre.length > 0,'is-invalid': formHC.noMascota.$touched && formHC.noMascota.$invalid}">
+                                    <input type="text" name="noMascota" class="md-textfield__input"
+                                        ng-model="Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noNombre">
+                                    <label class="md-textfield__label" for="noMascota">Mascota</label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row" ng-show="Ctrl.tab2">
+                            <div class="col-sm-6">
+                                <div class="md-select"
+                                    ng-class="{ 'is-dirty':Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noNombreEstadoReproductivo.length > 0}">
+                                    <select class="md-select__input" name="eReproductivo"
+                                        ng-change="Ctrl.combochangeReproductivo(Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.idEstadoReproductivo)"
+                                        ng-model="Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.idEstadoReproductivo"
+                                        ng-options="tiposRepro as tiposRepro.noNombreEstadoReproductivo for tiposRepro in Ctrl.comboEstadoReproductivo">
+                                        <option ng-show="false" value="" selected="true">
+                                            {{Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noNombreEstadoReproductivo}}
+                                        </option>
+                                    </select>
+                                    <label class="md-select__label" for="eReproductivo">E.Reproductivo</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="md-textfield"
+                                    ng-class="{ 'is-dirty': Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noTipoAlimentacion.length > 0,'is-invalid': formHC.noTipoAlimentacion.$touched && formHC.noTipoAlimentacion.$invalid}">
+                                    <input type="text" name="noTipoAlimentacion" class="md-textfield__input"
+                                        ng-model="Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noTipoAlimentacion">
+                                    <label class="md-textfield__label" for="noTipoAlimentacion">Tipo de
+                                        Alimentacion</label>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="md-textfield"
+                                    ng-class="{ 'is-dirty': Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noAlergias.length > 0,'is-invalid': formHC.noAlergias.$touched && formHC.noAlergias.$invalid}">
+                                    <input type="text" name="noAlergias" class="md-textfield__input"
+                                        ng-model="Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noAlergias">
+                                    <label class="md-textfield__label" for="noAlergias">Alergias</label>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="md-textfield"
+                                    ng-class="{ 'is-dirty': Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noAntFamiliares.length > 0,'is-invalid': formHC.noAntecedentes.$touched && formHC.noAntecedentes.$invalid}">
+                                    <input type="text" name="noAntecedentes" class="md-textfield__input"
+                                        ng-model="Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noAntFamiliares">
+                                    <label class="md-textfield__label" for="noAntecedentes">Antecedentes
+                                        Familiares</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="Ctrl.tab3">
+                            <div class="col-sm-6">
+                                <div class="md-textfield"
+                                    ng-class="{ 'is-dirty': Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noNombre.length > 0,'is-invalid': formHC.noMascota.$touched && formHC.noMascota.$invalid}">
+                                    <input type="text" name="noMascota" class="md-textfield__input" ng-model="">20 Kg
+                                    <label class="md-textfield__label" for="noMascota">Peso</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="md-textfield"
+                                    ng-class="{ 'is-dirty': Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noNombre.length > 0,'is-invalid': formHC.noMascota.$touched && formHC.noMascota.$invalid}">
+                                    <input type="text" name="noMascota" class="md-textfield__input" ng-model="">74 bpm
+                                    <label class="md-textfield__label" for="noMascota">Pulso</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+
+                                <div class="md-textfield"
+                                    ng-class="{ 'is-dirty': Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noNombre.length > 0,'is-invalid': formHC.noMascota.$touched && formHC.noMascota.$invalid}">
+                                    <input type="text" name="noMascota" class="md-textfield__input" ng-model="">36ºC
+                                    <label class="md-textfield__label" for="noMascota">Temperatura</label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="md-card__menu">
+            <button class="md-button md-button--icon" data-dismiss="modal" ng-click="Ctrl.cancel()">
+                <i class="mdi mdi-close"></i>
+            </button>
+        </div>
+
+    </form>
+</div>

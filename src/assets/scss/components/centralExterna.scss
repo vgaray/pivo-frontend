@@ -1,0 +1,15 @@
+.central-externa{
+    .table-central-externa{
+        .fa-trash{
+            color:$danger;
+        }
+        
+        .th-center{
+            text-align: center;
+        }
+    }
+    
+    thead tr th{
+        text-align: center;
+    }
+}

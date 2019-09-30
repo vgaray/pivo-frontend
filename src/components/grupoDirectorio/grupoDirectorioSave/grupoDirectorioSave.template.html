@@ -1,0 +1,22 @@
+<div class="md-card">
+    <div class="md-card__title">
+        <h2 class="md-card__title-text">{{ctrl.frmData.nameModal}}</h2>
+    </div>
+    <div class="md-card__supporting-text">
+        <form name="formGrupoGuardar" novalidate>
+            <div class="md-textfield" ng-class="{ 'is-dirty': ctrl.frmData.grupo.entity.noNombre.length > 0 , 'is-invalid': formGrupoGuardar.noNombre.$touched && formGrupoGuardar.noNombre.$invalid}">
+                <label class="md-textfield__label">Nombre Grupo *</label>
+                    <input type="text" name="noNombre" class="md-textfield__input" placeholder="Ingrese nombre" ng-model="ctrl.frmData.grupo.entity.noNombre"
+                        required="true" ng-change="ctrl.validaCampos(); ctrl.cambiarEspacios(); ctrl.onValidationNameDirectory()" >
+                    <span class="md-textfield__error" data-ng-show="formGrupoGuardar.noNombre.$touched && formGrupoGuardar.noNombre.$invalid">*Nombre es Obligatorio</span>
+                    <span class="md-textfield__error"  ng-if="ctrl.validacionDirectorio==true">*Nombre ya existe, seleccionar otro</span>
+            </div>                                            
+        </form>
+    </div>
+    <div  class="md-card__actions text-right">
+        <button type="button" class="md-button" ng-disabled="ctrl.varValidacion || ctrl.disableButtonSave || ctrl.validacionDirectorio" ng-click="ctrl.onSaveGrupo()">Guardar</button>
+    </div>
+    <div class="md-card__menu">
+        <button type="button" class="md-button md-button--icon"  ng-disabled="ctrl.disableButtonSave" data-dismiss="modal" ng-click="ctrl.cancel()"><i class="mdi mdi-close"></i></button>
+    </div>              
+</div>

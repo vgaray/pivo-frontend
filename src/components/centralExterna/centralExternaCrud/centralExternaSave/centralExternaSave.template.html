@@ -1,0 +1,36 @@
+<div class="md-card">
+    <div class="md-card__title">
+        <h2 class="md-card__title-text">{{Ctrl.frmData.nameModal}}</h2>
+    </div>
+    <div class="md-card__supporting-text">
+        <form class="row" name="formCentral" novalidate>
+            <div class="col-xs-12">
+                <div class="md-textfield" ng-class="{ 'is-invalid': formCentral.nombre.$touched && formCentral.nombre.$invalid, 'is-dirty' : Ctrl.frmData.central.entity.pNoEmpresa.length > 0 }">
+                    <input type="text" name="nombre" class="md-textfield__input" placeholder="Ingrese el nombre de la Empresa" ng-model="Ctrl.frmData.central.entity.pNoEmpresa" required="true">
+                    <label class="md-textfield__label">Nombre de la Empresa : </label>
+                    <span class="md-textfield__error" ng-show="formCentral.nombre.$touched && formCentral.nombre.$invalid">*Campo Requerido</span>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <div class="md-textfield" ng-class="{ 'is-invalid' : Ctrl.desVa==0 || formCentral.IP.$touched && formCentral.IP.$invalid, 'is-dirty' : Ctrl.frmData.central.entity.pNuIpEmpr.length > 0 }">
+                    <input class="md-textfield__input" type="text" name="IP" ng-ip-address placeholder="Ingrese un IP" ng-model="Ctrl.frmData.central.entity.pNuIpEmpr" ng-change="Ctrl.validarIp()" required>
+                    <label class="md-textfield__label">Direcci&oacute;n IP </label>
+                    <span class="md-textfield__error" ng-show="formCentral.IP.$touched && formCentral.IP.$invalid" class="text-danger">*Formato Incorrecto</span>
+                    <span class="md-textfield__error" ng-disabled="Ctrl.inMen">{{Ctrl.mensajeIP}}</span>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <div class="md-textfield">
+                    <textarea class="md-textfield__input" rows="12" name="descripcion" placeholder="Ingrese una descripción" ng-model="Ctrl.frmData.central.entity.pNoDescrip"></textarea>
+                    <label class="md-textfield__label">Descripci&oacute;n</label>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="md-card__actions">
+        <button type="button" class="md-button" ng-click="Ctrl.onSaveCentral()" ng-disabled='Ctrl.desVa==0 || !formCentral.$valid'>Guardar</button>
+    </div>
+    <div class="md-card__menu">
+        <button class="md-button md-button--icon" data-dismiss="modal" ng-click="Ctrl.cancel()"><i class="mdi mdi-close"></i></button>
+    </div>
+</div>

@@ -1,0 +1,90 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="md-card animated fadeInUp">
+            <div class="md-card__title">
+                <h2 class="md-card__title-text">Lista Area y Centro de Costo</h2>
+            </div>
+            <div class="md-card__supporting-text">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="md-textfield" ng-class="{ 'is-dirty' : ctrl.frmData.areaCentroCosto.list.buscarAreaCentro.request.pNoArea.length > 0 }">
+                            <input ng-keyup="event=$event;ctrl.listarContenidoFiltro(event.keyCode )" type="text" maxlength="20" class="md-textfield__input"
+                                ng-model="ctrl.frmData.areaCentroCosto.list.buscarAreaCentro.request.pNoArea">
+                            <label class="md-textfield__label">Área</label>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="md-textfield" ng-class="{ 'is-dirty' : ctrl.frmData.areaCentroCosto.list.buscarAreaCentro.request.pNoCentroCosto.length > 0 }">
+                            <input ng-keyup="event=$event;ctrl.listarContenidoFiltro(event.keyCode )" type="text" maxlength="20" class="md-textfield__input"
+                                ng-model="ctrl.frmData.areaCentroCosto.list.buscarAreaCentro.request.pNoCentroCosto">
+                            <label class="md-textfield__label">Centro de Costo</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">Regresar
+                        <button ng-click="ctrl.listarInicial()" class="md-button md-button--icon" href="" uib-tooltip="Lista Inicial">
+                            <span href=""  uib-tooltip="Lista Inicial" class="mdi mdi-keyboard-return icon-black">
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                <div class="table-responsive ">
+                    <table class="md-table table" id="tbACC">
+                        <thead>
+                            <tr>
+                                <th>Área</th>
+                                <th>Centro de Costo</th>
+                                <th class="text-center">Editar</th>
+                                <th class="text-center">Eliminar</th>
+                                <th class="text-center">Bolsa Min.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="lsACC in ctrl.lsAreaCentroCosto | filter:ctrl.paginate ">
+                                <td>{{ctrl.espacioArea?(lsACC.dad ? (lsACC.index+'._'+lsACC.noArea) : "" ):lsACC.noArea}}</td>
+                                <td>{{ctrl.espacioCentro?(!lsACC.dad ?(((lsACC.index-1)+'.'+lsACC.subindex)+'._'+lsACC.noCentroCosto)
+                                    : "" ):lsACC.noCentroCosto}}</td>
+                                <td class="text-center">
+                                    <button class="md-button md-button--icon" uib-tooltip="Editar" ng-click="ctrl.onSaveAreaCentroCosto( ctrl.frmData.update, lsACC.idEmpare )">
+                                        <i class="mdi mdi-pencil"></i>
+                                    </button>
+                                </td>
+                                <td class="text-center">
+                                    <button class="md-button md-button--icon" uib-tooltip="Eliminar" ng-click="ctrl.onEliminarAreaCentroCosto( lsACC.idEmpare,lsACC.noArea,lsACC.noCentroCosto )">
+                                        <i class="mdi mdi-delete"></i>
+                                    </button>
+                                </td>
+                                <td class="text-center">
+                                    <button class="md-button md-button--icon" uib-tooltip="Asignar Minutos" ng-click="ctrl.modalBolsaEmpresa(lsACC.idArea,lsACC.idEmpare)">
+                                        <i class="mdi mdi-deskphone"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="10" class="text-center">
+                                    <ul uib-pagination total-items="ctrl.totalItems" ng-model="ctrl.currentPage" max-size="10" boundary-links="true" items-per-page="ctrl.numPerPage"
+                                        class="pagination-sm" first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"
+                                        last-text="&raquo;">
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                </div>
+            </div>
+            <div class="md-card__menu">
+                <button class="md-button" ng-click="ctrl.onSaveAreaCentroCosto( ctrl.frmData.add )">
+                    <label class="">Agregar Área</label>
+                    <i class="mdi mdi-account-plus"></i>
+                </button>
+                <button class="md-button" ng-click="ctrl.onSaveCentroCosto( ctrl.frmData.add )">
+
+                    <label class="">Agregar Centro de Costo</label>
+                    <i class="mdi mdi-account-plus"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

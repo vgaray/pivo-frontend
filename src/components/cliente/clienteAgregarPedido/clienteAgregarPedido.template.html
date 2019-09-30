@@ -1,0 +1,156 @@
+<div class="md-card">
+    <div class="md-card__title">
+        <h2 class="md-card__title-text">Agregar Pedido</h2>
+    </div>
+    <div class="md-card__supporting-text">
+        <form  name="formAgregarPedido">
+            <div class="row">
+                <div class="col-sm-12 md-card__row-title">
+                
+                    <label>Cliente: </label> <span>{{Ctrl.clienteNMostrar.nombre}}</span>
+                        
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-textfield" ng-class="{ 'is-invalid': formAgregarPedido.coPedido.$touched && formAgregarPedido.coPedido.$invalid }">
+                        <input type="text" name="coPedido" class="md-textfield__input" required="true" ng-model="Ctrl.frmData.request.coPedido" ng-change="Ctrl.validaCodPedido()">
+                        <label class="md-textfield__label" for="coPedido">C&oacute;digo de Pedido</label>
+                        <small class="md-textfield__error" data-ng-show="formAgregarPedido.coPedido.$touched && formAgregarPedido.coPedido.$error.required">*C&oacute;digo de Pedido es Obligatorio</small>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-select" ng-class="{ 'is-invalid': formAgregarPedido.nomTipoPedido.$touched && Ctrl.frmData.request.idTipoPedido==null}">
+                        <select class="md-select__input" id="nomTipoPedido" name="nomTipoPedido" ng-model="Ctrl.frmData.request.idTipoPedido" ng-change="Ctrl.validaIdTipoPedido()" ng-options="lsPedidos.id as lsPedidos.noDescripcion for lsPedidos in Ctrl.lsTipoPedido">
+                            <!--<option ng-repeat="lsPedidos in Ctrl.lsTipoPedido" value="{{lsPedidos.id}}">{{lsPedidos.noDescripcion}}</option>-->
+                            <option ng-show="false" value="" selected="true">{{Ctrl.frmData.request.idTipoPedido}}</option>
+                        </select>
+                        <label class="md-select__label">Tipo Pedido:</label>
+                        <small class="md-select__error" ng-show="formAgregarPedido.nomTipoPedido.$touched && Ctrl.frmData.request.idTipoPedido==null">*Campo Obligatorio</small>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-select" ng-class="{'is-invalid': formAgregarPedido.nomPlan.$touched && Ctrl.frmData.request.idPlan==null}">
+                        <select class="md-select__input" id="nomPlan" name="nomPlan" ng-model="Ctrl.frmData.request.idPlan" ng-change="Ctrl.validaPlan()" 
+                            ng-options="lsPlane.id as lsPlane.noDescripcion for lsPlane in Ctrl.lsPlan">
+                            <option ng-show="false" value="" selected="true">{{Ctrl.frmData.request.idPlan}}</option>
+                        </select>
+                        <label class="md-select__label">Plan: </label>
+                        <small class="md-select__error" ng-show="formAgregarPedido.nomPlan.$touched && Ctrl.frmData.request.idPlan==null">*Campo Obligatorio</small>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-select" ng-class="{'is-invalid': formAgregarPedido.nomModalidad.$touched && Ctrl.frmData.request.idTipoDetalle==null}">
+                        <select id="nomModalidad" name="nomModalidad" class="md-select__input" ng-model="Ctrl.frmData.request.idTipoDetalle" ng-change="Ctrl.validaTipoDetalle()" 
+                          ng-options="lsModal.id as lsModal.noDescripcion for lsModal in Ctrl.lsModalidad">
+                          <option ng-show="false" value="" selected="true">{{Ctrl.frmData.request.idTipoDetalle}}</option>
+                        </select>
+                        <label class="md-select__label">Modalidad: </label>
+                        <small class="md-select__error" ng-show="formAgregarPedido.nomModalidad.$touched && Ctrl.frmData.request.idTipoDetalle==null">*Campo Obligatorio</small>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="md-textfield" ng-class="{ 'is-invalid': formAgregarPedido.noDireccion.$touched && formAgregarPedido.noDireccion.$invalid }">
+                        <input type="text" name="noDireccion" class="md-textfield__input" placeholder="Ingrese dirección"  required="true" ng-model="Ctrl.frmData.request.direccionPedido" ng-change="Ctrl.validaDireccionInstalacion()">
+                        <label class="md-textfield__label" for="coPedido">Dirección Instalaci&oacute;n</label>
+                        <small class="md-textfield__error" ng-show="formAgregarPedido.noDireccion.$touched && formAgregarPedido.noDireccion.$error.required">*Direcci&oacute;n de Instalaci&oacute;n es Obligatorio</small>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="md-textfield" ng-class="{'is-invalid': formAgregarPedido.noDescripcion.$touched && (Ctrl.frmData.request.dePedido==null || Ctrl.frmData.request.dePedido.lenght == 0) }">
+                        <textarea type="text" class="md-textfield__input" rows="12" name="noDescripcion" placeholder="Ingrese descripcion" ng-required="true" ng-model="Ctrl.frmData.request.dePedido" ng-change="Ctrl.validaDePedido()" ></textarea>
+                        <label class="md-textfield__label">Descripción:</label>
+                        <span class="md-textfield__error" ng-show="formAgregarPedido.noDescripcion.$touched && formAgregarPedido.noDescripcion.$error.required">*Descripci&oacute;n de Pedido es Obligatorio</span>
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+            <!-- <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                    <label for="nomTipoPedido">Tipo Pedido: </label>
+                    <select id="nomTipoPedido" name="nomTipoPedido"  class="form-control" ng-model="Ctrl.frmData.request.idTipoPedido" ng-change="Ctrl.validaIdTipoPedido()">
+                        <option value="">Seleccionar Tipo Pedido</option>
+                        <option ng-repeat="lsPedidos in Ctrl.lsTipoPedido" value="{{lsPedidos.id}}">{{lsPedidos.noDescripcion}}</option>
+                    </select>
+                </div>
+            </div> -->
+            <!--<div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group" ng-class="{ 'has-error' : formHorario.nomDiaSemanaFin.$invalid}">
+                    <label for="nomPlan">Plan: </label>
+                    <select id="nomPlan" name="nomPlan" class="form-control" ng-model="Ctrl.frmData.request.idPlan" ng-change="Ctrl.validaPlan()">
+                        <option value="">Seleccionar Plan</option>
+                        <option ng-repeat="lsPlane in Ctrl.lsPlan" value="{{lsPlane.id}}">{{lsPlane.noDescripcion}}</option>
+                    </select>
+                    <small ng-show="formHorario.nomPlan.$error.required" class="help-block">*Campo obligatorio</small>
+                </div>
+            </div>-->
+            <!--<div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group" ng-class="{ 'has-error' : formHorario.nomModalidad.$invalid}">
+                    <label for="nomModalidad">Modalidad: </label>
+                    <select id="nomModalidad" name="nomModalidad" class="form-control" ng-model="Ctrl.frmData.request.idTipoDetalle" ng-change="Ctrl.validaTipoDetalle()">
+                        <option value="">Seleccionar Modalidad</option>
+                        <option ng-repeat="lsModal in Ctrl.lsModalidad" value="{{lsModal.id}}">{{lsModal.noDescripcion}}</option>
+                    </select>
+                    <small ng-show="formHorario.nomModalidad.$error.required" class="help-block">*Campo obligatorio</small>
+                </div>
+            </div>-->
+            <!--<div class="col-sm-12">
+                <div class="md-textfield" ng-class="{ 'is-invalid': formAgregarPedido.coPedido.$touched && formAgregarPedido.coPedido.$invalid }">
+                    <input type="text" name="coPedido" class="md-textfield__input" required="true" ng-model="Ctrl.frmData.request.coPedido" ng-change="Ctrl.validaCodPedido()">
+                    <label class="md-textfield__label" for="coPedido">Dirección Instalaci&oacute;n</label>
+                    <small class="md-textfield__error" data-ng-show="formAgregarPedido.coPedido.$touched && formAgregarPedido.coPedido.$error.required">*C&oacute;digo de Dirección Instalaci&oacute;n</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Dirección Instalación:</label>
+                <div class=" col-xs-12 col-sm-9">
+                    <div ng-class="{ 'has-error': formAgregarPedido.noDireccion.$touched && formAgregarPedido.noDireccion.$invalid }">
+                        <input type="text" name="noDireccion" class="form-control " placeholder="Ingrese dirección"  required="true" ng-model="Ctrl.frmData.request.direccionPedido" ng-change="Ctrl.validaDireccionInstalacion()">
+                        <small class="text-danger" data-ng-show="formAgregarPedido.noDireccion.$touched && formAgregarPedido.noDireccion.$error.required">*Direccion de Instalación es Obligatorio</small>
+                    </div>
+                </div>
+            </div>-->
+            <!--<div class="form-group">
+                <label class="col-sm-3 control-label">Descripción:</label>
+                <div class=" col-xs-12 col-sm-9">
+                    <div ng-class="{ 'has-error': formAgregarPedido.noDescripcion.$touched && formAgregarPedido.noDescripcion.$invalid }">
+                        <textarea  class="form-control" rows="12" name="noDescripcion" placeholder="Ingrese descripcion" ng-required="true" ng-model="Ctrl.frmData.request.dePedido" ng-change="Ctrl.validaDePedido()" ></textarea>
+                        <small class="text-danger" data-ng-show="formAgregarPedido.noDescripcion.$touched && formAgregarPedido.noDescripcion.$error.required">*Descripción de Pedido es Obligatorio</small>
+                    </div>
+                </div>
+            </div>-->
+
+                <div class="table-responsive">
+                    <table class="md-table table">
+                        <thead>
+                            <tr>
+                                <th class="text-center" ng-repeat="header in Ctrl.headers">{{header.nombre}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="pedido in Ctrl.lsPedidos">
+                                <td class="text-center">{{pedido.coPedido}}</td>
+                                <td class="text-center">{{pedido.tiPedido}}</td>
+                                <td class="text-center">{{pedido.plan}}</td>
+                                <td class="text-center">{{pedido.tipoDetalle}}</td>
+                                <td class="text-center">{{pedido.dePedido}}</td>
+                                <td class="text-center">{{pedido.fePedido}}</td>
+                                <td class="text-center">
+                                    <a href="" uib-tooltip="Eliminar" ng-click="Ctrl.onEliminarPedido(pedido.idPedido)">
+                                        <i class="mdi mdi-delete"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+        
+        </form>
+    </div>
+    <div class="md-card__actions">
+        <button type="button" class="md-button" ng-click="Ctrl.reset(formAgregarPedido);Ctrl.agregarPedido()" ng-disabled="Ctrl.varValidacion" >Agregar</button>
+    </div>
+    <div class="md-card__menu">
+        <button class="md-button md-button--icon" data-dismiss="modal" ng-click="Ctrl.cancel()"><i class="mdi mdi-close"></i></button>
+    </div>
+</div>

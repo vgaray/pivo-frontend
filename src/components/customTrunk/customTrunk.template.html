@@ -1,0 +1,47 @@
+<div class="widgets customTrunk ">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="md-card animated fadeInUp">
+        <div class="md-card__title">
+          <h3 class="md-card__title-text">Lista Custom Trunk</h3>
+        </div>
+        <div class="md-card__supporting-text">
+          <div class="table-responsive">
+            <table class="md-table table">
+              <thead>
+                <tr>
+                  <th class="text-center" ng-repeat="header in ctrl.headerCustomTrunk">
+                    {{header.nombre}}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="customTrunks in ctrl.lsCustomTrunk">
+                  <td class="text-center">{{customTrunks.noCustomTrunk}}</td>
+                  <td class="text-center">{{customTrunks.noTiCustomTrunk}}</td>
+                  <td class="text-center">{{customTrunks.noDetalle}}</td>
+                  <td class="text-center">
+                     <button class="md-button md-button--icon" ng-click="ctrl.onSaveCustomTrunk( ctrl.frmData.update, customTrunks.idCustomTrunk )">
+                                        <i class="mdi mdi-pencil" aria-hidden="true"></i>
+                                    </button>
+                    </td>
+                  <td class="text-center">
+                                         <button class="md-button md-button--icon" ng-click="ctrl.onEliminarCustomTrunk(customTrunks.idCustomTrunk,customTrunks.noCustomTrunk,customTrunks.tiCustomTrunk,customTrunks.noDetalle)">
+                                        <i class="mdi mdi-delete" aria-hidden="true"></i>
+                                    </button>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="md-card__menu">
+                <button type="button" class="md-button" ng-click="ctrl.onSaveCustomTrunk( ctrl.frmData.add )">
+                                     Agregar Custom Trunk
+                                     <i class="fa fa-plus"></i>
+                                   </button>
+            </div>
+      </div>
+    </div>
+  </div>
+</div>

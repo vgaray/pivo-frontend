@@ -1,0 +1,88 @@
+<div class="md-card">
+    <div class="md-card__title">
+        <h2 class="md-card__title-text">{{ctrl.frmData.nameModal}}</h2>
+    </div>
+    <div class="md-card__supporting-text">
+        <form name="formUsuarioGesI" class="row">
+            <!-- Nombrea-->
+            <div class="col-sm-6">
+                <div class="md-textfield" ng-class="{ 'is-invalid': formUsuarioGesI.nomUsuario.$dirty && formUsuarioGesI.nomUsuario.$error.required, 'is-dirty': ctrl.frmData.usuario.entity.noNombre.length > 0  }">
+                    <input type="text" name="nomUsuario" class="md-textfield__input" ng-model="ctrl.frmData.usuario.entity.noNombre" 
+                    ng-change="ctrl.validarValIgu()" required>
+                    <label class="md-textfield__label" for="nomUsuario">Nombre(s)</label>
+                    <span class="md-textfield__error" ng-show="formUsuarioGesI.nomUsuario.$dirty && formUsuarioGesI.nomUsuario.$error.required">*Campo requerido</span>
+                </div>
+            </div>
+            <!--Apellidos -->
+            <div class="col-sm-6">
+                <div class="md-textfield" ng-class="{ 'is-invalid': formUsuarioGesI.apeUsuario.$dirty && formUsuarioGesI.apeUsuario.$error.required , 'is-dirty': ctrl.frmData.usuario.entity.noApellido.length > 0  }">
+                    <input type="text" name="apeUsuario" class="md-textfield__input" ng-model="ctrl.frmData.usuario.entity.noApellido" 
+                    ng-change="ctrl.validarValIgu();ctrl.validaFormatoEmail();" required>
+                    <label class="md-textfield__label" for="apeUsuario">Apellidos</label>
+                    <span class="md-textfield__error" ng-show="formUsuarioGesI.apeUsuario.$dirty && formUsuarioGesI.apeUsuario.$error.required">*Campo requerido</span>
+                </div>
+            </div>
+            <!--Email-->
+            <div class="col-sm-6">
+                <div class="md-textfield" ng-class="{ 'is-invalid': formUsuarioGesI.emailUsuario.$dirty && formUsuarioGesI.emailUsuario.$error.required || ctrl.flagDevEmail==1, 'is-dirty': ctrl.frmData.usuario.entity.email.length > 0  }">
+                    <input type="text" name="emailUsuario" class="md-textfield__input" ng-model="ctrl.frmData.usuario.entity.email" 
+                      ng-change="ctrl.validarValIgu();ctrl.verificarEmail()" required>
+                    <label class="md-textfield__label" for="emailUsuario">Email</label>
+                     <span class="md-textfield__error" >{{ctrl.menEmailVal}}</span>
+                    <span class="md-textfield__error" ng-show="formUsuarioGesI.emailUsuario.$dirty && formUsuarioGesI.emailUsuario.$error.required">*Campo requerido</span>
+                </div>
+            </div>
+            <!-- Tipo Rol -->
+            <div class="col-md-6">
+                <div class="md-select" ng-class="{ 'is-dirty': ctrl.flagCombo> 0, 'is-invalid' : formUsuarioGesI.selecRol.$invalid &&  formUsuarioGesI.selecRol.$touched }"
+                    ng-if="ctrl.frmData.usuario.entity.idRol!=2">
+                    <select class="md-select__input" name="selecRol" ng-model="ctrl.frmData.comboRol" ng-options="rol as rol.noRol for rol in ctrl.rolList track by rol.noRol"
+                       ng-change="ctrl.validarValIgu()"  required="required">
+                        <option ng-show="false"  value="" selected="">Seleccione un Rol...</option>
+                    </select>
+                    <label class="md-select__label">Rol</label>
+                    <span class="md-textfield__error" data-ng-show="!formUsuarioGesI.$pristine && formUsuarioGesI.selecRol.$error.required">*Escoja un Rol</span>
+                </div>
+            </div>
+        </form>
+        <div class="md-card__title-text">{{ctrl.frmData.subtitulo}}</div>
+        <form name="formUsuarioGesI2" class="row">
+            <!--Usuario-->
+            <div class="col-sm-12">
+                <div class="md-textfield" ng-class="{ 'is-dirty': ctrl.typeOperation>1, 'is-invalid': formUsuarioGesI2.loginUsuario.$dirty && formUsuarioGesI2.loginUsuario.$error.required }">
+                    <input type="text" name="loginUsuario" class="md-textfield__input" placeholder="Ingrese el nombre de usuario a usar" ng-disabled="ctrl.frmData.btnHabilitar"
+                        ng-model="ctrl.frmData.usuario.entity.noLogin" ng-change="ctrl.validarLogin();ctrl.validarValIgu()" required>
+                    <label class="md-textfield__label">Usuario</label>
+                    <span class="md-textfield__error">{{ctrl.frmData.usuario.mensajeValida}}</span>
+                    <span class="md-textfield__error" ng-show="formUsuarioGesI2.loginUsuario.$dirty && formUsuarioGesI2.loginUsuario.$error.required">*Campo requerido</span>
+                </div>
+            </div>
+            <!--check de cambio-->
+            <!--contraseña-->
+            <div class="col-sm-12">
+                <div class="md-checkbox" ng-show="ctrl.check">
+                    <input id="timeoutRestart" name="timeoutRestart" type="checkbox" aria-label="opcion checkbox" ng-model="ctrl.verContra"
+                     ng-change="ctrl.habCon()"  >
+                     <label for="timeoutRestart" class="control-label">¿Cambiar Contraseña?</label>
+                </div>
+                <div class="md-textfield" ng-show="ctrl.verContra" ng-class="{ 'is-invalid': formUsuarioGesI2.passUsuario.$dirty && formUsuarioGesI2.passUsuario.$error.required || ctrl.flaEstaValCon==1}">
+                    <input type="password" name="passUsuario" class="md-textfield__input"  
+                    ng-model="ctrl.frmData.usuario.password" 
+                     ng-change="ctrl.validarValIgu(); ctrl.validarContra();" required>
+                    <label class="md-textfield__label">Contraseña</label>
+                    <span class="md-textfield__error">{{ctrl.validaContraFinal}}</span>
+                    <span class="md-textfield__error" ng-show="formUsuarioGesI2.passUsuario.$dirty && formUsuarioGesI2.passUsuario.$error.required">*Campo requerido</span>
+                    
+                </div>
+
+            </div>
+            </div>
+     
+        </form>
+    <div class="md-card__actions">
+        <button type="button" ng-disabled="ctrl.nuEstadoBoton==1"  class="md-button" ng-click="ctrl.onSaveUsuario()">Guardar</button>
+    </div>
+    <div class="md-card__menu">
+        <button class="md-button md-button--icon" data-dismiss="modal" ng-click="ctrl.cancel()"><i class="mdi mdi-close"></i></button>
+    </div>
+</div>

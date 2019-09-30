@@ -1,0 +1,77 @@
+<div class="md-card modal-sounds">
+    <div class="md-card__title">
+        <h2 class="md-card__title-text">Audios Predeterminados</h4>
+    </div>
+    <div class="md-card__supporting-text md-card-audio">
+        <div class="row">
+            <div ng-hide = "ctrl.ui.isFilesLoaded || ctrl.ui.isListSoundEmpty" class="result-message">
+                <span class="img-result">
+                    <fading-circle-spinner></fading-circle-spinner>
+                </span>
+                <br/>
+                <span class="msg-result">Cargando audios del servidor...</span>
+            </div>
+            <div ng-hide = "!ctrl.ui.isErrorService" class="result-message">
+                <span class="img-result">
+                    
+                </span>
+                <br/>
+                <span class="msg-result">No existen archivos predeterminados por el momento...</span>
+            </div>
+            <div ng-hide="!ctrl.ui.isErrorService" class="result-message">
+                <span class="img-result">
+                    <span class="fa  fa-ban"></span>
+                </span>
+                <br/>
+                <span class="msg-result">Hubo una falla en la conexión con el servidor.</span>
+                <br/><br/>
+                <span class="btn btn-default" data-ng-click="ctrl.onLoadSoundsInServer()">Reintentar</span>
+            </div>
+            <div ng-hide = "!ctrl.ui.isFilesLoaded" class="row">
+                <!--<div class="media-player col-md-4 col-sm-12">
+                    <div class="thumbnail">
+                        <div class="content-icon-media-player">
+                            <div class="icon-media-player">
+                                <i class="glyphicon glyphicon-pause"></i>
+                            </div>
+                        </div>
+                        <div class="caption">
+                            <div class="name-sound">
+                                <span>{{itemSound}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+                <div class="playlist col-md-12 col-sm-12">                
+                    <div ng-repeat="itemSound in ctrl.frmData.lsAudiosPredeterminados">
+                        <div class="caption row">
+                            <div class="col-sm-2 col-xs-4 md-cont-audio">
+                                <!--<span class="item-icon-sound"><i class="glyphicon glyphicon-play"></i></span>-->
+                                <a class="md-item-play item-icon-sound sound a-{{$index+1}}" id="{{$index+1}}" ng-click="ctrl.AudioNombreElegir($index+1);ctrl.onPLayF($index+1)">
+                                    <audio id="ivr-{{$index + 1}}" class="audio-ivr"></audio>
+                                    <i class="glyphicon glyphicon-play"></i>
+                                    <!--audio id="ivr-{{$index + 1}}"></audio-->
+                                </a>
+                                <a class="md-item-play item-icon-sound sound" id="{{$index+1}}" ng-click="ctrl.AudioNombreElegir($index+1);ctrl.onStopF($index+1)">                                    
+                                    <i class="glyphicon glyphicon-stop"></i>
+                                </a>
+                                
+                            </div>
+                            <div class="col-sm-10 col-xs-8 md-cont-audio">
+                                <span>{{itemSound}}</span>
+                                <!--audio   controls>
+                                </audio-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="md-card__actions text-right">
+        <button class="md-button" data-ng-click="ctrl.onAccept()">Aceptar</button>
+    </div>
+    <div class="md-card__menu">
+        <button class="md-button md-button--icon" data-dismiss="modal" ng-click="ctrl.cancel()"><i class="mdi mdi-close"></i></button>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="md-card">
+    <div class="md-card__title">
+        <h2 class="md-card__title-text">{{ctrl.frmData.nameModal}}</h2>
+    </div>
+    <div class="md-card__supporting-text">
+        <form name="formEntradaGuardar" class="row">
+                <div class=" col-md-12">
+                    <div class="md-textfield" ng-class="{ 'is-dirty': ctrl.frmData.entradaDirectorio.entity.noNombre.length > 0 , 'is-invalid': formEntradaGuardar.noNombre.$touched && formEntradaGuardar.noNombre.$invalid} ">
+                        <label class="md-textfield__label">Nombre *</label>
+                        <input type="text" name="noNombre" class="md-textfield__input" placeholder="Ingrese nombre" ng-model="ctrl.frmData.entradaDirectorio.entity.noNombre"
+                            required="true" ng-change="ctrl.validaCampos()">
+                        <span class="md-textfield__error" ng-show="formEntradaGuardar.noNombre.$touched && formEntradaGuardar.noNombre.$invalid">*Nombre es Obligatorio</span>
+                    </div>  
+                </div> 
+
+                <div class=" col-md-12">
+                    <div class="md-textfield" ng-class="{ 'is-dirty': ctrl.frmData.entradaDirectorio.entity.nuAnexo > 0 , 'is-invalid': (formEntradaGuardar.annexNumber.$touched && formEntradaGuardar.annexNumber.$error.required) || ctrl.validacionEntrada==true || ctrl.validacionAnexoEntrada==true} ">
+                        <label  class="md-textfield__label">Número Anexo *</label>                    
+                        <input  type="text" name="annexNumber" class="md-textfield__input" placeholder="Ingrese número de anexo" ng-model="ctrl.frmData.entradaDirectorio.entity.nuAnexo"
+                            ng-change="ctrl.validaCampos(); ctrl.onValidationNameEntrada()" ng-disabled="ctrl.anexoHabilitado" required="true"
+                            onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                        <span class="md-textfield__error" ng-show="formEntradaGuardar.annexNumber.$touched && formEntradaGuardar.annexNumber.$error.required">*Anexo es Obligatorio</span>
+                        <span class="md-textfield__error"  ng-if="ctrl.validacionEntrada==true">*El número de anexo ya está en uso</span>     
+                        <span class="md-textfield__error"  ng-if="ctrl.validacionAnexoEntrada==true">*Debe ser numérico, sin espacios, entre 3 a 6 dígitos y no comenzar en cero</span>                       
+                    </div>  
+                </div>                                      
+
+
+                <div class="col-md-12">
+                    <v-accordion class="vAccordion--default" multiple>
+                        <v-pane>
+                            <v-pane-header>
+                                <h4>Opciones Avanzadas</h4>
+                            </v-pane-header>
+                            <v-pane-content>
+                                <div class="row">
+                                    <div class=" col-md-12">
+                                        <div class="md-textfield" ng-class="{ 'is-dirty': ctrl.frmData.entradaDirectorio.entity.nuTelefonico > 0}">
+                                            <label class="md-textfield__label">Número Telefónico </label>
+                                                <input type="text" name="nuTelefonico" class="md-textfield__input" placeholder="Ingrese número telefonico" ng-model="ctrl.frmData.entradaDirectorio.entity.nuTelefonico"
+                                                    required="true" ng-change="ctrl.validaCampos()" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                        </div>  
+
+                                        <div class="md-textfield" ng-class="{ 'is-dirty': ctrl.frmData.entradaDirectorio.entity.noPrefijo.length > 0}">
+                                            <label class="md-textfield__label">Prefijo </label>
+                                                <input type="text" name="noPrefijo" class="md-textfield__input" placeholder="Ingrese prefijo" ng-model="ctrl.frmData.entradaDirectorio.entity.noPrefijo"
+                                                    required="true" ng-change="ctrl.validaCampos()">
+                                        </div>     
+
+                                        <div class="md-textfield" ng-class="{ 'is-dirty': ctrl.frmData.entradaDirectorio.entity.noDescripcion.length > 0}">
+                                            <label class="md-textfield__label">Descripción </label>
+                                                    <textarea type="text" rows="3" name="descripcionIvr1" class="md-textfield__input" ng-show=true placeholder="Ingrese Descripcion"
+                                                        ng-model="ctrl.frmData.entradaDirectorio.entity.noDescripcion" required="true" />
+                                        </div> 
+                                    </div>   
+                                </div>
+                            </v-pane-content>
+                        </v-pane>
+                    </v-accordion>
+                </div>                                                      
+            </form>
+            </div>
+            <div class="md-card__actions text-right">
+                <button type="button" class="md-button" ng-disabled="ctrl.varValidacion || ctrl.disableButtonEntradaSave || ctrl.validacionEntrada || ctrl.validacionAnexoEntrada" ng-click="ctrl.onSaveEntrada()">Guardar</button>                
+            </div>
+            <div class="md-card__menu">
+                <button class="md-button md-button--icon" ng-disabled="ctrl.disableButtonEntradaSave" data-dismiss="modal" ng-click="ctrl.cancel()"><i class="mdi mdi-close"></i></button>
+            </div>                
+            </div>

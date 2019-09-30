@@ -1,0 +1,47 @@
+.md-dropdown__menu {
+  display: block;
+  right: 0;
+  left: initial;
+  width: auto;
+  height: 0;
+  background: $bg-white;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  /*overflow: hidden;*/
+  opacity: 0;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+  -moz-transition: width .5s cubic-bezier(.4,0,.2,1), height .5s cubic-bezier(.4,0,.2,1), opacity .25s cubic-bezier(.4,0,.2,1);
+  -webkit-transition: width .5s cubic-bezier(.4,0,.2,1), height .5s cubic-bezier(.4,0,.2,1), opacity .25s cubic-bezier(.4,0,.2,1);
+  -moz-transition: width .5s cubic-bezier(.4,0,.2,1), height .5s cubic-bezier(.4,0,.2,1), opacity .25s cubic-bezier(.4,0,.2,1);
+  -o-transition: width .5s cubic-bezier(.4,0,.2,1), height .5s cubic-bezier(.4,0,.2,1), opacity .25s cubic-bezier(.4,0,.2,1);
+  transition: width .5s cubic-bezier(.4,0,.2,1), height .5s cubic-bezier(.4,0,.2,1), opacity .25s cubic-bezier(.4,0,.2,1);
+  z-index: -999;
+
+  &>li>a{
+    padding: 0 16px;
+    line-height: .00390625;
+    height: 1px;
+    color: transparent;
+    outline: none;
+  }
+}
+
+.open>.md-dropdown__menu {
+  opacity: 1;
+  z-index: 999;
+
+  &>li {
+    height: 43.75px;
+  }
+
+  &>li>a{
+    display: block;
+    padding: 8px 16px;
+    height: 43.75px;
+    line-height: 2;
+    color: $color-black;
+  }
+}

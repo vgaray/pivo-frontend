@@ -1,0 +1,113 @@
+<form class="row" name="formRA">
+    <div class="col-md-12">
+        <div class="md-card animated fadeInUp">
+            <div class="md-card__title">
+                <h2 class="md-card__title-text">{{LReporCtrl.frmData.name_page_title}}</h2>
+            </div>
+            <div class="md-card__supporting-text md-overflow">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="md-select" ng-class="{ 'is-dirty' : LReporCtrl.frmData.comboColas }">
+                            <select name="idNombre" class="md-select__input" ng-model="LReporCtrl.frmData.comboColas" ng-options="listaQueue as listaQueue.name for listaQueue in LReporCtrl.lsComboColas track by listaQueue.name">
+                            </select>
+                            <label class="md-select__label" for="idNombre">Cola:</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <datepicker date-format="dd-MM-yyyy" selector="calendar-inicio-textfield" button-prev="<i class='mdi mdi-arrow-left'></i>"
+                            button-next="<i class='mdi mdi-arrow-right'></i>">
+                            <div class="md-textfield" ng-class="{ 'is-dirty' : LReporCtrl.dt, 'is-invalid' : formRA.pFeIni.$invalid }">
+                                <input id="pFeIni" name="pFeIni" type="text" class="calendar-inicio-textfield md-textfield__input" uib-datepicker-popup="dd-MM-yyyy"
+                                    ng-model="LReporCtrl.dt" current-text="Hoy" clear-text="Limpiar" close-text="Cerrar" is-open="LReporCtrl.opened"
+                                    datepicker-options="LReporCtrl.dateOptions" close-text="Close" ng-change="LReporCtrl.validaAnteriorInicio()"
+                                    input-date-validator>
+                                <button class="md-button-input">
+                                    <i class="mdi mdi-calendar"></i>
+                                </button>
+                                <label class="md-textfield__label" for="pFeIni">Fecha Inicio</label>
+                                <span class="md-textfield__error" ng-show="formRA.pFeIni.$invalid">Formato incorrecto</span>
+                            </div>
+                        </datepicker>
+                    </div>
+                    <div class="col-md-4">
+                        <datepicker date-format="dd-MM-yyyy" selector="calendar-fin-textfield" button-prev="<i class='mdi mdi-arrow-left'></i>" button-next="<i class='mdi mdi-arrow-right'></i>">
+                            <div class="md-textfield" ng-class="{ 'is-dirty' : LReporCtrl.dtf, 'is-invalid' : formRA.pFeFin.$invalid }">
+                                <input id="pFeFin" name="pFeFin" type="text" class="calendar-fin-textfield md-textfield__input" uib-datepicker-popup="dd-MM-yyyy"
+                                    ng-model="LReporCtrl.dtf" current-text="Hoy" clear-text="Limpiar" close-text="Cerrar" is-open="LReporCtrl.openedf"
+                                    datepicker-options="LReporCtrl.dateOptionsf" ng-required="true" close-text="Close" ng-change="LReporCtrl.validaAnteriorFin()"
+                                    input-date-validator>
+                                <button class="md-button-input">
+                                    <i class="mdi mdi-calendar"></i>
+                                </button>
+                                <label class="md-textfield__label" for="pFeFin">Fecha Fin</label>
+                                <span class="md-textfield__error" ng-show="formRA.pFeFin.$invalid">Formato incorrecto</span>
+                            </div>
+                        </datepicker>
+                    </div>
+                    <div class="col-md-12">
+                        <button class="md-button" ng-click="LReporCtrl.BuscarListaReporteAbandonos(1)" ng-disabled="LReporCtrl.varTotalHa">
+                            <label class="">Buscar</label>
+                            <i class="mdi mdi-magnify"></i>
+                        </button>
+                        <div class="pull-right" ng-hide="LReporCtrl.menuState.show">
+                            <button class="md-button dropdown-toggle" data-toggle="dropdown"> Exportar
+                                <i class="mdi mdi-chevron-double-down"></i>
+                            </button>
+                            <ul class="dropdown-menu md-dropdown-menu">
+                                <li>
+                                    <a href="" ng-click="LReporCtrl.descargarArchivo(LReporCtrl.excelVal)">
+                                        <i class="mdi mdi-file-excel" style="color:forestgreen"></i>Excel
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" ng-click="LReporCtrl.descargarArchivo(LReporCtrl.pdfVal)">
+                                        <i class="mdi mdi-file-pdf" style="color:firebrick"></i>PDF
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table ng-hide="LReporCtrl.validaVacio" class="md-table table">
+                        <thead>
+                            <tr>
+                                <th>Ningun elemento encontrado</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <table ng-hide="LReporCtrl.validaGrilla" st-table="LReporCtrl.lsReporteAbandono" class="md-table table">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Cola</th>
+                                <th class="text-center">Fecha</th>
+                                <th class="text-center">Hora</th>
+                                <th class="text-center">Tiempo de Abandono en segundos</th>
+                                <th class="text-center">Tiempo de Abandono en minutos</th>
+                                <th class="text-center">Número</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="row in LReporCtrl.lsReporteAbandono">
+                                <td class="text-rigth">{{row.queueName}}</td>
+                                <td class="text-center">{{row.fecha}}</td>
+                                <td class="text-center">{{row.qTime}}</td>
+                                <td class="text-center">{{row.info3}}</td>
+                                <td class="text-center">{{row.nuMin}}</td>
+                                <td class="text-center">{{row.numero}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="10" class="text-center">
+                                    <div uib-pagination total-items="LReporCtrl.totalItems" ng-model="LReporCtrl.currentPage" boundary-links="true" max-size="5" class="LReporCtrl.pagination-sm" ng-change="LReporCtrl.pageChanged(0)"
+                                    first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;" last-text="&raquo;"></div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,232 @@
+<div class="md-card">
+    <form name="formCita">
+        <div class="md-card__title">
+            <h2 class="md-card__title-text">{{Ctrl.frmData.name_page_title}}</h4>
+        </div>
+
+        <div class="md-card__supporting-text">
+            <div class="row">
+                <div class="col-sm-12 md-card__row-title">{{Ctrl.frmData.name_content}}</div>
+                <div class="col-sm-6" ng-hide="Ctrl.ilActivo">
+                    <div class="md-textfield"
+                        ng-class="{ 'is-dirty': Ctrl.frmData.Cita.listar.request.pNuDocumento.length > 0}">
+                        <input type="text" ng-disabled="Ctrl.ilActivo"
+                            onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="nuDocumento"
+                            class="md-textfield__input" maxlength="11"
+                            ng-model="Ctrl.frmData.Cita.listar.request.pNuDocumento" required>
+                        <label class="md-textfield__label" for="nuDocumento">Documento*</label>
+                    </div>
+                </div>
+                <div class="col-sm-6" ng-hide="Ctrl.ilActivo">
+                    <div class="md-card__actions text-right">
+                        <button type="button" class="md-button" ng-click="Ctrl.listarUsuarioCita()">Ingresar</button>
+                    </div>
+                </div>
+
+                <div class="tabbable" ng-show="Ctrl.ilActivo">
+                    <!-- Only required for left/right tabs -->
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="" data-target="#tab1" data-toggle="tab" ng-click="Ctrl.showTab(1)">Datos
+                                del Dueño</a>
+                        </li>
+                        <li>
+                            <a href="" data-target="#tab2" data-toggle="tab" ng-click="Ctrl.showTab(2)">Mascotas</a>
+                        </li>
+                        <li><a href="" data-target="#tab3" data-toggle="tab" ng-click="Ctrl.showTab(3)">Cita</a>
+                        </li>
+
+                    </ul>
+                    <div class="tab-content">
+                        <div class="row" ng-show="Ctrl.tab1">
+                            <div class="col-sm-6">
+                                <div class="md-textfield"
+                                    ng-class="{ 'is-dirty':  Ctrl.frmData.Cita.registrarActualizar.request.cita.noTipoDocumento.length > 0,'is-invalid': formCita.noTipoDocumento.$touched && formCita.noTipoDocumento.$invalid}">
+                                    <input type="text" name="noTipoDocumento" class="md-textfield__input"
+                                        ng-disabled="true"
+                                        ng-model="Ctrl.frmData.Cita.registrarActualizar.request.cita.noTipoDocumento">
+                                    <label class="md-textfield__label" for="noTipoDocumento">Tipo Documento</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="md-textfield"
+                                    ng-class="{ 'is-dirty':  Ctrl.frmData.Cita.registrarActualizar.request.cita.nuDocumento.length > 0,'is-invalid': formCita.nuDocumento.$touched && formCita.nuDocumento.$invalid}">
+                                    <input type="text" name="nuDocumento" class="md-textfield__input" ng-disabled="true"
+                                        ng-model="Ctrl.frmData.Cita.registrarActualizar.request.cita.nuDocumento">
+                                    <label class="md-textfield__label" for="nuDocumento">Nro Documento</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="md-textfield"
+                                    ng-class="{ 'is-dirty':  Ctrl.frmData.Cita.registrarActualizar.request.cita.noNombre.length > 0,'is-invalid': formCita.noNombre.$touched && formCita.noNombre.$invalid}">
+                                    <input type="text" name="noNombre" class="md-textfield__input" ng-disabled="true"
+                                        ng-model="Ctrl.frmData.Cita.registrarActualizar.request.cita.noNombre">
+                                    <label class="md-textfield__label" for="noNombre">Nombre</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="md-textfield"
+                                    ng-class="{ 'is-dirty':  Ctrl.frmData.Cita.registrarActualizar.request.cita.noApellido.length > 0,'is-invalid': formCita.noApellido.$touched && formCita.noApellido.$invalid}">
+                                    <input type="text" name="noApellido" class="md-textfield__input" ng-disabled="true"
+                                        ng-model="Ctrl.frmData.Cita.registrarActualizar.request.cita.noApellido">
+                                    <label class="md-textfield__label" for="noApellido">Apellido</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="md-textfield"
+                                    ng-class="{ 'is-dirty':  Ctrl.frmData.Cita.registrarActualizar.request.cita.nuTelefono.length > 0,'is-invalid': formCita.nuTelefono.$touched && formCita.nuTelefono.$invalid}">
+                                    <input type="text" name="nuTelefono" class="md-textfield__input" ng-disabled="true"
+                                        ng-model="Ctrl.frmData.Cita.registrarActualizar.request.cita.nuTelefono">
+                                    <label class="md-textfield__label" for="nuTelefono">Nro Celular</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="md-textfield"
+                                    ng-class="{ 'is-dirty':  Ctrl.frmData.Cita.registrarActualizar.request.cita.noCorreo.length > 0,'is-invalid': formCita.noCorreo.$touched && formCita.noCorreo.$invalid}">
+                                    <input type="text" name="noCorreo" class="md-textfield__input" ng-disabled="true"
+                                        ng-model="Ctrl.frmData.Cita.registrarActualizar.request.cita.noCorreo">
+                                    <label class="md-textfield__label" for="noCorreo">Correo</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive" ng-show="Ctrl.tab2">
+
+                            <table class="md-table table">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Nombre</th>
+                                        <th class="text-center">Descripción</th>
+                                        <th class="text-center">Fecha registro</th>
+                                        <th class="text-center">NºChip</th>
+                                        <th class="text-center">Escoger</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="mas in Ctrl.ArrayMascota | filter:Ctrl.paginate" ng-form="subForm">
+                                        <td class="text-center">{{mas.noMascota}}</td>
+                                        <td class="text-center">{{mas.noEspecie}}</td>
+                                        <td class="text-center">{{mas.noRaza}}</td>
+                                        <td class="text-center">{{mas.nuChip}}</td>
+
+                                        <td class="text-center">
+                                            <label>
+                                                <input type="radio" id="c_{{$index+1}}"
+                                                    ng-click="Ctrl.checkPet($index+1,mas)" value="one" />
+                                            </label>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <div class="row" ng-show="Ctrl.tab3">
+                            <div class="col-md-6">
+                                <datepicker date-format="dd-MM-yyyy" selector="calendar-inicio-textfield"
+                                    button-prev="<i class='mdi mdi-arrow-left'></i>"
+                                    button-next="<i class='mdi mdi-arrow-right'></i>">
+                                    <div class="md-textfield has-placeholder"
+                                        ng-class="{ 'is-dirty': Ctrl.dt ,'is-invalid': form.feIni.$invalid }">
+                                        <input input-date-validator type="text" maxlength="10"
+                                            uib-datepicker-popup="dd-MM-yyyy"
+                                            class="calendar-inicio-textfield md-textfield__input" id="feIni"
+                                            name="feIni" ng-model="Ctrl.dt" ng-required="true"
+                                            ng-change="Ctrl.validateDateini()" />
+                                        <button class="md-button-input" id="calendarT">
+                                            <i class="mdi mdi-calendar"></i>
+                                        </button>
+                                        <label class="md-textfield__label">Fecha reserva</label>
+                                        <span class="md-textfield__error"
+                                            ng-show="form.feIni.$dirty && form.feIni.$error.required">*Campo
+                                            Requerido</span>
+                                    </div>
+                                </datepicker>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="md-select is-dirty"
+                                    ng-class="{ 'is-dirty' :  Ctrl.frmData.Cita.registrarActualizar.request.cita.idTurno.length >0 }">
+                                    <select class="md-select__input"
+                                        ng-model=" Ctrl.frmData.Cita.registrarActualizar.request.cita.idTurno"
+                                        ng-options="estado as estado.noTurno for estado in Ctrl.comboTurno"
+                                        ng-change="Ctrl.combochangeTurno( Ctrl.frmData.Cita.registrarActualizar.request.cita.idTurno)">
+                                        <option ng-show="false" value="" selected="true">{{Ctrl.noTurno}}</option>
+                                    </select>
+                                    <label class="md-select__label">Turno</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="md-textfield"
+                                    ng-class="{ 'is-dirty':  Ctrl.frmData.Cita.registrarActualizar.request.cita.noCita.length > 0,'is-invalid': formCita.noCita.$touched && formCita.noCita.$invalid}">
+                                    <input type="text" name="noCita" class="md-textfield__input"
+                                        ng-model="Ctrl.frmData.Cita.registrarActualizar.request.cita.noCita">
+                                    <label class="md-textfield__label" for="noCita">Nombre de Cita</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="md-textfield"
+                                    ng-class="{ 'is-dirty':  Ctrl.frmData.Cita.registrarActualizar.request.cita.noDescripcion.length > 0,'is-invalid': formCita.noDescripcion.$touched && formCita.noDescripcion.$invalid}">
+                                    <input type="text" name="noDescripcion" class="md-textfield__input"
+                                        ng-model="Ctrl.frmData.Cita.registrarActualizar.request.cita.noDescripcion">
+                                    <label class="md-textfield__label" for="noDescripcion">Descripción</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="md-select is-dirty"
+                                    ng-class="{ 'is-dirty' :   Ctrl.frmData.Cita.registrarActualizar.request.cita.idActividad.length >0 }">
+                                    <select class="md-select__input"
+                                        ng-model="  Ctrl.frmData.Cita.registrarActualizar.request.cita.idActividad"
+                                        ng-options="act as act.noDescripcion for act in Ctrl.comboActividad"
+                                        ng-change="Ctrl.combochangeActividad(Ctrl.frmData.Cita.registrarActualizar.request.cita.idActividad)">
+                                        <option ng-show="false" value="" selected="true">{{Ctrl.noDescripcion}}</option>
+                                    </select>
+                                    <label class="md-select__label">Actividad</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="md-select is-dirty"
+                                    ng-class="{ 'is-dirty' :  Ctrl.frmData.Cita.registrarActualizar.request.cita.idEstado.length >0 }">
+                                    <select class="md-select__input"
+                                        ng-model=" Ctrl.frmData.Cita.registrarActualizar.request.cita.idEstado"
+                                        ng-options="estado as estado.noEstado for estado in Ctrl.comboEstado"
+                                        ng-change="Ctrl.combochangeEstado( Ctrl.frmData.Cita.registrarActualizar.request.cita.idEstado)">
+                                        <option ng-show="false" value="" selected="true">{{Ctrl.noEstado}}</option>
+                                    </select>
+                                    <label class="md-select__label">Estado</label>
+                                </div>
+                            </div>
+                            <!-- {idPersonal: "11111111111", noPersonal: "Milagros", noApePat: "Huerta", noApeMat: "Melendez", noAbreviatura: "DNI" -->
+                            <div class="col-sm-6">
+                                <div class="md-select is-dirty"
+                                    ng-class="{ 'is-dirty' :  Ctrl.frmData.Cita.registrarActualizar.request.cita.idPersonal.length >0 }">
+                                    <select class="md-select__input"
+                                        ng-model=" Ctrl.frmData.Cita.registrarActualizar.request.cita.idPersonal"
+                                        ng-options="personal as personal.noPersonal for personal in Ctrl.comboPersonal">
+                                        <option ng-show="false" value="" selected="true">Seleccione un personal</option>
+                                    </select>
+                                    <label class="md-select__label">Personal</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="md-textfield"
+                                    ng-class="{ 'is-dirty':   Ctrl.frmData.Cita.registrarActualizar.request.cita.nuContacto.length > 0,'is-invalid': formCita.nuContacto.$touched && formCita.nuContacto.$invalid}">
+                                    <input type="text" name="nuContacto" class="md-textfield__input"
+                                        ng-model=" Ctrl.frmData.Cita.registrarActualizar.request.cita.nuContacto">
+                                    <label class="md-textfield__label" for="nuContacto">Nro de contacto</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="md-card__menu">
+            <button class="md-button md-button--icon" data-dismiss="modal" ng-click="Ctrl.cancel()">
+                <i class="mdi mdi-close"></i>
+            </button>
+        </div>
+        <div class="md-card__actions text-right">
+            <button type="button" class="md-button" ng-disabled='!formPersonal.$valid'
+                ng-click="Ctrl.raPersonal()">Guardar</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,120 @@
+.area-centro {
+    .tabla-area-centro {
+        .fa-trash {
+            color: $danger;
+        }
+        .fa-fax{
+        	color:$success ;
+        }
+    }
+}
+.modal-bolsa-empresa {
+    .has-error {
+        .input-group-btn {
+            button {
+                border-color: #a94442;
+            }
+        }
+    }
+    .min-dispo{
+        width: 100%;
+        display: inline-block;
+    }
+    .checkbox-bolsa {
+        margin-left: 5px;
+        margin-top: 15px;
+    }
+    .table-det-bolsa {
+        font-size: 12px;
+        text-align: center;
+        .fa-trash{
+        color: $danger;
+        }
+    }
+    .btn-filtrar-bolsaempresa{
+        position: relative;
+        top: 20px;
+    }
+}
+@media(max-width: $resL) {
+    .modal-bolsa-empresa {
+        .check-permiso {
+            .control-label {
+                text-align: left;
+            }
+            .form-inline {
+                .checkbox {
+                    display: inline-block;
+                    margin-left: 2px;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: $resM) {
+    .modal-bolsa-empresa {
+        // width: 660px;
+        // margin: 30px auto;
+    }
+}
+
+@media (max-width: $resM) {
+    .modal-bolsa-empresa {
+        .check-permiso {
+            .control-label {
+                margin-bottom: 3px;
+            }
+            .form-inline {
+                .checkbox {
+                    display: inline-block;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .modal-bolsa-empresa {
+        // width: 100%;
+        .check-permiso {
+            .control-label {
+                margin-bottom: 3px;
+            }
+            .form-inline {
+                .checkbox {
+                    display: inline-block;
+                    padding-left: 19px;
+                }
+            }
+        }
+    }
+}
+@media (max-width: $resXS) {
+    .modal-bolsa-empresa{
+         .checkbox-bolsa {
+            margin-top: 0;
+         }
+        .col-modal-bolsa{
+            width: 100%
+        }
+    }
+}
+@media(max-width: 349px) {
+    .area-centro {
+        .b-permis {
+            width: 100%;
+            margin-bottom: 15px;
+            .btn-group {
+                float: left !important;
+                width: 100%;
+                .btn {
+                    width: 100%;
+                }
+            }
+            .pull-right>.dropdown-menu {
+                left: 0 !important;
+            }
+        }
+    }
+}

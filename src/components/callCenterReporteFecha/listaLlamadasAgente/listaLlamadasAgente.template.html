@@ -1,0 +1,164 @@
+<form class="row" name="formU">
+    <div class="col-xs-12">
+        <div class="md-card animated fadeInUp">
+            <div class="md-card__title">
+                <h2 class="md-card__title-text">{{LllamCtrl.frmData.name_page_title}}</h2>
+            </div>
+            <div class="md-card__supporting-text md-overflow">
+                <form name="formU">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="md-select" ng-class="{ 'is-dirty' : LllamCtrl.frmData.miCombo.name}">
+                                <select class="md-select__input" ng-model="LllamCtrl.frmData.miCombo" name="nameCola" ng-options="listaQueue as listaQueue.name 
+                                            for listaQueue in LllamCtrl.listaQueuesName 
+                                            track by listaQueue.name" ng-change="LllamCtrl.changeComboColasxAgente(LllamCtrl.frmData.miCombo.idQueues); LllamCtrl.validateColas();"
+                                    required>
+                                    <option ng-show="false" value="" selected="true"></option>
+                                </select>
+                                <label class="md-select__label">Seleccione una cola</label>
+                                <small class="md-textfield__error" ng-show="formU.nameCola.$invalid || formU.nameCola.$touched && formU.nameCola.$error.required">*Seleccione una cola</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="md-select" ng-class="{ 'is-dirty' : LllamCtrl.comboAgente.noAgente, 'is-invalid': formU.nameAgente.$dirty && formU.nameAgente.$error.required}">
+                                <select type="text" class="md-select__input" ng-model="LllamCtrl.comboAgente" name="nameAgente" ng-options="listaAgente as listaAgente.noAgente
+                                            for listaAgente in LllamCtrl.listaAgenteLContest
+                                            track by listaAgente.noAgente" ng-required="true">
+                                            <option ng-show="false" value="" selected="true"></option>
+                                </select>
+                                <label class="md-select__label">Seleccione un agente</label>
+                                <small class="md-textfield__error" ng-show="formU.nameAgente.$dirty && formU.nameAgente.$error.required">*Seleccione un agente</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <datepicker date-format="dd-MM-yyyy" selector="calendar-inicio-textfield" button-prev="<i class='mdi mdi-arrow-left'></i>"
+                                button-next="<i class='mdi mdi-arrow-right'></i>" datepicker-toggle="true">
+                                <div class="md-textfield" ng-class="{ 'is-dirty' : LllamCtrl.dt , 'is-invalid': formU.pFeIni.$dirty && formU.pFeIni.$error.required}">
+                                    <input type="text" id="btn-calendar" class="calendar-inicio-textfield md-textfield__input" id="pFeIni" name="pFeIni" ng-model="LllamCtrl.dt"
+                                        ng-change="LllamCtrl.validaAnteriorInicio()" input-date-validator uib-datepicker-popup="dd-MM-yyyy"
+                                        ng-required="true">
+                                    <button class="md-button-input">
+                                        <i class="mdi mdi-calendar"></i>
+                                    </button>
+                                    <label class="md-textfield__label">Fecha Inicio</label>
+                                    <small class="md-textfield__error" ng-show="formU.pFeIni.$dirty && formU.pFeIni.$error.required">*formato incorrecto</small>
+                                </div>
+                            </datepicker>
+                        </div>
+                        <div class="col-md-4 ">
+                            <datepicker date-format="dd-MM-yyyy" selector="calendar-fin-textfield" button-prev="<i class='mdi mdi-arrow-left'></i>" button-next="<i class='mdi mdi-arrow-right'></i>">
+                                <div class="md-textfield" ng-class="{ 'is-dirty' : LllamCtrl.dtf , 'is-invalid': formU.pFeFin.$dirty && formU.pFeFin.$error.required}">
+                                    <input type="text" class="calendar-fin-textfield md-textfield__input" id="pFeFin" name="pFeFin" uib-datepicker-popup="dd-MM-yyyy"
+                                        ng-model="LllamCtrl.dtf" datepicker-options="LllamCtrl.dateOptions" ng-required="true"
+                                        ng-change="LllamCtrl.validaAnteriorFin()" input-date-validator>
+                                    <button class="md-button-input">
+                                        <i class="mdi mdi-calendar"></i>
+                                    </button>
+                                    <label class="md-textfield__label">Fecha Fin</label>
+                                    <small class="md-textfield__error" ng-show="formU.pFeFin.$dirty && formU.pFeFin.$error.required">*formato incorrecto</small>
+                                </div>
+                            </datepicker>
+                        </div>
+                        <div class="col-md-4 ">
+                            <div class="md-textfield" ng-class="{ 'is-dirty' : LllamCtrl.horaInicio, 'is-invalid': formU.hoIni.$dirty && formU.hoIni.$error.required}">
+
+                                <input type="text" id="hoIni" name="hoIni" class="md-textfield__input" ng-model="LllamCtrl.horaInicio" ng-change="LllamCtrl.validaHoraInicio()"
+                                    ng-required="LllamCtrl.frmData.reporte.listarLlAgente.request.horaI!=null">
+                                <button class="md-button-input">
+                                    <i class="mdi mdi-clock"></i>
+                                </button>
+                                <label class="md-textfield__label">Hora Inicio</label>
+                            </div>
+                            <script type="text/javascript">
+                                $('#hoIni').timepicker({
+                                    timeFormat: 'HH:MM'
+                                })
+                            </script>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="md-textfield" ng-class="{ 'is-dirty' : LllamCtrl.horaFin }">
+                                <input type="text" id="hoFi" name="hoFin" class="md-textfield__input" ng-model="LllamCtrl.horaFin" ng-change="LllamCtrl.validaHoraFin()"
+                                    ng-required="LllamCtrl.frmData.reporte.listarLlAgente.request.horaF != null">
+                                <button id="hoFi" class="md-button-input">
+                                    <i class="mdi mdi-clock"></i>
+                                </button>
+                                <label class="md-textfield__label">Hora Fin</label>
+                            </div>
+                            <script type="text/javascript">
+                                $('#hoFi').timepicker({
+                                    defaultTime: '23:45',
+                                    showMeridian: false,
+                                    timeFormat: 'HH:MM'
+                                })
+                            </script>
+                        </div>
+                        <div class="col-md-12">
+                            <button class="md-button" ng-click="LllamCtrl.BuscaListaLlamadasAgente()" ng-disabled="LllamCtrl.varTotalHa">
+                                <i class="fa fa-search"></i> Buscar
+                            </button>
+                            <!-- ng-hide="LllamCtrl.menuState.show" -->
+                            <div class="pull-right" ng-hide="LllamCtrl.menuState.show">
+                                <button class="md-button dropdown-toggle" data-toggle="dropdown"> Exportar
+                                    <i class="mdi mdi-chevron-double-down"></i>
+                                </button>
+                                <ul class="dropdown-menu md-dropdown-menu">
+                                    <li>
+                                        <a href="" ng-click="LllamCtrl.descargarArchivo(LllamCtrl.excelVal)">
+                                            <i class="mdi mdi-file-excel" style="color:forestgreen"></i>Excel
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" ng-click="LllamCtrl.descargarArchivo(LllamCtrl.pdfVal)">
+                                            <i class="mdi mdi-file-pdf" style="color:firebrick"></i>PDF
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="table-responsive">
+                    <table ng-hide="LllamCtrl.validaVacio" class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Ningun elemento encontrado
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <table ng-hide="LllamCtrl.validaGrilla" st-table="LllamCtrl.lsLlamadasAgente" class="md-table table">
+                        <thead>
+                            <tr class="row-llamadaFecha">
+                                <th class="text-center" rowspan="2">Agente</th>
+                                <th class="" colspan="3">Llamadas</th>
+                                <th class="md-table table" colspan="4">Tiempo</th>
+                            </tr>
+                            <tr>
+                                <th class="text-center">Atendidas</th>
+                                <th class="text-center">Culminadas Cliente</th>
+                                <th class="text-center">Culminadas Agente</th>
+                                <th class="text-center">Hablado</th>
+                                <th class="text-center">Promedio Hablado</th>
+                                <th class="text-center">Minimo Hablado</th>
+                                <th class="text-center">Maximo Hablado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="row in LllamCtrl.lsLlamadasAgente">
+                                <td class="text-center">{{row.noAgente}}</td>
+                                <td class="text-center">{{row.llamadasAtendidas}}</td>
+                                <td class="text-center">{{row.llamadasCulCli}}</td>
+                                <td class="text-center">{{row.llamadasCulAge}}</td>
+                                <td class="text-center">{{row.tiempoHablado}}</td>
+                                <td class="text-center">{{row.tPromHablado}}</td>
+                                <td class="text-center">{{row.tMinHablado}}</td>
+                                <td class="text-center">{{row.tMaxHablado}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,80 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="md-card animated zoomIn">
+            <div class="md-card__title">
+                <h2 class="md-card__title-text">Listado Lista Negra</h2>
+            </div>
+            <div class="md-card__supporting-text">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="md-textfield" ng-class="{ 'is-dirty' : ctrl.frmData.request.nuTelefo > 0 }">
+                            <input type="text" class="md-textfield__input" name="nuTelefo" ng-model="ctrl.frmData.request.nuTelefo" ng-required="true" ng-disabled="ctrl.pk_numero != null" ng-change="ctrl.validateNumero();" onkeypress='return event.charCode >= 48 && event.charCode <= 57' ng-keyup="event=$event;ctrl.buscarListaNegra(event.keyCode )">
+                            <label class="md-textfield__label" >Número</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="md-select" ng-class=" { 'is-dirty' : ctrl.frmData.request.coTipllam }">
+                            <select type="text" class="md-select__input" ng-model="ctrl.frmData.request.coTipllam" ng-options="item.nombre as item.nombre for item in ctrl.tipoLlamadas" ng-change="ctrl.validateTipo();">
+                                <option value=""></option>
+                            </select>
+                            <label class="md-select__label" >Tipo</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="md-select" ng-class=" { 'is-dirty' : ctrl.frmData.request.ilActivo }">
+                            <select type="text" class="md-select__input" ng-model="ctrl.frmData.request.ilActivo" ng-options="item.id as item.nombre for item in ctrl.tipoEstados" ng-change="ctrl.validateEstado();">
+                                <option value=""></option>
+                            </select>
+                            <label class="md-select__label" >Estado</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="md-button" ng-click="ctrl.BuscarEnListaNegra()" ng-disabled="ctrl.frmData.active.optGeneral">
+                            <label class="">Buscar</label>
+                            <i class="mdi mdi-magnify"></i>    
+                        </button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="md-table table">
+                        <thead>
+                            <tr>
+                                <th class="text-center" ng-repeat="header in ctrl.headersListaNegra">{{header.nombreTH}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="listNegra in ctrl.listListaNegra | filter:ctrl.paginate ">
+                                <td>{{listNegra.coTipllam}}</td>
+                                <td class="text-right">{{listNegra.nuTelefo}}</td>
+                                <td>{{listNegra.noDescri}}</td>
+                                <td class="text-center">
+                                    <a href="" ng-click="ctrl.cambiaEstadoListaNegra(listNegra.nuTelefo, listNegra.ilActivo)">
+                                        <span ng-if="listNegra.ilActivo == true" class="label label-success"><i  class="mdi mdi-check"></i></span>
+                                        <span ng-if="listNegra.ilActivo == false" class="label label-danger"><i  class="mdi mdi-close"></i></span>
+                                    </a>
+                                </td>
+                                <td class="text-center"><button class="md-button md-button--icon"  ng-click="ctrl.modalListaNegraCrud(listNegra.nuTelefo)" uib-tooltip="Editar"><i class="mdi mdi-pencil"></i></button></td>
+                                <td class="text-center"><button class="md-button md-button--icon"  ng-click="ctrl.modalEliminarNumero(listNegra.nuTelefo)" uib-tooltip="Eliminar"><i class="mdi mdi-delete"></i></button></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="13" class="text-center">
+                                    <ul uib-pagination total-items="ctrl.totalItems" ng-model="ctrl.currentPage" max-size="10" boundary-links="true" items-per-page="ctrl.numPerPage"
+                                        class="pagination-sm" first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"
+                                        last-text="&raquo;">
+                                    </ul>                                    
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            <div class="md-card__menu">
+                <button class="md-button" ng-click="ctrl.modalListaNegraCrud()"> Agregar Número
+                    <i class="mdi mdi-plus"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

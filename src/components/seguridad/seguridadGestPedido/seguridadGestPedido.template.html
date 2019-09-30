@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="md-card animated zoomIn">
+            <div class="md-card__title clearfix">
+                <h2 class="md-card__title-text">Listado de Rol</h2>
+            </div>
+            <div class="md-card__supporting-text">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="table-responsive">
+                            <table class="md-table table">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center" ng-repeat="header in ctrlp.headerRol">{{header.nombre}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="roles in ctrlp.listadoRol">
+                                      <td>{{$index+1}}</td>
+                                      <td>{{roles.noRol}}</td>
+                                      <td>{{roles.noDescri}}</td>
+                                      <td class="text-center">
+                                          <button class="md-button md-button--icon" ng-click="ctrlp.irAEdidar(roles.idRol,roles.ilActivo,roles.noDescri,roles.noRol)">
+                                              <i class="mdi mdi-pencil"></i>
+                                          </button>
+                                      </td>
+                                      <td class="text-center">
+                                          <button class="md-button md-button--icon">
+                                            <i class="mdi mdi-delete"></i>
+                                          </button>
+                                      </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

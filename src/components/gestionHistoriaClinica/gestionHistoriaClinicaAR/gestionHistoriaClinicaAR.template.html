@@ -1,0 +1,249 @@
+<div class="md-card">
+    <form name="formHC">
+        <div class="md-card__title">
+            <h2 class="md-card__title-text">{{Ctrl.frmData.name_page_title}}</h4>
+        </div>
+        <div class="md-card__supporting-text">
+            <div class="row">
+                <div class="col-sm-12 md-card__row-title">{{Ctrl.frmData.name_content}}</div>
+                <div class="col-sm-6" ng-hide="Ctrl.ilActivo">
+                    <div class="md-textfield"
+                        ng-class="{ 'is-dirty': Ctrl.frmData.HistoriaClinica.listarCF.request.pNoPass.length > 0,'is-invalid': formHC.noPass.$touched && formHC.noPass.$invalid}">
+                        <input type="password" name="noPass" class="md-textfield__input"
+                            ng-model="Ctrl.frmData.HistoriaClinica.listarCF.request.pNoPass">
+                        <label class="md-textfield__label" for="noPass">Contraseña de H.C</label>
+                    </div>
+
+                </div>
+                <div class="col-sm-6" ng-hide="Ctrl.ilActivo">
+                    <div class="md-card__actions text-right">
+                        <button type="button" class="md-button" ng-click="Ctrl.cargaDatos()">Ingresar</button>
+                    </div>
+                </div>
+                <div class="tabbable" ng-show="Ctrl.ilActivo">
+                    <!-- Only required for left/right tabs -->
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="" data-target="#tab1" data-toggle="tab"
+                                ng-click="Ctrl.listarContantesFisiologicas()">Contante Fisiologica Mascota</a>
+                        </li>
+                        <li><a href="" data-target="#tab2" data-toggle="tab" ng-click="Ctrl.listarProblemas()">Listado
+                                De Problemas</a>
+                        </li>
+                        <li><a href="" data-target="#tab3" data-toggle="tab" ng-click="Ctrl.listarVacunas()">Vacunas</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="row" ng-show="Ctrl.tab1">
+                            <div class="table-responsive">
+                                <table class="md-table table" id="tbCF">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">Peso</th>
+                                            <th class="text-center">Pulso</th>
+                                            <th class="text-center">Temperatura</th>
+                                            <th class="text-center">F.Registro</th>
+                                            <!-- <th class="text-center">G.Ficha Clínica</th> -->
+                                            <!-- <th class="text-center">Eliminar</th> -->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="hc in Ctrl.lsHistoriaClinicaCF | filter:Ctrl.paginate">
+                                            <td class="text-center">{{hc.peso}}</td>
+                                            <td class="text-center">{{hc.pulso}}</td>
+                                            <td class="text-center">{{hc.temperatura}}</td>
+                                            <td class="text-center">{{hc.feRegistro}}</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="13" class="text-center">
+                                                <div uib-pagination total-items="Ctrl.totalItems"
+                                                    ng-model="Ctrl.currentPage" max-size="5" boundary-links="true"
+                                                    items-per-page="Ctrl.numPerPage" class="pagination-sm"
+                                                    first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"
+                                                    last-text="&raquo;">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="md-textfield"
+                                    ng-class="{ 'is-dirty': Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noNombre.length > 0,'is-invalid': formHC.noMascota.$touched && formHC.noMascota.$invalid}">
+                                    <input type="text" name="noMascota" class="md-textfield__input" ng-model="">
+                                    <label class="md-textfield__label" for="noMascota">Peso</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="md-textfield"
+                                    ng-class="{ 'is-dirty': Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noNombre.length > 0,'is-invalid': formHC.noMascota.$touched && formHC.noMascota.$invalid}">
+                                    <input type="text" name="noMascota" class="md-textfield__input" ng-model="">
+                                    <label class="md-textfield__label" for="noMascota">Pulso</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+
+                                <div class="md-textfield"
+                                    ng-class="{ 'is-dirty': Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noNombre.length > 0,'is-invalid': formHC.noMascota.$touched && formHC.noMascota.$invalid}">
+                                    <input type="text" name="noMascota" class="md-textfield__input" ng-model="">
+                                    <label class="md-textfield__label" for="noMascota">Temperatura</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <button class="md-button" ng-click="Ctrl.RAMascota()">
+                                    <label class="">Agregar nueva toma</label>
+                                    <i class="mdi mdi-paw"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="Ctrl.tab2">
+                            <div class="table-responsive">
+                                <table class="md-table table" id="tbCF">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">Problema</th>
+                                            <th class="text-center">Tipo Problema</th>
+                                            <th class="text-center">Descripcion</th>
+                                            <th class="text-center">F.Registro</th>
+                                            <!-- <th class="text-center">G.Ficha Clínica</th> -->
+                                            <!-- <th class="text-center">Eliminar</th> -->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="hc in Ctrl.lsHistoriaClinicaLP | filter:Ctrl.paginate">
+                                            <td class="text-center">{{hc.noProblema}}</td>
+                                            <td class="text-center">{{hc.noTipoProblema}}</td>
+                                            <td class="text-center">{{hc.noDescripcion}}</td>
+                                            <td class="text-center">{{hc.feRegistro}}</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="13" class="text-center">
+                                                <div uib-pagination total-items="Ctrl.totalItems"
+                                                    ng-model="Ctrl.currentPage" max-size="5" boundary-links="true"
+                                                    items-per-page="Ctrl.numPerPage" class="pagination-sm"
+                                                    first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"
+                                                    last-text="&raquo;">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="md-textfield"
+                                    ng-class="{ 'is-dirty': Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noNombre.length > 0,'is-invalid': formHC.noMascota.$touched && formHC.noMascota.$invalid}">
+                                    <input type="text" name="noMascota" class="md-textfield__input" ng-model="">
+                                    <label class="md-textfield__label" for="noMascota">Problema</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="md-textfield"
+                                    ng-class="{ 'is-dirty': Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noNombre.length > 0,'is-invalid': formHC.noMascota.$touched && formHC.noMascota.$invalid}">
+                                    <input type="text" name="noMascota" class="md-textfield__input" ng-model="">
+                                    <label class="md-textfield__label" for="noMascota">Tipo</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+
+                                <div class="md-textfield"
+                                    ng-class="{ 'is-dirty': Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noNombre.length > 0,'is-invalid': formHC.noMascota.$touched && formHC.noMascota.$invalid}">
+                                    <input type="text" name="noMascota" class="md-textfield__input" ng-model="">
+                                    <label class="md-textfield__label" for="noMascota">Descripcion</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <button class="md-button" ng-click="Ctrl.RAMascota()">
+                                    <label class="">Agregar nuevo problema</label>
+                                    <i class="mdi mdi-paw"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="Ctrl.tab3">
+                            <div class="table-responsive">
+                                <table class="md-table table" id="tbCF">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">Nombre</th>
+                                            <th class="text-center">Tipo Vacuna</th>
+                                            <th class="text-center">Descripcion</th>
+                                            <th class="text-center">Aplicado</th>
+                                            <th class="text-center">F.Registro</th>
+                                            <th class="text-center">F.Aplicado</th>
+                                            <!-- <th class="text-center">G.Ficha Clínica</th> -->
+                                            <!-- <th class="text-center">Eliminar</th> -->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="hc in Ctrl.lsHistoriaClinicaV | filter:Ctrl.paginate">
+                                            <td class="text-center">{{hc.noNombre}}</td>
+                                            <td class="text-center">{{hc.noTipoVacuna}}</td>
+                                            <td class="text-center">{{hc.noDescripcion}}</td>
+                                            <td class="text-center">{{hc.ilAplicado}}</td>
+                                            <td class="text-center">{{hc.feRegistro}}</td>
+                                            <td class="text-center">{{hc.feAplicado}}</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="13" class="text-center">
+                                                <div uib-pagination total-items="Ctrl.totalItems"
+                                                    ng-model="Ctrl.currentPage" max-size="5" boundary-links="true"
+                                                    items-per-page="Ctrl.numPerPage" class="pagination-sm"
+                                                    first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"
+                                                    last-text="&raquo;">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="md-textfield"
+                                    ng-class="{ 'is-dirty': Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noNombre.length > 0,'is-invalid': formHC.noMascota.$touched && formHC.noMascota.$invalid}">
+                                    <input type="text" name="noMascota" class="md-textfield__input" ng-model="">
+                                    <label class="md-textfield__label" for="noMascota">Nombre</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="md-textfield"
+                                    ng-class="{ 'is-dirty': Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noNombre.length > 0,'is-invalid': formHC.noMascota.$touched && formHC.noMascota.$invalid}">
+                                    <input type="text" name="noMascota" class="md-textfield__input" ng-model="">
+                                    <label class="md-textfield__label" for="noMascota">Tipo</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="md-textfield"
+                                    ng-class="{ 'is-dirty': Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noNombre.length > 0,'is-invalid': formHC.noMascota.$touched && formHC.noMascota.$invalid}">
+                                    <input type="text" name="noMascota" class="md-textfield__input" ng-model="">
+                                    <label class="md-textfield__label" for="noMascota">Descripcion</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="md-textfield"
+                                    ng-class="{ 'is-dirty': Ctrl.frmData.HistoriaClinica.registrarActualizar.request.historiaClinica.noNombre.length > 0,'is-invalid': formHC.noMascota.$touched && formHC.noMascota.$invalid}">
+                                    <input type="text" name="noMascota" class="md-textfield__input" ng-model="">
+                                    <label class="md-textfield__label" for="noMascota">Aplicado</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <button class="md-button" ng-click="Ctrl.RAMascota()">
+                                    <label class="">Agregar nueva vacuna</label>
+                                    <i class="mdi mdi-paw"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="md-card__menu">
+            <button class="md-button md-button--icon" data-dismiss="modal" ng-click="Ctrl.cancel()">
+                <i class="mdi mdi-close"></i>
+            </button>
+        </div>
+    </form>
+</div>

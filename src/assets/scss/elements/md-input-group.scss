@@ -1,0 +1,47 @@
+.md-input-group{
+    max-width: 100%;
+    .md-checkbox{
+        width: 25px;
+        padding-top: 10px;
+    }
+    .md-button-group{
+        width: 35px;
+        padding-top: 15px;
+        text-align: center;
+        & .md-button[disabled]{
+            opacity: .5;
+        }
+    }
+    .md-checkbox, .md-button-group{
+        float: left;
+    }
+    .md-textfield{
+        width: -webkit-calc(100% - 60px);
+        width: -moz-calc(100% - 60px);	
+        width: -ms-calc(100% - 60px);	
+        width: -o-calc(100% - 60px);	
+        width: calc(100% - 60px);
+        margin-top: 0;
+        float: left;
+    }
+}
+
+.md-input-group__button{
+    display: flex;
+    & .md-textfield, & .md-select{
+        width: -webkit-calc(100% - 35px);
+        width: -moz-calc(100% - 35px);	
+        width: -ms-calc(100% - 35px);	
+        width: -o-calc(100% - 35px);	
+        width: calc(100% - 35px);
+        margin-top: 0;
+        float: left;
+    }
+    & .md-button-group{
+        width: 35px;
+        text-align: center;
+        float: right;
+        align-items: center;
+        display: flex;
+    }
+}

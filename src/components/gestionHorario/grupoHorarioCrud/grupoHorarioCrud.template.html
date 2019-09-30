@@ -1,0 +1,30 @@
+<div class="md-card">
+    <div class="md-card__title">
+        <h2 class="md-card__title-text">{{Ctrl.frmData.name_page_title}}</h2>
+        <!-- <button type="button" ng-click="ctrl.cancel()" class=" icon-cancel close" data-dismiss="modal" aria-hidden="true"></button> -->
+        <h4 class="modal-title" ng-if="ctrl.grupoHorarioRequest.idGrupoHor==null">{{ctrl.modal.nombreNuevo}}</h4>
+        <h4 class="modal-title" ng-if="ctrl.grupoHorarioRequest.idGrupoHor!=null">{{ctrl.modal.nombreEditar}}</h4>
+    </div>
+    <div class="modal-body">
+        <form name="formGrupoHorario">
+            <div class="md-card__supporting-text">
+                <form name="formGrupoHorario">
+                    <div class="md-textfield" ng-class="{ 'is-dirty': ctrl.grupoHorarioRequest.nomGrupoHor.length > 0}" data-ng-class="{ 'has-error': formGrupoHorario.noNombre.$invalid && formGrupoHorario.nomGrupoHor.$touched }">
+                        <input type="text" name="nomGrupoHor" class="md-textfield__input" ng-model="ctrl.grupoHorarioRequest.nomGrupoHor" ng-change="ctrl.cambiarNombreGuion()"
+                            placeholder="Nombre de grupo" required="required">
+                        <label class="md-textfield__label" for="razonSocial">Nombre Grupo Horario</label>
+                    </div>
+                    <small class="text-danger" data-ng-show="!formGrupoHorario.$pristine && formGrupoHorario.nomGrupoHor.$error.required">*Nombre es obligatorio.</small>
+                </form>
+            </div>
+        </form>
+    </div>
+    <div class="md-card__actions text-right">
+        <button type="button" class="md-button" ng-click="ctrl.raGrupoHorario()">Guardar</button>
+    </div>
+    <div class="md-card__menu">
+        <button class="md-button md-button--icon" data-dismiss="modal" ng-click="ctrl.cancel()">
+            <i class="mdi mdi-close"></i>
+        </button>
+    </div>
+</div>

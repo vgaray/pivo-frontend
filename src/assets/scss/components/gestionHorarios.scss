@@ -1,0 +1,44 @@
+
+.md-item-play{
+    font-size: 20px;
+}
+
+.md-item-play i{
+    cursor:pointer;
+    color: $color-default;
+}
+
+.md-item-play:hover{
+    text-decoration: none;
+    color: $color-default;
+}
+
+.md-cont-audio{
+    min-height: 40px !important;
+    border-bottom: 1px solid $color-default;
+}
+
+.md-card-audio{
+    overflow-y: scroll;
+    height: 400px;
+}
+
+.grupoHorario li.is-active{
+    background-color: $color-default;
+    color: #FFFFFF;
+}
+
+.nameGrupoHor:hover{
+    color: #1D471F;
+}
+
+.nameGrupoHor{
+    cursor:pointer;
+    color: $color-default;
+    text-decoration: none !important;
+}
+
+
+.grupoHorario li.is-active .nameGrupoHor{
+    color: #FFFFFF;
+}

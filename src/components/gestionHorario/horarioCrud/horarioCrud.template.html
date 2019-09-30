@@ -1,0 +1,444 @@
+<div class="md-card" >
+    <div class="md-card__title">
+        <h2 class="md-card__title-text" ng-if="ctrl.horarioRequest.idHorario==undefined">{{ctrl.modal.nombreNuevo}}</h4>
+        <h2 class="md-card__title-text" ng-if="ctrl.horarioRequest.idHorario!=undefined">{{ctrl.modal.nombreEditar}}</h4>
+    </div>
+    <div class="md-card__supporting-text timepicker">
+        <form name="formHorario" >
+        <div class="row ">
+            <div class="col-md-6 ">
+                <div class="md-textfield has-placeholder"  >
+                    <input  id="hoInicio" name="hoInicio" type="text" ng-model="ctrl.horarioRequest.hoInicio" class="md-textfield__input">
+                    <button class="md-button-input">
+                                <i class="mdi mdi-clock"></i>
+                    </button>
+                    <label class="md-textfield__label">Desde hora:</label>
+                    
+                </div>
+                <script type="text/javascript">
+                    $("#hoInicio").timepicker({
+                    
+                        defaultTime: 'default',
+                        minuteStep: 1,
+                    
+                        showMeridian: false
+                        
+                    })
+                </script>
+                    
+                    <!--<label for="">Hora Inicio</label>
+                        <div class="input-group bootstrap-timepicker timepicker incrementHour">
+                            <input id="hoInicio" name="hoInicio" type="text" ng-model="ctrl.horarioRequest.hoInicio" class="form-control input-small">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                        </div>
+                                <script type="text/javascript">
+                                $('#hoInicio').timepicker({
+                                    defaultTime: 'default',
+                                    showMeridian: false,
+                                    timeFormat: 'HH:mm:ss',
+                                    dynamic: true,
+                                    disableMousewheel: true
+                                });
+                                </script>-->
+            </div>
+            
+            <div class="col-md-6">
+                <div class="md-textfield has-placeholder">
+                    <input id="hoFin" name="hoFin" type="text" ng-model="ctrl.horarioRequest.hoFin" ng-disabled="ctrl.horarioRequest.hoInicio==''||ctrl.horarioRequest.hoInicio==null" class="md-textfield__input"  ng-required="ctrl.horarioRequest.hoInicio!=null">
+                    <button class="md-button-input">
+                            <i class="mdi mdi-clock"></i>
+                    </button>
+                    <label for="hoFin" class="md-textfield__label">Hora Fin</label>          
+                </div>
+                <script type="text/javascript">
+                                        $('#hoFin').timepicker({
+                                            
+                                            minuteStep: 1,
+                                            showMeridian: false,
+                                            timeFormat: 'HH:MM'
+                                        })
+                                    </script>
+                    <!--<div class="form-group" ng-class="{ 'has-error' : formHorario.hoFin.$invalid}">
+                        <label for="">Hora Fin</label>
+                            <div class="input-group bootstrap-timepicker timepicker">
+                                <input id="hoFin" name="hoFin" type="text" ng-model="ctrl.horarioRequest.hoFin" class="form-control input-small" ng-disabled="ctrl.horarioRequest.hoInicio==''||ctrl.horarioRequest.hoInicio==null" ng-required="ctrl.horarioRequest.hoInicio!=null">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                            </div>
+                            <small ng-show="formHorario.hoFin.$error.required" class="help-block">*seleccione hora</small>
+                            <script type="text/javascript">
+                            $('#hoFin').timepicker({
+                                defaultTime: 'default',
+                                showMeridian: false,
+                                timeFormat: 'HH:MM',
+                              allowInputToggle: true,
+                            });
+                            </script>
+                    </div>-->
+            </div>
+            <div class="col-md-6">
+                <div class="md-select" ng-class="{'is-dirty': ctrl.horarioRequest.nomDiaSemanaInicio.length > 0, 'is-invalid': formHorario.nomDiaSemanaInicio.$touched && ctrl.horarioRequest.nomDiaSemanaInicio==null}">
+                    <select id="nomDiaSemanaInicio" name="nomDiaSemanaInicio" class="md-select__input" ng-model="ctrl.horarioRequest.nomDiaSemanaInicio" ng-change="ctrl.validateDayWeek(); ctrl.fnValidaDiaSemananInicio()" ng-click="flag=true" ng-options="diaSemana.valueDay as diaSemana.diaSemanaNombre for diaSemana in ctrl.diaSemanaInicio">
+                                <option ng-show="false" value="" selected="true">{{ctrl.horarioRequest.nomDiaSemanaInicio}}</option>
+                    </select>
+                    <label  class="md-select__label">Dia Semana Inicio</label>
+                    <small class="md-select__error" ng-show="formHorario.nomDiaSemanaInicio.$touched && ctrl.horarioRequest.nomDiaSemanaInicio==null">*Campo obligatorio</small>
+                        
+                </div>
+            </div>
+                <div class="col-md-6">
+                    <div class="md-select" ng-class="{'is-dirty': ctrl.horarioRequest.nomDiaSemanaFin.length > 0, 'is-invalid' : formHorario.nomDiaSemanaFin.$invalid }">
+                        <select id="nomDiaSemanaFin"  name="nomDiaSemanaFin" class="md-select__input" ng-model="ctrl.horarioRequest.nomDiaSemanaFin" ng-options="diaSemana.valueDay as diaSemana.diaSemanaNombre for diaSemana in ctrl.diaSemanaFin" ng-disabled="ctrl.horarioRequest.nomDiaSemanaInicio =='' || ctrl.horarioRequest.nomDiaSemanaInicio == null ||  ctrl.horarioRequest.nomDiaSemanaInicio == '*'" ng-required="ctrl.horarioRequest.nomDiaSemanaInicio!=null"
+                           ng-change="ctrl.fnValidaDiaSemanaFin()" >
+                            <option ng-show="false" value="" selected="true">{{ctrl.horarioRequest.nomDiaSemanaFin}}</option>
+                        </select>
+                        <label class="md-select__label" for="nomDiaSemanaFin">Dia Semana Fin</label>
+                        <small class="md-select__error" ng-show="formHorario.nomDiaSemanaFin.$invalid">*Campo obligatorio</small>
+                        
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="md-select" ng-class="{'is-dirty': ctrl.horarioRequest.nomDiaMesInicio.length > 0, 'is-invalid' : formHorario.nomDiaMesInicio.$touched && ctrl.horarioRequest.nomDiaMesInicio==null }">
+                        <select id="nomDiaMesInicio" name="nomDiaMesInicio"  class="md-select__input" ng-model="ctrl.horarioRequest.nomDiaMesInicio" ng-change="ctrl.validateDiaMesIni(); ctrl.fnValidaDiaMesInicio()" ng-options="diaMes.valueDay as diaMes.nameDay for diaMes in ctrl.diaMesInicio">
+                            <option ng-show="false" value="" selected="true">{{ctrl.horarioRequest.nomDiaMesInicio}}</option>
+                        </select>
+                        <label for="nomDiaMesInicio" class="md-select__label">Dia Mes Inicio</label>
+                        <small class="md-select__error" ng-show="formHorario.nomDiaMesInicio.$touched && ctrl.horarioRequest.nomDiaMesInicio==null">*Campo obligatorio</small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="md-select" ng-class="{'is-dirty': ctrl.horarioRequest.nomDiaMesFin.length > 0, 'is-invalid': formHorario.nomDiaMesFin.$invalid}">
+                        <select  name="nomDiaMesFin" class="md-select__input" ng-model="ctrl.horarioRequest.nomDiaMesFin" ng-options="diaMes.valueDay as diaMes.nameDay for diaMes in ctrl.diaMesFin" ng-disabled="ctrl.horarioRequest.nomDiaMesInicio =='' || ctrl.horarioRequest.nomDiaMesInicio == null ||  ctrl.horarioRequest.nomDiaMesInicio == '*'" ng-required="ctrl.horarioRequest.nomDiaMesInicio!=null"
+                         ng-change="ctrl.fnValidaDiaMesFin()">
+                                <option ng-show="false" value="" selected="true">{{ctrl.horarioRequest.nomDiaMesFin}}</option>
+                        </select>
+                        <label for="nomDiaMesFin" class="md-select__label">Dia Mes Fin</label>
+                        <small class="md-select__error" ng-show="formHorario.nomDiaMesFin.$invalid && formHorario.nomDiaMesFin.$error.required">*Campo obligatorio</small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="md-select" ng-class="{'is-dirty': ctrl.horarioRequest.nomMesInicio.length > 0, 'is-invalid': formHorario.nomMesInicio.$touched && ctrl.horarioRequest.nomMesInicio==null}">
+                        <select class="md-select__input" name="nomMesInicio" ng-model="ctrl.horarioRequest.nomMesInicio" ng-change="ctrl.validateMes(); ctrl.fnValidaMesInicio()" ng-options="mes.valueMes as mes.nombreMeses for mes in ctrl.nombreMes">
+                            <option ng-show="false" value="" selected="true">{{ctrl.horarioRequest.nomMesInicio}}</option>
+                        </select>
+                        <label  class="md-select__label">Mes Inicio</label>
+                        <small class="md-select__error" ng-show="formHorario.nomMesInicio.$touched && ctrl.horarioRequest.nomMesInicio==null">*Campo obligatorio</small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="md-select" ng-class="{'is-dirty': ctrl.horarioRequest.nomMesFin.length> 0, 'is-invalid': formHorario.nomMesFin.$invalid}">
+                        <select  class="md-select__input" name="nomMesFin" ng-model="ctrl.horarioRequest.nomMesFin" ng-options="mes.valueMes as mes.nombreMeses for mes in ctrl.nombreMes" ng-change="ctrl.validateDiaMesFin(); ctrl.fnValidaMesFin()" ng-disabled="ctrl.horarioRequest.nomMesInicio =='' || ctrl.horarioRequest.nomMesInicio == null ||  ctrl.horarioRequest.nomMesInicio == '*'" ng-required="ctrl.horarioRequest.nomMesInicio!=null">
+                            <option ng-show="false" value="" selected="true">{{ctrl.horarioRequest.nomMesFin}}</option>
+                        </select>
+                        <label  class="md-select__label">Mes Fin</label>
+                        <small class="md-select__error" ng-show="formHorario.nomMesFin.$invalid && formHorario.nomMesFin.$error.required">*Campo obligatorio</small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="md-select" ng-class="{'is-dirty': ctrl.horarioRequest.tiHorario != null, 'is-invalid': formHorario.tiHorario.$touched && ctrl.horarioRequest.tiHorario==null}">
+                        <select name="tiHorario" class="md-select__input" ng-model="ctrl.horarioRequest.tiHorario" ng-options="item.valueTipo as item.nombreTipo for item in ctrl.tipHorario" ng-change="ctrl.fnValTiHorario()">
+                            <option ng-show="false" value="" selected="true">{{ctrl.horarioRequest.tiHorario}}</option>
+                        </select>
+                        <label  class="md-select__label">Tipo</label>
+                        <small class="md-select__error" ng-show="formHorario.tiHorario.$touched && ctrl.horarioRequest.tiHorario==null">*Campo obligatorio</small>
+                    </div>
+                </div>
+                <div class="col-md-6" ng-if="ctrl.horarioRequest.tiHorario==2">
+                    <div ng-if="ctrl.horarioRequest.idHorario==null">                                 
+                        <div class="col-input-file">
+                            <input id="archivo" type='file' accept='audio/*' file-model="ctrl.fileUpload" ng-model="ctrl.valorFile">
+                        </div>
+                        <div>
+                            <div class="md-textfield" ng-class="{'is-dirty' : ctrl.fileUpload.name.length > 0, 'is-invalid': (formHorario.audioReceive.$dirty && formHorario.audioIvrCrear.$error.required) ||  ctrl.validarExtension()==true  }">
+                                <input class="md-textfield__input" ng-model="ctrl.fileUpload.name" id="fileSelected" name="audioReceive" disabled>
+                                <label class="md-textfield__label" for="">Nombre de Audio*</label>
+                                <small class="md-textfield__error" ng-if="formHorario.audioReceive.$dirty && formHorario.audioReceive.$error.required" >*Audio es Obligatorio</small>  
+                                <small class="md-textfield__error" ng-if="ctrl.validarExtension()==true" >*Audio debe de ser mp3</small>                                                                                                                                           
+                                
+                            </div>
+                            <button class="md-button-input md-button-file" ng-click="ctrl.upFile()">
+                                <i class="mdi mdi-paperclip mdi-file"></i>
+                            </button>
+                        </div>
+                            <script>
+                                    document.getElementById("archivo").onchange = function () {
+                                        if(this.files[0]!=null){
+                                            document.getElementById("fileSelected").value = this.files[0].name;
+                                        }
+                                    };
+                            </script>   
+                            
+                        <div class="md-textfield" ng-class="{'is-dirty': ctrl.audioNombre !=null || ctrl.audioNombre.lenght >0}">
+                            <input id="audioPreestablecido" type="text" class="md-textfield__input" ng-model="ctrl.audioNombre" disabled>
+                            
+                            <button type="button" class="md-button-input" ng-click="ctrl.onLoadModalSoundsDefault()" > 
+                                <i class="mdi mdi-dots-horizontal"></i>
+                            </button>
+                            <label class="md-textfield__label" for="audioPreestablecido">Audio Preestablecido</label>
+                            
+                        </div>   
+                    </div>
+                    <div ng-if="ctrl.horarioRequest.idHorario!=null">
+                       
+                        <div class="col-input-file">
+                            <input id="archivo" type='file' accept='audio/*' file-model="ctrl.fileUpload" ng-model="ctrl.valorFile">
+                        </div>
+                        <div>
+                            <div class="md-textfield" ng-class="{'is-dirty' : ctrl.fileUpload.name.length > 0, 'is-invalid': (formHorario.audioReceive.$dirty && formHorario.audioIvrCrear.$error.required) ||  ctrl.validarExtension()==true  }">
+                                <input class="md-textfield__input" ng-model="ctrl.fileUpload.name" id="fileSelected" name="audioReceive" disabled>
+                                <label class="md-textfield__label" for="">Nombre de Audio*</label>
+                                <small class="md-textfield__error" ng-if="formHorario.audioReceive.$dirty && formHorario.audioReceive.$error.required" >*Audio es Obligatorio</small>  
+                                <small class="md-textfield__error" ng-if="ctrl.validarExtension()==true" >*Audio debe de ser mp3</small>                                                                                                                                           
+                                
+                            </div>
+                            <button class="md-button-input md-button-file" ng-click="ctrl.upFile()">
+                                <i class="mdi mdi-paperclip mdi-file"></i>
+                            </button>
+                        </div>
+                            <script>
+                                    document.getElementById("archivo").onchange = function () {
+                                        if(this.files[0]!=null){
+                                            document.getElementById("fileSelected").value = this.files[0].name;
+                                        }
+                                    };
+                            </script>   
+                            
+                        <div class="md-textfield" ng-class="{'is-dirty': ctrl.audioNombre !=null || ctrl.audioNombre.lenght >0}">
+                            <input id="audioPreestablecido" type="text" class="md-textfield__input" ng-model="ctrl.audioNombre" disabled>
+                            
+                            <button type="button" class="md-button-input" ng-click="ctrl.onLoadModalSoundsDefault()" > 
+                                <i class="mdi mdi-dots-horizontal"></i>
+                            </button>
+                            <label class="md-textfield__label" for="audioPreestablecido">Audio Preestablecido</label>
+                            
+                        </div>   
+                    </div>
+                    <!--<div ng-if="ctrl.horarioRequest.idHorario!=null">
+                        <div class="col-input-file">
+                            <input id="archivo" type="file" accept="audio/*" file-model="ctrl.myFile" ng-model="ctrl.fileUpload" >
+                        </div>
+                        <div>
+                            <div class="md-textfield" ng-class="{'is-dirty' : ctrl.myFile.name.length > 0, 'is-invalid': (formHorario.audioReceive.$dirty && formHorario.audioIvrCrear.$error.required) ||  ctrl.validarExtension()==true  }">
+                                <input class="md-textfield__input" ng-model="ctrl.myFile.name" id="fileSelected" name="audioReceive" disabled>
+                                <label class="md-textfield__label" for="">Nombre de Audio*</label>
+                                <small class="md-textfield__error" ng-if="formHorario.audioReceive.$dirty && formHorario.audioReceive.$error.required" >*Audio es Obligatorio</small>  
+                                <small class="md-textfield__error" ng-if="ctrl.validarExtension()==true" >*Audio debe de ser mp3 o wav</small>                                                                                                                                           
+                            </div>
+                            <button class="md-button-input md-button-file" ng-click="ctrl.upFile()">
+                                <i class="mdi mdi-paperclip mdi-file"></i>
+                            </button>
+                        </div>
+                            <script>
+                                document.getElementById("archivo").onchange = function () {
+                                    if(this.files[0]!=null){
+                                        document.getElementById("fileSelected").value = this.files[0].name;
+                                    }
+                                };
+                            </script>   
+                         <div class="col-sm-12">
+                            <div class="md-textfield" ng-class="{'is-dirty': ctrl.horarioRequest.nomAudio !=null || ctrl.horarioRequest.nomAudio.lenght >0}">
+                                <input type="text" id="audioPreestablecido" class="md-textfield__input" ng-model="ctrl.horarioRequest.nomAudio" ng-change="ctrl.llenar()">
+                                <label class="md-textfield__label" for="audioPreestablecido">Audio Preestablecido</label>
+                                <button type="button" class="md-button-input" ng-click="ctrl.onLoadModalSoundsDefault()"  > 
+                                    <i class="mdi mdi-dots-horizontal"></i>
+                                </button>
+                            </div>
+                         </div>   
+                        
+                    </div>-->
+                    <!--<div class="form-group" ng-class="{ 'is-dirty' : ctrl.fileUpload == null }" ng-if="ctrl.horarioRequest.idHorario==null">
+                        <label>Nombre del audio</label>
+                        <div class="inputfile">
+                            <div class="pc-file">
+                                <div class="row">
+                                    <div class="col-sm-12 ">
+                                        <input id="audioUpload" name="audioUpload" ng-model="ctrl.fileUpload" type="file" class="form-control" ng-change="ctrl.nombrarAudio(2)" base-sixty-four-input accept="audio/mp3" ng-required="ctrl.horarioRequest.tiHorario==2">
+                                    </div>
+                                    <div class="col-sm-6 ">
+                                        <label class="btn btn-default" ng-click="ctrl.onLoadModalSoundsDefault()">Preestablecidos</label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="btn btn-default" for="audioUpload" >Desde Mi PC</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>
+                    <div class="form-group" ng-class="{ 'is-dirty' : ctrl.fileUpload == null }" ng-if="ctrl.horarioRequest.idHorario!=null">
+                            <label>Nombre del audio</label>
+                            <div class="inputfile">
+                                <div class="pc-file">
+                                    <input id="audioUpload" name="audioUpload" ng-model="ctrl.fileUpload" type="file" class="form-control" ng-change="ctrl.nombrarAudio(2)" base-sixty-four-input accept="audio/mp3">
+                                        <div class="row">
+                                            <div class="col-md-6 col-xs-6">
+                                                <label class="btn btn-default" ng-click="ctrl.onLoadModalSoundsDefault()">Preestablecidos</label>
+                                            </div>
+                                            <div class="col-md-6 col-xs-6">
+                                                <label class="btn btn-default" for="audioUpload" >Desde Mi PC</label>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="col-md-12">
+                            <label ><i class="fa fa-play" aria-hidden="true" ng-hide ="ctrl.horarioRequest.nomAudio==null"></i> {{ctrl.horarioRequest.nomAudio}}</label>
+                     </div>-->
+                </div>
+        </div>
+        </form>
+        <!--<form class="row" name="formHorario">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                    <label for="">Hora Inicio</label>
+                    <div class="input-group bootstrap-timepicker timepicker incrementHour">
+                        <input id="hoInicio" name="hoInicio" type="text" ng-model="ctrl.horarioRequest.hoInicio" class="form-control input-small">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                    </div>
+                    <script type="text/javascript">
+                    $('#hoInicio').timepicker({
+                        defaultTime: 'default',
+                        showMeridian: false,
+                        timeFormat: 'HH:mm:ss',
+                        dynamic: true,
+                        disableMousewheel: true
+                    });
+                    </script>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group" ng-class="{ 'has-error' : formHorario.hoFin.$invalid}">
+                    <label for="">Hora Fin</label>
+                    <div class="input-group bootstrap-timepicker timepicker">
+                        <input id="hoFin" name="hoFin" type="text" ng-model="ctrl.horarioRequest.hoFin" class="form-control input-small" ng-disabled="ctrl.horarioRequest.hoInicio==''||ctrl.horarioRequest.hoInicio==null" ng-required="ctrl.horarioRequest.hoInicio!=null">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                    </div>
+                    <small ng-show="formHorario.hoFin.$error.required" class="help-block">*seleccione hora</small>
+                    <script type="text/javascript">
+                    $('#hoFin').timepicker({
+                        defaultTime: 'default',
+                        showMeridian: false,
+                        timeFormat: 'HH:MM',
+                      allowInputToggle: true,
+                    });
+                    </script>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                    <label for="nomDiaSemanaInicio">Dia Semana Inicio</label>
+                    <select id="nomDiaSemanaInicio" name="nomDiaSemanaInicio" ng-model="ctrl.horarioRequest.nomDiaSemanaInicio" class="form-control" ng-change="ctrl.validateDayWeek()">
+                        <option ng-repeat="diaSemana in ctrl.diaSemanaInicio" value="{{diaSemana.valueDay}}">{{diaSemana.diaSemanaNombre}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group" ng-class="{ 'has-error' : formHorario.nomDiaSemanaFin.$invalid}">
+                    <label for="nomDiaSemanaFin">Dia Semana Fin</label>
+                    <select id="nomDiaSemanaFin" name="nomDiaSemanaFin" ng-model="ctrl.horarioRequest.nomDiaSemanaFin" class="form-control" ng-disabled="ctrl.horarioRequest.nomDiaSemanaInicio =='' || ctrl.horarioRequest.nomDiaSemanaInicio == null ||  ctrl.horarioRequest.nomDiaSemanaInicio == '*'" ng-required="ctrl.horarioRequest.nomDiaSemanaInicio!=null">
+                        <option ng-repeat="diaSemana in ctrl.diaSemanaFin" value="{{diaSemana.valueDay}}">{{diaSemana.diaSemanaNombre}}</option>
+                    </select>
+                    <small ng-show="formHorario.nomDiaSemanaFin.$error.required" class="help-block">*Campo obligatorio</small>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group" ng-class="{ 'has-error' : formHorario.nomDiaMesInicio.$invalid && !formHorario.nomDiaMesInicio.$pristine }">
+                    <label for="nomDiaMesInicio">Dia Mes Inicio</label>
+                    <select id="nomDiaMesInicio" name="nomDiaMesInicio" ng-model="ctrl.horarioRequest.nomDiaMesInicio" class="form-control" ng-change="ctrl.validateDiaMesIni()">
+                        <option ng-repeat="dia in ctrl.diaMesInicio" value="{{dia.valueDay}}">{{dia.nameDay}}</option>
+                    </select>
+                    <small ng-show="formHorario.nomDiaMesInicio.$touched && formHorario.nomDiaMesInicio.$invalid">*Campo observado</small>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group" ng-class="{ 'has-error' : formHorario.nomDiaMesFin.$invalid}">
+                    <label for="">Dia Mes Fin</label>
+                    <select id="nomDiaMesFin" name="nomDiaMesFin" ng-model="ctrl.horarioRequest.nomDiaMesFin" class="form-control" ng-change="ctrl.validateDiaMesFin()" ng-disabled="ctrl.horarioRequest.nomDiaMesInicio == '' || ctrl.horarioRequest.nomDiaMesInicio == null || ctrl.horarioRequest.nomDiaMesInicio =='*'" ng-required="ctrl.horarioRequest.nomDiaMesInicio!=null">
+                        <option ng-repeat="dia in ctrl.diaMesFin" value="{{dia.valueDay}}">{{dia.nameDay}}</option>
+                    </select>
+                    <small ng-show="formHorario.nomDiaMesFin.$invalid && formHorario.nomDiaMesFin.$error.required" class="help-block">*Campo obligatorio</small>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                    <label for="nomMesInicio">Mes Inicio</label>
+                    <select id="nomMesInicio" name="nomMesInicio" ng-model="ctrl.horarioRequest.nomMesInicio" class="form-control" ng-change="ctrl.validateMes()">
+                        <option ng-repeat="mes in ctrl.nombreMes" value="{{mes.valueMes}}">{{mes.nombreMeses}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group" ng-class="{ 'has-error' : formHorario.nomMesFin.$invalid }">
+                    <label for="nomMesFin">Mes Fin</label>
+                    <select id="nomMesFin" name="nomMesFin" ng-model="ctrl.horarioRequest.nomMesFin" class="form-control" ng-disabled="ctrl.horarioRequest.nomMesInicio==''||ctrl.horarioRequest.nomMesInicio==null || ctrl.horarioRequest.nomMesInicio == '*'" ng-required="ctrl.horarioRequest.nomMesInicio!=null && ctrl.horarioRequest.nomMesInicio!=null">
+                        <option ng-repeat="mes in ctrl.nombreMesFin" value="{{mes.valueMes}}">{{mes.nombreMeses}}</option>
+                    </select>
+                    <small ng-show="formHorario.nomMesFin.$invalid && formHorario.nomMesFin.$error.required" class="help-block">*Campo obligatorio</small>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group" ng-class="{ 'has-error' : formHorario.tiHorario.$invalid }">
+                    <label for="tiHorario">Tipo Horario <i class="ion-information-circled" uib-tooltip-html="'<strong>Abierto:</strong> Opción para vincular IVR. <br> <strong>Cerrado:</strong> Opcion para subir sólo audio informativo.'"></i></label>
+                    <select id="tiHorario" name="tiHorario" ng-model="ctrl.horarioRequest.tiHorario" class="form-control" required="required" ng-options="item.valueTipo as item.nombreTipo for item in ctrl.tipHorario">
+                    <option value="">Selecc. Tipo</option>
+                    </select>
+                    <small ng-show="formHorario.tiHorario.$touched && formHorario.tiHorario.$error.required" class="help-block">*Campo obligatorio</small>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12" ng-if="ctrl.horarioRequest.tiHorario==2">
+                <div class="form-group" ng-class="{ 'has-error' : formHorario.audioUpload.$invalid }" ng-if="ctrl.horarioRequest.idHorario==null">
+                    <label>Nombre del audio</label>
+                    <!-- <label for="audioUpload" class="btn btn-default"><i class="fa fa-upload"></i> Seleccione Audio</label> 
+                    <div class="inputfile">
+                        <div class="pc-file">
+                            <input id="audioUpload" name="audioUpload" ng-model="ctrl.fileUpload" type="file" class="form-control" ng-change="ctrl.nombrarAudio(2)" base-sixty-four-input accept="audio/mp3" ng-required="ctrl.horarioRequest.tiHorario==2">
+                            <div class="row">
+                                <div class="col-md-6 col-xs-6">
+                                    <label class="btn btn-default" ng-click="ctrl.onLoadModalSoundsDefault()">Preestablecidos</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="btn btn-default" for="audioUpload" >Desde Mi PC</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                  <!--  <small ng-show="formHorario.audioUpload.$invalid" class="help-block">*formato de archivo no valido</small>-->
+                  <!--  <small ng-show="formHorario.audioUpload.$error.$touched && formHorario.audioUpload.$error.required" class="help-block">*Campo obligatorio</small>
+                  
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : formHorario.audioUpload.$invalid }" ng-if="ctrl.horarioRequest.idHorario!=null">
+                    <label>Nombre del audio</label>
+                    <!-- <label for="audioUpload" class="btn btn-default"><i class="fa fa-upload"></i> Seleccione Audio</label> 
+                    <div class="inputfile">
+                        <div class="pc-file">
+                            <input id="audioUpload" name="audioUpload" ng-model="ctrl.fileUpload" type="file" class="form-control" ng-change="ctrl.nombrarAudio(2)" base-sixty-four-input accept="audio/mp3">
+                            <div class="row">
+                                <div class="col-md-6 col-xs-6">
+                                    <label class="btn btn-default" ng-click="ctrl.onLoadModalSoundsDefault()">Preestablecidos</label>
+                                </div>
+                                <div class="col-md-6 col-xs-6">
+                                    <label class="btn btn-default" for="audioUpload" >Desde Mi PC</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <small ng-show="formHorario.audioUpload.$invalid" class="help-block">*formato de archivo no valido</small>
+                   <!--<small ng-show="formHorario.audioUpload.$error.$touched && formHorario.audioUpload.$error.required" class="help-block">*Campo obligatorio</small> 
+                </div>
+                <div class="col-md-12">
+                       <label ><i class="fa fa-play" aria-hidden="true" ng-hide ="ctrl.horarioRequest.nomAudio==null"></i> {{ctrl.horarioRequest.nomAudio}}</label>
+                </div>
+
+            </div>
+        </form>-->
+    </div>
+    <div class="md-card__actions">
+       <!-- <button type="button" ng-if="ctrl.horarioRequest.idHorario==null" class="md-button" ng-click="ctrl.insertaHorario()" ng-disabled='!formHorario.$valid'>Agregar</button>-->
+       <button type="button" ng-if="ctrl.horarioRequest.idHorario==null" class="md-button" ng-click="ctrl.insertaHorario()" ng-disabled="ctrl.habilitacion">Agregar</button>
+        <!--<button type="button" ng-if="ctrl.horarioRequest.idHorario!=null" class="md-button" ng-click="ctrl.editaHorario()" data-ng-disabled='!formHorario.$valid || conditions'>Guardar</button>-->
+        <button type="button" ng-if="ctrl.horarioRequest.idHorario!=null" class="md-button" ng-click="ctrl.editaHorario()" ng-disabled='ctrl.habilitacion'>Guardar</button>
+    </div>
+
+    <div class="md-card__menu">
+        <button class="md-button md-button--icon" data-dismiss="modal" ng-click="ctrl.cancel()" aria-hidden="true"><i class="mdi mdi-close"></i></button>
+    </div>
+</div>

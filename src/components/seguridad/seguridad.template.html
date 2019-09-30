@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="md-card animated zoomIn" zoom-in>
+            <div class="md-card__title">
+                <h2 class="md-card__title-text">Listado Rol</h2>
+            </div>
+            <div class="md-card__supporting-text">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="table-responsive">
+                            <table class="md-table table" id="tbACC">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center" ng-repeat="header in ctrl.headerRol">
+                                            {{header.nombre}}
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="rol in ctrl.rolList">
+                                        <td class="text-center">{{$index+1}} </td>
+                                        <td class="text-center">{{rol.noRol}} </td>
+                                        <td class="text-center">{{rol.noDescri}} </td>
+                                        <td class="text-center"><button class="md-button md-button--icon" ng-click="ctrl.irAEdidar(rol.idRol,rol.ilActivo,rol.noDescri,rol.noRol)" uib-tooltip="Editar"><i class="mdi mdi-pencil"></i></button></td>
+                                        <td class="text-center"><button class="md-button md-button--icon" ng-click="ctrl.onEliminarRol(rol)"><i class="mdi mdi-delete" uib-tooltip="Eliminar"></i></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="md-card__menu">
+                <button class="md-button" ui-sref="principal.seguridadCrud({idInstancia: ctrl.dataInfo.idInstancia })">
+                    <label>Nuevo Rol</label>
+                    <i class="mdi mdi-account-plus"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
