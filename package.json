@@ -24,7 +24,7 @@
     "jquery-inputmask": "^1.0.1",
     "natives": "^1.1.6",
     "ng-material": "0.0.0",
-    "npm": "^6.8.0"
+    "npm": "^6.13.4"
   },
   "devDependencies": {
     "gulp-mocha": "^4.3.1",
