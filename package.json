@@ -13,7 +13,7 @@
     "angular-material": "^1.1.19",
     "angularjs-datepicker": "^2.1.23",
     "browser-sync": "^2.18.8",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-concat": "^2.6.1",
     "gulp-less": "^3.5.0",
